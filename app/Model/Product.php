@@ -1,12 +1,15 @@
 <?
 App::uses('AppModel', 'Model');
-App::uses('Article', 'Article.Model');
+App::uses('ProductType', 'Model');
 App::uses('Media', 'Media.Model');
-App::uses('Category', 'Model');
-class Product extends Article {
-	const NUM_DETAIL = 5;
-	const MOTOR = 6;
+class Product extends AppModel {
 	
+	public $belongsTo = array(
+		'ProductType' => array(
+			'foreignKey' => 'product_type_id',
+			'dependent' => true
+		),
+	);
 	public $hasOne = array(
 		'Media' => array(
 			'foreignKey' => 'object_id',
@@ -15,6 +18,8 @@ class Product extends Article {
 		)
 	);
 	
-	public $objectType = 'Product';
+	public $validate = array(
+		'serial' => 'notempty'
+	);
 	
 }

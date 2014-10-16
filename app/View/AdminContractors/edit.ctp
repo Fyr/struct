@@ -1,12 +1,13 @@
 <div class="span8 offset2">
 <?
-    $id = $this->request->data('Product.id');
-    $title = ($id) ? __('Edit product') : __('Create product');
+    $id = $this->request->data('Contractor.id');
+    $title = ($id) ? __('Edit contractor') : __('Create contractor');
     echo $this->element('admin_title', compact('title'));
     
-    echo $this->PHForm->create('Product');
+    echo $this->PHForm->create('Contractor');
     $aTabs = array(
-        'General' => $this->element('admin_edit_Product'),
+        'General' => $this->element('admin_edit_Contractor'),
+        'Details' => $this->PHForm->editor('details', array('fullwidth' => true))
     );
     
 	echo $this->element('admin_tabs', compact('aTabs'));
