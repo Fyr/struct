@@ -10,13 +10,6 @@ class Product extends AppModel {
 			'dependent' => true
 		),
 	);
-	public $hasOne = array(
-		'Media' => array(
-			'foreignKey' => 'object_id',
-			'conditions' => array('Media.object_type' => 'Product', 'Media.main' => 1),
-			'dependent' => true
-		)
-	);
 	
 	public $validate = array(
 		'serial' => 'notempty'

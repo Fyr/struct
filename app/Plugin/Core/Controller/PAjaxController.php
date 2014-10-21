@@ -2,6 +2,7 @@
 App::uses('AppController', 'Controller');
 class PAjaxController extends AppController {
     public $name = 'PAjax';
+    public $layout = 'ajax';
     
 	const STATUS_OK = 'OK';
 	const STATUS_ERROR = 'ERROR';

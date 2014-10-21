@@ -6,8 +6,17 @@
 	<title><?=$title_for_layout; ?></title>
 <?php
 	echo $this->Html->meta('icon');
-
-	echo $this->Html->css(array('bootstrap.min', 'bootstrap-responsive.min', 'jquery-ui-1.10.3.custom', 'admin'));
+	
+	$css = array(
+		'bootstrap.min', 
+		'bootstrap-responsive.min', 
+		'jquery-ui-1.10.3.custom', 
+		'admin',
+		'/table/css/grid',
+		'/icons/css/icons'
+	);
+	echo $this->Html->css($css);
+	
 	$aScripts = array(
 		'vendor/jquery/jquery-1.10.2.min',
 		'vendor/jquery/jquery.cookie',
@@ -15,6 +24,8 @@
 		'vendor/bootstrap.min',
 		'vendor/meiomask',
 		'admin',
+		'/core/js/json_handler',
+		'/table/js/grid'
 	);
 	echo $this->Html->script($aScripts);
 

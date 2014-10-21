@@ -19,6 +19,7 @@ class AdminController extends AppController {
 				'Products' => array('label' => __('Products'), 'href' => array('controller' => 'AdminProducts', 'action' => 'index')),
 			)),
 			'Contractors' => array('label' => __('Contractors'), 'href' => array('controller' => 'AdminContractors', 'action' => 'index')),
+			'Orders' => array('label' => __('Orders'), 'href' => array('controller' => 'AdminOrders', 'action' => 'index')),
 			'Faq' => array('label' => __('FAQ'), 'href' => array('controller' => 'AdminFaq', 'action' => 'index')),
 			// 'slider' => array('label' => __('Slider'), 'href' => array('controller' => 'AdminSlider', 'action' => 'index')),
 			// 'settings' => array('label' => __('Settings'), 'href' => array('controller' => 'AdminSettings', 'action' => 'index'))
