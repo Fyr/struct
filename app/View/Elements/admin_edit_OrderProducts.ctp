@@ -1,3 +1,13 @@
+<div style="margin: 10px 0">
+	<?=__('This order requires:')?><br/>
+	<b>
+<?
+	foreach($this->request->data('OrderType') as $orderType) {
+		echo $orderType['qty'].' '.$aProductTypeOptions[$orderType['product_type_id']].'<br/>';
+	}
+?>
+</b>
+</div>
 <div id="addProductForm" class="inline">
 	<div class="inline">
 		<label for="ProductTypeId">Product Type</label>

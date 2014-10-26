@@ -1,3 +1,6 @@
+<?
+	if ($aProducts) {
+?>
 <table class="grid table-bordered shadow">
 <thead>
 	<tr class="first table-gradient">
@@ -8,7 +11,7 @@
 </thead>
 <tbody>
 <?
-	foreach($aProducts as $product) {
+		foreach($aProducts as $product) {
 ?>
 	<tr class="grid-row">
 		<td class="nowrap text-center">
@@ -18,7 +21,7 @@
 		<td><?=$product['Product']['serial']?></td>
 	</tr>
 <?
-	}
+		}
 ?>
 	<tr class="grid-footer table-gradient" id="last-tr">
 		<td class="nowrap" colspan="3">
@@ -27,3 +30,8 @@
 	</tr>
 	</tbody>
 </table>
+<?
+	} else {
+		echo '<br>'.__('- No products in this order -');
+	}
+?>

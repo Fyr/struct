@@ -10,7 +10,6 @@ class AdminAjaxController extends PAjaxController {
 		$this->loadModel('Product');
 		$this->loadModel('OrderProduct');
 		
-		fdebug($this->request->data);
 		$errMsg = '';
 		$aProducts = array();
 		$orderID = $this->request->data('Order.id');

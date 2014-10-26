@@ -5,6 +5,8 @@ class AdminController extends AppController {
 	public $layout = 'admin';
 	// public $components = array();
 	public $uses = array();
+	
+	protected $aNavBar = array(), $aBottomLinks = array(), $currMenu = '', $currLink = '';
 
 	public function _beforeInit() {
 	    // auto-add included modules - did not included if child controller extends AdminController
@@ -33,7 +35,11 @@ class AdminController extends AppController {
 	}
 	
 	public function beforeRender() {
-		parent::beforeRender();
+		$this->set('aNavBar', $this->aNavBar);
+		$this->set('currMenu', $this->currMenu);
+		$this->set('aBottomLinks', $this->aBottomLinks);
+		$this->set('currLink', $this->currLink);
+		$this->set('pageTitle', $this->pageTitle);
 		$this->set('isAdmin', $this->isAdmin());
 	}
 	

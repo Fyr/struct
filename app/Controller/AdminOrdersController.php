@@ -3,7 +3,7 @@ App::uses('AdminController', 'Controller');
 class AdminOrdersController extends AdminController {
 	public $name = 'AdminOrders';
 	public $components = array('Auth', 'Table.PCTableGrid');
-	public $uses = array('Order', 'Contractor', 'ProductType', 'OrderProduct');
+	public $uses = array('Order', 'OrderType', 'Contractor', 'ProductType', 'OrderProduct');
 	
 	public function index() {
 		$this->paginate = array(
