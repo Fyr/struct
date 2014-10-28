@@ -39,7 +39,6 @@ class SiteController extends AppController {
 		}
 		$this->loadModel('ChatUser');
 		$this->currUser = $this->ChatUser->getUser($this->currUserID);
-		fdebug($this->currUser, 'curr_user'.$this->currUserID.'.log', false);
 	}
 	
 	public function beforeRender() {

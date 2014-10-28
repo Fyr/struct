@@ -23,7 +23,8 @@
 		'vendor/bootstrap.min',
 		'vendor/jquery/jquery.nicescroll.min',
 		'vendor/jquery/jquery.formstyler.min',
-		'/core/js/json_handler'
+		'/core/js/json_handler',
+		'struct'
 	);
 	echo $this->Html->script($aScripts);
 
@@ -34,49 +35,9 @@
 </head>
 <body>
 <script type="text/javascript">
-var Struct = {
-	fixDialogHeight: function () {
-		var ordersHeight = $(window).height() - 230;
-		$("#allOrders").height(ordersHeight);
-		$("#allOrders").getNiceScroll().resize();
-		
-		$("#menuBarScroll").height($(window).height());
-		$("#menuBarScroll").getNiceScroll().resize();
-	},
-	
-	deviceListShow: function () {
-		$("#orders").show();
-		$("#allOrders").getNiceScroll().show();
-		$(".menuBar div").removeClass("active");
-		$(".menuBar .glyphicons.ipad").closest("div").addClass("active");
-	},
-	
-	deviceListHide: function () {
-		$("#orders").hide();
-		$("#allOrders").getNiceScroll().hide();
-		$(".menuBar .glyphicons.ipad").closest("div").removeClass("active");
-	},
-	
-	deviceListToggle: function () {
-		if ($("#orders").is(':visible')) {
-			Struct.deviceListHide();
-		} else {
-			$("#allOrders").load(structURL.deviceList, null, function(){
-				Struct.deviceListShow();
-			});
-		}
-	},
-	
-	initPanel: function () {
-		$(".userMessages").load(structURL.panel, null, function(){
-			$("#allOrders").niceScroll({cursorwidth:"5px",cursorcolor:"#999999",cursorborder:"none"});
-			Struct.fixDialogHeight();
-		});
-	}
-}
 var structURL = {
 	deviceList: '<?=$this->Html->url(array('controller' => 'SiteAjax', 'action' => 'deviceList'), true)?>',
-	panel: '<?=$this->Html->url(array('controller' => 'SiteAjax', 'action' => 'panel'), true)?>'
+	panel: '<?=$this->Html->url(array('controller' => 'SiteAjax', 'action' => 'panel', true))?>'
 }
 
 $(document).ready(function () {
@@ -86,12 +47,12 @@ $(document).ready(function () {
 	
 	Struct.initPanel();
 	
-	$("#menuBarScroll").niceScroll({cursorwidth:"3px",cursorcolor:"#000",cursorborder:"none"});
-	$('select').styler(); 
-	
 	$(".menuBar .glyphicons.ipad").bind('click', function(event) {
 		Struct.deviceListToggle();
 	});
+	
+	$("#menuBarScroll").niceScroll({cursorwidth:"3px",cursorcolor:"#000",cursorborder:"none"});
+	$('select').styler(); 
 });			
 </script>
     <div class="menuBar">
@@ -112,7 +73,7 @@ $(document).ready(function () {
 		</div>
 	</div>
 	
-	<div class="userMessages" id="orders" style="display:none">
+	<div class="userMessages" style="display:none">
 		<?=$this->element('panel')?>
 	</div>
 	<div class="pageOrder">
