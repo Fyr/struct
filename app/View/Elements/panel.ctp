@@ -5,7 +5,7 @@
 <div class="myOrders">
 	<a href="<?=$this->Html->url(array('controller' => 'SiteOrders', 'action' => 'orders'), true)?>" class="btn"><?=__('My orders')?></a>
 </div>
-<div id="allOrders" style="overflow:hidden">
+<div class="allOrders" style="overflow:hidden">
 	<?=$this->element('device_list')?>
 </div>
 <div class="recharge clearfix">

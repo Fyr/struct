@@ -26,6 +26,9 @@ class SiteAjaxController extends PAjaxController {
 		$this->set('currUserID', $this->currUserID);
 	}
 	
+	public function jsSettings() {
+	}
+	
 	public function deviceList() {
 		$aDevices = $this->ProductType->find('all');
 		$this->set('aDevices', $aDevices);

@@ -1,40 +1,40 @@
 var Struct = {
-	fixDialogHeight: function () {
+	$panel: null, 
+	
+	fixPanelHeight: function () {
 		var ordersHeight = $(window).height() - 230;
-		$("#allOrders").height(ordersHeight);
-		$("#allOrders").getNiceScroll().resize();
-		
-		$("#menuBarScroll").height($(window).height());
-		$("#menuBarScroll").getNiceScroll().resize();
+		$(".allOrders", Struct.panel).height(ordersHeight);
+		$(".allOrders", Struct.panel).getNiceScroll().resize();
 	},
 	
-	deviceListShow: function () {
-		$(".userMessages").show();
-		$("#allOrders").getNiceScroll().show();
+	panelShow: function () {
+		$(Struct.panel).show();
+		$(".allOrders", Struct.panel).getNiceScroll().show();
 		$(".menuBar div").removeClass("active");
 		$(".menuBar .glyphicons.ipad").closest("div").addClass("active");
 	},
 	
-	deviceListHide: function () {
-		$(".userMessages").hide();
-		$("#allOrders").getNiceScroll().hide();
+	panelHide: function () {
+		$(Struct.panel).hide();
+		$(".allOrders", Struct.panel).getNiceScroll().hide();
 		$(".menuBar .glyphicons.ipad").closest("div").removeClass("active");
 	},
 	
-	deviceListToggle: function () {
-		if ($(".userMessages").is(':visible')) {
-			Struct.deviceListHide();
+	panelToggle: function () {
+		if ($(Struct.panel).is(':visible')) {
+			Struct.panelHide();
 		} else {
-			$("#allOrders").load(structURL.deviceList, null, function(){
-				Struct.deviceListShow();
+			$(".allOrders", Struct.panel).load(structURL.deviceList, null, function(){
+				Struct.panelShow();
 			});
 		}
 	},
 	
-	initPanel: function () {
-		$(".userMessages").load(structURL.panel, null, function(){
-			$("#allOrders").niceScroll({cursorwidth:"5px",cursorcolor:"#999999",cursorborder:"none"});
-			Struct.fixDialogHeight();
+	initPanel: function (container) {
+		Struct.panel = container;
+		$(Struct.panel).load(structURL.panel, null, function(){
+			$(".allOrders", Struct.panel).niceScroll({cursorwidth:"5px",cursorcolor:"#999999",cursorborder:"none"});
+			Struct.fixPanelHeight();
 		});
 	}
 }
