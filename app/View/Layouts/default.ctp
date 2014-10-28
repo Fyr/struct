@@ -37,7 +37,7 @@
 <script type="text/javascript">
 var structURL = {
 	deviceList: '<?=$this->Html->url(array('controller' => 'SiteAjax', 'action' => 'deviceList'), true)?>',
-	panel: '<?=$this->Html->url(array('controller' => 'SiteAjax', 'action' => 'panel', true))?>'
+	panel: '<?=$this->Html->url(array('controller' => 'SiteAjax', 'action' => 'panel'), true)?>'
 }
 
 $(document).ready(function () {
@@ -52,7 +52,7 @@ $(document).ready(function () {
 	});
 	
 	$("#menuBarScroll").niceScroll({cursorwidth:"3px",cursorcolor:"#000",cursorborder:"none"});
-	$('select').styler(); 
+	$('select').styler();
 });			
 </script>
     <div class="menuBar">

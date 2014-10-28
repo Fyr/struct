@@ -1,6 +1,8 @@
 <?php
 App::uses('AppHelper', 'View/Helper');
 class MediaHelper extends AppHelper {
+	public $helpers = array('Html');
+	
 	private $MediaPath;
 	
 	public function __construct(View $view, $settings = array()) {
@@ -15,6 +17,9 @@ class MediaHelper extends AppHelper {
 			return '';
 		}
 		$media = $mediaRow['Media'];
-		return $this->MediaPath->getImageUrl($media['object_type'], $media['id'], $size, $media['file'].$media['ext']);
+		$url = $this->MediaPath->getImageUrl($media['object_type'], $media['id'], $size, $media['file'].$media['ext']);
+		$fixedUrl = $this->Html->url(array('plugin' => 'media', 'controller' => 'router', 'action' => 'index'));
+		$url = str_replace('/media/router', $fixedUrl, $url);
+		return $url;
 	}
 }
