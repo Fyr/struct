@@ -34,84 +34,63 @@
 </head>
 <body>
 <script type="text/javascript">
-function fixDialogHeight() {
-	var messagesHeight = $(window).height() - 82;
-	$("#allMessages").height(messagesHeight);
+var Struct = {
+	fixDialogHeight: function () {
+		var ordersHeight = $(window).height() - 230;
+		$("#allOrders").height(ordersHeight);
+		$("#allOrders").getNiceScroll().resize();
+		
+		$("#menuBarScroll").height($(window).height());
+		$("#menuBarScroll").getNiceScroll().resize();
+	},
 	
-	var dialogHeight = $(window).height() - $(".bottom").height();
-	$(".dialog").height(dialogHeight);
+	deviceListShow: function () {
+		$("#orders").show();
+		$("#allOrders").getNiceScroll().show();
+		$(".menuBar div").removeClass("active");
+		$(".menuBar .glyphicons.ipad").closest("div").addClass("active");
+	},
 	
-	var ordersHeight = $(window).height() - 230;
-	$("#allOrders").height(ordersHeight);
+	deviceListHide: function () {
+		$("#orders").hide();
+		$("#allOrders").getNiceScroll().hide();
+		$(".menuBar .glyphicons.ipad").closest("div").removeClass("active");
+	},
 	
-	$("#menuBarScroll").height($(window).height());
-}
-
-function deviceListShow() {
-	$("#orders").show();
-	$("#allOrders").niceScroll({cursorwidth:"5px",cursorcolor:"#999999",cursorborder:"none"});
-	$("#allOrders").getNiceScroll().show();
-	$(".menuBar div").removeClass("active");
-	$(".menuBar .glyphicons.ipad").closest("div").addClass("active");
-}
-
-function deviceListHide() {
-	$("#orders").hide();
-	$("#allOrders").getNiceScroll().hide();
-	$(".menuBar .glyphicons.ipad").closest("div").removeClass("active");
-}
-
-function deviceListToggle() {
-	if ($("#orders").is(':visible')) {
-		deviceListHide();
-	} else {
-		$("#allOrders").load(structURL.deviceList, null, function(){
-			deviceListShow();
+	deviceListToggle: function () {
+		if ($("#orders").is(':visible')) {
+			Struct.deviceListHide();
+		} else {
+			$("#allOrders").load(structURL.deviceList, null, function(){
+				Struct.deviceListShow();
+			});
+		}
+	},
+	
+	initPanel: function () {
+		$(".userMessages").load(structURL.panel, null, function(){
+			$("#allOrders").niceScroll({cursorwidth:"5px",cursorcolor:"#999999",cursorborder:"none"});
+			Struct.fixDialogHeight();
 		});
 	}
 }
-
 var structURL = {
-	deviceList: '<?=$this->Html->url(array('controller' => 'SiteAjax', 'action' => 'deviceList'))?>'
+	deviceList: '<?=$this->Html->url(array('controller' => 'SiteAjax', 'action' => 'deviceList'), true)?>',
+	panel: '<?=$this->Html->url(array('controller' => 'SiteAjax', 'action' => 'panel'), true)?>'
 }
 
 $(document).ready(function () {
 	$(window).resize(function() {
-		fixDialogHeight();
+		Struct.fixDialogHeight();
 	});
 	
-	fixDialogHeight();
+	Struct.initPanel();
 	
-	$(".dialog").niceScroll({cursorwidth:"5px",cursorcolor:"#999999",cursorborder:"none"});
 	$("#menuBarScroll").niceScroll({cursorwidth:"3px",cursorcolor:"#000",cursorborder:"none"});
-	$(".sendForm textarea").niceScroll({cursorwidth:"5px",cursorcolor:"#999999",cursorborder:"none", autohidemode: "false"});
+	$('select').styler(); 
 	
-	$(".dialog").scrollTop($(".innerDialog").height() - $(".dialog").height() + 97);
-	
-	$('select').styler();  
-	
-	$(".menuBar .glyphicons:not(.chat,.ipad)").bind('click', function(event) {
-		$(".menuBar div").removeClass("active");
-		$(this).closest("div").addClass("active");
-		$("#messagesBar,#orders").hide();
-	});
-	/*
-	$(".menuBar .glyphicons.chat").bind('click', function(event) {
-		$("#messagesBar").toggle();
-		if ( $("#messagesBar").is(':visible') ) {
-			$("#allMessages").niceScroll({cursorwidth:"5px",cursorcolor:"#999999",cursorborder:"none"});
-			$("#allMessages").getNiceScroll().show();
-			$(".menuBar div").removeClass("active");
-			$(this).closest("div").addClass("active");
-		}
-		else {
-			$("#allMessages").getNiceScroll().hide();
-			$(this).closest("div").removeClass("active");
-		}
-	});
-	*/
 	$(".menuBar .glyphicons.ipad").bind('click', function(event) {
-		deviceListToggle();
+		Struct.deviceListToggle();
 	});
 });			
 </script>
@@ -134,23 +113,7 @@ $(document).ready(function () {
 	</div>
 	
 	<div class="userMessages" id="orders" style="display:none">
-		<div class="searchBlock clearfix">
-			<input type="text" value="Найти устройство"  />
-			<a href="javascript: void(0)" class="glyphicons search"></a>
-		</div>
-		<div class="myOrders">
-			<a href="<?=$this->Html->url(array('controller' => 'SiteOrders', 'action' => 'orders'))?>" class="btn"><?=__('My orders')?></a>
-		</div>
-		<div id="allOrders">
-			<?=$this->element('device_list')?>
-		</div>
-		<div class="recharge clearfix">
-			<span class="glyphicons wallet"></span>
-			<div class="text">
-				<div class="balance"><?=__('Balance')?>: <?=$this->element('sum', array('sum' => $balance))?></div>
-				<a href="<?=$this->Html->url(array('controller' => 'SiteOrders', 'action' => 'recharge'))?>"><?=__('Recharge')?></a>
-			</div>
-		</div>
+		<?=$this->element('panel')?>
 	</div>
 	<div class="pageOrder">
 		<?=$this->fetch('content')?>
