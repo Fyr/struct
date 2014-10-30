@@ -3,8 +3,6 @@ App::uses('AppController', 'Controller');
 class SiteController extends AppController {
 	public $name = 'Site';
 	
-	protected $currUserID, $currUser;
-	
 	public function _beforeInit() {
 		// $this->components = array_merge(array('Table.PCTableGrid'), $this->components);
 	    $this->helpers = array_merge(array('Html', 'Form', 'Core.PHTime', 'Media'), $this->helpers);
@@ -25,20 +23,26 @@ class SiteController extends AppController {
 	}
 	
 	public function beforeFilter() {
-		$userID = Hash::get($this->request->params, 'pass.0');
-		$action = Hash::get($this->request->params, 'action');
-		if ($userID && $action == 'auth') {
-			$this->Session->write('currUser.id', $userID);
-			$this->redirect('/');
-			return false;
+		if (TEST_ENV) {
+			$userID = Hash::get($this->request->params, 'pass.0');
+			$action = Hash::get($this->request->params, 'action');
+			if ($userID && $action == 'auth') {
+				$this->Session->write('currUser.id', $userID);
+				$this->redirect('/');
+				return false;
+			}
+			$this->currUserID = $this->Session->read('currUser.id');
+		} else {
+			$this->loadModel('ClientProject');
+			$userData = ClientProject::getUserAuthData();
+			$this->currUserID = Hash::get($userData, 'user_id');
 		}
-		$this->currUserID = $this->Session->read('currUser.id');
 		if (!$this->currUserID) {
 			$this->autoRender = false;
 			exit('You must be authorized');
 		}
-		$this->loadModel('ChatUser');
 		$this->currUser = $this->ChatUser->getUser($this->currUserID);
+		//fdebug($this->currUser, 'curr_user'.$this->currUserID.'.log', false);
 	}
 	
 	public function beforeRender() {

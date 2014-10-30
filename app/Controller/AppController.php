@@ -3,6 +3,10 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
     public $paginate;
 	public $pageTitle = '';
+	
+	public $uses = array('ChatUser');
+	
+	protected $currUser = array(), $currUserID;
     
     public function __construct($request = null, $response = null) {
 	    $this->_beforeInit();

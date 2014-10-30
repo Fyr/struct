@@ -17,9 +17,6 @@ class MediaHelper extends AppHelper {
 			return '';
 		}
 		$media = $mediaRow['Media'];
-		$url = $this->MediaPath->getImageUrl($media['object_type'], $media['id'], $size, $media['file'].$media['ext']);
-		$fixedUrl = $this->Html->url(array('plugin' => 'media', 'controller' => 'router', 'action' => 'index'));
-		$url = str_replace('/media/router', $fixedUrl, $url);
-		return $url;
+		return $this->MediaPath->getImageUrl($media['object_type'], $media['id'], $size, $media['file'].$media['ext']);
 	}
 }

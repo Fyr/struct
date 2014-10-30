@@ -39,7 +39,8 @@ define('EMAIL_ADMIN_CC', 'fyr.work@gmail.com');
 define('PATH_FILES_UPLOAD', $_SERVER['DOCUMENT_ROOT'].'/files/');
 
 Configure::write('baseURL', array(
-	'chat' => 'http://phppainkiller.ru/msg2/'
+	'chat' => 'http://phppainkiller.ru/msg2/',
+	// 'media' => '/chat'
 ));
 
 function fdebug($data, $logFile = 'tmp.log', $lAppend = true) {

@@ -29,10 +29,12 @@
 		'vendor/jquery/jquery.formstyler.min',
 		'/core/js/json_handler',
 		'struct',
-		$this->Html->url(array('controller' => 'SiteAjax', 'action' => 'jsSettings'), true),
-		$baseURL['chat'].'ChatAjax/jsSettings',
-		$baseURL['chat'].'js/chat.js'
+		$this->Html->url(array('controller' => 'SiteAjax', 'action' => 'jsSettings'), true)
 	);
+	if (!TEST_ENV) {
+		$aScripts[] = $baseURL['chat'].'ChatAjax/jsSettings';
+		$aScripts[] = $baseURL['chat'].'js/chat.js';
+	}
 	echo $this->Html->script($aScripts);
 
 	echo $this->fetch('meta');
@@ -48,15 +50,26 @@ $(document).ready(function () {
 		$("#menuBarScroll").getNiceScroll().resize();
 		
 		Struct.fixPanelHeight();
+<?
+	if (!TEST_ENV) {
+?>		
 		Chat.fixPanelHeight();
+<?
+	}
+?>
 	});
 	
 	Struct.initPanel($(".userMessages.struct").get(0));
-	
 	$(".menuBar .glyphicons.ipad").bind('click', function(event) {
+<?
+	if (!TEST_ENV) {
+?>
 		if ($(".userMessages.chat").is(':visible')) {
 			Chat.panelHide();
 		}
+<?
+	}
+?>
 		Struct.panelToggle();
 	});
 	
@@ -85,11 +98,11 @@ $(document).ready(function () {
 		<div id="menuBarScroll">
 			<img class="userLogo" src="<?=$currUser['Avatar']['url']?>" alt="" style="width: 90px;" />
 			<div><a href="javascript: void(0)" class="glyphicons search"></a></div>
-			<div><a href="javascript: void(0)" class="glyphicons chat"><span class="badge badge-important">11</span></a></div>
+			<div><a href="javascript: void(0)" class="glyphicons chat"><span class="badge badge-important"></span></a></div>
 			<div><a href="javascript: void(0)" class="glyphicons group"></a></div>
 			<div><a href="javascript: void(0)" class="glyphicons notes"></a></div>
 			<div><a href="javascript: void(0)" class="glyphicons briefcase"></a></div>
-			<div><a href="javascript: void(0)" class="glyphicons credit_card"><span class="badge badge-important">1</span></a></div>
+			<div><a href="javascript: void(0)" class="glyphicons credit_card"><span class="badge badge-important"></span></a></div>
 			<div><a href="javascript: void(0)" class="glyphicons cloud"></a></div>
 			<div><a href="javascript: void(0)" class="glyphicons file"></a></div>
 			<div><a href="javascript: void(0)" class="glyphicons ipad"></a></div>

@@ -7,12 +7,17 @@ class SiteAjaxController extends PAjaxController {
 	public $helpers = array('Media');
 	
 	public function beforeFilter() {
-		$this->currUserID = $this->Session->read('currUser.id');
+		if (TEST_ENV) {
+			$this->currUserID = $this->Session->read('currUser.id');
+		} else {
+			$this->loadModel('ClientProject');
+			$userData = ClientProject::getUserAuthData();
+			$this->currUserID = Hash::get($userData, 'user_id');
+		}
 		if (!$this->currUserID) {
 			$this->autoRender = false;
 			exit('You must be authorized');
 		}
-		$this->loadModel('ChatUser');
 		$this->currUser = $this->ChatUser->getUser($this->currUserID);
 	}
 	
