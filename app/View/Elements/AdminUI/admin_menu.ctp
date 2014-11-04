@@ -12,7 +12,7 @@
 			$label.= ' <b class="caret"></b>';
 			$linkOptions = array('escape' => false, 'class' => "dropdown-toggle", 'data-toggle' => "dropdown");
 		} else {
-			$url = $this->Html->url($item['href']);
+			$url = $item['href'];
 		}
 		if ($id == $currMenu) {
 			$class[] = 'active';

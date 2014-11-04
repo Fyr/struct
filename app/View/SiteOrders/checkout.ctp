@@ -1,11 +1,6 @@
 <?=$this->Form->create('Contractor', array('class' => 'contactForm'))?>
 <div class="device-lists row col-md-10 col-sm-10 col-xs-10">
 <?
-	$aIcons = array(
-		'icon glyphicons ipad',
-		'icon glyphicons imac',
-		'icon glyphicons print'
-	);
 	foreach($aProductTypes as $i => $productType) {
 		$qty = $this->request->data($i.'.ProductType.qty');
 		if ($qty) {
@@ -13,7 +8,7 @@
     <div class="device-list-cell">
         <div class="device-list-h clearfix">
             <figure class="row col-md-2 col-sm-2 col-xs-2">
-                <?=$this->element('product_image', $productType)?>
+                <?=$this->element('product_image', $productType['ProductType'])?>
                 <span class="size">x<?=$qty?></span>
             </figure>
             <div class="description col-md-10 col-sm-10 col-xs-10">
