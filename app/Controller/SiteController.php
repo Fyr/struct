@@ -47,11 +47,13 @@ class SiteController extends AppController {
 	
 	public function beforeRender() {
 		parent::beforeRender();
-		$this->set('balance', 148);
+		$this->set('balance', '0');
 		$this->set('PU_', '$');
 		$this->set('_PU', '');
 		
 		$this->set('currUser', $this->currUser);
 		$this->set('currUserID', $this->currUserID);
+		
+		$this->set('pageTitle', $this->pageTitle);
 	}
 }

@@ -1,34 +1,69 @@
-<a href="<?=$this->Html->url(array('controller' => 'SiteOrders', 'action' => 'recharge'))?>" class="btn rightButton"><?=__('Balance')?>: <?=$this->element('sum', array('sum' => $balance))?></a>
-<a href="<?=$this->Html->url(array('controller' => 'SiteOrders', 'action' => 'orders'))?>" class="btn rightButton"><?=__('My orders')?></a>
-<h1><?=$productType['ProductType']['title']?></h1>
 <?=$this->Form->create('Contractor', array('class' => 'contactForm'))?>
-<div class="product clearfix">
-	<img src="<?=$this->Media->imageUrl($productType, '100x')?>" class="fullImg" alt="<?=$productType['ProductType']['title']?>" />
-	<div class="description">
-		<div class="info"><?=$productType['ProductType']['descr']?></div>
-		<span class="price"><?=$this->element('arenda_price', array('price' => $productType['ProductType']['arenda_price']))?></span>
-		<div class="btn-group">
+<div class="device-lists row col-md-10 col-sm-10 col-xs-10">
 <?
-	$options = array();
-	for($i = 1; $i <= 10; $i++) {
-		$options[$i] = $i.' '.__('units');
-	}
-	echo $this->Form->input('OrderType.qty', array('options' => $options, 'label' => false, 'class' => 'select110'));
+	$aIcons = array(
+		'icon glyphicons ipad',
+		'icon glyphicons imac',
+		'icon glyphicons print'
+	);
+	foreach($aProductTypes as $i => $productType) {
+		$qty = $this->request->data($i.'.ProductType.qty');
+		if ($qty) {
 ?>
-		</div>
-		<div class="btn-group">
+    <div class="device-list-cell">
+        <div class="device-list-h clearfix">
+            <figure class="row col-md-2 col-sm-2 col-xs-2">
+                <?=$this->element('product_image', $productType)?>
+                <span class="size">x<?=$qty?></span>
+            </figure>
+            <div class="description col-md-10 col-sm-10 col-xs-10">
+                <?=$productType['ProductType']['descr']?>
+            </div>
+        </div>
+        <div class="device-list-b">
+            <!--div class="min-size">
+                <?=__('Min.qty')?>: <br />50 <?=__('items')?>
+            </div-->
+            <div class="devise-item-size clearfix">
+                <div class="box-input">
+                	<input type="hidden" name="data[<?=$i?>][OrderType][product_type_id]" value="<?=$productType['ProductType']['id']?>" />
+                    <input type="text" name="data[<?=$i?>][OrderType][qty]" value="<?=$qty?>"/>
+                </div>
+                <div class="box-select page-menu">
 <?
-	$options = array();
-	for($i = 1; $i <= 12; $i++) {
-		$options[$i] = $i.' '.__('months');
+	$fieldName = 'period_'.$i;
+	$options = array('name' => 'data['.$i.'][Order][period]', 'selected' => $this->request->data($i.'.Order.period'));
+	echo '<span id="'.$fieldName.'">'.$this->element('select_period', compact('fieldName', 'options')).'</span>';
+?>
+<script type="text/javascript">
+$(document).ready(function(){
+	setTimeout(function(){
+		$('#<?=$fieldName?> .jq-selectbox__select-text').html($('#ContractorPeriod<?=$i?> option[selected="selected"]').html()); // select.options[select.selectedIndex].text
+	}, 500);
+});
+</script>
+                </div>
+                <div class="price-month">
+                    <?=$this->element('arenda_price', array('price' => $productType['ProductType']['arenda_price']))?>
+                </div>
+                <div class="remove">
+                    <a class="remove-link" href="#" onclick="$(this).closest('.device-list-cell').remove()"><?=__('Remove')?></a>
+                </div>
+            </div>
+        </div>
+    </div>
+<?
+		}
 	}
-	echo $this->Form->input('Order.period', array('options' => $options, 'label' => false, 'class' => 'select110'));
-?>		
-		</div>
-		<div class="btn-group"><button type="submit" class="btn"><?=__('Create order')?></button></a></div>
-	</div>
+?>
+    <!--div class="lease-terms"><span>*</span> При условии аренды на 5 лет</div-->
 </div>
-	<fieldset>
+<style type="text/css">
+.device-order-form label {margin-top: 30px;}
+.device-list-cell:last {border-bottom: medium none;}
+</style>
+<div class="device-order-form row col-md-10 col-sm-10 col-xs-10">
+        <fieldset>
 <?
 	echo $this->Form->input('Contractor.contact_person', array(
 		'label' => array('text' => __('Contact person')),
@@ -53,6 +88,12 @@
 		'placeholder' => __('Contractor details').'...'
 	));
 ?>
-		<div style="padding-top: 40px;"><button type="submit" class="btn"><?=__('Create order')?></button></div>
-	</fieldset>
+        <fieldset>
+        	<br>
+            <input type="submit" value="<?=__('Create order')?>"/>
+            <!--div class="no-money">
+                На вашем счету недостаточно средств
+            </div-->
+        </fieldset>
+</div>
 <?=$this->Form->end()?>
