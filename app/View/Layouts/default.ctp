@@ -128,7 +128,7 @@ $(document).ready(function () {
             <div class="row clearfix">
                 <div class="device-page-title col-md-8 col-sm-8 col-xs-8"><?=$pageTitle?></div>
                 <div class="state-of-account col-md-4 col-sm-4 col-xs-4 t-a-right clearfix">
-                    <a onclick="return false;" href="<?=$this->Html->url(array('controller' => 'SiteOrders', 'action' => 'orders'))?>" class="device-my-orders"><?=__('My orders')?></a>
+                    <a href="<?=$this->Html->url(array('controller' => 'SiteOrders', 'action' => 'orders'))?>" class="device-my-orders"><?=__('My orders')?></a>
                     <div class="account-money">
                         <div class=""><?=__('Balance')?>: <b><?=$this->element('sum', array('sum' => $balance))?></b></div>
                         <a href="<?=$this->Html->url(array('controller' => 'SiteOrders', 'action' => 'recharge'))?>" class="replenish"><?=__('Recharge')?></a>

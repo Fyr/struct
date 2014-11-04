@@ -59,6 +59,7 @@ class SiteOrdersController extends SiteController {
 		$this->set('aOrders', $aOrders);
 		$aProductTypeOptions = $this->ProductType->find('all');
 		$this->set('aProductTypeOptions', Hash::combine($aProductTypeOptions, '{n}.ProductType.id', '{n}'));
+		$this->pageTitle = __('My orders');
 	}
 	
 	public function recharge() {
