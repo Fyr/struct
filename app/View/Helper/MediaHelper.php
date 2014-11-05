@@ -1,8 +1,6 @@
 <?php
 App::uses('AppHelper', 'View/Helper');
 class MediaHelper extends AppHelper {
-	public $helpers = array('Html');
-	
 	private $MediaPath;
 	
 	public function __construct(View $view, $settings = array()) {

@@ -1,17 +1,17 @@
 <?php
 App::uses('Controller', 'Controller');
 class AppController extends Controller {
-    public $paginate;
+	public $paginate;
 	public $pageTitle = '';
 	
 	public $uses = array('ChatUser');
 	
 	protected $currUser = array(), $currUserID;
-    
-    public function __construct($request = null, $response = null) {
-	    $this->_beforeInit();
-	    parent::__construct($request, $response);
-	    $this->_afterInit();
+	
+	public function __construct($request = null, $response = null) {
+		$this->_beforeInit();
+		parent::__construct($request, $response);
+		$this->_afterInit();
 	}
 	
 	protected function _beforeInit() {
@@ -22,11 +22,26 @@ class AppController extends Controller {
 	    // after construct actions here
 	}
 	
-    public function isAuthorized($user) {
+	public function isAuthorized($user) {
     	$this->set('currUser', $user);
 		return Hash::get($user, 'active');
 	}
 	
 	public function beforeRender() {
+	}
+	
+	protected function _checkAuth() {
+		if (TEST_ENV) {
+			$this->currUserID = $this->Session->read('currUser.id');
+		} else {
+			$this->loadModel('ClientProject');
+			$userData = ClientProject::getUserAuthData();
+			$this->currUserID = Hash::get($userData, 'user_id');
+		}
+		if (!$this->currUserID) {
+			$this->autoRender = false;
+			exit('You must be authorized');
+		}
+		$this->currUser = $this->ChatUser->getUser($this->currUserID);
 	}
 }

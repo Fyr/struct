@@ -3,7 +3,7 @@
                             <a href="/tasks/"><span class="glyphicons search"></span></a>
                         </li>
                         <li>
-                            <a href="#"><span class="glyphicons chat chatPanel"></span><div class="coutnum">1</div></a>
+                            <a href="#"><span class="glyphicons chat chatPanel"></span><div class="coutnum"></div></a>
                         </li>
 <!--                        <li>-->
 <!--                            <a data-menu-index="3" href="#"><span class="glyphicons group"></span></a>-->

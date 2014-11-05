@@ -8,8 +8,6 @@
 	<link href='http://fonts.googleapis.com/css?family=Roboto:900,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 
 <?php
-	$baseURL = Configure::read('baseURL');
-	
 	echo $this->Html->meta('icon');
 	
 	/*
@@ -29,10 +27,6 @@
 		'custom',
 		'user-inner',
 		'device',
-		$baseURL['chat'].'css/msg_panel.css'
-		/*
-		'jquery.formstyler',
-		*/
 	);
 	
 	echo $this->Html->css($css);
@@ -55,13 +49,11 @@
 		'vendor/jquery/jquery.nicescroll.min',
 		'vendor/jquery/jquery.formstyler.min',
 		'/core/js/json_handler',
+		$this->Html->url(array('controller' => 'DeviceAjax', 'action' => 'jsSettings', 'no')),
+		$this->Html->url(array('controller' => 'ChatAjax', 'action' => 'jsSettings', 'no')),
 		'struct',
-		$this->Html->url(array('controller' => 'SiteAjax', 'action' => 'jsSettings'), true)
+		'chat'
 	);
-	if (!TEST_ENV) {
-		$aScripts[] = $baseURL['chat'].'ChatAjax/jsSettings';
-		$aScripts[] = $baseURL['chat'].'js/chat.js';
-	}
 	echo $this->Html->script($aScripts);
 
 	echo $this->fetch('meta');
@@ -77,26 +69,14 @@ $(document).ready(function () {
 		$("#menuBarScroll").getNiceScroll().resize();
 		
 		Struct.fixPanelHeight();
-<?
-	if (!TEST_ENV) {
-?>		
 		Chat.fixPanelHeight();
-<?
-	}
-?>
 	});
 	
 	Struct.initPanel($(".userMessages.struct").get(0));
 	$(".menuBar .devicePanel").bind('click', function(event) {
-<?
-	if (!TEST_ENV) {
-?>
 		if ($(".userMessages.chat").is(':visible')) {
 			Chat.panelHide();
 		}
-<?
-	}
-?>
 		Struct.panelToggle();
 	});
 	
@@ -105,9 +85,7 @@ $(document).ready(function () {
 	$("#menuBarScroll").getNiceScroll().resize();
 	
 	$('select.formstyler').styler();
-<?
-	if (!TEST_ENV) {
-?>	
+	
 	// Init chat panel
 	Chat.initPanel($(".userMessages.chat").get(0));
 	$(".menuBar .chatPanel").bind('click', function(event) {
@@ -116,9 +94,6 @@ $(document).ready(function () {
 		}
 		Chat.panelToggle();
 	});
-<?
-	}
-?>	
 });			
 </script>
 	<div class="userMessages struct" style="display:none"></div>
