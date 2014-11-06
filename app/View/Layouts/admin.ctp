@@ -8,8 +8,8 @@
 	echo $this->Html->meta('icon');
 	
 	$css = array(
-		'bootstrap.min', 
-		'bootstrap-responsive.min', 
+		'admin-bootstrap.min', 
+		'admin-bootstrap-responsive.min', 
 		'jquery-ui-1.10.3.custom', 
 		'admin',
 		'/table/css/grid',
@@ -21,7 +21,8 @@
 		'vendor/jquery/jquery-1.10.2.min',
 		'vendor/jquery/jquery.cookie',
 		'vendor/jquery/jquery-ui-1.10.3.custom.min',
-		'vendor/bootstrap.min',
+		'vendor/admin-bootstrap.min',
+		'vendor/bootstrap-multiselect',
 		'vendor/meiomask',
 		'admin',
 		'/core/js/json_handler',
@@ -73,6 +74,10 @@
 	<?=$this->element('/AdminUI/admin_footer')?>
 </footer>
 </div>
-<?//$this->element('sql_dump'); ?>
+<?
+	if (TEST_ENV) {
+		echo $this->element('sql_dump'); 
+	}
+?>
 </body>
 </html>

@@ -1,7 +1,11 @@
 <div class="searchBlock clearfix">
-	<input type="text" placeholder="Найти собеседника"  />
-	<a href="javascript: void(0)" class="glyphicons search"></a>
+    <form action="#">
+        <input class="searchInput" type="text" placeholder="Найти собеседника">
+        <button class="searchButton" ><span class="glyphicons search"></span></button>
+    </form>
 </div>
-<div class="allMessages">
-	<?=$this->element('contact_list')?>
+<div class="dropdown-panel-scroll">
+    <div class="messages-list allMessages">
+        <?=$this->element('contact_list')?>
+    </div>
 </div>

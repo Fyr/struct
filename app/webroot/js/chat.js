@@ -15,13 +15,8 @@ var Chat = {
 	},
 	
 	fixPanelHeight: function () {
-		messagesHeight = $(window).height() - 82;
-		$(".allMessages", Chat.panel).height(messagesHeight);
-		$(".allMessages", Chat.panel).getNiceScroll().resize();
-		
 		var dialogHeight = $(window).height() - $(".bottom").height();
-		$(".dialog").height(dialogHeight);
-		$(".dialog").getNiceScroll().resize();
+        $(".dialog").height(dialogHeight);
 	},
 	
 	scrollTop: function () {
@@ -32,8 +27,7 @@ var Chat = {
 		Chat.panel = container;
 		Chat.innerCall = userID && true;
 		// load panel anyway
-		$(Chat.panel).load(chatURL.panel, null, function(){
-			$(".allMessages", Chat.panel).niceScroll({cursorwidth:"5px",cursorcolor:"#999999",cursorborder:"none"});
+		$(Chat.panel).load(chatURL.panel, {data: {type: (Chat.innerCall) ? '' : 'external'}}, function(){
 			Chat.fixPanelHeight();
 			if (chatUpdateTime) {
 				Chat.timer = setInterval(function(){
@@ -51,10 +45,9 @@ var Chat = {
 			});
 		});
 	},
-	
+	/*
 	panelShow: function () {
 		$(Chat.panel).show();
-		$(".allMessages", Chat.panel).getNiceScroll().show();
 		$(".menuBar div").removeClass("active");
 		$(".menuBar .chatPanel").parent().addClass("active");
 		Chat.disableUpdate();
@@ -62,7 +55,6 @@ var Chat = {
 	
 	panelHide: function () {
 		$(Chat.panel).hide();
-		$(".allMessages", Chat.panel).getNiceScroll().hide();
 		$(".menuBar .chatPanel").parent().removeClass("active");
 		Chat.enableUpdate();
 	},
@@ -81,7 +73,7 @@ var Chat = {
 		}
 		
 	},
-	
+	*/
 	sendMsg: function () {
 		var msg = $(".sendForm textarea").val();
 		Chat.addMsg(msg);
@@ -128,7 +120,7 @@ var Chat = {
 	},
 	
 	openRoom: function (userID) {
-		Chat.panelHide();
+		// Chat.panelHide();
 		Chat.disableUpdate();
 		$.post(chatURL.openRoom, {data: {user_id: userID}}, function(response){
 			if (checkJson(response)) {
@@ -335,7 +327,7 @@ var Chat = {
 		} else if (!count) {
 			count = '';
 		}
-		$(".chatPanel > span.badge").html(count);
+		$("#chatTotalUnread").html(count);
 	},
 	
 	enableUpdate: function () {
@@ -354,9 +346,9 @@ var Chat = {
 	},
 	
 	filterContactList: function (filter) {
-		$(".allMessages .userItem", Chat.panel).each(function(){
+		$(".allMessages .messages-new", Chat.panel).each(function(){
 			if (filter) {
-				var name = $(".topName .name", this).html();
+				var name = $(".name", this).html();
 				if (name.substr(0, filter.length).toLowerCase() == filter.toLowerCase()) {
 					$(this).show();
 				} else {

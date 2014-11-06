@@ -1,8 +1,10 @@
 <?php
 App::uses('AppController', 'Controller');
-class ChatController extends AppController {
+App::uses('SiteController', 'Controller');
+class ChatController extends SiteController {
+	public $name = 'Chat';
 	
 	public function index($userID = 0) {
-		$this->set('userID', ($userID) ?  $userID : 'null');
+		$this->set('chatUserID', ($userID) ?  $userID : 'null');
 	}
 }

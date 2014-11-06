@@ -1,0 +1,482 @@
+[placeholder]:focus::-webkit-input-placeholder {
+  color: transparent !important; }
+
+[placeholder]:focus::-moz-placeholder {
+  color: transparent !important; }
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both; }
+
+.count:empty, .badge:empty {
+  display: none; }
+
+.main-panel {
+  position: fixed;
+  height: 100%;
+  width: 90px;
+  font-family: "Open Sans";
+  z-index: 10000;
+  top: 0;
+  left: 0;
+  /*  DropDown Panel Style  */ }
+  .main-panel .main-panel-block {
+    position: relative;
+    height: 100%;
+    width: 90px;
+    background: #313131;
+    overflow: hidden;
+    z-index: 100; }
+  .main-panel .main-panel-wrapper {
+    position: relative;
+    overflow-y: auto;
+    padding-right: 17px;
+    height: 100%;
+    width: 107px; }
+  .main-panel .user-image {
+    height: 90px;
+    width: 90px; }
+    .main-panel .user-image img {
+      display: block; }
+  .main-panel .main-panel-list {
+    width: 90px;
+    position: relative; }
+    .main-panel .main-panel-list ul li {
+      position: relative; }
+      .main-panel .main-panel-list ul li.open:before {
+        content: '';
+        position: absolute;
+        height: 13px;
+        width: 10px;
+        background: url(../img/arrows/main-panel-list-arr.png) no-repeat 0 0;
+        right: 0;
+        top: 50%;
+        margin-top: -1px; }
+      .main-panel .main-panel-list ul li.open a {
+        color: #fff; }
+    .main-panel .main-panel-list ul a {
+      display: block;
+      text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
+      text-align: center;
+      padding: 3px 0;
+      font-size: 32px;
+      color: #5a5a5a; }
+      .main-panel .main-panel-list ul a:hover {
+        color: #fff; }
+    .main-panel .main-panel-list ul .count {
+      position: absolute;
+      height: 18px;
+      width: 19px;
+      border-top-left-radius: 50%;
+      border-top-right-radius: 50%;
+      border-bottom-left-radius: 50%;
+      border-bottom-right-radius: 50%;
+      font-family: 'Open Sans';
+      right: 17px;
+      top: 21px;
+      background: #ff6363;
+      text-align: center;
+      font-size: 10px;
+      padding: 2px 0;
+      color: #fff; }
+  .main-panel .main-panel-dropdown {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 90; }
+    .main-panel .main-panel-dropdown .dropdown-panel {
+      position: absolute;
+      height: 100%;
+      width: 270px;
+      -webkit-transition: left 1s ease-in-out;
+      -moz-transition: left 1s ease-in-out;
+      transition: left 1s ease-in-out;
+      background: #f4f4f4;
+      left: -180px;
+      top: 0;
+      overflow: hidden; }
+      .main-panel .main-panel-dropdown .dropdown-panel.dropdown-open {
+        -webkit-transition: left 1s ease-in-out;
+        -moz-transition: left 1s ease-in-out;
+        transition: left 1s ease-in-out;
+        left: 90px; }
+      .main-panel .main-panel-dropdown .dropdown-panel .dropdown-panel-wrapper {
+        position: relative;
+        padding-right: 17px;
+        height: 100%;
+        width: 287px; }
+        .main-panel .main-panel-dropdown .dropdown-panel .dropdown-panel-wrapper .dropdown-panel-scroll {
+          overflow: auto;
+          height: 100%;
+          width: 287px; }
+  .main-panel .service-menu {
+    position: relative;
+    height: 200px;
+    width: 90px;
+    margin-top: 90px; }
+    .main-panel .service-menu.service-menu-fixed {
+      position: absolute;
+      left: 0;
+      bottom: 0; }
+    .main-panel .service-menu li {
+      position: relative; }
+      .main-panel .service-menu li.logo-li {
+        margin-top: 28px; }
+      .main-panel .service-menu li a {
+        display: block;
+        text-decoration: none;
+        -webkit-tap-highlight-color: transparent;
+        text-align: center;
+        padding: 8px 0;
+        font-size: 31px;
+        color: #5a5a5a; }
+        .main-panel .service-menu li a:hover {
+          color: #fff; }
+          .main-panel .service-menu li a:hover .logo-icon {
+            background-position: 0 100%; }
+        .main-panel .service-menu li a .logo-icon {
+          display: inline-block;
+          height: 39px;
+          width: 34px;
+          background: url(../img/service-menu-logo.png) no-repeat 0 0; }
+  .main-panel .dropdown-chatPanel .searchBlock {
+    position: absolute;
+    height: 81px;
+    width: 270px;
+    padding: 31px 26px 0 30px;
+    border-bottom: 1px solid #e5e6e9;
+    background: #f4f4f4;
+    top: 0;
+    left: 0;
+    z-index: 100; }
+    .main-panel .dropdown-chatPanel .searchBlock .searchInput {
+      width: 185px;
+      background: transparent;
+      border: medium none;
+      box-shadow: none;
+      float: left;
+      font-family: "Open Sans",sans-serif;
+      color: #616161;
+      font-size: 15px;
+      margin: 0;
+      padding: 0; }
+      .main-panel .dropdown-chatPanel .searchBlock .searchInput::-webkit-input-placeholder {
+        color: #616161;
+        opacity: 1; }
+      .main-panel .dropdown-chatPanel .searchBlock .searchInput::-moz-placeholder {
+        color: #616161;
+        opacity: 1; }
+      .main-panel .dropdown-chatPanel .searchBlock .searchInput:-moz-placeholder {
+        color: #616161;
+        opacity: 1; }
+      .main-panel .dropdown-chatPanel .searchBlock .searchInput:-ms-input-placeholder {
+        color: #616161;
+        opacity: 1; }
+    .main-panel .dropdown-chatPanel .searchBlock .searchButton {
+      float: right;
+      display: inline-block;
+      margin-top: -3px;
+      background: none;
+      font-size: 20px;
+      border: none;
+      padding: 0; }
+  .main-panel .dropdown-chatPanel .messages-list {
+    width: 270px;
+    padding-top: 81px; }
+    .main-panel .dropdown-chatPanel .messages-list li {
+      padding: 16px 13px 16px 23px;
+      border-top: 1px solid #e5e6e9;
+      cursor: pointer; }
+      .main-panel .dropdown-chatPanel .messages-list li:first-child {
+        border-top: none; }
+      .main-panel .dropdown-chatPanel .messages-list li:hover {
+        background: #e4efed; }
+      .main-panel .dropdown-chatPanel .messages-list li.messages-new {
+        background: #ecedef; }
+        .main-panel .dropdown-chatPanel .messages-list li.messages-new:hover {
+          background: #e4efed; }
+      .main-panel .dropdown-chatPanel .messages-list li .messages-user {
+        float: left;
+        height: 52px;
+        width: 50px;
+        border-bottom: 2px solid transparent;
+        text-align: center;
+        margin-right: 15px; }
+        .main-panel .dropdown-chatPanel .messages-list li .messages-user.rate-10 {
+          border-color: #23b5ae; }
+        .main-panel .dropdown-chatPanel .messages-list li .messages-user.rate-0 {
+          border-color: #ff6363; }
+        .main-panel .dropdown-chatPanel .messages-list li .messages-user img {
+          height: 50px; }
+      .main-panel .dropdown-chatPanel .messages-list li .text {
+        height: 52px;
+        width: 130px;
+        padding-top: 3px;
+        float: left; }
+        .main-panel .dropdown-chatPanel .messages-list li .text .name {
+          width: 130px;
+          display: inline-block;
+          max-width: 100%;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          padding: 0 0 3px; }
+        .main-panel .dropdown-chatPanel .messages-list li .text .message {
+          width: 130px;
+          margin-top: -7px;
+          display: inline-block;
+          max-width: 100%;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          color: #616161;
+          font-size: 13px; }
+          .main-panel .dropdown-chatPanel .messages-list li .text .message p {
+            padding-top: 7px;
+            display: inline-block;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: 0; }
+          .main-panel .dropdown-chatPanel .messages-list li .text .message .inner-user {
+            display: inline-block;
+            height: 25px;
+            width: 25px;
+            margin: -3px 5px 0 0;
+            float: left; }
+            .main-panel .dropdown-chatPanel .messages-list li .text .message .inner-user img {
+              display: block; }
+      .main-panel .dropdown-chatPanel .messages-list li .aside-block {
+        width: 35px;
+        float: right; }
+        .main-panel .dropdown-chatPanel .messages-list li .aside-block .time {
+          padding-top: 8px;
+          text-align: center;
+          font-size: 11px;
+          color: #818181; }
+        .main-panel .dropdown-chatPanel .messages-list li .aside-block .count-b {
+          padding-top: 7px;
+          text-align: center; }
+          .main-panel .dropdown-chatPanel .messages-list li .aside-block .count-b .count {
+            display: inline-block;
+            height: 18px;
+            width: 19px;
+            border-top-left-radius: 50%;
+            border-top-right-radius: 50%;
+            border-bottom-left-radius: 50%;
+            border-bottom-right-radius: 50%;
+            font-family: 'Open Sans';
+            right: 17px;
+            top: 21px;
+            background: #ff6363;
+            text-align: center;
+            font-size: 10px;
+            padding: 2px 0;
+            color: #fff; }
+  .main-panel .dropdown-ipadPanel .drop-device-list {
+    width: 270px;
+    padding: 10px 0 62px; }
+    .main-panel .dropdown-ipadPanel .drop-device-list .drop-device-list-cell {
+      padding: 0 16px 20px;
+      border-top: 1px solid #e8e8e8;
+      cursor: default; }
+      .main-panel .dropdown-ipadPanel .drop-device-list .drop-device-list-cell:first-child {
+        border-top: none; }
+      .main-panel .dropdown-ipadPanel .drop-device-list .drop-device-list-cell .drop-device-icon {
+        color: #22B5AE;
+        font-size: 50px;
+        font-weight: 400;
+        width: 70px;
+        float: left; }
+      .main-panel .dropdown-ipadPanel .drop-device-list .drop-device-list-cell .drop-device-info {
+        width: 157px;
+        padding: 12px 0 0;
+        color: #616161;
+        font-size: 13px;
+        font-weight: 400;
+        float: right; }
+        .main-panel .dropdown-ipadPanel .drop-device-list .drop-device-list-cell .drop-device-info .title {
+          display: inline-block;
+          color: #313131;
+          font-size: 15px;
+          font-weight: 600;
+          margin-bottom: 3px; }
+        .main-panel .dropdown-ipadPanel .drop-device-list .drop-device-list-cell .drop-device-info p {
+          margin-bottom: 9px; }
+        .main-panel .dropdown-ipadPanel .drop-device-list .drop-device-list-cell .drop-device-info .month-amount {
+          color: #313131;
+          font-size: 15px;
+          font-weight: 400; }
+        .main-panel .dropdown-ipadPanel .drop-device-list .drop-device-list-cell .drop-device-info .select-option .box-input {
+          width: 62px;
+          margin-right: 9px;
+          float: left; }
+          .main-panel .dropdown-ipadPanel .drop-device-list .drop-device-list-cell .drop-device-info .select-option .box-input input {
+            display: inline-block;
+            border: 1px solid #d1d1d1;
+            border-top-left-radius: 2px;
+            border-top-right-radius: 2px;
+            border-bottom-left-radius: 2px;
+            border-bottom-right-radius: 2px;
+            box-shadow: none !important;
+            -webkit-appearance: none;
+            font-family: "Open Sans";
+            height: 31px;
+            width: 60px;
+            background-color: transparent;
+            font-size: 14px;
+            padding: 4px 13px;
+            font-weight: 600;
+            color: #616161; }
+        .main-panel .dropdown-ipadPanel .drop-device-list .drop-device-list-cell .drop-device-info .select-option .box-select {
+          width: 85px;
+          float: left; }
+          .main-panel .dropdown-ipadPanel .drop-device-list .drop-device-list-cell .drop-device-info .select-option .box-select .dropdown.open .btn {
+            background-color: #22b5ae; }
+          .main-panel .dropdown-ipadPanel .drop-device-list .drop-device-list-cell .drop-device-info .select-option .box-select .btn {
+            border-radius: 2px;
+            padding: 4px 12px 5px;
+            background-color: transparent;
+            font-weight: 600;
+            color: #616161; }
+            .main-panel .dropdown-ipadPanel .drop-device-list .drop-device-list-cell .drop-device-info .select-option .box-select .btn:hover {
+              background-color: #22b5ae; }
+          .main-panel .dropdown-ipadPanel .drop-device-list .drop-device-list-cell .drop-device-info .select-option .box-select .glyphicon {
+            font-size: 12px;
+            font-weight: 400;
+            top: 2px; }
+  .main-panel .dropdown-ipadPanel .b-order-bottom-device {
+    width: 270px;
+    position: absolute;
+    border-top: 1px solid #e8e8e8;
+    padding: 11px 16px 20px;
+    background: #f4f4f4;
+    bottom: 0;
+    left: 0;
+    z-index: 100; }
+    .main-panel .dropdown-ipadPanel .b-order-bottom-device .my-orders {
+      display: inline-block;
+      text-decoration: underline;
+      padding-top: 6px;
+      font-size: 14px;
+      color: #428bca;
+      float: left; }
+      .main-panel .dropdown-ipadPanel .b-order-bottom-device .my-orders:hover {
+        text-decoration: none; }
+    .main-panel .dropdown-ipadPanel .b-order-bottom-device .order-device {
+      float: right;
+      background-color: transparent;
+      border: 1px solid #d1d1d1;
+      text-decoration: none;
+      border-radius: 2px;
+      color: #616161;
+      display: inline-block;
+      font-family: "Open Sans";
+      font-size: 14px;
+      font-weight: 600;
+      padding: 7px 13px 8px; }
+      .main-panel .dropdown-ipadPanel .b-order-bottom-device .order-device:hover {
+        text-decoration: none; }
+  .main-panel .dropdown-ipadPanel .box-select .jq-selectbox {
+    width: 87px; }
+  .main-panel .dropdown-ipadPanel .box-select .jq-selectbox {
+    vertical-align: middle;
+    cursor: pointer; }
+    .main-panel .dropdown-ipadPanel .box-select .jq-selectbox .jq-selectbox__select {
+      color: #616161;
+      font-weight: 600;
+      padding: 4px 28px 5px 12px;
+      border-top-left-radius: 2px;
+      border-top-right-radius: 2px;
+      border-bottom-left-radius: 2px;
+      border-bottom-right-radius: 2px;
+      background-color: transparent;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      height: 31px; }
+      .main-panel .dropdown-ipadPanel .box-select .jq-selectbox .jq-selectbox__select:hover {
+        background: #22b5ae;
+        border-color: #22b5ae;
+        color: #fff !important; }
+        .main-panel .dropdown-ipadPanel .box-select .jq-selectbox .jq-selectbox__select:hover .jq-selectbox__trigger-arrow {
+          background-position: -33px -66px !important; }
+      .main-panel .dropdown-ipadPanel .box-select .jq-selectbox .jq-selectbox__select .jq-selectbox__select-text {
+        display: block;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap; }
+      .main-panel .dropdown-ipadPanel .box-select .jq-selectbox .jq-selectbox__select .jq-selectbox__trigger {
+        position: absolute;
+        top: 1px;
+        right: 1px;
+        width: 22px;
+        height: 31px; }
+      .main-panel .dropdown-ipadPanel .box-select .jq-selectbox .jq-selectbox__select .jq-selectbox__trigger-arrow {
+        overflow: hidden;
+        position: absolute;
+        background: url(../img/sprite.png) no-repeat scroll -33px -55px transparent;
+        border: medium none;
+        height: 8px;
+        opacity: 1;
+        right: 8px;
+        top: 10px;
+        width: 11px; }
+    .main-panel .dropdown-ipadPanel .box-select .jq-selectbox.opened .jq-selectbox__select {
+      background: #22b5ae;
+      border-color: #22b5ae;
+      color: #fff !important; }
+    .main-panel .dropdown-ipadPanel .box-select .jq-selectbox.opened .jq-selectbox__trigger-arrow {
+      background-position: -33px -66px !important; }
+    .main-panel .dropdown-ipadPanel .box-select .jq-selectbox.disabled .jq-selectbox__select {
+      border-color: #CCC;
+      background: #f5f5f5;
+      color: #ccc; }
+    .main-panel .dropdown-ipadPanel .box-select .jq-selectbox.disabled .jq-selectbox__trigger-arrow {
+      opacity: 0.3;
+      filter: alpha(opacity=30); }
+    .main-panel .dropdown-ipadPanel .box-select .jq-selectbox .jq-selectbox__dropdown {
+      display: none;
+      position: absolute;
+      width: 100% !important;
+      background-color: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
+      margin: 2px 0 0;
+      border-radius: 4px;
+      float: left;
+      font-size: 14px;
+      left: 0;
+      padding: 5px 0;
+      text-align: left;
+      top: 36px; }
+    .main-panel .dropdown-ipadPanel .box-select .jq-selectbox ul {
+      padding: 0; }
+    .main-panel .dropdown-ipadPanel .box-select .jq-selectbox li {
+      clear: both;
+      color: #333;
+      display: block;
+      font-weight: normal;
+      line-height: 1.42857;
+      padding: 3px 20px;
+      white-space: nowrap; }
+      .main-panel .dropdown-ipadPanel .box-select .jq-selectbox li:hover {
+        background: #22b5ae;
+        color: #fff; }
+      .main-panel .dropdown-ipadPanel .box-select .jq-selectbox li.selected {
+        background-color: #a3abb1;
+        color: #fff; }
+      .main-panel .dropdown-ipadPanel .box-select .jq-selectbox li.disabled {
+        background: #cecece; }
+      .main-panel .dropdown-ipadPanel .box-select .jq-selectbox li .disabled {
+        color: #AAA; }
+        .main-panel .dropdown-ipadPanel .box-select .jq-selectbox li .disabled:hover {
+          background: none; }
+      .main-panel .dropdown-ipadPanel .box-select .jq-selectbox li .option {
+        padding-left: 25px; }
+
+/*# sourceMappingURL=main-panel.css.map */

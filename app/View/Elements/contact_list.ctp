@@ -1,3 +1,4 @@
+<ul>
 <?
 	foreach($aUsers as $user) {
 		$name = Hash::get($user, 'ChatUser.name');
@@ -17,17 +18,22 @@
 			$onclick = "Chat.openRoom(".$user['ChatUser']['id'].")";
 		}
 ?>
-<div class="userItem clearfix" onclick="<?=$onclick?>">
-	<a href="javascript: void(0)"><img class="ava" src="<?=$user['Avatar']['url']?>" alt="<?=$name?>" /></a>
-	<div class="topName">
-		<span class="name"><?=$name?></span>
-		<span class="time"><?=$time?></span>
-	</div>
-	<div class="topName">
-		<span class="message"><?=Hash::get($user, 'ChatMessage.message')?></span>
-		<span class="badge badge-important"><?=$count?></span>
-	</div>
-</div>
+            <li class="messages-new clearfix" onclick="<?=$onclick?>">
+                <figure class="messages-user rate-10"><img class="ava" src="<?=$user['Avatar']['url']?>" alt="<?=$name?>" /></figure>
+                <div class="text">
+                    <div class="name"><?=$name?></div>
+                    <div class="message clearfix">
+                        <p><?=Hash::get($user, 'ChatMessage.message')?></p>
+                    </div>
+                </div>
+                <div class="aside-block">
+                    <div class="time"><?=$time?></div>
+                    <div class="count-b">
+                        <span class="count"><?=$count?></span>
+                    </div>
+                </div>
+            </li>
 <?
 	}
 ?>
+</ul>

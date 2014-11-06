@@ -2,21 +2,16 @@ var Struct = {
 	$panel: null, 
 	
 	fixPanelHeight: function () {
-		var ordersHeight = $(window).height() - 50;
-		$(".allOrders", Struct.panel).height(ordersHeight);
-		$(".allOrders", Struct.panel).getNiceScroll().resize();
 	},
-	
+	/*
 	panelShow: function () {
 		$(Struct.panel).show();
-		$(".allOrders", Struct.panel).getNiceScroll().show();
 		$(".menuBar div").removeClass("active");
 		$(".menuBar .devicePanel").closest("div").addClass("active");
 	},
 	
 	panelHide: function () {
 		$(Struct.panel).hide();
-		$(".allOrders", Struct.panel).getNiceScroll().hide();
 		$(".menuBar .devicePanel").closest("div").removeClass("active");
 	},
 	
@@ -30,11 +25,11 @@ var Struct = {
 			});
 		}
 	},
-	
+	*/
 	initPanel: function (container) {
 		Struct.panel = container;
 		$(Struct.panel).load(structURL.panel, null, function(){
-			$(".allOrders", Struct.panel).niceScroll({cursorwidth:"5px",cursorcolor:"#999999",cursorborder:"none"});
+			$('select.formstyler', Struct.panel).styler();
 			Struct.fixPanelHeight();
 		});
 	}

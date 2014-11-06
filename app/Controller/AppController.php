@@ -5,6 +5,7 @@ class AppController extends Controller {
 	public $pageTitle = '';
 	
 	public $uses = array('ChatUser');
+	public $helpers = array('Html', 'Form');
 	
 	protected $currUser = array(), $currUserID;
 	
@@ -28,6 +29,14 @@ class AppController extends Controller {
 	}
 	
 	public function beforeRender() {
+		$this->set('balance', '0');
+		$this->set('PU_', '$');
+		$this->set('_PU', '');
+		
+		$this->set('currUser', $this->currUser);
+		$this->set('currUserID', $this->currUserID);
+		
+		$this->set('pageTitle', $this->pageTitle);
 	}
 	
 	protected function _checkAuth() {

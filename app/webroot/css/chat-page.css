@@ -1,0 +1,9 @@
+.chat-page .bottom {
+  width: 100%;
+  position: fixed;
+  left: 90px;
+  bottom: 0;
+  background: #fff;
+  z-index: 100; }
+
+/*# sourceMappingURL=chat-page.css.map */

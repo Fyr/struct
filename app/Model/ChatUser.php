@@ -1,7 +1,6 @@
 <?php
 App::uses('AppModel', 'Model');
 class ChatUser extends AppModel {
-	public $useDbConfig = 'users';
 	public $useTable = 'clients';
 	public $primaryKey = 'id';
 	

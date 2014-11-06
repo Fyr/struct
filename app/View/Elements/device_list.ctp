@@ -1,4 +1,4 @@
-<form id="devicePanelForm" action="<?=$this->Html->url(array('controller' => 'SiteOrders', 'action' => 'checkout'), true)?>" method="post" style="padding-bottom: 100px;">
+<form id="devicePanelForm" action="<?=$this->Html->url(array('controller' => 'Device', 'action' => 'checkout'), true)?>" method="post">
 		<ul class="drop-device-list">
 <?
 	
