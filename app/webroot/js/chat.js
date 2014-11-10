@@ -27,7 +27,7 @@ var Chat = {
 		Chat.panel = container;
 		Chat.innerCall = userID && true;
 		// load panel anyway
-		$(Chat.panel).load(chatURL.panel, {data: {type: (Chat.innerCall) ? '' : 'external'}}, function(){
+		$(Chat.panel).load(chatURL.panel, {data: {type: (Chat.innerCall) ? 'internal' : ''}}, function(){
 			Chat.fixPanelHeight();
 			if (chatUpdateTime) {
 				Chat.timer = setInterval(function(){
@@ -37,12 +37,16 @@ var Chat = {
 			if (userID) {
 				Chat.openRoom(userID);
 			}
-			$(".searchBlock input", Chat.panel).click(function(){
-				$(this).val('');
-			});
-			$(".searchBlock input", Chat.panel).change(function(){
-				Chat.filterContactList($(".searchBlock input", Chat.panel).val());
-			});
+			Chat.initHandlers();
+		});
+	},
+	
+	initHandlers: function() {
+		$(".searchBlock .searchInput", Chat.panel).focus(function(){
+			this.select();
+		});
+		$(".searchBlock .searchButton", Chat.panel).click(function(){
+			Chat.filterContactList($(".searchBlock .searchInput", Chat.panel).val());
 		});
 	},
 	/*
@@ -109,6 +113,7 @@ var Chat = {
 			roomID = Chat.getActiveRoom();
 		}
 		$(".dialog .innerDialog #roomChat_" + roomID).append(Chat.renderAddFile(msg, url, file_name));
+		Chat.scrollTop();
 	},
 	
 	sendFile: function (fileData) {
@@ -133,6 +138,7 @@ var Chat = {
 				}
 				Chat.dispatchEvents(response.data.events);
 				Chat.activateRoom(roomID);
+				Chat.scrollTop();
 				Chat.enableUpdate();
 			}
 		}, 'json');
@@ -162,10 +168,10 @@ var Chat = {
 		aID = new Array();
 		for(var i = 0; i < aEvents.length; i++) {
 			var event = aEvents[i];
-			if (event.event_type == chatDef.incomingMsg) {
+			if (event.event_type == chatDef.incomingMsg || event.event_type == chatDef.outcomingMsg) {
 				Chat.addMsg(event.msg, event.user, event.time, roomID);
-			} else if (event.event_type == chatDef.fileDownloadAvail) {
-				Chat.addFile(chatLocale.fileReceived, event.url, event.file_name, roomID);
+			} else if (event.event_type == chatDef.fileDownloadAvail || event.event_type == chatDef.fileUploaded) {
+				Chat.addFile(event.msg, event.url, event.file_name, roomID);
 			}
 			aID.push(event.id);
 		}
@@ -241,6 +247,7 @@ var Chat = {
 					if (roomID = Chat.getActiveRoom()) {
 						Chat.activateRoom(roomID);
 					}
+					$(Chat.panel).html(response.panel);
 					Chat.enableUpdate();
 				}
 			}, 'json');
@@ -253,25 +260,28 @@ var Chat = {
 			var roomID = this.id.replace(/roomTab_/, '');
 			Chat.clearUnreadEvents(roomID);
 		});
+		var count = 0;
 		for(var i = 0; i < data.events.length; i++) {
 			var event = data.events[i].ChatEvent;
+			count+= event.active;
 			$roomTab = $(".openChats #roomTab_" + event.room_id);
 			if ($roomTab.length) {
-				if (event.event_type == chatDef.incomingMsg) {
+				if (event.event_type == chatDef.incomingMsg || event.event_type == chatDef.outcomingMsg) {
 					var msg = data.messages[event.msg_id];
 					Chat.addUnreadEvent(event.room_id, {
 						id: event.id,
 						event_type: event.event_type,
 						time: event.created,
 						msg: msg.message,
-						user: data.authors[event.initiator_id]
+						user: (event.event_type == chatDef.incomingMsg) ? data.authors[event.initiator_id] : null
 					});
-				} else if (event.event_type == chatDef.fileDownloadAvail) {
+				} else if (event.event_type == chatDef.fileDownloadAvail || event.event_type == chatDef.fileUploaded) {
 					var file = data.files[event.file_id];
 					Chat.addUnreadEvent(event.room_id, {
 						id: event.id,
 						event_type: event.event_type,
 						time: event.created,
+						msg: (event.event_type == chatDef.fileDownloadAvail) ? chatLocale.fileReceived : chatLocale.fileUploaded,
 						url: file.url_download,
 						file_name: file.orig_fname
 					});
@@ -282,7 +292,7 @@ var Chat = {
 			var roomID = this.id.replace(/roomTab_/, '');
 			Chat.showUnreadTab(roomID);
 		});
-		Chat.showUnreadTotal(data.events.length);
+		Chat.showUnreadTotal(count);
 		Chat.enableUpdate();
 	},
 	
@@ -346,6 +356,10 @@ var Chat = {
 	},
 	
 	filterContactList: function (filter) {
+		$(Chat.panel).load(chatURL.panel, {data: {q: filter, type: (Chat.innerCall) ? 'internal' : ''}}, function(){
+			Chat.initHandlers();
+		});
+		/*
 		$(".allMessages .messages-new", Chat.panel).each(function(){
 			if (filter) {
 				var name = $(".name", this).html();
@@ -358,5 +372,6 @@ var Chat = {
 				$(this).show();
 			}
 		});
+		*/
 	}
 }

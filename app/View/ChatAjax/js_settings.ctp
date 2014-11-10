@@ -12,7 +12,9 @@ var chatURL = {
 }
 chatUpdateTime = <?=Configure::read('chatUpdateTime')?>;
 chatDef = {
+	outcomingMsg: <?=ChatEvent::OUTCOMING_MSG?>,
 	incomingMsg: <?=ChatEvent::INCOMING_MSG?>,
+	fileUploaded: <?=ChatEvent::FILE_UPLOADED?>,
 	fileDownloadAvail: <?=ChatEvent::FILE_DOWNLOAD_AVAIL?>
 }
 chatLocale = {

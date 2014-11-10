@@ -31,7 +31,13 @@ class ChatAjaxController extends PAjaxController {
 			$this->setError($e->getMessage());
 		}
 		*/
-		$aUsers = $this->ChatUser->getContactListUsers($this->currUserID);
+		$aUsers = array();
+		$q = $this->request->data('q');
+		if ($q) {
+			$aUsers = $this->ChatUser->search($this->currUserID, $q);
+		} else {
+			$aUsers = $this->ChatUser->getContactListUsers($this->currUserID);
+		}
 		$this->set('aUsers', $aUsers);
 	}
 	
@@ -44,7 +50,7 @@ class ChatAjaxController extends PAjaxController {
 			
 			$room = $this->ChatEvent->openRoom($this->currUserID, $userID);
 			$user = $this->ChatUser->getUser($userID);
-			$events = $this->ChatEvent->getActiveEvents($this->currUserID);
+			$events = $this->ChatEvent->getAllRoomEvents($this->currUserID, $room['ChatRoom']['id']);
 			return $this->setResponse(compact('room', 'user', 'events'));
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
@@ -87,10 +93,17 @@ class ChatAjaxController extends PAjaxController {
 		try {
 			$data = $this->ChatEvent->getActiveEvents($this->currUserID);
 			// fdebug($data, 'update_chat.log', false);
-			$this->setResponse($data);
+			// $this->setResponse($data);
+			$data = $this->ChatEvent->getActiveEvents($this->currUserID);
+			$this->set('status', self::STATUS_OK);
+			$this->set('data', $data);
+			
+			$aUsers = $this->ChatUser->getContactListUsers($this->currUserID);
+			$this->set('aUsers', $aUsers);
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
 		}
+		
 	}
 	
 	public function markRead() {

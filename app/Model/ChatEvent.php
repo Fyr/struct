@@ -96,10 +96,10 @@ class ChatEvent extends AppModel {
 		return $room;
 	}
 	
-	public function getActiveEvents($currUserID) {
+	protected function _getEvents($currUserID, $conditions) {
 		$this->loadModel(array('ChatMessage', 'ChatUser', 'Media.Media'));
 		
-		$conditions = array('user_id' => $currUserID, 'active' => 1);
+		$conditions = array_merge(array('user_id' => $currUserID), $conditions);
 		$order = array('room_id', 'created');
 		$events = $this->find('all', compact('conditions', 'order'));
 		
@@ -123,6 +123,14 @@ class ChatEvent extends AppModel {
 		$authors = Hash::combine($authors, '{n}.ChatUser.id', '{n}');
 		$files = Hash::combine($files, '{n}.Media.id', '{n}.Media');
 		return compact('events', 'messages', 'authors', 'files');
+	}
+	
+	public function getActiveEvents($currUserID) {
+		return $this->_getEvents($currUserID, array('active' => 1));
+	}
+	
+	public function getAllRoomEvents($currUserID, $room_id) {
+		return $this->_getEvents($currUserID, compact('room_id'));
 	}
 	
 	public function markInactive($ids) {

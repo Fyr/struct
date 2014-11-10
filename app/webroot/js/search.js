@@ -9,11 +9,11 @@ var Search = {
 	},
 	
 	initHandlers: function() {
-		$(".searchBlock input", Search.panel).click(function(){
+		$(".searchBlock .searchInput", Search.panel).click(function(){
 			this.select();
 		});
 		$(".searchBlock .searchButton", Search.panel).click(function(){
-			Search.filterContactList($(".searchBlock input", Search.panel).val());
+			Search.filterContactList($(".searchBlock .searchInput", Search.panel).val());
 		});
 	},
 	

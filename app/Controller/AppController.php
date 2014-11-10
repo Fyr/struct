@@ -52,5 +52,6 @@ class AppController extends Controller {
 			exit('You must be authorized');
 		}
 		$this->currUser = $this->ChatUser->getUser($this->currUserID);
+		fdebug($this->currUser, 'curr_user.log', false);
 	}
 }
