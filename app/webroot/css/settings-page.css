@@ -1,0 +1,40 @@
+.settings-page {
+  cursor: default;
+  position: relative;
+  padding: 0 20px;
+  z-index: 50; }
+  .settings-page .container-fluid {
+    max-width: 1200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto; }
+  .settings-page .n-padding {
+    padding: 0; }
+  .settings-page .settings-avatar img {
+    width: 100%;
+    max-width: 192px; }
+
+.ui-autocomplete {
+  z-index: 100;
+  width: 300px !important;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
+  margin: 0;
+  border-radius: 4px;
+  font-size: 14px;
+  padding: 5px 0;
+  text-align: left; }
+  .ui-autocomplete li {
+    clear: both;
+    color: #333;
+    display: block;
+    font-weight: normal;
+    line-height: 1.42857;
+    padding: 3px 20px;
+    white-space: nowrap; }
+    .ui-autocomplete li:hover {
+      background: #22b5ae;
+      color: #fff; }
+
+/*# sourceMappingURL=settings-page.css.map */

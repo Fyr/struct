@@ -14,7 +14,7 @@
 </div>
 <div class="service-menu">
     <ul>
-        <li><a href="javascript:void(0)"><span class="glyphicons settings"></span></a></li>
+        <li><a href="<?=$this->Html->url(array('controller' => 'Profile', 'action' => 'edit'))?>"><span class="glyphicons settings"></span></a></li>
         <li><a href="/client/logout"><span class="glyphicons exit"></span></a></li>
         <li class="logo-li"><a href="javascript:void(0)"><span class="logo-icon"></span></a></li>
     </ul>

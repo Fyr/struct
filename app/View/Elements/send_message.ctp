@@ -6,7 +6,7 @@
 	<div class="clearfix"></div>
 	<div class="formBottom clearfix" style="height: 32px;">
 		<div class="inputFile icon icon_attach">
-			<input id="fileupload" type="file" />
+			<input type="file" class="fileuploader" data-object_type="Chat" />
 		</div>
 		<span><?=__('To send message press Enter')?></span>
 		<div id="processFile" style="padding-top: 4px; display: none;"><img src="/img/ajax_loader.gif" alt="" /> <span style="float: none;"><?=__('Processing file...')?></span></div>

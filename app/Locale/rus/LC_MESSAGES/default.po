@@ -1,0 +1,375 @@
+msgid "Username"
+msgstr "Пользователь"
+
+msgid "Invalid username or password, try again"
+msgstr "Неправильное имя пользователя или пароль"
+
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "Home"
+msgstr "Главная"
+
+msgid "You must log in to access this page"
+msgstr "Вы должны авторизоваться"
+
+msgid "Your session has been expired. Please, relogin to perform this action"
+msgstr "Авторизация истекла. Пож-ста, авторизуйтесь снова"
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Back"
+msgstr "Назад"
+
+msgid "Apply"
+msgstr "Применить"
+
+msgid "Upload files..."
+msgstr "Загрузка файлов..."
+
+msgid "Set as main"
+msgstr "Назначить осн."
+
+msgid "Delete"
+msgstr "Удалить"
+
+msgid "Original image"
+msgstr "Оригинальное изображение"
+
+msgid "Uploaded"
+msgstr "Загружено"
+
+msgid "File name"
+msgstr "Имя файла"
+
+msgid "File size"
+msgstr "Размер файла"
+
+msgid "Resolution"
+msgstr "Разрешение"
+
+msgid "Enlarge"
+msgstr "Увеличить"
+
+msgid "Links"
+msgstr "Ссылки"
+
+msgid "Original size"
+msgstr "Оригинальный размер"
+
+msgid "For editor"
+msgstr "Для редактора"
+
+msgid "Resize"
+msgstr "Изменить размеры"
+
+msgid "Width"
+msgstr "Ширина"
+
+msgid "Height"
+msgstr "Высота"
+
+msgid "Media URL"
+msgstr "Media URL"
+
+msgid "Add record"
+msgstr "Добавить запись"
+
+msgid "Show filter settings"
+msgstr "Показать настройки фильтра"
+
+msgid "Edit record"
+msgstr "Редактировать запись"
+
+msgid "Delete record"
+msgstr "Удалить запись"
+
+msgid "Delete checked records"
+msgstr "Удалить помеченные записи"
+
+msgid "Dashboard"
+msgstr "Главная"
+
+msgid "User name"
+msgstr "Имя пользователя"
+
+msgid "Password"
+msgstr "Пароль"
+
+msgid "Remember me"
+msgstr "Запомнить"
+
+msgid "Login"
+msgstr "Вход"
+
+msgid "Clean image cache"
+msgstr "Очистить кэш изображений"
+
+msgid "Processing query..."
+msgstr "Обработка запроса..."
+
+msgid "CMS Development"
+msgstr "Разработка CMS"
+
+msgid "Admin Home Page"
+msgstr "Главная страница Админа"
+
+msgid "Open Home page of Front-end in a new tab"
+msgstr "Открыть главную страницу сайта в новой вкладке"
+
+msgid "Go to Site"
+msgstr "Перейти к сайту"
+
+msgid "Log out"
+msgstr "Выход"
+
+msgid "Send"
+msgstr "Отправить"
+
+msgid "General"
+msgstr "Общее"
+
+msgid "Title"
+msgstr "Название"
+
+msgid "Teaser"
+msgstr "Анонс"
+
+msgid "Published"
+msgstr "Опубликовано"
+
+msgid "Featured"
+msgstr "Особое"
+
+msgid "Active"
+msgstr "Активен"
+
+msgid "Field is mandatory"
+msgstr "Поле обязательно для заполнения"
+
+msgid "Sort Order"
+msgstr "Сортировка"
+
+msgid "Upload"
+msgstr "Загрузить"
+
+msgid "Loading..."
+msgstr "rus:Loading...!"
+
+msgid "Jan"
+msgstr "rus:Jan!"
+
+msgid "Feb"
+msgstr "rus:Feb!"
+
+msgid "Mar"
+msgstr "rus:Mar!"
+
+msgid "Apr"
+msgstr "rus:Apr!"
+
+msgid "May"
+msgstr "rus:May!"
+
+msgid "Jul"
+msgstr "rus:Jul!"
+
+msgid "Jun"
+msgstr "rus:Jun!"
+
+msgid "Aug"
+msgstr "rus:Aug!"
+
+msgid "Sep"
+msgstr "rus:Sep!"
+
+msgid "Oct"
+msgstr "rus:Oct!"
+
+msgid "Nov"
+msgstr "rus:Nov!"
+
+msgid "Dec"
+msgstr "rus:Dec!"
+
+
+
+
+
+
+
+msgid "Product already exists in the order"
+msgstr "rus:Product already exists in the order!"
+
+msgid "Product does not exist"
+msgstr "rus:Product does not exist!"
+
+msgid "Incorrect request"
+msgstr "rus:Incorrect request!"
+
+msgid "Products"
+msgstr "rus:Products!"
+
+msgid "Product types"
+msgstr "rus:Product types!"
+
+msgid "Contractors"
+msgstr "rus:Contractors!"
+
+msgid "Orders"
+msgstr "rus:Orders!"
+
+msgid "FAQ"
+msgstr "rus:FAQ!"
+
+msgid "New order"
+msgstr "rus:New order!"
+
+msgid "My orders"
+msgstr "rus:My orders!"
+
+msgid "Recharge balance"
+msgstr "rus:Recharge balance!"
+
+msgid "Profile settings"
+msgstr "rus:Profile settings!"
+
+msgid "Tech.params"
+msgstr "rus:Tech.params!"
+
+msgid "Edit contractor"
+msgstr "rus:Edit contractor!"
+
+msgid "Create contractor"
+msgstr "rus:Create contractor!"
+
+msgid "Edit question"
+msgstr "rus:Edit question!"
+
+msgid "Create question"
+msgstr "rus:Create question!"
+
+msgid "Edit order"
+msgstr "rus:Edit order!"
+
+msgid "Create order"
+msgstr "rus:Create order!"
+
+msgid "Edit product"
+msgstr "rus:Edit product!"
+
+msgid "Create product"
+msgstr "rus:Create product!"
+
+msgid "Edit product type"
+msgstr "rus:Edit product type!"
+
+msgid "Create product type"
+msgstr "rus:Create product type!"
+
+msgid "You have received a file"
+msgstr "rus:You have received a file!"
+
+msgid "File has been uploaded"
+msgstr "rus:File has been uploaded!"
+
+msgid "Min.qty"
+msgstr "rus:Min.qty!"
+
+msgid "items"
+msgstr "rus:items!"
+
+msgid "Remove"
+msgstr "rus:Remove!"
+
+msgid "Contact person"
+msgstr "rus:Contact person!"
+
+msgid "Email"
+msgstr "rus:Email!"
+
+msgid "Contractor details"
+msgstr "rus:Contractor details!"
+
+msgid "Order ID"
+msgstr "rus:Order ID!"
+
+msgid "Sum"
+msgstr "rus:Sum!"
+
+msgid "Choose the suitable payment system to recharge your balance"
+msgstr "rus:Choose the suitable payment system to recharge your balance!"
+
+msgid "Recharge amount"
+msgstr "rus:Recharge amount!"
+
+msgid "Paid"
+msgstr "rus:Paid!"
+
+msgid "Shipped"
+msgstr "rus:Shipped!"
+
+msgid "- No products in this order -"
+msgstr "rus:- No products in this order -!"
+
+msgid "month"
+msgstr "rus:month!"
+
+msgid "Requires a payment"
+msgstr "rus:Requires a payment!"
+
+msgid "Shipping"
+msgstr "rus:Shipping!"
+
+msgid "Ready"
+msgstr "rus:Ready!"
+
+msgid "Find user..."
+msgstr "rus:Find user...!"
+
+msgid "Order it"
+msgstr "rus:Order it!"
+
+msgid "years"
+msgstr "rus:years!"
+
+msgid "Send message"
+msgstr "rus:Send message!"
+
+msgid "To send message press Enter"
+msgstr "rus:To send message press Enter!"
+
+msgid "Processing file..."
+msgstr "rus:Processing file...!"
+
+msgid "Balance"
+msgstr "rus:Balance!"
+
+msgid "Tech.support"
+msgstr "rus:Tech.support!"
+
+msgid "Change email"
+msgstr "rus:Change email!"
+
+msgid "Change password"
+msgstr "rus:Change password!"
+
+msgid "Profile has been successfully saved"
+msgstr "rus:Profile has been successfully saved!"
+
+msgid "My video"
+msgstr "rus:My video!"
+
+msgid "Skills"
+msgstr "rus:Skills!"
+
+msgid "Birthday"
+msgstr "rus:Birthday!"
+
+msgid "I live"
+msgstr "rus:I live!"
+
+msgid "Interface language"
+msgstr "rus:Interface language!"
+

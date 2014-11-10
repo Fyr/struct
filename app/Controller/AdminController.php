@@ -14,8 +14,6 @@ class AdminController extends AppController {
 	    $this->helpers = array_merge(array('Html', 'Table.PHTableGrid', 'Form.PHForm'), $this->helpers);
 	    
 		$this->aNavBar = array(
-			// 'Page' => array('label' => __('Static Pages'), 'href' => array('controller' => 'AdminContent', 'action' => 'index', 'Page')),
-			// 'News' => array('label' => __('News'), 'href' => array('controller' => 'AdminContent', 'action' => 'index', 'News')),
 			'Products' => array('label' => __('Products'), 'href' => '', 'submenu' => array(
 				'Types' => array('label' => __('Product types'), 'href' => array('controller' => 'AdminProductTypes', 'action' => 'index')),
 				'Products' => array('label' => __('Products'), 'href' => array('controller' => 'AdminProducts', 'action' => 'index')),
@@ -23,8 +21,6 @@ class AdminController extends AppController {
 			'Contractors' => array('label' => __('Contractors'), 'href' => array('controller' => 'AdminContractors', 'action' => 'index')),
 			'Orders' => array('label' => __('Orders'), 'href' => array('controller' => 'AdminOrders', 'action' => 'index')),
 			'Faq' => array('label' => __('FAQ'), 'href' => array('controller' => 'AdminFaq', 'action' => 'index')),
-			// 'slider' => array('label' => __('Slider'), 'href' => array('controller' => 'AdminSlider', 'action' => 'index')),
-			// 'settings' => array('label' => __('Settings'), 'href' => array('controller' => 'AdminSettings', 'action' => 'index'))
 		);
 		$this->aBottomLinks = $this->aNavBar;
 	}

@@ -19,7 +19,7 @@
 		}
 ?>
             <li class="messages-new clearfix" onclick="<?=$onclick?>">
-                <figure class="messages-user rate-10"><img class="ava" src="<?=$user['Avatar']['url']?>" alt="<?=$name?>" /></figure>
+                <figure class="messages-user rate-10"><img class="ava" src="<?=$user['Avatar']['url']?>" alt="<?=$name?>" style="width: 50px; height: auto;"/></figure>
                 <div class="text">
                     <div class="name"><?=$name?></div>
                     <div class="message clearfix">

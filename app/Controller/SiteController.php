@@ -42,7 +42,7 @@ class SiteController extends AppController {
 			exit('You must be authorized');
 		}
 		$this->currUser = $this->ChatUser->getUser($this->currUserID);
-		//fdebug($this->currUser, 'curr_user'.$this->currUserID.'.log', false);
+		// fdebug($this->currUser, 'curr_user'.$this->currUserID.'.log', false);
 	}
 	
 	public function beforeRender() {

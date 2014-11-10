@@ -527,7 +527,7 @@
 
 									if (selectSmartPositioning === true || selectSmartPositioning === 1) {
 										// раскрытие вниз
-										if (bottomOffset > (minHeight + searchHeight + 20))	{
+										if (bottomOffset > (minHeight + searchHeight + 160))	{
 											dropDown();
 											selectbox.removeClass('dropup').addClass('dropdown');
 										// раскрытие вверх

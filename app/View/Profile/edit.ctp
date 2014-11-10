@@ -1,0 +1,183 @@
+<style type="text/css">
+.settings-input input {
+	font-size: 20px;
+}
+</style>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="page-title"><?=$pageTitle?></div>
+    </div>
+</div>
+<div class="row">
+
+<?=$this->Form->create('Profile')?>
+<?=$this->Form->hidden('Profile.id')?>
+<div class="col-md-12 col-sm-12 col-xs-12 n-padding">
+    <div class="col-md-3 col-sm-3 col-xs-12">
+        <div class="col-md-12 col-sm-12 col-xs-3 n-padding">
+            <div class="settings-avatar">
+<?
+	if ($this->request->data('Media.id')) {
+		$src = $this->Media->imageUrl($this->request->data, 'noresize');
+	} else {
+		$src = '/img/no-photo.jpg';
+	}
+?>
+                <img id="<?=$this->request->data('Media.id')?>" src="<?=$src?>" alt="" />
+            </div>
+        </div>
+        <div class="settings-avatar-info fs13 text-grey mb60">
+            <input class="fileuploader" type="file" data-object_type="Profile" data-object_id="<?=$id?>" style="display: inline" />
+            <div id="progress-bar">
+            	<div id="progress-stats"></div>
+            </div>
+        </div>
+        <div class="mb30">
+            <a href="#"><?=__('Tech.support')?></a>
+        </div>
+        <div class="settings-link">
+            <a href="#"><span class="glyphicon-extended glyphicon-mailfull"></span> <?=__('Change email')?></a>
+        </div>
+        <div class="settings-link">
+            <a href="#"><span class="glyphicon-extended glyphicon-unlock"></span> <?=__('Change password')?></a>
+        </div>
+    </div>
+    <div class="col-md-7 col-sm-7 col-xs-12">
+<?
+	if (isset($this->request->query['success']) && $this->request->query['success']) {
+?>
+    	<div align="center">
+    		<label>
+                <?=__('Profile has been successfully saved')?>
+            </label>
+        </div>
+<?
+	}
+?>
+        <div class="settings-input-row">
+            <div class="comments-box-send-info">
+                <?=__('My video')?>
+            </div>
+            <div class="input-group settings-input col-md-12 col-sm-12">
+                <span class="input-group-addon halflings facetime-video"></span>
+                <?=$this->Form->input('Profile.video_url', array('label' => false, 'class' => 'form-control'))?>
+            </div>
+        </div>
+        <div class="settings-input-row">
+            <div class="comments-box-send-info">
+                <?=__('Skills')?>
+            </div>
+            <div class="input-group settings-input col-md-12 col-sm-12">
+            	<?=$this->Form->input('Profile.skills', array('type' => 'text', 'label' => false, 'class' => 'form-control col-md-12 col-sm-12', 'id' => 'tokenfield'))?>
+            </div>
+        </div>
+        <div class="settings-input-row">
+            <div class="comments-box-send-info">
+                <?=__('Birthday')?>
+            </div>
+            <div id="datetimepicker1" class="input-group date settings-input col-md-12 col-sm-12">
+                <span class="input-group-addon">
+                    <span class="glyphicons calendar"></span>
+                </span>
+                <?=$this->Form->input('Profile.birthday', array('type' => 'text', 'label' => false, 'id' => 'datetimepicker6', 'class' => 'form-control', 'data-date-format' => "YYYY-MM-DD"))?>
+            </div>
+        </div>
+        <div class="settings-input-row">
+            <div class="comments-box-send-info">
+                <?=__('I live')?>
+            </div>
+            <div class="input-group settings-input col-md-12 col-sm-12">
+                <span class="input-group-addon glyphicon-extended glyphicons direction"></span>
+                <?=$this->Form->input('Profile.live_place', array('type' => 'text', 'label' => false))?>
+            </div>
+        </div>
+        <div class="settings-input-row nbb">
+            <div class="comments-box-send-info">
+                <?=__('Interface language')?>
+            </div>
+            <input class="hidenibput" id="lang" type="text" />
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <span class="htmlholder"><span class="country-icon"><img src="/img/temp/en.png" alt=""/></span>  English</span> <span class="halflings chevron-down"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a data-lang="en" href="#"><span class="country-icon"><img src="/img/temp/china.png" alt=""/></span>English</a></li>
+                    <li><a data-lang="en1" href="#"><span class="country-icon"><img src="/img/temp/russia.png" alt=""/></span>English</a></li>
+                    <li><a data-lang="en2" href="#"><span class="country-icon"><img src="/img/temp/en.png" alt=""/></span>  English</span></a></li>
+                    <li><a data-lang="en3" href="#">English</a></li>
+                    <li><a data-lang="en4" href="#">English</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="settings-input-row nbb">
+            <div class="comments-box-send-info">
+                Если вы ищете работу, работодатель сможет вас найти в базе данных
+            </div>
+            <label>
+                <input type="checkbox" /> <span class="glyphicon glyphicon-ok"></span> Я в поисках работы
+            </label>
+        </div>
+        <div class="settings-input-row nbb clearfix mb100">
+            <div class="col-md-2 col-sm-2 npl">
+                <input type="submit" class="btn btn-default" value="<?=__('Save')?>" />
+            </div>
+            <div class="col-md-10 col-sm-10 taright">
+                <a href="<?=$this->Html->url(array('controller' => 'Profile', 'action' => 'view'))?>"><?=__('How other people see this page')?></a>
+            </div>
+        </div>
+        <div class="settings-input-row nbb clearfix">
+            <div class="col-md-2 col-sm-2 npl">
+                <a href="#" class="btn btn-default">
+                    <?=__('Delete')?>
+                </a>
+            </div>
+            <div class="col-md-10 col-sm-10 ">
+                <div class="fs13 text-grey">
+                    Вы можете без особого труда удалить свой профиль с сайта, просто нажмите кнопку и вся информация будет безвозвратно удалена.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?=$this->Form->end()?>
+
+</div>
+<script type="text/javascript">
+<?
+	$profileID = Hash::get($profile, 'Profile.id');
+?>
+var objectType = 'Profile', objectID = <?=($profileID) ? $profileID : 'null'?>;
+// -- settings-script.js -- 
+$(function() {
+    $('select.formstyler').styler();
+    $('#datetimepicker1').datetimepicker({
+        pickTime: false
+    });
+    $('#datetimepicker6').datetimepicker({
+        pickTime: false
+    });
+/*
+    $('#tokenfield').tokenfield({
+        autocomplete: {
+            source: ['Jumla','pyton','Ruby','C++','CSS3','HTML5','DOTA2','Ruby - on - Rails','ModX'],
+            delay: 100
+        },
+        showAutocompleteOnFocus: true,
+        tokens: ['Jumla','Ruby','C++']
+    });
+    */
+    $('.settings-input-row input[type="checkbox"]').each(function(){
+        $(this).change(function(){
+            if($(this).is(':checked')){
+                $(this).parent().removeClass('checkedOut');
+                $(this).parent().addClass('checkedIn');
+            }else{
+                $(this).parent().addClass('checkedOut');
+                $(this).parent().removeClass('checkedIn');
+            }
+        });
+        $(this).change();
+    });
+    $('.settings-input-row input[type="checkbox"]').change();
+});
+</script>

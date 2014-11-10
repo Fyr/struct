@@ -1,6 +1,6 @@
 <div class="searchBlock clearfix">
     <form action="#">
-        <input class="searchInput" type="text" placeholder="Найти собеседника">
+        <input class="searchInput" type="text" placeholder="<?=__('Find user...')?>">
         <button class="searchButton" ><span class="glyphicons search"></span></button>
     </form>
 </div>

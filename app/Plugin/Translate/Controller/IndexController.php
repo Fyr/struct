@@ -16,15 +16,19 @@ class IndexController extends AdminController {
 		$file = file_get_contents($path.$fname);
 		$msgFile = file_get_contents($this->msgFile);
 		preg_match_all('/__\(\'([\w\s\d\%\,\.\!\-]+)\'\)/', $file, $matches);
-		if (isset($matches[1])) {
+		if (isset($matches[1]) && $matches[1]) {
+			echo $path.$fname.' - '.count($matches[1]).'<br>';
 			foreach($matches[1] as $phrase) {
 				if (strpos($msgFile, $phrase) === false) {
 					// добавить метку в файл
 					$this->count++;
 					file_put_contents($this->msgFile, 'msgid "'.$phrase.'"'."\r\n".'msgstr "'.Configure::read('Config.language').':'.$phrase.'!"'."\r\n\r\n", FILE_APPEND);
 					$msgFile = file_get_contents($this->msgFile);
+					
+					echo $phrase."<br>";
 				}
 			}
+			echo "<br>";
 		}
 	}
 	

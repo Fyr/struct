@@ -19,8 +19,6 @@
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 
 <?php
-	$baseURL = Configure::read('baseURL');
-	
 	echo $this->Html->meta('icon');
 	
 	$css = array(
@@ -45,6 +43,8 @@
 		'main-panel',
 		'chat',
 		'struct',
+		'search',
+		'group'
 	);
 	
 	// Files required for upload
@@ -62,19 +62,21 @@
 ?>
 	<script src="<?=$this->Html->url(array('controller' => 'ChatAjax', 'action' => 'jsSettings'))?>"></script>
 	<script src="<?=$this->Html->url(array('controller' => 'DeviceAjax', 'action' => 'jsSettings'))?>"></script>
+	<script src="<?=$this->Html->url(array('controller' => 'ProfileAjax', 'action' => 'jsSettings'))?>"></script>
+	<script src="<?=$this->Html->url(array('controller' => 'GroupAjax', 'action' => 'jsSettings'))?>"></script>
 <script>
+var objectType = 'Chat', objectID = null;
 $(document).ready(function () {
 	
 	$(window).resize(function() {
 		Chat.fixPanelHeight();
-		
-		// handle resize for iPad panel
-		Struct.fixPanelHeight();
 	});
 	
 	$('select.formstyler').styler();
+	Search.initPanel($('.dropdown-searchPanel .dropdown-panel-wrapper').get(0));
 	Chat.initPanel($(".dropdown-chatPanel .dropdown-panel-wrapper").get(0), <?=(isset($chatUserID)) ? $chatUserID : 'false'?>);
 	Struct.initPanel($('.dropdown-ipadPanel .dropdown-panel-wrapper').get(0));
+	Group.initPanel($('.dropdown-groupPanel .dropdown-panel-wrapper').get(0));
 	
 	$(".sendForm .icon_enter").bind('click', function() {
 		Chat.sendMsg();
@@ -129,7 +131,6 @@ $(document).ready(function () {
         </div>
     </div>
 </div>
-<?=$this->element('js_templates')?>
 <?
 	} else {
 ?>
@@ -155,5 +156,6 @@ $(document).ready(function () {
 <?
 	}
 ?>
+<?=$this->element('js_templates')?>
 </body>
 </html>

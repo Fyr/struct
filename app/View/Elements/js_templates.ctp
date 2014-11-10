@@ -25,3 +25,23 @@
 <script type="text/x-tmpl" id="extra-msg">
 <div class="date">{%=o.msg%}: <a href="{%=o.url%}" target="_blank">{%=o.file_name%}</a></div>
 </script>
+
+<script type="text/x-tmpl" id="group-gallery-admin">
+{% 
+	for(var i = 0; i < o.length; i++) { 
+		var img = o[i].Media;
+%}
+    <li>
+        <div class="remove-media" onclick="Group.delGalleryImage({%=img.object_id%}, {%=img.id%})"><span class="glyphicons circle_remove"></span></div>
+        <a href="javascript::void(0)">
+            <img src="{%=img.image.replace(/100x80/, '96x96')%}" alt="" />
+        </a>
+    </li>
+{%
+	}
+%}
+    <li>
+        <a href="javascript: void(0)" class="label-add add-image"><span class="glyphicons picture"></span></a>
+        <a href="javascript: void(0)" class="label-add add-video"><span class="halflings facetime-video"></span></a>
+    </li>
+</script>

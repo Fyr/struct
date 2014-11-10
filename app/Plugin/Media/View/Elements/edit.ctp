@@ -21,7 +21,7 @@
             <span class="btn btn-primary fileinput-button">
     	        <i class="icon-plus icon-white"></i>
     	        <span><?=__d('media', 'Upload files...');?></span>
-    	        <input id="fileupload" type="file" name="files[]" multiple>
+    	        <input id="fileupload" type="file" name="files[]" data-object_type="<?=$object_type?>" data-object_id="<?=$object_id?>" multiple>
     	    </span>
 		</td>
 		<td width="75%" align="center" valign="middle">
@@ -79,7 +79,7 @@
 	</tr>
 	</table>
 <script type="text/javascript">
-var mediaGrid = null, object_type = '<?=$object_type?>', object_id = <?=$object_id?>;
+var mediaGrid = null;
 var mediaURL = {
 	upload: '<?=$this->Html->url(array('plugin' => 'media', 'controller' => 'ajax', 'action' => 'upload'))?>',
 	move: '<?=$this->Html->url(array('plugin' => 'media', 'controller' => 'ajax', 'action' => 'move'))?>.json',

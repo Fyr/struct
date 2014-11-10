@@ -15,8 +15,8 @@ $(function () {
         dataType: 'json',
         done: function (e, data) {
             $.each(data.result.files, function (index, file) {
-                file.object_type = object_type;
-                file.object_id = object_id;
+                file.object_type = $(data.fileInput).data('object_type');
+                file.object_id = $(data.fileInput).data('object_id');
                 $.post(mediaURL.move, file, function(response){
                     mediaGrid.setData(response.data);
                     mediaGrid.update();
