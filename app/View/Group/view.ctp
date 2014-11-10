@@ -145,19 +145,23 @@
         </div>
     </div>
 </div-->
+<?
+	$aGroupAchievement = Hash::get($group, 'GroupAchievement');
+	if ($aGroupAchievement) {
+?>
 <div class="row">
     <div class="col-md-11 col-sm-10 col-xs-8">
         <div class="col-md-12">
-            <div class="subheading">Достижения</div>
+            <div class="subheading"><?=__('Achievements')?></div>
         </div>
     </div>
 </div>
 <div class="row mb40 achieve-list">
     <div class="col-md-11 col-sm-10 col-xs-8">
 <?
-	foreach(Hash::get($group, 'GroupAchievement') as $i => $achieve) {
-		$class = ($i > 2) ? 'can-hide' : '';
-		$style = ($i > 2) ? 'style="display: none"' : '';
+		foreach($aGroupAchievement as $i => $achieve) {
+			$class = ($i > 2) ? 'can-hide' : '';
+			$style = ($i > 2) ? 'style="display: none"' : '';
 ?>
         <div class="col-md-4 mb10 <?=$class?>" <?=$style?>>
             <a href="<?=Hash::get($achieve, 'url')?>" class="fs15">
@@ -165,7 +169,7 @@
             </a>
         </div>
 <?
-	}
+		}
 ?>
 		<div class="col-md-12">
             <div class="morelink">
@@ -178,8 +182,10 @@
         </div>
     </div>
 </div>
-
-<div class="row">
+<?
+	}
+?>
+<!--div class="row">
     <div class="col-md-11 col-sm-10 col-xs-8">
         <div class="col-md-12">
             <div class="subheading">Команда</div>
@@ -559,4 +565,4 @@
             </div>
         </div>
     </div>
-</div>
+</div-->

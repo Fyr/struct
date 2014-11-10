@@ -14,10 +14,10 @@ class ChatUser extends AppModel {
 	protected $ChatEvent, $ChatRoom, $Profile, $Media, $Group;
 	
 	protected function _initUserData($user) {
-		// $user['ChatUser']['name'] = (trim($user['ChatUserData']['full_name'])) ? $user['ChatUserData']['full_name'] : $user['ChatUser']['username'];
+		$user['ChatUser']['name'] = (trim($user['ChatUserData']['full_name'])) ? $user['ChatUserData']['full_name'] : $user['ChatUser']['username'];
 		// $user['Avatar']['url'] = (trim($user['ChatUserData']['avatar'])) ? $user['ChatUserData']['avatar'] : '/img/no-photo.jpg';
 
-		$user['ChatUser']['name'] = $user['ChatUser']['username'];
+		// $user['ChatUser']['name'] = $user['ChatUser']['username'];
 		
 		$this->loadModel(array('Profile', 'Media.Media'));
 		$profile = $this->Profile->findByUserId($user['ChatUser']['id']);
@@ -90,8 +90,8 @@ class ChatUser extends AppModel {
 			'ChatUser.id <> '.$currUserID,
 			'AND' => array(
 				'OR' => array(
-					// array('ChatUserData.full_name LIKE ?' => '%'.$q.'%'),
-					array('ChatUser.username LIKE ?' => '%'.$q.'%'),
+					array('ChatUserData.full_name LIKE ?' => '%'.$q.'%'),
+					// array('ChatUser.username LIKE ?' => '%'.$q.'%'),
 					array('Profile.skills LIKE ?' => '%'.$q.'%'),
 					// array('Profile.live_place LIKE ?' => '%'.$q.'%'),
 					// array('Group.title LIKE ?' => '%'.$q.'%'),

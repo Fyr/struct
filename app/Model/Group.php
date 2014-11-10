@@ -23,9 +23,8 @@ class Group extends AppModel {
 	);
 	
 	public function search($currUserID, $q) {
-		$fields = 'Group.id, Group.title';
 		$conditions = array('Group.title LIKE ?' => '%'.$q.'%');
 		$order = array('Group.title');
-		return $this->find('all', compact('fields', 'conditions', 'order'));
+		return $this->find('all', compact('conditions', 'order'));
 	}
 }

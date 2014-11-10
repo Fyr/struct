@@ -5,7 +5,7 @@
                         <div class="user-spec"><?=Hash::get($user, 'Profile.skills')?></div>
                         <div class="user-menu page-menu">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <!--button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                     В избранное <span class="halflings chevron-down"></span>
                                 </button>
                                 <ul class="dropdown-menu" role="menu">
@@ -14,10 +14,10 @@
                                     <li><a href="#">Одногруппники</a></li>
                                     <li><a href="#">Сотрудники</a></li>
                                     <li><a href="#">Подруги</a></li>
-                                </ul>
+                                </ul-->
                             </div>
                             <div class="dropdown">
-                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                                <!--button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
                                     Отправить сообщение
                                 </button>
                                 <div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
@@ -56,7 +56,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div-->
                             </div>
                         </div>
                     </div>
@@ -74,25 +74,30 @@
 <?
 	// $live_place = Hash::get($user, 'Profile.live_place');
 	// list($town, $country) = explode(',', $live_place);
+	$addr = Hash::get($user, 'Profile.live_place');
+	if ($addr) {
 ?>
-                            <div class="fs15"><?=Hash::get($user, 'Profile.live_place');?></div>
+                            <div class="fs15"><?=$addr?></div>
+<?
+	}
+?>
                             <div class="fs13 text-grey"><? // country?></div>
                             <div class="fs15 mt10"><?=Hash::get($user, 'Profile.birthday');?></div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="user-education">
-                            <img src="/img/temp/t_logo.png" alt="" />
+                            <!--img src="/img/temp/t_logo.png" alt="" />
                             <div class="fs15"> МГТУ им. Н. Э. Баумана</div>
                             <div class="fs13">
                                 Вычислительные машины,
                                 комплексы, системы, сети
-                            </div>
+                            </div-->
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="vp10">
-                            <div class="fs15 mt10"> +7 909 307-26-25</div>
+                            <div class="fs15 mt10"><!-- +7 909 307-26-25--></div>
                             <div class="fs15 mt10">
                                 <a href="#"><?=Hash::get($user, 'ChatUser.username')?></a>
                             </div>

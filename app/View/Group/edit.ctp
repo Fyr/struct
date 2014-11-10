@@ -167,14 +167,14 @@
         <div class="group-create-cell col-md-12 col-sm-12 col-xs-12">
             <div class="group-create-left col-md-3 col-sm-3 col-xs-12"></div>
             <div class="group-create-right col-md-9 col-sm-9 col-xs-12">
-                <div class="group-hide-view">
+                <!--div class="group-hide-view">
                     <div class="comments-hide-view">
                         <?=__('If you are looking for a job, employer can find you in our database')?>
                     </div>
                     <label>
                         <input type="checkbox" name="data[Group][hidden]" value="1" <?=$this->request->data('Group.hidden') ? 'checked="checked"' : ''?>/> <span class="glyphicons ok_2"></span> <?=__('Hide group')?>
                     </label>
-                </div>
+                </div-->
                 <div class="page-menu clearfix">
                     <input type="submit" class="btn btn-default" value="<?=__('Save')?>" />
                 </div>

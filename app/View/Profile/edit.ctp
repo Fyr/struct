@@ -41,14 +41,14 @@
 	}
 ?>
         <div class="mb30">
-            <a href="#"><?=__('Tech.support')?></a>
+            <a href="/tickets/tickets"><?=__('Tech.support')?></a>
         </div>
-        <div class="settings-link">
+        <!--div class="settings-link">
             <a href="#"><span class="glyphicon-extended glyphicon-mailfull"></span> <?=__('Change email')?></a>
         </div>
         <div class="settings-link">
             <a href="#"><span class="glyphicon-extended glyphicon-unlock"></span> <?=__('Change password')?></a>
-        </div>
+        </div-->
     </div>
     <div class="col-md-7 col-sm-7 col-xs-12">
 <?
@@ -122,14 +122,14 @@
                 </ul>
             </div>
         </div>
-        <div class="settings-input-row nbb">
+        <!--div class="settings-input-row nbb">
             <div class="comments-box-send-info">
             	<?=__('If you are looking for a job, employer can find you in our database')?>
             </div>
             <label>
                 <input type="checkbox" /> <span class="glyphicon glyphicon-ok"></span> <?=__('I am looking for a job')?>
             </label>
-        </div>
+        </div-->
         <div class="settings-input-row nbb clearfix mb100">
             <div class="col-md-2 col-sm-2 npl">
                 <input type="submit" class="btn btn-default" value="<?=__('Save')?>" />
@@ -138,7 +138,7 @@
                 <a href="<?=$this->Html->url(array('controller' => 'Profile', 'action' => 'view'))?>"><?=__('How other people see this page')?></a>
             </div>
         </div>
-        <div class="settings-input-row nbb clearfix">
+        <!--div class="settings-input-row nbb clearfix">
             <div class="col-md-2 col-sm-2 npl">
                 <a href="#" class="btn btn-default">
                     <?=__('Delete')?>
@@ -149,7 +149,7 @@
                 	<?=__('You can easily remove your profile from the site, just click the button and all information will be deleted permanently.')?>
                 </div>
             </div>
-        </div>
+        </div-->
     </div>
 </div>
 <?=$this->Form->end()?>

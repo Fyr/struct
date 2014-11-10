@@ -155,43 +155,43 @@ msgid "Upload"
 msgstr "Загрузить"
 
 msgid "Loading..."
-msgstr "rus:Loading...!"
+msgstr "Загрузка..."
 
 msgid "Jan"
-msgstr "rus:Jan!"
+msgstr "Янв"
 
 msgid "Feb"
-msgstr "rus:Feb!"
+msgstr "Фев"
 
 msgid "Mar"
-msgstr "rus:Mar!"
+msgstr "Мар"
 
 msgid "Apr"
-msgstr "rus:Apr!"
+msgstr "Апр"
 
 msgid "May"
-msgstr "rus:May!"
+msgstr "Май"
 
 msgid "Jul"
-msgstr "rus:Jul!"
+msgstr "Июл"
 
 msgid "Jun"
-msgstr "rus:Jun!"
+msgstr "Июн"
 
 msgid "Aug"
-msgstr "rus:Aug!"
+msgstr "Авг"
 
 msgid "Sep"
-msgstr "rus:Sep!"
+msgstr "Сен"
 
 msgid "Oct"
-msgstr "rus:Oct!"
+msgstr "Окт"
 
 msgid "Nov"
-msgstr "rus:Nov!"
+msgstr "Нов"
 
 msgid "Dec"
-msgstr "rus:Dec!"
+msgstr "Дек"
 
 
 
@@ -200,272 +200,271 @@ msgstr "rus:Dec!"
 
 
 msgid "Product already exists in the order"
-msgstr "rus:Product already exists in the order!"
+msgstr "Продукт уже присутствует в заказе"
 
 msgid "Product does not exist"
-msgstr "rus:Product does not exist!"
+msgstr "Продукт не существует"
 
 msgid "Incorrect request"
-msgstr "rus:Incorrect request!"
+msgstr "Неправильный запрос"
 
 msgid "Products"
-msgstr "rus:Products!"
+msgstr "Продукт"
 
 msgid "Product types"
-msgstr "rus:Product types!"
+msgstr "Типы продуктов"
 
 msgid "Contractors"
-msgstr "rus:Contractors!"
+msgstr "Контрагенты"
 
 msgid "Orders"
-msgstr "rus:Orders!"
+msgstr "Заказы"
 
 msgid "FAQ"
-msgstr "rus:FAQ!"
+msgstr "FAQ"
 
 msgid "New order"
-msgstr "rus:New order!"
+msgstr "Новые заказы"
 
 msgid "My orders"
-msgstr "rus:My orders!"
+msgstr "Мои заказы"
 
 msgid "Recharge balance"
-msgstr "rus:Recharge balance!"
+msgstr "Пополнить баланс"
 
 msgid "Profile settings"
-msgstr "rus:Profile settings!"
+msgstr "Настройки профиля"
 
 msgid "Tech.params"
-msgstr "rus:Tech.params!"
+msgstr "Тех. параметры"
 
 msgid "Edit contractor"
-msgstr "rus:Edit contractor!"
+msgstr "Редактировать контрагента"
 
 msgid "Create contractor"
-msgstr "rus:Create contractor!"
+msgstr "Создать контрагента"
 
 msgid "Edit question"
-msgstr "rus:Edit question!"
+msgstr "Редактировать вопрос"
 
 msgid "Create question"
-msgstr "rus:Create question!"
+msgstr "Создать вопрос"
 
 msgid "Edit order"
-msgstr "rus:Edit order!"
+msgstr "Редактировать заказ"
 
 msgid "Create order"
-msgstr "rus:Create order!"
+msgstr "Создать заказ"
 
 msgid "Edit product"
-msgstr "rus:Edit product!"
+msgstr "Редактировать продукт"
 
 msgid "Create product"
-msgstr "rus:Create product!"
+msgstr "Создать продукт"
 
 msgid "Edit product type"
-msgstr "rus:Edit product type!"
+msgstr "Редактировать тип продукта"
 
 msgid "Create product type"
-msgstr "rus:Create product type!"
+msgstr "Создать тип продукта"
 
 msgid "You have received a file"
-msgstr "rus:You have received a file!"
+msgstr "Вы получили файл"
 
 msgid "File has been uploaded"
-msgstr "rus:File has been uploaded!"
+msgstr "Файл загружен"
 
 msgid "Min.qty"
-msgstr "rus:Min.qty!"
+msgstr "Мин. кол-во"
 
 msgid "items"
-msgstr "rus:items!"
+msgstr "предметы"
 
 msgid "Remove"
-msgstr "rus:Remove!"
+msgstr "Удалить"
 
 msgid "Contact person"
-msgstr "rus:Contact person!"
+msgstr "Контактное лицо"
 
 msgid "Email"
-msgstr "rus:Email!"
+msgstr "Email"
 
 msgid "Contractor details"
-msgstr "rus:Contractor details!"
+msgstr "Контактные данные контрагента"
 
 msgid "Order ID"
-msgstr "rus:Order ID!"
+msgstr "ID заказа"
 
 msgid "Sum"
-msgstr "rus:Sum!"
+msgstr "Сумма"
 
 msgid "Choose the suitable payment system to recharge your balance"
-msgstr "rus:Choose the suitable payment system to recharge your balance!"
+msgstr "Выберите подходящую платёжную систему для пополнения вашего баланса"
 
 msgid "Recharge amount"
-msgstr "rus:Recharge amount!"
+msgstr "Пополнить сумму"
 
 msgid "Paid"
-msgstr "rus:Paid!"
+msgstr "Платное"
 
 msgid "Shipped"
-msgstr "rus:Shipped!"
+msgstr "Куплено"
 
 msgid "- No products in this order -"
-msgstr "rus:- No products in this order -!"
+msgstr "Нет продуктов в текущем заказе"
 
 msgid "month"
-msgstr "rus:month!"
+msgstr "месяцы"
 
 msgid "Requires a payment"
-msgstr "rus:Requires a payment!"
+msgstr "Требует оплату"
 
 msgid "Shipping"
-msgstr "rus:Shipping!"
+msgstr "Покупка"
 
 msgid "Ready"
-msgstr "rus:Ready!"
+msgstr "Готов"
 
 msgid "Find user..."
-msgstr "rus:Find user...!"
+msgstr "Найти пользователя..."
 
 msgid "Order it"
-msgstr "rus:Order it!"
+msgstr "Оформить заказ"
 
 msgid "years"
-msgstr "rus:years!"
+msgstr "года"
 
 msgid "Send message"
-msgstr "rus:Send message!"
+msgstr "Отправить сообщение"
 
 msgid "To send message press Enter"
-msgstr "rus:To send message press Enter!"
+msgstr "Для отправки сообщения нажмите Enter"
 
 msgid "Processing file..."
-msgstr "rus:Processing file...!"
+msgstr "Обработка файла"
 
 msgid "Balance"
-msgstr "rus:Balance!"
+msgstr "Баланс"
 
 msgid "Tech.support"
-msgstr "rus:Tech.support!"
+msgstr "Техническая поддержка"
 
 msgid "Change email"
-msgstr "rus:Change email!"
+msgstr "Сменить email"
 
 msgid "Change password"
-msgstr "rus:Change password!"
+msgstr "Сменить пароль"
 
 msgid "Profile has been successfully saved"
-msgstr "rus:Profile has been successfully saved!"
+msgstr "Профиль успешно сохранён"
 
 msgid "My video"
-msgstr "rus:My video!"
+msgstr "Моё видео"
 
 msgid "Skills"
-msgstr "rus:Skills!"
+msgstr "Навыки"
 
 msgid "Birthday"
-msgstr "rus:Birthday!"
+msgstr "Дата рождения"
 
 msgid "I live"
-msgstr "rus:I live!"
+msgstr "Я живу"
 
 msgid "Interface language"
-msgstr "rus:Interface language!"
+msgstr "Язык интерфейса"
 
 msgid "No user found"
-msgstr "rus:No user found!"
+msgstr "Не найден ни один пользователь"
 
 msgid "Achievement"
-msgstr "rus:Achievement!"
+msgstr "Достижение"
 
 msgid "Achievement approve URL"
-msgstr "rus:Achievement approve URL!"
+msgstr "Ссылка подтверждения достижения"
 
 msgid "Remove achievement"
-msgstr "rus:Remove achievement!"
+msgstr "Удалить достижение"
 
 msgid "Headquaters"
-msgstr "rus:Headquaters!"
+msgstr "Штаб-квартира"
 
 msgid "Phone"
-msgstr "rus:Phone!"
+msgstr "Телефон"
 
 msgid "Site URL and email"
-msgstr "rus:Site URL and email!"
+msgstr "Адрес сайта и email"
 
 msgid "Remove address"
-msgstr "rus:Remove address!"
+msgstr "Удалить адрес"
 
 msgid "Members"
-msgstr "rus:Members!"
+msgstr "Участники"
 
 msgid "Find group..."
-msgstr "rus:Find group...!"
+msgstr "Найти группу..."
 
 msgid "Find user or community..."
-msgstr "rus:Find user or community...!"
+msgstr "Найти пользователя или сообщество"
 
 msgid "No item found"
-msgstr "rus:No item found!"
+msgstr "Ничего не найдено"
 
 msgid "Group settings"
-msgstr "rus:Group settings!"
+msgstr "Настройки группы"
 
 msgid "Create group"
-msgstr "rus:Create group!"
+msgstr "Создать группу"
 
 msgid "Group has been successfully saved"
-msgstr "rus:Group has been successfully saved!"
+msgstr "Группа была успешно удалена"
 
 msgid "Group video"
-msgstr "rus:Group video!"
+msgstr "Видео группы"
 
 msgid "Group title"
-msgstr "rus:Group title!"
+msgstr "Название группы"
 
 msgid "Description"
-msgstr "rus:Description!"
+msgstr "Описание"
 
 msgid "Photo or video gallery"
-msgstr "rus:Photo or video gallery!"
+msgstr "Фото-видео галерея"
 
 msgid "URL for video"
-msgstr "rus:URL for video!"
+msgstr "Ссылка для видео"
 
 msgid "Add another address"
-msgstr "rus:Add another address!"
+msgstr "Добавить другой адрес"
 
 msgid "Add another achievement"
-msgstr "rus:Add another achievement!"
+msgstr "Добавить другое достижение"
 
 msgid "If you are looking for a job, employer can find you in our database"
-msgstr "rus:If you are looking for a job, employer can find you in our database!"
+msgstr "Если вы в поисках работы, работодатель сможет найти вас в нашей базе данных"
 
 msgid "Hide group"
-msgstr "rus:Hide group!"
+msgstr "Скрыть группу"
 
 msgid "All addresses"
-msgstr "rus:All addresses!"
+msgstr "Все адреса"
 
 msgid "Collapse"
-msgstr "rus:Collapse!"
+msgstr "Свернуть"
 
 msgid "Show more"
-msgstr "rus:Show more!"
+msgstr "Показать ещё"
 
 msgid "Create your profile"
-msgstr "rus:Create your profile!"
+msgstr "Создайте ваш профиль"
 
 msgid "Full name"
-msgstr "rus:Full name!"
+msgstr "Полное имя"
 
 msgid "I am looking for a job"
-msgstr "rus:I am looking for a job!"
+msgstr "Я в поисках работы"
 
 msgid "How other people see this page"
-msgstr "rus:How other people see this page!"
+msgstr "Как другие люди видят эту страницу"
 
 msgid "You can easily remove your profile from the site, just click the button and all information will be deleted permanently."
-msgstr "rus:You can easily remove your profile from the site, just click the button and all information will be deleted permanently.!"
-
+msgstr "Вы можете легко удалить ваш профиль с сайта, просто нажмите кнопку и вся информация будет сразу же удалена."

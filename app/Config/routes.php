@@ -1,6 +1,6 @@
 <?php
 Router::parseExtensions('html', 'json');
-Router::connect('/', array('controller' => 'Device', 'action' => 'index'));
+Router::connect('/', array('controller' => 'Profile', 'action' => 'edit'));
 
 CakePlugin::routes();
 
