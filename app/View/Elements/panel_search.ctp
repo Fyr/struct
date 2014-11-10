@@ -6,12 +6,13 @@
 </div>
 <div class="dropdown-panel-scroll">
 <?
-	if ($aUsers) {
+	if ((isset($aUsers) && $aUsers) || (isset($aGroups) && $aGroups)) {
 ?>
     <ul class="search-list-user">
 <?
-		foreach($aUsers as $user) {
-			$name = Hash::get($user, 'ChatUser.name');
+		if (isset($aUsers) && $aUsers) {
+			foreach($aUsers as $user) {
+				$name = Hash::get($user, 'ChatUser.name');
 ?>
         <li class="simple-list-item">
             <a href="<?=$this->Html->url(array('controller' => 'Profile', 'action' => 'view', $user['ChatUser']['id']))?>">
@@ -25,7 +26,31 @@
             </a>
         </li>
 <?
+			}
 		}
+		if (isset($aGroups) && $aGroups) {
+			foreach($aGroups as $group) {
+				$name = Hash::get($group, 'Group.title');
+				$src = $this->Media->imageUrl($group, '50x');
+				if (!$src) {
+					$src = '/img/group-create-pl-image.jpg';
+				}
+?>
+        <li class="simple-list-item">
+            <a href="<?=$this->Html->url(array('controller' => 'Group', 'action' => 'view', $group['Group']['id']))?>">
+                <div class="user-list-item clearfix">
+                    <div class="user-list-item-avatar rate-10"><img src="<?=$src?>" alt="<?=$name?>" style="width: 50px; height: auto;" /></div>
+                    <div class="user-list-item-body">
+                        <div class="user-list-item-name"><?=$name?></div>
+                        <div class="user-list-item-spec"><!--0 members--></div>
+                    </div>
+                </div>
+            </a>
+        </li>
+<?
+			}
+		}
+		
 ?>
     </ul>
 <?
@@ -34,7 +59,7 @@
 	<ul class="search-list-user">
 		<li class="simple-list-item">
 			<div style="margin-left: 10px;">
-				<?=__('No user found');?>
+				<?=__('No item found');?>
 			</div>
 		</li>
 	</ul>

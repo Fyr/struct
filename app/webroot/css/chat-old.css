@@ -5,9 +5,9 @@ body { font-family: 'Open Sans', sans-serif; color: #313131; }
 .icon_add:hover { background-position: 0 -278px;}
 .icon_enter { background: url('../img/sprite.png') no-repeat 0 -55px; width: 29px; height: 29px;}
 .icon_enter:hover { background-position: 0 -211px;}
-.icon_attach { background-position: 0 -89px; width: 31px; height: 31px;}
+.icon_attach {background: url('../img/sprite.png') no-repeat 0 -89px; width: 31px; height: 31px;}
 .icon_attach:hover { background-position: 0 -244px; }
-.icon_cube { background-position: 0 -124px; width: 34px; height: 39px; margin-top: 24px;}
+.icon_cube { background: url('../img/sprite.png') no-repeat 0 -124px; width: 34px; height: 39px; margin-top: 24px;}
 .icon_cube:hover { background-position: 0 -167px;}
 
 .menuBar { width: 90px; background: #313131; height: 100%; text-align: center;  position: fixed; z-index: 1000; }

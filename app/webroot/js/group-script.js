@@ -19,4 +19,22 @@ $(function () {
     $('.drop-add-video .close-block').on('click', function(){
        $(this).parent().removeClass('open');
     });
+
+
+    $('.panel-users-block .remove').on('click', function(){
+        if($(this).parent().parent().hasClass('remove-open')){
+            $(this).parent().parent().removeClass('remove-open');
+        }else{
+            $('.panel-users-block').removeClass('remove-open');
+            $(this).parent().parent().addClass('remove-open');
+        }
+        $('.remove-button a').on('click', function(){
+            $('.panel-users-block').removeClass('remove-open');
+        });
+        $(document).click( function(event){
+            if ($(event.target).closest($('.panel-users-block')).length) return false;
+                $('.panel-users-block').removeClass('remove-open');
+            event.stopPropagation();
+        });
+    });
 });

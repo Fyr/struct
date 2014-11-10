@@ -84,8 +84,7 @@ class ChatUser extends AppModel {
 	}
 	
 	public function search($currUserID, $q) {
-		$this->loadModel(array('Profile', 'Group'));
-		
+		$this->loadModel('Profile');
 		$fields = 'ChatUser.id, ChatUser.username';
 		$conditions = array(
 			'ChatUser.id <> '.$currUserID,
@@ -95,13 +94,13 @@ class ChatUser extends AppModel {
 					array('ChatUser.username LIKE ?' => '%'.$q.'%'),
 					array('Profile.skills LIKE ?' => '%'.$q.'%'),
 					// array('Profile.live_place LIKE ?' => '%'.$q.'%'),
-					array('Group.title LIKE ?' => '%'.$q.'%'),
+					// array('Group.title LIKE ?' => '%'.$q.'%'),
 				)
 			)
 		);
 		$joins = array(
 			array('type' => 'left', 'table' => $this->Profile->getTableName(), 'alias' => 'Profile', 'conditions' => array('Profile.user_id = ChatUser.id')),
-			array('type' => 'left', 'table' => $this->Group->getTableName(), 'alias' => 'Group', 'conditions' => array('Group.owner_id = ChatUser.id'))
+			// array('type' => 'left', 'table' => $this->Group->getTableName(), 'alias' => 'Group', 'conditions' => array('Group.owner_id = ChatUser.id'))
 		);
 		$order = array('ChatUser.username');
 		$aUsers = $this->find('all', compact('fields', 'conditions', 'order', 'joins'));

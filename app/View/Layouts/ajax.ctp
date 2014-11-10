@@ -1,3 +1,3 @@
 <?php 
 	echo $this->fetch('content');
-	// $this->element('sql_dump');
+	// echo $this->element('sql_dump');

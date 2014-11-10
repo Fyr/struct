@@ -3,7 +3,7 @@ App::uses('AppController', 'Controller');
 App::uses('PAjaxController', 'Core.Controller');
 class ProfileAjaxController extends PAjaxController {
 	public $name = 'ProfileAjax';
-	public $uses = array('Profile', 'ChatUser');
+	public $uses = array('Profile', 'ChatUser', 'Group');
 	public $helpers = array('Media');
 	
 	private $profile;
@@ -20,11 +20,11 @@ class ProfileAjaxController extends PAjaxController {
 	}
 	
 	public function panel() {
-		$aUsers = array();
 		$q = $this->request->data('q');
 		if ($q) {
-			$aUsers = $this->ChatUser->search($this->currUserID, $q);
+			$this->set('aUsers', $this->ChatUser->search($this->currUserID, $q));
+			$this->set('aGroups', $this->Group->search($this->currUserID, $q));
 		}
-		$this->set('aUsers', $aUsers);
+		
 	}
 }

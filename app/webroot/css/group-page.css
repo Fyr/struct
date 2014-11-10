@@ -25,17 +25,39 @@
       font-family: "Roboto";
       font-size: 36px;
       font-weight: 900; }
+    .group-page .header-group-create .page-title-group-image {
+      height: 50px;
+      width: 50px;
+      margin-right: 20px;
+      overflow: hidden;
+      float: left; }
+      .group-page .header-group-create .page-title-group-image img {
+        display: block;
+        min-width: 50px;
+        min-height: 50px; }
+    .group-page .header-group-create .title-button {
+      text-align: right;
+      font-size: 14px;
+      margin: 8px 0 0; }
+      .group-page .header-group-create .title-button .parents {
+        margin: -1px -5px 0 0; }
+      .group-page .header-group-create .title-button .wrench {
+        margin: -2px -7px 1px 0; }
   .group-page .group-create {
     padding: 14px 0 45px; }
     .group-page .group-create .group-create-head .group-create-logo {
       padding: 0 30px 0 0; }
       .group-page .group-create .group-create-head .group-create-logo figure {
         padding: 0;
-        margin: 0 0 13px; }
+        max-width: 200px;
+        max-height: 200px;
+        margin: 0 0 10px;
+        overflow: hidden; }
         .group-page .group-create .group-create-head .group-create-logo figure img {
           width: 100%;
-          max-width: 197px;
+          max-width: 200px;
           padding-right: 15px;
+          max-height: 200px;
           cursor: pointer; }
         .group-page .group-create .group-create-head .group-create-logo figure label {
           margin-bottom: 0; }
@@ -259,9 +281,178 @@
             width: 25px; }
             .group-page .group-create .group-create-cell .group-hide-view label.checkedOut .glyphicons:before {
               display: none; }
-              /*
   .group-page .group-address-block .group-create-cell:last-child .input-boxing:last-child,
   .group-page .group-achievements-block .group-create-cell:last-child .input-boxing:last-child {
     border-bottom-color: #000; }
-*/
+  .group-page .group-users-block {
+    padding: 30px 0 18px; }
+    .group-page .group-users-block .panel-users-block {
+      position: relative;
+      background: #f5f6f8;
+      margin-bottom: 20px;
+      overflow: hidden;
+      height: 74px; }
+      .group-page .group-users-block .panel-users-block.remove-open .r-users-block {
+        border-left: none;
+        right: -1px; }
+      .group-page .group-users-block .panel-users-block.remove-open .remove {
+        color: #fff !important;
+        background: #ff6363; }
+      .group-page .group-users-block .panel-users-block.remove-open .remove-block-drop {
+        top: 0%; }
+      .group-page .group-users-block .panel-users-block .link-block {
+        width: 100%;
+        float: left; }
+      .group-page .group-users-block .panel-users-block .l-users-block {
+        padding: 10px 0 10px 10px;
+        float: left; }
+        .group-page .group-users-block .panel-users-block .l-users-block figure {
+          height: 52px;
+          width: 50px;
+          border-bottom: 2px solid transparent;
+          overflow: hidden;
+          float: left; }
+          .group-page .group-users-block .panel-users-block .l-users-block figure.rate-10 {
+            border-color: #23b5ae; }
+          .group-page .group-users-block .panel-users-block .l-users-block figure.rate-0 {
+            border-color: #ff6363; }
+          .group-page .group-users-block .panel-users-block .l-users-block figure img {
+            display: block;
+            min-height: 50px;
+            min-width: 50px; }
+        .group-page .group-users-block .panel-users-block .l-users-block .text {
+          width: 81%;
+          padding: 4px 0 0 15px;
+          float: left; }
+          .group-page .group-users-block .panel-users-block .l-users-block .text .name {
+            width: 100%;
+            display: inline-block;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: #313131;
+            font-size: 15px;
+            font-weight: 600; }
+          .group-page .group-users-block .panel-users-block .l-users-block .text .skills {
+            width: 100%;
+            display: inline-block;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: #616161;
+            font-size: 13px;
+            font-weight: 400; }
+      .group-page .group-users-block .panel-users-block .r-users-block {
+        position: absolute;
+        height: 74px;
+        width: 37px;
+        border-left: 1px solid #e6e6e6;
+        background: #f5f6f8;
+        right: 0;
+        top: 0;
+        z-index: 10; }
+        .group-page .group-users-block .panel-users-block .r-users-block .ok {
+          color: #ABABAB;
+          height: 37px;
+          width: 37px;
+          padding: 6px 0 0 12px;
+          cursor: pointer; }
+          .group-page .group-users-block .panel-users-block .r-users-block .ok:hover {
+            color: #fff;
+            background: #23b5ae; }
+        .group-page .group-users-block .panel-users-block .r-users-block .remove {
+          color: #ABABAB;
+          height: 37px;
+          width: 37px;
+          padding: 6px 0 0 11px;
+          cursor: pointer; }
+          .group-page .group-users-block .panel-users-block .r-users-block .remove:hover {
+            color: #fff;
+            background: #ff6363; }
+      .group-page .group-users-block .panel-users-block .remove-block-drop {
+        background: #ff6363;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        -webkit-transition: top 0.3s ease-in-out;
+        -moz-transition: top 0.3s ease-in-out;
+        transition: top 0.3s ease-in-out;
+        color: #fff;
+        top: 100%;
+        left: 0; }
+        .group-page .group-users-block .panel-users-block .remove-block-drop .remove-text {
+          padding: 10px 40px 27px 10px;
+          font-size: 13px; }
+          .group-page .group-users-block .panel-users-block .remove-block-drop .remove-text a {
+            color: #fff;
+            border-bottom: 1px dotted #fff; }
+            .group-page .group-users-block .panel-users-block .remove-block-drop .remove-text a:hover {
+              border-bottom-color: transparent;
+              text-decoration: none; }
+        .group-page .group-users-block .panel-users-block .remove-block-drop .remove-button {
+          position: absolute;
+          bottom: 10px;
+          right: 45px; }
+          .group-page .group-users-block .panel-users-block .remove-block-drop .remove-button a {
+            display: inline-block;
+            margin: 0 5px; }
+  .group-page .group-list-ur {
+    padding: 29px 0; }
+    .group-page .group-list-ur li {
+      position: relative;
+      height: 190px;
+      width: 100px;
+      margin: 0 20px 20px 0;
+      float: left; }
+      .group-page .group-list-ur li.add-new-user figure {
+        background: url(../img/temp/emtyimage.jpg) no-repeat; }
+      .group-page .group-list-ur li .remove-media {
+        position: absolute;
+        height: 20px;
+        width: 20px;
+        border-top-left-radius: 50%;
+        border-top-right-radius: 50%;
+        border-bottom-left-radius: 50%;
+        border-bottom-right-radius: 50%;
+        top: -10px;
+        right: -10px;
+        padding: 0 0 0 4px;
+        background: #fff;
+        cursor: pointer;
+        font-size: 12px;
+        color: #CBCBCB;
+        z-index: 20; }
+        .group-page .group-list-ur li .remove-media .glyphicons {
+          margin-top: -3px; }
+        .group-page .group-list-ur li .remove-media:hover {
+          background: #23b5ae;
+          color: #fff; }
+      .group-page .group-list-ur li a {
+        text-decoration: none; }
+      .group-page .group-list-ur li figure {
+        position: relative;
+        height: 103px;
+        width: 100px;
+        border-bottom: 3px solid transparent;
+        overflow: hidden;
+        margin: 0 0 6px; }
+        .group-page .group-list-ur li figure.rate-10 {
+          border-color: #23b5ae; }
+        .group-page .group-list-ur li figure.rate-0 {
+          border-color: #ff6363; }
+        .group-page .group-list-ur li figure img {
+          display: block;
+          min-height: 100px;
+          min-width: 100px; }
+      .group-page .group-list-ur li .name {
+        font-size: 15px;
+        line-height: 22px;
+        color: #313131; }
+      .group-page .group-list-ur li .profession {
+        font-size: 13px;
+        font-style: italic;
+        color: #616161; }
+
 /*# sourceMappingURL=group-page.css.map */

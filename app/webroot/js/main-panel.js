@@ -57,5 +57,49 @@ $(function() {
             $('.main-panel-wrapper .service-menu').addClass('service-menu-fixed');
         }
     });
+
+
+    // проверяем поддержку position: fixed;[start]
+    var isFixedSupported = (function(){
+        var isSupported = null;
+        if (document.createElement) {
+            var el = document.createElement("div");
+            if (el && el.style) {
+                el.style.position = "fixed";
+                el.style.top = "10px";
+                var root = document.body;
+                if (root && root.appendChild && root.removeChild) {
+                    root.appendChild(el);
+                    isSupported = (el.offsetTop === 10);
+                    root.removeChild(el);
+                }
+            }
+        }
+        return isSupported;
+    })();
+    window.onload = function(){
+        if (!isFixedSupported){
+            // добавляем контекст для "старичков"
+            document.body.className += ' no-fixed-supported';
+            // имитируем position: fixed;
+            //var topbar = document.getElementById('topbar');
+            var bottombar = document.getElementsByClassName('main-panel');
+            var bottomBarHeight = bottombar.offsetHeight;
+            var windowHeight = window.innerHeight;
+            // обрабатываем события touch и scroll
+            window.ontouchmove = function(e) {
+                if (event.target !== topbar){
+                    topbar.style = "";
+                }
+            }
+            window.onscroll = function(){
+                var scrollTop = window.scrollY;
+                //topbar.style.top = scrollTop + 'px';
+                bottombar.style.bottom = (scrollTop + windowHeight - bottomBarHeight) + 'px';
+            };
+        }
+        // первичный scroll
+                window.scrollBy(0, 1);
+        }
 	
 });

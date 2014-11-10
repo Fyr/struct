@@ -44,6 +44,10 @@ var Chat = {
 	initHandlers: function() {
 		$(".searchBlock .searchInput", Chat.panel).focus(function(){
 			this.select();
+			Chat.disableUpdate();
+		});
+		$(".searchBlock .searchInput", Chat.panel).blur(function(){
+			Chat.enableUpdate();
 		});
 		$(".searchBlock .searchButton", Chat.panel).click(function(){
 			Chat.filterContactList($(".searchBlock .searchInput", Chat.panel).val());
@@ -241,13 +245,15 @@ var Chat = {
 	updateState: function () {
 		if (Chat.isUpdateEnabled()) {
 			Chat.disableUpdate();
-			$.get(chatURL.updateState, null, function(response){
+			var data = {data: {q: $(".searchBlock .searchInput", Chat.panel).val(), type: (Chat.innerCall) ? 'internal' : ''}};
+			$.post(chatURL.updateState, data, function(response){
 				if (checkJson(response)) {
 					Chat.dispatchEvents(response.data);
 					if (roomID = Chat.getActiveRoom()) {
 						Chat.activateRoom(roomID);
 					}
 					$(Chat.panel).html(response.panel);
+					Chat.initHandlers();
 					Chat.enableUpdate();
 				}
 			}, 'json');

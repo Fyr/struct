@@ -1,8 +1,6 @@
 <div class="searchBlock clearfix">
-    <form action="#">
         <input class="searchInput" type="text" value="<?=$this->request->data('q')?>" placeholder="<?=__('Find user...')?>">
-        <button class="searchButton" ><span class="glyphicons search"></span></button>
-    </form>
+        <button type="button" class="searchButton"><span class="glyphicons search"></span></button>
 </div>
 <div class="dropdown-panel-scroll">
     <div class="messages-list allMessages">

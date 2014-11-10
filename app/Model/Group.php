@@ -21,4 +21,11 @@ class Group extends AppModel {
 			'dependent' => true
 		)
 	);
+	
+	public function search($currUserID, $q) {
+		$fields = 'Group.id, Group.title';
+		$conditions = array('Group.title LIKE ?' => '%'.$q.'%');
+		$order = array('Group.title');
+		return $this->find('all', compact('fields', 'conditions', 'order'));
+	}
 }

@@ -98,8 +98,7 @@ class ChatAjaxController extends PAjaxController {
 			$this->set('status', self::STATUS_OK);
 			$this->set('data', $data);
 			
-			$aUsers = $this->ChatUser->getContactListUsers($this->currUserID);
-			$this->set('aUsers', $aUsers);
+			$this->contactList();
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
 		}
