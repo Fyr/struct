@@ -11,7 +11,7 @@
                 <div class="user-list-item-avatar rate-10"><img src="<?=($src) ? $src : '/img/no-photo.jpg'?>" alt="<?=$name?>" style="width: 50px;" /></div>
                 <div class="user-list-item-body">
                     <div class="user-list-item-name"><?=$name?></div>
-                    <div class="user-list-item-spec">0 <?=__('Members')?></div>
+                    <div class="user-list-item-spec"><!--0 <?=__('Members')?>--></div>
                 </div>
             </div>
         </a>

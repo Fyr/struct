@@ -3,13 +3,15 @@
 	font-size: 20px;
 }
 </style>
+<?
+	$id = $this->request->data('Profile.id');
+?>
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="page-title"><?=$pageTitle?></div>
+        <div class="page-title"><?=($id)? __('Profile settings') : __('Create your profile')?></div>
     </div>
 </div>
 <div class="row">
-
 <?=$this->Form->create('Profile')?>
 <?=$this->Form->hidden('Profile.id')?>
 <div class="col-md-12 col-sm-12 col-xs-12 n-padding">
@@ -26,12 +28,18 @@
                 <img id="<?=$this->request->data('Media.id')?>" src="<?=$src?>" alt="" />
             </div>
         </div>
+<?
+	if ($id) {
+?>
         <div class="settings-avatar-info fs13 text-grey mb60">
             <input class="fileuploader" type="file" data-object_type="Profile" data-object_id="<?=$id?>" style="display: inline" />
             <div id="progress-bar">
             	<div id="progress-stats"></div>
             </div>
         </div>
+<?
+	}
+?>
         <div class="mb30">
             <a href="#"><?=__('Tech.support')?></a>
         </div>
@@ -61,6 +69,14 @@
             <div class="input-group settings-input col-md-12 col-sm-12">
                 <span class="input-group-addon halflings facetime-video"></span>
                 <?=$this->Form->input('Profile.video_url', array('label' => false, 'class' => 'form-control'))?>
+            </div>
+        </div>
+        <div class="settings-input-row">
+            <div class="comments-box-send-info">
+                <?=__('Full name')?>
+            </div>
+            <div class="input-group settings-input col-md-12 col-sm-12">
+                <?=$this->Form->input('Profile.full_name', array('label' => false, 'class' => 'form-control'))?>
             </div>
         </div>
         <div class="settings-input-row">
@@ -101,20 +117,17 @@
                     <span class="htmlholder"><span class="country-icon"><img src="/img/temp/en.png" alt=""/></span>  English</span> <span class="halflings chevron-down"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a data-lang="en" href="#"><span class="country-icon"><img src="/img/temp/china.png" alt=""/></span>English</a></li>
+                	<li><a data-lang="en2" href="#"><span class="country-icon"><img src="/img/temp/en.png" alt=""/></span> English</span></a></li>
                     <li><a data-lang="en1" href="#"><span class="country-icon"><img src="/img/temp/russia.png" alt=""/></span>English</a></li>
-                    <li><a data-lang="en2" href="#"><span class="country-icon"><img src="/img/temp/en.png" alt=""/></span>  English</span></a></li>
-                    <li><a data-lang="en3" href="#">English</a></li>
-                    <li><a data-lang="en4" href="#">English</a></li>
                 </ul>
             </div>
         </div>
         <div class="settings-input-row nbb">
             <div class="comments-box-send-info">
-                Если вы ищете работу, работодатель сможет вас найти в базе данных
+            	<?=__('If you are looking for a job, employer can find you in our database')?>
             </div>
             <label>
-                <input type="checkbox" /> <span class="glyphicon glyphicon-ok"></span> Я в поисках работы
+                <input type="checkbox" /> <span class="glyphicon glyphicon-ok"></span> <?=__('I am looking for a job')?>
             </label>
         </div>
         <div class="settings-input-row nbb clearfix mb100">
@@ -133,7 +146,7 @@
             </div>
             <div class="col-md-10 col-sm-10 ">
                 <div class="fs13 text-grey">
-                    Вы можете без особого труда удалить свой профиль с сайта, просто нажмите кнопку и вся информация будет безвозвратно удалена.
+                	<?=__('You can easily remove your profile from the site, just click the button and all information will be deleted permanently.')?>
                 </div>
             </div>
         </div>

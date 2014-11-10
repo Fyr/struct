@@ -100,7 +100,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <!--div class="row">
                 <div class="col-md-11 col-sm-10 col-xs-8">
                     <div class="col-md-12">
                         <div class="subheading">Достижения</div>
@@ -137,8 +137,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
+            </div-->
+            <!--div class="row">
                 <div class="col-md-11 col-sm-10 col-xs-8">
                     <div class="col-md-12">
                         <div class="subheading">Группы</div>
@@ -357,8 +357,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
+            </div-->
+            <!--div class="row">
                 <div class="col-md-11 col-sm-10 col-xs-8">
                     <div class="col-md-12">
                         <div class="subheading page-menu">
@@ -490,10 +490,12 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div-->
         </div>
+        
         <div class="fixed-message">
-            <div class="container">
+        
+            <!--div class="container">
                 <div class="row">
                     <div class="col-md-11 col-sm-10 col-xs-8">
                         <div class="col-md-4 col-md-offset-8">
@@ -504,4 +506,4 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div-->

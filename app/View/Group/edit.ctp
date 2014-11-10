@@ -4,7 +4,7 @@
     margin-bottom: 0px;
 }
 .group-page .group-create .group-create-cell fieldset:last .input-boxing:last {
-	border-bottom: 2px solid #000;
+	border-bottom: 2px solid #eeeeee;
 }
 </style>
 <?
@@ -97,10 +97,10 @@
                     <div class="gallery-add clearfix">
                         <div class="drop-add-video">
                             	<div class="close-block glyphicons circle_remove"></div>
-                                <label for="add-new-video-4">Ссылка на видеоролик</label>
+                                <label for="add-new-video-4"><?=__('URL for video')?></label>
                                 <input id="add-new-video-4" type="text"/>
                                 <div class="page-menu clearfix">
-                                    <button class="btn btn-default">Добавить</button>
+                                    <button class="btn btn-default"><?=__('Add')?></button>
                                 </div>
                         </div>
                         <ul class="gallery-add-list clearfix">
@@ -169,10 +169,10 @@
             <div class="group-create-right col-md-9 col-sm-9 col-xs-12">
                 <div class="group-hide-view">
                     <div class="comments-hide-view">
-                        Если вы ищете работу, работодатель сможет вас найти в базе данных
+                        <?=__('If you are looking for a job, employer can find you in our database')?>
                     </div>
                     <label>
-                        <input type="checkbox" name="data[Group][hidden]" value="1" <?=$this->request->data('Group.hidden') ? 'checked="checked"' : ''?>/> <span class="glyphicons ok_2"></span> Скрыть группу
+                        <input type="checkbox" name="data[Group][hidden]" value="1" <?=$this->request->data('Group.hidden') ? 'checked="checked"' : ''?>/> <span class="glyphicons ok_2"></span> <?=__('Hide group')?>
                     </label>
                 </div>
                 <div class="page-menu clearfix">

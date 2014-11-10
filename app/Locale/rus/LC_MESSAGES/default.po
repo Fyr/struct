@@ -373,3 +373,99 @@ msgstr "rus:I live!"
 msgid "Interface language"
 msgstr "rus:Interface language!"
 
+msgid "No user found"
+msgstr "rus:No user found!"
+
+msgid "Achievement"
+msgstr "rus:Achievement!"
+
+msgid "Achievement approve URL"
+msgstr "rus:Achievement approve URL!"
+
+msgid "Remove achievement"
+msgstr "rus:Remove achievement!"
+
+msgid "Headquaters"
+msgstr "rus:Headquaters!"
+
+msgid "Phone"
+msgstr "rus:Phone!"
+
+msgid "Site URL and email"
+msgstr "rus:Site URL and email!"
+
+msgid "Remove address"
+msgstr "rus:Remove address!"
+
+msgid "Members"
+msgstr "rus:Members!"
+
+msgid "Find group..."
+msgstr "rus:Find group...!"
+
+msgid "Find user or community..."
+msgstr "rus:Find user or community...!"
+
+msgid "No item found"
+msgstr "rus:No item found!"
+
+msgid "Group settings"
+msgstr "rus:Group settings!"
+
+msgid "Create group"
+msgstr "rus:Create group!"
+
+msgid "Group has been successfully saved"
+msgstr "rus:Group has been successfully saved!"
+
+msgid "Group video"
+msgstr "rus:Group video!"
+
+msgid "Group title"
+msgstr "rus:Group title!"
+
+msgid "Description"
+msgstr "rus:Description!"
+
+msgid "Photo or video gallery"
+msgstr "rus:Photo or video gallery!"
+
+msgid "URL for video"
+msgstr "rus:URL for video!"
+
+msgid "Add another address"
+msgstr "rus:Add another address!"
+
+msgid "Add another achievement"
+msgstr "rus:Add another achievement!"
+
+msgid "If you are looking for a job, employer can find you in our database"
+msgstr "rus:If you are looking for a job, employer can find you in our database!"
+
+msgid "Hide group"
+msgstr "rus:Hide group!"
+
+msgid "All addresses"
+msgstr "rus:All addresses!"
+
+msgid "Collapse"
+msgstr "rus:Collapse!"
+
+msgid "Show more"
+msgstr "rus:Show more!"
+
+msgid "Create your profile"
+msgstr "rus:Create your profile!"
+
+msgid "Full name"
+msgstr "rus:Full name!"
+
+msgid "I am looking for a job"
+msgstr "rus:I am looking for a job!"
+
+msgid "How other people see this page"
+msgstr "rus:How other people see this page!"
+
+msgid "You can easily remove your profile from the site, just click the button and all information will be deleted permanently."
+msgstr "rus:You can easily remove your profile from the site, just click the button and all information will be deleted permanently.!"
+

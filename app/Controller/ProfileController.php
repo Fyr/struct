@@ -23,7 +23,6 @@ class ProfileController extends SiteController {
 		} else {
 			$this->request->data = $this->profile;
 		}
-		$this->pageTitle = __('Profile settings');
 	}
 
 	public function view($id = 0) {
