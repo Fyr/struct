@@ -23,28 +23,9 @@ class SiteController extends AppController {
 	}
 	
 	public function beforeFilter() {
-		if (TEST_ENV) {
-			$userID = Hash::get($this->request->params, 'pass.0');
-			$action = Hash::get($this->request->params, 'action');
-			if ($userID && $action == 'auth') {
-				$this->Session->write('currUser.id', $userID);
-				$this->redirect('/');
-				return false;
-			}
-			$this->currUserID = $this->Session->read('currUser.id');
-		} else {
-			$this->loadModel('ClientProject');
-			$userData = ClientProject::getUserAuthData();
-			$this->currUserID = Hash::get($userData, 'user_id');
-		}
-		if (!$this->currUserID) {
-			$this->autoRender = false;
-			exit('You must be authorized');
-		}
-		$this->currUser = $this->ChatUser->getUser($this->currUserID);
-		// fdebug($this->currUser, 'curr_user'.$this->currUserID.'.log', false);
+		$this->_checkAuth();
 	}
-	
+	/*
 	public function beforeRender() {
 		parent::beforeRender();
 		$this->set('balance', '0');
@@ -56,4 +37,5 @@ class SiteController extends AppController {
 		
 		$this->set('pageTitle', $this->pageTitle);
 	}
+	*/
 }

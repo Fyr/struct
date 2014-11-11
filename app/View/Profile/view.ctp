@@ -99,7 +99,7 @@
                         <div class="vp10">
                             <div class="fs15 mt10"><!-- +7 909 307-26-25--></div>
                             <div class="fs15 mt10">
-                                <a href="#"><?=Hash::get($user, 'ChatUser.username')?></a>
+                                <!--a href="#"><?=Hash::get($user, 'ChatUser.username')?></a-->
                             </div>
                         </div>
                     </div>

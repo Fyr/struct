@@ -78,8 +78,10 @@ $(function() {
 		Chat.fixPanelHeight();
 	});
 	
-	$('select.formstyler').styler();
-	// $('.textarea-auto').autosize();
+	$('select.formstyler, input.filestyle').styler({
+		fileBrowse: 'Загрузить фото'
+	});
+	$('.textarea-auto').autosize();
 	
 	Search.initPanel($('.dropdown-searchPanel .dropdown-panel-wrapper').get(0));
 	Chat.initPanel($('.dropdown-chatPanel .dropdown-panel-wrapper').get(0));
@@ -97,7 +99,7 @@ $(function() {
     <div class="main-panel-block">
         <div class="main-panel-wrapper">
             <div class="user-image">
-                <a href="#"><img src="<?=$currUser['Avatar']['url']?>" alt="<?=$currUser['ChatUser']['name']?>" style="width: 90px;"/></a>
+                <a href="/profile/user/"><img src="<?=$currUser['Avatar']['url']?>" alt="<?=$currUser['ChatUser']['name']?>" style="width: 90px;"/></a>
             </div>
             <?=$this->element('panel_icons')?>
         </div>

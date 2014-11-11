@@ -7,14 +7,6 @@ class ProfileController extends SiteController {
 	public $uses = array('Profile', 'ChatUserData');
 	public $helpers = array('Media');
 	
-	private $profile;
-	
-	public function beforeFilter() {
-		parent::beforeFilter();
-		$this->profile = $this->Profile->findByUserId($this->currUserID);
-		$this->set('profile', $this->profile);
-	}
-	
 	public function edit() {
 		if ($this->request->is('post') || $this->request->is('put')) {
 			$this->request->data('Profile.user_id', $this->currUserID);

@@ -1237,3 +1237,7 @@ a.autor-link img{
     display: inline-block;
     padding: 0 0 0 46px;
 }
+.my-page-view-user{
+    display: inline-block;
+    margin-top: 6px;
+}

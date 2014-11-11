@@ -100,7 +100,7 @@ $(document).ready(function () {
     <div class="main-panel-block">
         <div class="main-panel-wrapper">
             <div class="user-image">
-                <a href="#"><img src="<?=$currUser['Avatar']['url']?>" alt="<?=$currUser['ChatUser']['name']?>" style="width: 90px;"/></a>
+                <a href="/profile/user/"><img src="<?=$currUser['Avatar']['url']?>" alt="<?=$currUser['ChatUser']['name']?>" style="width: 90px;"/></a>
             </div>
             <?=$this->element('panel_icons')?>
         </div>

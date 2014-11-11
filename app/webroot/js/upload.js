@@ -30,7 +30,7 @@ $(function () {
                 	} else {
                 		var mediaID = $('.settings-avatar img').prop('id');
                 		if (mediaID) {
-                			$.get(profileURL.removeAvatar + '/' + objectType + '/' + objectID + '/' + $('.settings-avatar img').prop('id') + '.json');
+                			$.get(profileURL.removeAvatar + '/' + file.object_type + '/' + file.object_id + '/' + $('.settings-avatar img').prop('id') + '.json');
                 		}
                 		$('.settings-avatar img').prop('src', response.data[0].Media.image.replace(/100x80/, '200x'));
                 		$('.settings-avatar img').prop('id', response.data[0].Media.id);

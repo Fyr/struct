@@ -4,10 +4,10 @@ class AppController extends Controller {
 	public $paginate;
 	public $pageTitle = '';
 	
-	public $uses = array('ChatUser');
+	public $uses = array('ChatUser', 'Profile');
 	public $helpers = array('Html', 'Form');
 	
-	protected $currUser = array(), $currUserID;
+	protected $currUser = array(), $currUserID, $profile;
 	
 	public function __construct($request = null, $response = null) {
 		$this->_beforeInit();
@@ -28,17 +28,6 @@ class AppController extends Controller {
 		return Hash::get($user, 'active');
 	}
 	
-	public function beforeRender() {
-		$this->set('balance', '0');
-		$this->set('PU_', '$');
-		$this->set('_PU', '');
-		
-		$this->set('currUser', $this->currUser);
-		$this->set('currUserID', $this->currUserID);
-		
-		$this->set('pageTitle', $this->pageTitle);
-	}
-	
 	protected function _checkAuth() {
 		if (TEST_ENV) {
 			$this->currUserID = $this->Session->read('currUser.id');
@@ -52,6 +41,21 @@ class AppController extends Controller {
 			exit('You must be authorized');
 		}
 		$this->currUser = $this->ChatUser->getUser($this->currUserID);
-		fdebug($this->currUser, 'curr_user.log', false);
+		$this->profile = $this->Profile->findByUserId($this->currUserID);
+		$lang = Hash::get($this->profile, 'Profile.lang');
+		$lang = ($lang == 'rus') ? $lang : 'eng';
+		Configure::write('Config.language', $lang);
+		if (TEST_ENV) {
+			fdebug($this->currUser, 'curr_user.log', false);
+		}
+		
+		$this->set('balance', '0');
+		$this->set('PU_', '$');
+		$this->set('_PU', '');
+		
+		$this->set('currUser', $this->currUser);
+		$this->set('currUserID', $this->currUserID);
+		$this->set('profile', $this->profile);
+		$this->set('pageTitle', $this->pageTitle);
 	}
 }

@@ -9,7 +9,7 @@ class GroupController extends SiteController {
 	
 	public function edit($id = 0) {
 		$group = $this->Group->findById($id);
-		if (Hash::get($group, 'Group.owner_id') != $this->currUserID) {
+		if ($id && Hash::get($group, 'Group.owner_id') != $this->currUserID) {
 			return $this->redirect(array('controller' => 'Group', 'action' => 'view', $id));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {

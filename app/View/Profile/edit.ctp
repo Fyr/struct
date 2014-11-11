@@ -32,7 +32,7 @@
 	if ($id) {
 ?>
         <div class="settings-avatar-info fs13 text-grey mb60">
-            <input class="fileuploader" type="file" data-object_type="Profile" data-object_id="<?=$id?>" style="display: inline" />
+            <input class="fileuploader filestyle" type="file" data-object_type="Profile" data-object_id="<?=$id?>" style="display: inline" />
             <div id="progress-bar">
             	<div id="progress-stats"></div>
             </div>
@@ -112,7 +112,21 @@
                 <?=__('Interface language')?>
             </div>
             <input class="hidenibput" id="lang" type="text" />
-            <div class="btn-group">
+            <div class="box-select">
+                <label for="settings-input-row-lang"></label>
+<?
+	$options = array(
+		'eng' => __('English'),
+		'rus' => __('Russian')
+	);
+?>
+<?=$this->Form->input('Profile.lang', array('label' => false, 'options' => $options, 'class' => 'formstyler', 'id' => 'settings-input-row-lang'))?>
+                <!--select class="formstyler" name="data[Profile][lang]" id="settings-input-row-lang">
+                    <option value="0" selected="selected">English</option>
+                    <option value="1">Русский</option>
+                </select-->
+            </div>
+            <!--div class="btn-group">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                     <span class="htmlholder"><span class="country-icon"><img src="/img/temp/en.png" alt=""/></span>  English</span> <span class="halflings chevron-down"></span>
                 </button>
@@ -120,7 +134,7 @@
                 	<li><a data-lang="en2" href="#"><span class="country-icon"><img src="/img/temp/en.png" alt=""/></span> English</span></a></li>
                     <li><a data-lang="en1" href="#"><span class="country-icon"><img src="/img/temp/russia.png" alt=""/></span>English</a></li>
                 </ul>
-            </div>
+            </div-->
         </div>
         <!--div class="settings-input-row nbb">
             <div class="comments-box-send-info">

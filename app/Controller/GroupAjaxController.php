@@ -6,14 +6,9 @@ class GroupAjaxController extends PAjaxController {
 	public $uses = array('Profile', 'Group');
 	public $helpers = array('Media');
 	
-	private $profile;
-	
 	public function beforeFilter() {
 		parent::beforeFilter();
 		$this->_checkAuth();
-		$this->set('currUserID', $this->currUserID);
-		$this->profile = $this->Profile->findByUserId($this->currUserID);
-		$this->set('profile', $this->profile);
 	}
 	
 	public function jsSettings() {

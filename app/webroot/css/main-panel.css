@@ -48,6 +48,8 @@
       height: 90px;
       width: 90px;
       color: #919191; }
+      .main-panel .user-image a:focus {
+        outline: none; }
       .main-panel .user-image a:before {
         position: absolute;
         content: '\E362';
@@ -86,7 +88,7 @@
           border-top: 6px solid transparent;
           content: "";
           height: 0;
-          margin-top: 1px;
+          margin-top: -5px;
           position: absolute;
           right: 0;
           top: 50%;
@@ -116,14 +118,22 @@
         border-bottom-right-radius: 50%;
         font-family: 'Open Sans';
         right: 17px;
-        top: 21px;
+        top: 14px;
         background: #ff6363;
         text-align: center;
         font-size: 10px;
         padding: 2px 0;
         color: #fff; }
-      .main-panel .main-panel-list ul .glyphicons:before {
-        margin: 0; }
+      .main-panel .main-panel-list ul .glyphicons {
+        width: 100%; }
+        .main-panel .main-panel-list ul .glyphicons:before {
+          width: 100%;
+          vertical-align: inherit;
+          margin: -9px 0 0; }
+        .main-panel .main-panel-list ul .glyphicons.groupPanel:before {
+          margin: -10px 0 0; }
+        .main-panel .main-panel-list ul .glyphicons.ipadPanel:before {
+          margin: -7px 0 0; }
   .main-panel .main-panel-dropdown {
     position: absolute;
     top: 0;
@@ -191,6 +201,12 @@
           width: 34px;
           background: url(../img/slogo.png) no-repeat 0 0;
           background-size: cover; }
+      .main-panel .service-menu li .glyphicons {
+        width: 100%; }
+        .main-panel .service-menu li .glyphicons:before {
+          width: 100%;
+          vertical-align: inherit;
+          margin: -9px 0 0; }
   .main-panel .dropdown-searchPanel .searchBlock {
     position: absolute;
     height: 81px;

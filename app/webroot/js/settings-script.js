@@ -7,14 +7,14 @@ $(function () {
         pickTime: false
     });
 
-    $('#tokenfield').tokenfield({
-        autocomplete: {
-            source: ['Jumla','pyton','Ruby','C++','CSS3','HTML5','DOTA2','Ruby - on - Rails','ModX'],
-            delay: 100
-        },
-        showAutocompleteOnFocus: true,
-        tokens: ['Jumla','Ruby','C++']
-    });
+    //$('#tokenfield').tokenfield({
+    //    autocomplete: {
+    //        source: ['Jumla','pyton','Ruby','C++','CSS3','HTML5','DOTA2','Ruby - on - Rails','ModX'],
+    //        delay: 100
+    //    },
+    //    showAutocompleteOnFocus: true,
+    //    tokens: ['Jumla','Ruby','C++']
+    //});
 
     $('.settings-input-row input[type="checkbox"]').each(function(){
         $(this).change(function(){

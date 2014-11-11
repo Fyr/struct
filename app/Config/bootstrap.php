@@ -16,8 +16,6 @@ CakeLog::config('error', array(
 	'file' => 'error',
 ));
 
-Configure::write('Config.language', 'rus');
-
 CakePlugin::loadAll();
 
 define('DOMAIN_NAME', 'struct.dev');

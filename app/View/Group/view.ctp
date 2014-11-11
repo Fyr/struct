@@ -52,13 +52,15 @@
 	foreach(Hash::get($group, 'GroupAddress') as $i => $groupAddress) {
 		$class = ($i > 0) ? 'can-hide' : '';
 		$style = ($i > 0) ? 'style="display: none"' : '';
+		$url = Hash::get($groupAddress, 'url');
+		$email = Hash::get($groupAddress, 'email');
 ?>
 			<div class="user-adress <?=$class?>" <?=$style?>>
                 <div class="fs13"><?=Hash::get($groupAddress, 'address')?></div>
                 <div class="fs13"><?=Hash::get($groupAddress, 'phone')?></div>
                 <div class="fs13">
-                    <a href="#"><?=Hash::get($groupAddress, 'url')?></a><br/>
-                    <a href="#"><?=Hash::get($groupAddress, 'email')?></a>
+                    <a href="<?=$url?>" target="_blank"><?=$url?></a><br/>
+                    <a href="mailto:<?=$email?>"><?=$email?></a>
                 </div>
             </div>
 <?
@@ -170,7 +172,7 @@
 			$style = ($i > 2) ? 'style="display: none"' : '';
 ?>
         <div class="col-md-4 mb10 <?=$class?>" <?=$style?>>
-            <a href="<?=Hash::get($achieve, 'url')?>" class="fs15">
+            <a href="<?=Hash::get($achieve, 'url')?>" class="fs15" target="_blank">
                 <?=Hash::get($achieve, 'title');?>
             </a>
         </div>
