@@ -26,7 +26,7 @@ class ChatUser extends AppModel {
 		}
 		if ($profile && isset($profile['Media']) && Hash::get($profile, 'Media.id')) {
 			$row = $profile['Media'];
-			$src = $this->Media->getPHMedia()->getImageUrl($row['object_type'], $row['id'], 'thumb90x90', $row['file'].$row['ext']);
+			$src = $this->Media->getPHMedia()->getImageUrl($row['object_type'], $row['id'], 'thumb180x180', $row['file'].$row['ext']);
 		} else {
 			$src = '/img/no-photo.jpg';
 		}

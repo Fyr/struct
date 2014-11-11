@@ -1,5 +1,5 @@
 <div class="searchBlock clearfix">
-    <input class="searchInput" type="text" placeholder="<?=__('Find group...')?>">
+    <input class="searchInput" type="text" value="<?=$this->request->data('q')?>" placeholder="<?=__('Find group...')?>">
     <button class="searchButton" ><span class="glyphicons search"></span></button>
 </div>
 <div class="create-group">

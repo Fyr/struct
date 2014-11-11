@@ -4,16 +4,24 @@ var Group = {
 	initPanel: function (container) {
 		Group.panel = container;
 		$(Group.panel).load(groupURL.panel, null, function(){
-			$(".searchBlock input", Group.panel).click(function(){
-				$(this).val('');
-			});
-			$(".searchBlock input", Group.panel).change(function(){
-				Group.filterContactList($(".searchBlock input", Group.panel).val());
-			});
+			Group.initHandlers();
+		});
+	},
+	
+	initHandlers: function() {
+		$(".searchBlock .searchInput", Group.panel).click(function(){
+			this.select();
+		});
+		$(".searchBlock .searchButton", Group.panel).change(function(){
+			Group.filterContactList($(".searchBlock .searchInput", Group.panel).val());
 		});
 	},
 	
 	filterContactList: function (filter) {
+		$(Group.panel).load(groupURL.panel, {data: {q: filter}}, function(){
+			Group.initHandlers();
+		});
+		/*
 		$(".simple-list-item", Group.panel).each(function(){
 			if (filter) {
 				var name = $(".user-list-item-name", this).html();
@@ -26,6 +34,7 @@ var Group = {
 				$(this).show();
 			}
 		});
+		*/
 	},
 	
 	renderGalleryAdmin: function(data) {

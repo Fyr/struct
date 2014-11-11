@@ -15,7 +15,8 @@ class ProfileAjaxController extends PAjaxController {
 	}
 	
 	public function panel() {
-		$this->loadModel(array('ChatUser', 'Group'));
+		$this->loadModel('ChatUser');
+		$this->loadModel('Group');
 		$q = $this->request->data('q');
 		if ($q) {
 			$this->set('aUsers', $this->ChatUser->search($this->currUserID, $q));
@@ -28,7 +29,7 @@ class ProfileAjaxController extends PAjaxController {
 		try {
 			$date = $this->request->data('date');
 			if (!$date) {
-				throw new Exception('Incorrect request');
+				$date = date('Y-m-d');
 			}
 			
 			$data = array();
@@ -42,6 +43,7 @@ class ProfileAjaxController extends PAjaxController {
 				Hash::extract($data[Inflector::tableize('ChatEvent')], '{n}.ChatEvent.initiator_id')
 			);
 			$data['users'] = $this->ChatUser->getUsers($aID);
+			$data['users'] = Hash::combine($data['users'], '{n}.ChatUser.id', '{n}');
 			
 			$this->loadModel('ChatMessage');
 			$aID = Hash::extract($data[Inflector::tableize('ChatEvent')], '{n}.ChatEvent.msg_id');

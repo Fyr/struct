@@ -3,7 +3,6 @@ App::uses('AppController', 'Controller');
 App::uses('PAjaxController', 'Core.Controller');
 class GroupAjaxController extends PAjaxController {
 	public $name = 'GroupAjax';
-	public $uses = array('Profile', 'Group');
 	public $helpers = array('Media');
 	
 	public function beforeFilter() {
@@ -15,8 +14,15 @@ class GroupAjaxController extends PAjaxController {
 	}
 	
 	public function panel() {
-		// Exclude current user from list
-		$aGroups = $this->Group->find('all');
+		$this->loadModel('Group');
+		$q = $this->request->data('q');
+		if ($q) {
+			$aGroups = $this->Group->search($this->currUserID, $q);
+		} else {
+			$conditions = array('Group.owner_id' => $this->currUserID);
+			$order = 'Group.title';
+			$aGroups = $this->Group->find('all', compact('conditions', 'order'));
+		}
 		$this->set('aGroups', $aGroups);
 	}
 	
