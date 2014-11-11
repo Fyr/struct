@@ -93,14 +93,16 @@
 ?>
                 <fieldset>
                     <label><?=__('Photo or video gallery')?></label>
-                    <div class="gallery-add clearfix">
+                    <div class="gallery-add page-menu clearfix">
                         <div class="drop-add-video">
-                            	<div class="close-block glyphicons circle_remove"></div>
-                                <label for="add-new-video-4"><?=__('URL for video')?></label>
+                            <div class="close-block glyphicons circle_remove"></div>
+                            <form action="#">
+                                <label for="add-new-video-4"><?=__('Youtube.com URL')?></label>
                                 <input id="add-new-video-4" type="text"/>
                                 <div class="page-menu clearfix">
                                     <button class="btn btn-default"><?=__('Add')?></button>
                                 </div>
+                            </form>
                         </div>
                         <ul class="gallery-add-list clearfix">
                         </ul>
@@ -111,8 +113,8 @@
 					            	<div id="progress-stats"></div>
 					            </div>
 				            </span>
+				            <button type="button" class="btn btn-default btn-sm add-video label-add"><?=__('Upload video')?></button>
 			            </span>
-			            
                     </div>
                 </fieldset>
 <?
@@ -179,16 +181,15 @@
                 </div-->
                 <div class="page-menu clearfix">
                     <input type="submit" class="btn btn-default" value="<?=__('Save')?>" />
-                </div>
 <?
 	if ($id) {
 ?>
-                <div class="page-menu clearfix">
                     <a href="#" class="btn btn-default"><?=__('Delete')?></a>
-                </div>
 <?
 	}
 ?>
+
+                </div>
             </div>
         </div>
 <?=$this->Form->end()?>

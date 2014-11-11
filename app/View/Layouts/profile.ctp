@@ -36,7 +36,6 @@
 	
 	$aScripts = array(
 		'vendor/jquery/jquery-1.10.2.min',
-		// 'vendor/jquery/jquery-ui-1.10.3.custom.min',
 		'vendor/jquery/jquery-ui.min',
 		'vendor/easing.1.3',
 		'vendor/formstyler',
@@ -79,7 +78,7 @@ $(function() {
 	});
 	
 	$('select.formstyler, input.filestyle').styler({
-		fileBrowse: 'Загрузить фото'
+		fileBrowse: '<?=__('Upload image')?>'
 	});
 	$('.textarea-auto').autosize();
 	

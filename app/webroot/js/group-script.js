@@ -13,11 +13,11 @@ $(function () {
     });
     $('.group-hide-view input[type="checkbox"]').change();
 
-    $('.gallery-add-list .add-video').on('click', function(){
-       $(this).parent().parent().parent().parent().find('.drop-add-video').addClass('open');
+    $('.gallery-add .add-video').on('click', function(){
+       $('.gallery-add .drop-add-video').addClass('open');
     });
-    $('.drop-add-video .close-block').on('click', function(){
-       $(this).parent().removeClass('open');
+    $('.gallery-add .drop-add-video .close-block').on('click', function(){
+       $('.gallery-add .drop-add-video').removeClass('open');
     });
 
 

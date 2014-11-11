@@ -398,13 +398,13 @@
         cursor: pointer;
         float: left; }
         .device-page .device-page-wrapper .personal-account .payment-personal-account ul li.visa {
-          background: url(../images/payment-type-1.png) no-repeat 0 100%; }
+          background: url(../img/payment-type-1.png) no-repeat 0 100%; }
         .device-page .device-page-wrapper .personal-account .payment-personal-account ul li.master-cart {
-          background: url(../images/payment-type-2.png) no-repeat 0 100%; }
+          background: url(../img/payment-type-2.png) no-repeat 0 100%; }
         .device-page .device-page-wrapper .personal-account .payment-personal-account ul li.yandex-money {
-          background: url(../images/payment-type-3.png) no-repeat 0 100%; }
+          background: url(../img/payment-type-3.png) no-repeat 0 100%; }
         .device-page .device-page-wrapper .personal-account .payment-personal-account ul li.qiwi {
-          background: url(../images/payment-type-4.png) no-repeat 0 100%; }
+          background: url(../img/payment-type-4.png) no-repeat 0 100%; }
         .device-page .device-page-wrapper .personal-account .payment-personal-account ul li.active, .device-page .device-page-wrapper .personal-account .payment-personal-account ul li:hover {
           border-color: #cccccc;
           background-position: 0 0; }

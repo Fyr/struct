@@ -65,7 +65,8 @@
       z-index: 10; }
   .main-panel .main-panel-list {
     width: 90px;
-    position: relative; }
+    position: relative;
+    margin-top: 10px; }
     .main-panel .main-panel-list ul {
       padding: 0; }
       .main-panel .main-panel-list ul li {
@@ -131,7 +132,7 @@
           vertical-align: inherit;
           margin: -9px 0 0; }
         .main-panel .main-panel-list ul .glyphicons.groupPanel:before {
-          margin: -10px 0 0; }
+          margin: -15px 0 0; }
         .main-panel .main-panel-list ul .glyphicons.ipadPanel:before {
           margin: -7px 0 0; }
   .main-panel .main-panel-dropdown {

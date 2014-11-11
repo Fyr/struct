@@ -1,3 +1,7 @@
+<?
+	$this->Html->css(array('jquery.fancybox'), array('inline' => false));
+	$this->Html->script(array('vendor/jquery/jquery-ui-1.10.3.custom.min', 'vendor/jquery/jquery.fancybox.pack'), array('inline' => false));
+?>
 <div class="row">
     <div class="col-md-11 col-sm-10 col-xs-8">
         <div class="col-md-5 col-sm-5">
@@ -84,9 +88,11 @@
             <div class="galery-box clearfix">
 <?
 	foreach($aGroupGallery as $media) {
+		$src = $this->Media->imageUrl($media, 'thumb200x140');
+		$orig = $this->Media->imageUrl($media, 'noresize');
 ?>
                 <div class="galery-box-item">
-                	<img src="<?=$this->Media->imageUrl($media, 'thumb200x140')?>" alt="" style="width: 100%"/>
+                	<a href="<?=$orig?>" class="fancybox" rel="photoalobum"><img src="<?=$src?>" alt=""  style="width: 100%" /></a>
                 </div>
 <?
 	}
@@ -524,3 +530,10 @@
         </div>
     </div>
 </div-->
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.fancybox').fancybox({
+		padding: 5
+	});
+});
+</script>

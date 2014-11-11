@@ -112,6 +112,11 @@
         .group-page .group-create .group-create-cell fieldset .gallery-add {
           position: relative;
           margin: 15px 0 14px; }
+          .group-page .group-create .group-create-cell fieldset .gallery-add .jq-file {
+            float: left; }
+          .group-page .group-create .group-create-cell fieldset .gallery-add .btn-default {
+            padding: 5px 10px 6px;
+            font-size: 13px; }
           .group-page .group-create .group-create-cell fieldset .gallery-add .gallery-add-list {
             position: relative; }
             .group-page .group-create .group-create-cell fieldset .gallery-add .gallery-add-list li {
@@ -132,7 +137,6 @@
                 margin: 0 0 0 8px;
                 color: #CBCBCB; }
                 .group-page .group-create .group-create-cell fieldset .gallery-add .gallery-add-list li .label-add label {
-                  cursor: pointer;
                   font-size: 18px;
                   color: #CBCBCB; }
                 .group-page .group-create .group-create-cell fieldset .gallery-add .gallery-add-list li .label-add:focus {
