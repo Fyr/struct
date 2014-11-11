@@ -49,7 +49,8 @@
         <div class="col-md-3">
             
 <?
-	foreach(Hash::get($group, 'GroupAddress') as $i => $groupAddress) {
+	$aGroupAddress = Hash::get($group, 'GroupAddress');
+	foreach($aGroupAddress as $i => $groupAddress) {
 		$class = ($i > 0) ? 'can-hide' : '';
 		$style = ($i > 0) ? 'style="display: none"' : '';
 		$url = Hash::get($groupAddress, 'url');

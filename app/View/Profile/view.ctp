@@ -62,7 +62,10 @@
                     </div>
                     <div class="col-md-3 col-sm-3">
                         <div class="user-avatar taright">
-                            <img src="<?=$this->Media->imageUrl($user, '192x')?>" alt="<?=Hash::get($user, 'ChatUser.username')?>" />
+<?
+	$src = (Hash::get($user, 'Media.id')) ? $this->Media->imageUrl($user, '192x') : '/img/no-photo.jpg';
+?>
+                            <img src="<?=$src?>" alt="<?=Hash::get($user, 'ChatUser.username')?>" />
                         </div>
                     </div>
                 </div>

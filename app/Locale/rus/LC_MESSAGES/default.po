@@ -292,6 +292,9 @@ msgstr "Email"
 msgid "Contractor details"
 msgstr "Контактные данные контрагента"
 
+msgid "Contractor name"
+msgstr "Наименнование контрагента"
+
 msgid "Order ID"
 msgstr "ID заказа"
 

@@ -26,16 +26,14 @@
                 <figure class="col-md-12 col-sm-12 col-xs-5 settings-avatar">
                     <label for="filestyle-0">
 <?
-	if ($this->request->data('Media.id')) {
-		$src = $this->Media->imageUrl($this->request->data, '200x');
-	} else {
-		$src = '/img/group-create-pl-image.jpg';
-	}
+	if ($id) {
+		if ($this->request->data('Media.id')) {
+			$src = $this->Media->imageUrl($this->request->data, '200x');
+		} else {
+			$src = '/img/group-create-pl-image.jpg';
+		}
 ?>
 		                <img id="<?=$this->request->data('Media.id')?>" src="<?=$src?>" alt="" style="cursor: default" />
-<?
-	if ($id) {
-?>
                         <input type="file" class="fileuploader filestyle" data-object_type="Group" data-object_id="<?=$id?>" data-progress_id="progress-Group_<?=$id?>" style="display: inline" />
 <?
 	}

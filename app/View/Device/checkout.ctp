@@ -74,7 +74,7 @@ $(document).ready(function(){
 		'style' => 'max-width:274px'
 	));
 	echo $this->Form->input('Contractor.title', array(
-		'label' => array('text' => __('Contractor\'s name')),
+		'label' => array('text' => __('Contractor name')),
 		'placeholder' => __('Contractor\'s name').'...'
 	));
 	echo $this->Form->input('Contractor.details', array(

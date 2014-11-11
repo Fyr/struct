@@ -143,7 +143,7 @@ $(document).ready(function () {
                     <a href="<?=$this->Html->url(array('controller' => 'Device', 'action' => 'orders'))?>" class="device-my-orders"><?=__('My orders')?></a>
                     <div class="account-money">
                         <div class=""><?=__('Balance')?>: <b><?=$this->element('sum', array('sum' => $balance))?></b></div>
-                        <a href="<?=$this->Html->url(array('controller' => 'Device', 'action' => 'recharge'))?>" class="replenish"><?=__('Recharge')?></a>
+                        <a href="<?=$this->Html->url(array('controller' => 'Device', 'action' => 'recharge'))?>" class="replenish"><?=__('Recharge balance')?></a>
                     </div>
                 </div>
             </div>
