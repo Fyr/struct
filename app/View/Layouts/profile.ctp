@@ -86,8 +86,6 @@ $(function() {
 	Chat.initPanel($('.dropdown-chatPanel .dropdown-panel-wrapper').get(0));
 	Struct.initPanel($('.dropdown-ipadPanel .dropdown-panel-wrapper').get(0));
 	Group.initPanel($('.dropdown-groupPanel .dropdown-panel-wrapper').get(0));
-	
-	$.post(profileURL.dashboardEvents, {data: {date: '2014-11-11'}}, function(response){ console.log(response); });
 });
 </script>
 </head>

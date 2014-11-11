@@ -204,6 +204,7 @@ var Chat = {
 			Chat.showUnreadTab(roomID);
 			Chat.showUnreadTotal(Chat.countUnreadTotal());
 			var readIds = Chat.renderEvents(roomID, aUnreadEvents);
+			Chat.scrollTop();
 			Chat.disableUpdate();
 			$.post(chatURL.markRead, {data: {ids: readIds}}, function(response){
 				if (checkJson(response)) {
@@ -213,7 +214,6 @@ var Chat = {
 		}
 		
 		Chat.fixPanelHeight();
-		Chat.scrollTop();
 	},
 	
 	renderRoomTab: function (data) {
