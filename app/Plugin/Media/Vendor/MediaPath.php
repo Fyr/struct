@@ -10,8 +10,10 @@ class MediaPath {
     function getSizeInfo($size) {
     	$_ret = array();
     	if ($size && strpos($size, 'x') !== false) {
+    		
     		$_ret = array('w' => null, 'h' => null);
 
+    		$size = str_replace('thumb', '', $size);
     		$aSize = explode('x', $size);
     		if (isset($aSize[0]) && $aSize[0]) {
     			$_ret['w'] = $aSize[0];
@@ -45,12 +47,16 @@ class MediaPath {
      */
     function getFileName($type, $id, $size, $filename) {
     	$aFName = $this->getFileInfo($filename);
+    	$prefix = '';
+    	if (strpos($size, 'thumb') !== false) {
+    		$prefix = 'thumb';
+    	}
     	$aSize = $this->getSizeInfo($size);
     	$_ret = $this->getPath($type, $id);
     	if ($aSize) {
-    		$_ret.= $aSize['w'].'x'.$aSize['h'].'.'.$aFName['ext'];
+    		$_ret.= $prefix.$aSize['w'].'x'.$aSize['h'].'.'.$aFName['ext'];
     	} else {
-    		$_ret.= $filename;
+    		$_ret.= $filename; // clean image file for no resizing
     	}
     	return $_ret;
     }
@@ -104,4 +110,8 @@ class MediaPath {
     	return Configure::read('baseURL.media').'/files/'.strtolower($type).'/'.$page.'/'.$id.'/'.rawurlencode($filename);
     }
 
+    function getResizeMethod($size) {
+    	return (strpos($size, 'thumb') !== false) ? 'thumb' : 'resize';
+    }
+    
 }

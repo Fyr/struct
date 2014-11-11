@@ -1,11 +1,12 @@
 <style type="text/css">
-
+/*
 .group-page .group-create .group-create-cell fieldset:last {
     margin-bottom: 0px;
 }
 .group-page .group-create .group-create-cell fieldset:last .input-boxing:last {
 	border-bottom: 2px solid #eeeeee;
 }
+*/
 </style>
 <?
 	$this->Html->script('group-script', array('inline' => false));
@@ -35,7 +36,7 @@
 <?
 	if ($id) {
 ?>
-                        <input type="file" class="fileuploader" data-object_type="Group" data-object_id="<?=$id?>" data-progress_id="progress-Group_<?=$id?>" style="display: inline" />
+                        <input type="file" class="fileuploader filestyle" data-object_type="Group" data-object_id="<?=$id?>" data-progress_id="progress-Group_<?=$id?>" style="display: inline" />
 <?
 	}
 ?>
@@ -195,6 +196,11 @@
 <script type="text/javascript">
 var count = {address: 1, achieve: 1};
 $(document).ready(function(){
+	$('select.formstyler, input.filestyle').styler({
+        fileBrowse: 'Загрузить фото'
+    });
+    $('.textarea-auto').autosize();
+            
 	$('.group-address-block .add-new-info').click(function(){
 		var $div = $('.group-address-block .group-address-info:first');
 		count.address++;

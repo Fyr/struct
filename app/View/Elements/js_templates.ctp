@@ -34,7 +34,7 @@
     <li>
         <div class="remove-media" onclick="Group.delGalleryImage({%=img.object_id%}, {%=img.id%})"><span class="glyphicons circle_remove"></span></div>
         <a href="javascript::void(0)">
-            <img src="{%=img.image.replace(/100x80/, '96x96')%}" alt="" />
+            <img src="{%=img.image.replace(/100x80/, 'thumb96x96')%}" alt="" />
         </a>
     </li>
 {%

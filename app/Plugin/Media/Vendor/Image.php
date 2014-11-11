@@ -168,6 +168,24 @@ class Image
 		$this->setImage($rImage);
 	}
 	
+	public function thumb($iNewSizeX, $iNewSizeY) 
+	{
+		$iSourceX = $this->getSizeX();
+		$iSourceY = $this->getSizeY();
+        
+		$fAspectX = $iNewSizeX / $iSourceX;
+		$fAspectY = $iNewSizeY / $iSourceY;
+		
+		$fAspect = max($fAspectX, $fAspectY);
+		
+		$iDestX = $iSourceX * $fAspect;
+		$iDestY = $iSourceY * $fAspect;
+		
+		$rImage = imagecreatetruecolor($iNewSizeX, $iNewSizeY);
+		imagecopyresampled($rImage, $this->getImage(), ($iNewSizeX - $iDestX) / 2, ($iNewSizeY - $iDestY) / 2, 0, 0, $iDestX, $iDestY, $iSourceX, $iSourceY);
+		$this->setImage($rImage);
+	}
+	
 	/** 
 		Divides hexadecimal string of RGB-color representation into a RGB-color array accordingly. 
 		If $i parameter is passed, returns only appropriate color component (R,G or B)
@@ -211,6 +229,7 @@ class Image
 		} 
 		else 
 			imagegif($rImage, $sOutFile);
+		
 	}
 	
 	public function outputJpg($sOutFile = false, $rImage = false) 
@@ -315,4 +334,3 @@ class Image
 			imagefilledrectangle($this->getImage(), $iX1, $iY1, $iX2, $iY2, $this->getColor($xHexColor));
 	}
 }
-?>

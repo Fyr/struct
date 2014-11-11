@@ -41,8 +41,26 @@
     height: 90px;
     width: 90px;
     overflow: hidden; }
+    .main-panel .user-image a {
+      display: inline-block;
+      position: relative;
+      background: #e7e7e7;
+      height: 90px;
+      width: 90px;
+      color: #919191; }
+      .main-panel .user-image a:before {
+        position: absolute;
+        content: '\E362';
+        height: 90px;
+        width: 90px;
+        font-size: 24px;
+        top: 25px;
+        left: 33px;
+        font-family: 'Glyphicons Regular'; }
     .main-panel .user-image img {
-      display: block; }
+      display: block;
+      position: relative;
+      z-index: 10; }
   .main-panel .main-panel-list {
     width: 90px;
     position: relative; }
@@ -104,8 +122,8 @@
         font-size: 10px;
         padding: 2px 0;
         color: #fff; }
-      .main-panel .main-panel-list ul .glyphicons {
-        width: 100%; }
+      .main-panel .main-panel-list ul .glyphicons:before {
+        margin: 0; }
   .main-panel .main-panel-dropdown {
     position: absolute;
     top: 0;
@@ -143,7 +161,7 @@
     width: 90px;
     margin-top: 90px; }
     .main-panel .service-menu.service-menu-fixed {
-      position: absolute;
+      position: fixed;
       left: 0;
       bottom: 21px; }
     .main-panel .service-menu ul {
@@ -165,11 +183,14 @@
           color: #fff; }
           .main-panel .service-menu li a:hover .logo-icon {
             background-position: 0 100%; }
+        .main-panel .service-menu li a:focus {
+          outline: none; }
         .main-panel .service-menu li a .logo-icon {
           display: inline-block;
           height: 39px;
           width: 34px;
-          background: url(../img/slogo.png) no-repeat 0 0; }
+          background: url(../img/slogo.png) no-repeat 0 0;
+          background-size: cover; }
   .main-panel .dropdown-searchPanel .searchBlock {
     position: absolute;
     height: 81px;
@@ -335,7 +356,8 @@
         overflow: hidden;
         border-bottom: 2px solid transparent;
         text-align: center;
-        margin-right: 15px; }
+        margin-right: 15px;
+        overflow: hidden; }
         .main-panel .dropdown-chatPanel .messages-list li .messages-user.rate-10 {
           border-color: #23b5ae; }
         .main-panel .dropdown-chatPanel .messages-list li .messages-user.rate-0 {

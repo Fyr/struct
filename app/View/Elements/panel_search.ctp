@@ -1,8 +1,6 @@
 <div class="searchBlock clearfix">
-    <form action="#">
         <input class="searchInput" type="text" value="<?=$this->request->data('q')?>" placeholder="<?=__('Find user or community...')?>">
-        <button class="searchButton"><span class="glyphicons search"></span></button>
-    </form>
+        <button type="button" class="searchButton"><span class="glyphicons search"></span></button>
 </div>
 <div class="dropdown-panel-scroll">
 <?
@@ -31,7 +29,7 @@
 		if (isset($aGroups) && $aGroups) {
 			foreach($aGroups as $group) {
 				$name = Hash::get($group, 'Group.title');
-				$src = $this->Media->imageUrl($group, '50x');
+				$src = $this->Media->imageUrl($group, 'thumb50x50');
 				if (!$src) {
 					$src = '/img/group-create-pl-image.jpg';
 				}

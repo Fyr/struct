@@ -3,7 +3,7 @@
 	foreach($aGroups as $group) {
 		$name = $group['Group']['title'];
 		$url = $this->Html->url(array('controller' => 'Group', 'action' => 'view', $group['Group']['id']));
-		$src = $this->Media->imageUrl($group, '50x');
+		$src = $this->Media->imageUrl($group, 'thumb50x50');
 ?>
     <li class="simple-list-item">
         <a href="<?=$url?>">

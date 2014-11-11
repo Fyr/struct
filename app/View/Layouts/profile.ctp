@@ -38,7 +38,7 @@
 		'vendor/jquery/jquery-1.10.2.min',
 		// 'vendor/jquery/jquery-ui-1.10.3.custom.min',
 		'vendor/jquery/jquery-ui.min',
-		'vendor/jquery/jquery.easing.1.3',
+		'vendor/easing.1.3',
 		'vendor/formstyler',
 		'vendor/bootstrap.min',
 		'vendor/moment',
@@ -51,6 +51,7 @@
 		'chat',
 		'struct',
 		'search',
+		'group-script',
 		'group'
 	);
 	

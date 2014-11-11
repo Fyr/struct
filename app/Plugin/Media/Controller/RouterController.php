@@ -3,10 +3,16 @@ App::uses('AppController', 'Controller');
 class RouterController extends AppController {
 	var $name = 'Router';
 	var $layout = false;
-	var $uses = array();
+	var $uses = false;
 	var $autoRender = false;
 	
-	function index($type, $id, $size, $filename) {
+	public function beforeFilter() {
+	}
+	
+	public function beforeRender() {
+	}
+	
+	public function index($type, $id, $size, $filename) {
 		App::uses('MediaPath', 'Media.Vendor');
 		$this->PHMedia = new MediaPath();
 		
@@ -26,7 +32,8 @@ class RouterController extends AppController {
 		
 		$image->load($this->PHMedia->getFileName($type, $id, null, $aFName['fname'].'.'.$aFName['orig_ext']));
 		if ($aSize) {
-			$image->resize($aSize['w'], $aSize['h']);
+			$method = $this->PHMedia->getResizeMethod($size);
+			$image->{$method}($aSize['w'], $aSize['h']);
 		}
 		if ($aFName['ext'] == 'jpg') {
 			$image->outputJpg($fname);
@@ -38,5 +45,7 @@ class RouterController extends AppController {
 			$image->outputGif($fname);
 			$image->outputGif();
 		}
+		exit;
 	}
+	
 }

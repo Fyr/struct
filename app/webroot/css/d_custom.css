@@ -1053,6 +1053,9 @@ a.autor-link img{
     color: #313131;
     cursor: pointer;
 }
+.settings-input-row .jq-selectbox{
+    width: 110px;
+}
 .settings-input-row label input[type="checkbox"]{
     opacity: 0;
 }

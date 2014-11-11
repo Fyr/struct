@@ -98,4 +98,47 @@
       .wrapper-container .jq-selectbox li .option {
         padding-left: 25px; }
 
+.jq-file {
+  width: 100%;
+  padding-right: 15px;
+  max-width: 200px;
+  height: 34px; }
+  .jq-file input {
+    height: auto;
+    line-height: 1em;
+    cursor: pointer; }
+  .jq-file .focused .jq-file__name {
+    border: 1px solid #5794bf; }
+  .jq-file.disabled {
+    background: none repeat scroll 0 0 #f5f5f5;
+    border-color: #ccc;
+    box-shadow: none;
+    cursor: default;
+    color: #888; }
+    .jq-file.disabled .jq-file__name {
+      color: #888; }
+    .jq-file.disabled .jq-file__browse {
+      background: none repeat scroll 0 0 #f5f5f5;
+      border-color: #ccc;
+      box-shadow: none;
+      color: #888; }
+  .jq-file:hover .jq-file__browse {
+    color: #FFF !important;
+    background-color: #22B5AE;
+    border-color: #22B5AE; }
+  .jq-file .jq-file__name {
+    display: none; }
+  .jq-file .jq-file__browse {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    line-height: 30px;
+    font-size: 13px;
+    padding: 0;
+    text-align: center;
+    cursor: pointer;
+    color: #333;
+    left: 1px;
+    top: 1px; }
+
 /*# sourceMappingURL=content.css.map */
