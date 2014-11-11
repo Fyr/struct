@@ -51,6 +51,7 @@
 		'chat',
 		'struct',
 		'search',
+		'settings-script',
 		'group-script',
 		'group'
 	);

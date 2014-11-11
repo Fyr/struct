@@ -9,6 +9,9 @@ class GroupController extends SiteController {
 	
 	public function edit($id = 0) {
 		$group = $this->Group->findById($id);
+		if (Hash::get($group, 'Group.owner_id') != $this->currUserID) {
+			return $this->redirect(array('controller' => 'Group', 'action' => 'view', $id));
+		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			$this->request->data('Group.owner_id', $this->currUserID);
 			$this->request->data('Group.hidden', $this->request->data('Group.hidden') && true);
@@ -20,7 +23,9 @@ class GroupController extends SiteController {
 	}
 
 	public function view($id) {
-		$this->set('group', $this->Group->findById($id));
+		$group = $this->Group->findById($id);
+		$this->set('group', $group);
+		$this->set('canEdit', Hash::get($group, 'Group.owner_id') == $this->currUserID);
 	}
 	
 	public function delete($id) {

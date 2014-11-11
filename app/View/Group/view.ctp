@@ -21,9 +21,15 @@
                 <a class="btn btn-default" href="#">
                     Отправить сообщение
                 </a>
+<?
+	if ($canEdit) {
+?>
                 <a href="<?=$this->Html->url(array('controller' => 'Group', 'action' => 'edit', $id))?>" class="btn btn-default">
                     <span class="glyphicon glyphicon-wrench glyphicons wrench"></span>
                 </a>
+<?
+	}
+?>
             </div>
         </div>
     </div>

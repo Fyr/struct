@@ -51,11 +51,11 @@
         padding: 0;
         height: 200px;
         width: 200px;
-        margin: 0 0 10px;
-        overflow: hidden; }
+        margin: 0 0 10px; }
         .group-page .group-create .group-create-head .group-create-logo figure img {
           width: 100%;
           padding-right: 15px;
+          margin-bottom: 15px;
           max-height: 200px;
           cursor: pointer; }
         .group-page .group-create .group-create-head .group-create-logo figure label {
