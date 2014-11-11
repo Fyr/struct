@@ -7,3 +7,6 @@ var groupURL = {
 	getGallery: '<?=$this->Html->url(array('plugin' => 'media', 'controller' => 'Ajax', 'action' => 'getList', 'GroupGallery'))?>',
 	delGalleryImage: '<?=$this->Html->url(array('plugin' => 'media', 'controller' => 'Ajax', 'action' => 'delete', 'GroupGallery'))?>'
 }
+var groupDef = {
+	maxImages: <?=Configure::read('groupMaxImages')?>
+}

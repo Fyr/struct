@@ -78,82 +78,31 @@
         </div>
     </div>
 </div>
-<!--div class="row mb40">
+<div class="row mb40">
     <div class="col-md-11 col-sm-10 col-xs-8">
         <div class="col-md-12">
             <div class="galery-box clearfix">
+<?
+	foreach($aGroupGallery as $media) {
+?>
                 <div class="galery-box-item">
-                    <div class="dropdown ">
-                        <button class="noStyles" type="button" id="dropdownMenu123" data-toggle="dropdown">
-                            <img src="/img/temp/gal1.jpg" alt="" />
-                        </button>
-                        <div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu123">
-                            <div class="dropdown-wrap">
-                                <div class="dropdown-close">
-                                    <span class="glyphicon halflings remove-sign"></span>
-                                </div>
-                                <div class="dropdown-body inner-content">
-                                    <img src="/img/temp/gal1.jpg" alt="" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                	<img src="<?=$this->Media->imageUrl($media, 'thumb200x140')?>" alt="" style="width: 100%"/>
                 </div>
-                <div class="galery-box-item video-box">
-                    <div class="dropdown ">
-                        <button class="noStyles" type="button" id="dropdownMenu123" data-toggle="dropdown">
-                            <img src="/img/temp/gal2.jpg" alt="" />
+<?
+	}
+?>
+                <!--div class="galery-box-item video-box">
+                    <div class="dropdown">
+                    	<button class="noStyles" type="button">
+                            <img src="/img/temp/gal2.jpg" alt="" style="width: 100%"/>
                         </button>
-                        <div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu123">
-                            <div class="dropdown-wrap">
-                                <div class="dropdown-close">
-                                    <span class="glyphicon halflings remove-sign"></span>
-                                </div>
-                                <div class="dropdown-body inner-content">
-                                    <iframe width="420" height="315" src="//www.youtube.com/embed/n9spVobX63g" frameborder="0" allowfullscreen></iframe>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                </div>
-                <div class="galery-box-item ">
-                    <div class="dropdown ">
-                        <button class="noStyles" type="button" id="dropdownMenu123" data-toggle="dropdown">
-                            <img src="/img/temp/gal3.jpg" alt="" />
-                        </button>
-                        <div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu123">
-                            <div class="dropdown-wrap">
-                                <div class="dropdown-close">
-                                    <span class="glyphicon halflings remove-sign"></span>
-                                </div>
-                                <div class="dropdown-body inner-content">
-                                    <img src="/img/temp/gal3.jpg" alt="" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="galery-box-item">
-                    <div class="dropdown ">
-                        <button class="noStyles" type="button" id="dropdownMenu123" data-toggle="dropdown">
-                            <img src="/img/temp/gal4.jpg" alt="" />
-                        </button>
-                        <div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu123">
-                            <div class="dropdown-wrap">
-                                <div class="dropdown-close">
-                                    <span class="glyphicon halflings remove-sign"></span>
-                                </div>
-                                <div class="dropdown-body inner-content">
-                                    <img src="/img/temp/gal4.jpg" alt="" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </div-->
+                
             </div>
         </div>
     </div>
-</div-->
+</div>
 <?
 	$aGroupAchievement = Hash::get($group, 'GroupAchievement');
 	if ($aGroupAchievement) {

@@ -23,9 +23,16 @@ class GroupController extends SiteController {
 	}
 
 	public function view($id) {
+		$this->loadModel('Media.Media');
+		
 		$group = $this->Group->findById($id);
 		$this->set('group', $group);
 		$this->set('canEdit', Hash::get($group, 'Group.owner_id') == $this->currUserID);
+		$aGroupGallery = $this->Media->getList(
+			array('object_type' => 'GroupGallery', 'object_id' => $id), 
+			array('Media.id' => 'DESC')
+		);
+		$this->set('aGroupGallery', $aGroupGallery);
 	}
 	
 	public function delete($id) {

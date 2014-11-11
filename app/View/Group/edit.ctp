@@ -104,12 +104,15 @@
                         </div>
                         <ul class="gallery-add-list clearfix">
                         </ul>
-                        <input type="file" class="fileuploader filestyle" data-object_type="GroupGallery" data-object_id="<?=$id?>" data-progress_id="progress-GroupGallery_<?=$id?>" style="display: inline" />
-                        <span id="progress-GroupGallery_<?=$id?>">
-	                        <div id="progress-bar">
-				            	<div id="progress-stats"></div>
-				            </div>
+                        <span class="gallery-uploader" style="display: none;">
+	                        <input type="file" class="fileuploader filestyle" data-object_type="GroupGallery" data-object_id="<?=$id?>" data-progress_id="progress-GroupGallery_<?=$id?>" />
+	                        <span id="progress-GroupGallery_<?=$id?>">
+		                        <div id="progress-bar">
+					            	<div id="progress-stats"></div>
+					            </div>
+				            </span>
 			            </span>
+			            
                     </div>
                 </fieldset>
 <?

@@ -40,8 +40,8 @@
 {%
 	}
 %}
-    <li>
+    <!--li>
         <a href="javascript: void(0)" class="label-add add-image"><span class="glyphicons picture"></span></a>
         <a href="javascript: void(0)" class="label-add add-video"><span class="halflings facetime-video"></span></a>
-    </li>
+    </li-->
 </script>

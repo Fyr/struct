@@ -41,6 +41,12 @@ var Group = {
 		$('.drop-add-video .close-block').on('click', function(){
 			$(this).parent().removeClass('open');
 		});
+		
+		$('.gallery-uploader').hide();
+		console.log([data.length, groupDef.maxImages]);
+		if (data.length < groupDef.maxImages) {
+			$('.gallery-uploader').show();
+		}
 	},
 	
 	updateGalleryAdmin: function(group_id) {
