@@ -84,13 +84,15 @@ var Chat = {
 	*/
 	sendMsg: function () {
 		var msg = $(".sendForm textarea").val();
-		Chat.addMsg(msg);
-		$(".sendForm textarea").val('');
-		$.post(chatURL.sendMsg, {data: {msg: msg, roomID: Chat.getActiveRoom()}}, function(response){
-			if (checkJson(response)) {
-				
-			}
-		}, 'json');
+		if (msg) {
+			Chat.addMsg(msg);
+			$(".sendForm textarea").val('');
+			$.post(chatURL.sendMsg, {data: {msg: msg, roomID: Chat.getActiveRoom()}}, function(response){
+				if (checkJson(response)) {
+					
+				}
+			}, 'json');
+		}
 	},
 	
 	renderMsg: function (msg, user, time) {
