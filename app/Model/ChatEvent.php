@@ -149,4 +149,13 @@ class ChatEvent extends AppModel {
 		$group = array('ChatEvent.room_id');
 		return $this->find('all', compact('fields', 'conditions', 'joins', 'order', 'group'));
 	}
+	
+	public function dashboardEvents($currUserID, $date) {
+		$conditions = array_merge(
+			$this->dateRange('ChatEvent.created', $date),
+			array('ChatEvent.user_id' => $currUserID, 'ChatEvent.active' => 1)
+		);
+		$order = 'ChatEvent.created';
+		return $this->find('all', compact('conditions', 'order'));
+	}
 }

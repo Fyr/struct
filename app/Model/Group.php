@@ -34,4 +34,10 @@ class Group extends AppModel {
 		$order = array('Group.title');
 		return $this->find('all', compact('conditions', 'order'));
 	}
+	
+	public function dashboardEvents($currUserID, $date) {
+		$conditions = $this->dateRange('Group.created', $date);
+		$order = 'Group.created';
+		return $this->find('all', compact('conditions', 'order'));
+	}
 }

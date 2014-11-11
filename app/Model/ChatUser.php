@@ -110,4 +110,11 @@ class ChatUser extends AppModel {
 		$aUsers = $this->getUsers($aID);
 		return $aUsers;
 	}
+	
+	public function dashboardEvents($currUserID, $date) {
+		$fields = array('ChatUser.create_time', 'ChatUser.id');
+		$conditions = $this->dateRange('ChatUser.create_time', $date);
+		$order = 'ChatUser.create_time';
+		return $this->find('all', compact('fields', 'conditions', 'order'));
+	}
 }

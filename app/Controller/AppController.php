@@ -22,6 +22,16 @@ class AppController extends Controller {
 	protected function _afterInit() {
 	    // after construct actions here
 	}
+	/* Перестает работать загрузка моделей из uses :(
+	public function loadModel($models) {
+		if (!is_array($models)) {
+			$models = array($models);
+		}
+		foreach($models as $model) {
+			parent::loadModel($model);
+		}
+	}
+	*/
 	
 	public function isAuthorized($user) {
     	$this->set('currUser', $user);
@@ -40,6 +50,8 @@ class AppController extends Controller {
 			$this->autoRender = false;
 			exit('You must be authorized');
 		}
+		$this->loadModel('ChatUser');
+		$this->loadModel('Profile');
 		$this->currUser = $this->ChatUser->getUser($this->currUserID);
 		$this->profile = $this->Profile->findByUserId($this->currUserID);
 		$lang = Hash::get($this->profile, 'Profile.lang');
