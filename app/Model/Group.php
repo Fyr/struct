@@ -19,6 +19,13 @@ class Group extends AppModel {
 		),
 		'GroupAchievement' => array(
 			'dependent' => true
+		),
+		'GroupGallery' => array(
+			'className' => 'Media.Media',
+			'foreignKey' => 'object_id',
+			'conditions' => array('GroupGallery.object_type' => 'GroupGallery'),
+			'dependent' => true,
+			'order' => array('GroupGallery.id' => 'DESC')
 		)
 	);
 	

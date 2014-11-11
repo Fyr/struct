@@ -22,7 +22,7 @@ class PAjaxController extends AppController {
     
 	public function setResponse($data = array()) {
 	    $this->_response = array('status' => self::STATUS_OK);
-	    if ($data) {
+	    if ($data || is_array($data)) { // include empty JS-array [] to response for valid array JS-processing
 	    	$this->_response['data'] = $data;
 	    }
 	}

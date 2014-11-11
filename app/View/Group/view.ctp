@@ -82,14 +82,18 @@
         </div>
     </div>
 </div>
+<?
+	$aGroupGallery = Hash::get($group, 'GroupGallery');
+	if ($aGroupGallery) {
+?>
 <div class="row mb40">
     <div class="col-md-11 col-sm-10 col-xs-8">
         <div class="col-md-12">
             <div class="galery-box clearfix">
 <?
 	foreach($aGroupGallery as $media) {
-		$src = $this->Media->imageUrl($media, 'thumb200x140');
-		$orig = $this->Media->imageUrl($media, 'noresize');
+		$src = $this->Media->imageUrl(array('Media' => $media), 'thumb200x140');
+		$orig = $this->Media->imageUrl(array('Media' => $media), 'noresize');
 ?>
                 <div class="galery-box-item">
                 	<a href="<?=$orig?>" class="fancybox" rel="photoalobum"><img src="<?=$src?>" alt=""  style="width: 100%" /></a>
@@ -110,6 +114,7 @@
     </div>
 </div>
 <?
+	}
 	$aGroupAchievement = Hash::get($group, 'GroupAchievement');
 	if ($aGroupAchievement) {
 ?>

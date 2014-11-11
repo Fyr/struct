@@ -157,17 +157,19 @@ class Media extends AppModel {
 		App::uses('Path', 'Core.Vendor');
 		
 		$media = $this->findById($this->id);
-		$path = $this->PHMedia->getPath($media[$this->alias]['object_type'], $this->id);
-
-		if (file_exists($path)) {
-			// remove all files in folder
-			$aPath = Path::dirContent($path);
-			if (isset($aPath['files']) && $aPath['files']) {
-				foreach($aPath['files'] as $file) {
-					unlink($aPath['path'].$file);
+		if ($media) {
+			$path = $this->PHMedia->getPath($media[$this->alias]['object_type'], $this->id);
+	
+			if (file_exists($path)) {
+				// remove all files in folder
+				$aPath = Path::dirContent($path);
+				if (isset($aPath['files']) && $aPath['files']) {
+					foreach($aPath['files'] as $file) {
+						unlink($aPath['path'].$file);
+					}
 				}
+				rmdir($path);
 			}
-			rmdir($path);
 		}
 		return true;
 	}

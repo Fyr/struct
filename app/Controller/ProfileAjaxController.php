@@ -20,6 +20,9 @@ class ProfileAjaxController extends PAjaxController {
 			$this->set('aUsers', $this->ChatUser->search($this->currUserID, $q));
 			$this->set('aGroups', $this->Group->search($this->currUserID, $q));
 		}
+	}
+	
+	public function events() {
 		
 	}
 }

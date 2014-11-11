@@ -28,14 +28,16 @@ class GroupController extends SiteController {
 		$group = $this->Group->findById($id);
 		$this->set('group', $group);
 		$this->set('canEdit', Hash::get($group, 'Group.owner_id') == $this->currUserID);
-		$aGroupGallery = $this->Media->getList(
-			array('object_type' => 'GroupGallery', 'object_id' => $id), 
-			array('Media.id' => 'DESC')
-		);
-		$this->set('aGroupGallery', $aGroupGallery);
 	}
 	
 	public function delete($id) {
+		$this->autoRender = false;
+		
+		$group = $this->Group->findById($id);
+		if ($id && Hash::get($group, 'Group.owner_id') != $this->currUserID) {
+			return $this->redirect(array('controller' => 'Group', 'action' => 'view', $id));
+		}
+		
 		$this->Group->delete($id);
 		$this->redirect(array('controller' => 'Profile', 'action' => 'view'));
 	}

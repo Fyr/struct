@@ -43,7 +43,6 @@ var Group = {
 		});
 		
 		$('.gallery-uploader').hide();
-		console.log([data.length, groupDef.maxImages]);
 		if (data.length < groupDef.maxImages) {
 			$('.gallery-uploader').show();
 		}
@@ -51,13 +50,17 @@ var Group = {
 	
 	updateGalleryAdmin: function(group_id) {
 		$.get(groupURL.getGallery + '/' + group_id + '.json', null, function(response){
-			Group.showGalleryAdmin(response.data);
+			if (checkJson(response)) {
+				Group.showGalleryAdmin(response.data);
+			}
 		});
 	},
 	
 	delGalleryImage: function(group_id, id) {
 		$.get(groupURL.delGalleryImage + '/' + group_id + '/'  + id + '.json', null, function(response){
-			Group.showGalleryAdmin(response.data);
+			if (checkJson(response)) {
+				Group.showGalleryAdmin(response.data);
+			}
 		});
 	}
 }
