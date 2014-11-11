@@ -93,20 +93,7 @@ $(document).ready(function () {
 </head>
 <body>
 
-<div class="main-panel">
-    <div class="main-panel-dropdown">
-        <?=$this->element('panels')?>
-    </div>
-    <div class="main-panel-block">
-        <div class="main-panel-wrapper">
-            <div class="user-image">
-                <a href="/profile/user/"><img src="<?=$currUser['Avatar']['url']?>" alt="<?=$currUser['ChatUser']['name']?>" style="width: 90px;"/></a>
-            </div>
-            <?=$this->element('panel_icons')?>
-        </div>
-    </div>
-</div>
-
+<?=$this->element('panel_menu')?>
 <?
 	if ($this->request->controller == 'Chat') {
 ?>

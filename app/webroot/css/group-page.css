@@ -242,44 +242,8 @@
             color: #23B5AE; }
           .group-page .group-create .group-create-cell .group-create-left .add-new-info .title-new-info {
             border-bottom: 1px dotted #c4c4c4; }
-      .group-page .group-create .group-create-cell .group-hide-view {
-        margin: 20px 0 0; }
-        .group-page .group-create .group-create-cell .group-hide-view .comments-hide-view {
-          color: #818181;
-          font-size: 11px;
-          font-weight: 400; }
-        .group-page .group-create .group-create-cell .group-hide-view .comments-hide-view {
-          margin-bottom: 12px; }
-        .group-page .group-create .group-create-cell .group-hide-view label {
-          display: inline-block;
-          font-size: 24px;
-          font-weight: bold;
-          margin-bottom: 37px;
-          color: #313131;
-          cursor: pointer; }
-          .group-page .group-create .group-create-cell .group-hide-view label input[type="checkbox"] {
-            opacity: 0; }
-          .group-page .group-create .group-create-cell .group-hide-view label .glyphicons {
-            display: inline-block;
-            margin: 5px 10px 0 -16px;
-            border-top-left-radius: 2px;
-            border-top-right-radius: 2px;
-            border-bottom-left-radius: 2px;
-            border-bottom-right-radius: 2px;
-            height: 25px;
-            width: 25px;
-            background: #23b5ae;
-            vertical-align: top;
-            font-size: 16px;
-            padding: 2px;
-            color: #FFF; }
-            .group-page .group-create .group-create-cell .group-hide-view label .glyphicons:before {
-              margin: -7px 0 0 2px; }
-          .group-page .group-create .group-create-cell .group-hide-view label.checkedOut .glyphicons {
-            height: 25px;
-            width: 25px; }
-            .group-page .group-create .group-create-cell .group-hide-view label.checkedOut .glyphicons:before {
-              display: none; }
+      .group-page .group-create .group-create-cell .delete-group {
+        float: right; }
   .group-page .group-users-block {
     padding: 30px 0 18px; }
     .group-page .group-users-block .panel-users-block {
