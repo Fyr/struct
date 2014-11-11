@@ -41,7 +41,7 @@
 	}
 ?>
         <div class="mb30">
-            <a href="/tickets/tickets"><?=__('Tech.support')?></a>
+            <a href="/tickets/tickets" target="_blank"><?=__('Tech.support')?></a>
         </div>
         <!--div class="settings-link">
             <a href="#"><span class="glyphicon-extended glyphicon-mailfull"></span> <?=__('Change email')?></a>
