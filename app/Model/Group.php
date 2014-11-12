@@ -2,6 +2,8 @@
 App::uses('AppModel', 'Model');
 App::uses('Media', 'Media.Model');
 App::uses('GroupAddress', 'Model');
+App::uses('GroupAchievement', 'Model');
+App::uses('GroupVideo', 'Model');
 class Group extends AppModel {
 	
 	public $hasOne = array(
@@ -26,6 +28,9 @@ class Group extends AppModel {
 			'conditions' => array('GroupGallery.object_type' => 'GroupGallery'),
 			'dependent' => true,
 			'order' => array('GroupGallery.id' => 'DESC')
+		),
+		'GroupVideo' => array(
+			'dependent' => true
 		)
 	);
 	
@@ -36,7 +41,7 @@ class Group extends AppModel {
 	}
 	
 	public function dashboardEvents($currUserID, $date) {
-		$conditions = $this->dateRange('Group.created', $date);
+		// $conditions = $this->dateRange('Group.created', $date);
 		$order = 'Group.created';
 		return $this->find('all', compact('conditions', 'order'));
 	}

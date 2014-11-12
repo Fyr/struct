@@ -1,13 +1,3 @@
-<style type="text/css">
-/*
-.group-page .group-create .group-create-cell fieldset:last {
-    margin-bottom: 0px;
-}
-.group-page .group-create .group-create-cell fieldset:last .input-boxing:last {
-	border-bottom: 2px solid #eeeeee;
-}
-*/
-</style>
 <?
 	$this->Html->script('group-script', array('inline' => false));
 	$id = $this->request->data('Group.id');
@@ -96,13 +86,11 @@
                     <div class="gallery-add page-menu clearfix">
                         <div class="drop-add-video">
                             <div class="close-block glyphicons circle_remove"></div>
-                            <form action="#">
-                                <label for="add-new-video-4"><?=__('Youtube.com URL')?></label>
-                                <input id="add-new-video-4" type="text"/>
+                                <label for="add-new-video"><?=__('Youtube.com URL')?></label>
+                                <input id="add-new-video" type="text"/>
                                 <div class="page-menu clearfix">
-                                    <button class="btn btn-default"><?=__('Add')?></button>
+                                    <button type="button" class="btn btn-default" onclick="Group.addGalleryVideo(<?=$id?>)"><?=__('Add')?></button>
                                 </div>
-                            </form>
                         </div>
                         <ul class="gallery-add-list clearfix">
                         </ul>
@@ -184,7 +172,7 @@
 <?
 	if ($id) {
 ?>
-                    <a href="<?=$this->Html->url(array('controller' => 'Group', 'action' => 'delete', $id))?>" class="btn btn-default"><?=__('Delete')?></a>
+                    <a href="<?=$this->Html->url(array('controller' => 'Group', 'action' => 'delete', $id))?>" class="btn btn-default delete-group"><?=__('Delete')?></a>
 <?
 	}
 ?>

@@ -26,7 +26,7 @@
 <div class="date">{%=o.msg%}: <a href="{%=o.url%}" target="_blank">{%=o.file_name%}</a></div>
 </script>
 
-<script type="text/x-tmpl" id="group-gallery-admin">
+<script type="text/x-tmpl" id="group-gallery-image-admin">
 {% 
 	for(var i = 0; i < o.length; i++) { 
 		var img = o[i].Media;
@@ -34,14 +34,26 @@
     <li>
         <div class="remove-media" onclick="Group.delGalleryImage({%=img.object_id%}, {%=img.id%})"><span class="glyphicons circle_remove"></span></div>
         <a href="javascript::void(0)">
-            <img src="{%=img.image.replace(/100x80/, 'thumb96x96')%}" alt="" />
+            <img src="{%=img.image.replace(/100x80/, 'thumb120x90')%}" alt="" />
         </a>
     </li>
 {%
 	}
 %}
-    <!--li>
-        <a href="javascript: void(0)" class="label-add add-image"><span class="glyphicons picture"></span></a>
-        <a href="javascript: void(0)" class="label-add add-video"><span class="halflings facetime-video"></span></a>
-    </li-->
+</script>
+
+<script type="text/x-tmpl" id="group-gallery-video-admin">
+{% 
+	for(var i = 0; i < o.length; i++) { 
+		var video = o[i].GroupVideo;
+%}
+    <li>
+        <div class="remove-media" onclick="Group.delGalleryVideo({%=video.group_id%}, {%=video.id%})"><span class="glyphicons circle_remove"></span></div>
+        <a class="gallery-video" href="javascript::void(0)">
+        	<img src="http://img.youtube.com/vi/{%=video.video_id%}/1.jpg" alt="" />
+        </a>
+    </li>
+{%
+	}
+%}
 </script>

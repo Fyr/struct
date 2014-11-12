@@ -152,7 +152,7 @@ class ChatEvent extends AppModel {
 	
 	public function dashboardEvents($currUserID, $date) {
 		$conditions = array_merge(
-			$this->dateRange('ChatEvent.created', $date),
+			// $this->dateRange('ChatEvent.created', $date),
 			array('ChatEvent.user_id' => $currUserID, 'ChatEvent.active' => 1)
 		);
 		$order = 'ChatEvent.created';

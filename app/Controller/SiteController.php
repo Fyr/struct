@@ -23,6 +23,7 @@ class SiteController extends AppController {
 	}
 	
 	public function beforeFilter() {
+		$this->Auth->allow(array('index', 'register'));
 		$this->_checkAuth();
 	}
 	/*

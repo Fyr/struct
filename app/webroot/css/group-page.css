@@ -49,11 +49,10 @@
       padding: 0 30px 0 0; }
       .group-page .group-create .group-create-head .group-create-logo figure {
         padding: 0;
-        height: 200px;
-        width: 200px;
         margin: 0 0 10px; }
         .group-page .group-create .group-create-head .group-create-logo figure img {
           width: 100%;
+          max-width: 200px;
           padding-right: 15px;
           margin-bottom: 15px;
           cursor: pointer; }
@@ -121,11 +120,11 @@
             position: relative; }
             .group-page .group-create .group-create-cell fieldset .gallery-add .gallery-add-list li {
               position: relative;
-              height: 100px;
-              width: 100px;
+              height: 94px;
+              width: 124px;
               border: 2px solid #efefef;
               margin-bottom: 10px;
-              margin-right: 18px;
+              margin-right: 20px;
               text-align: center;
               font-size: 18px;
               float: left; }
@@ -162,9 +161,9 @@
                 .group-page .group-create .group-create-cell fieldset .gallery-add .gallery-add-list li .gallery-video:hover:before {
                   content: '';
                   position: absolute;
-                  height: 96px;
-                  width: 96px;
-                  background: rgba(48, 48, 47, 0.7) url(../img/play-btn-gallery.png) no-repeat 50% 50%;
+                  height: 90px;
+                  width: 120px;
+                  background: rgba(48, 48, 47, 0.2) url(../img/play-btn-gallery.png) no-repeat 50% 50%;
                   left: 0;
                   top: -33px;
                   z-index: 10; }

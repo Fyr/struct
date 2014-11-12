@@ -19,30 +19,34 @@
         <div class="col-md-12 col-sm-12 col-xs-3 n-padding">
             <div class="settings-avatar">
 <?
-	if ($this->request->data('Media.id')) {
-		$src = $this->Media->imageUrl($this->request->data, 'noresize');
-	} else {
-		$src = '/img/no-photo.jpg';
-	}
+	if ($id) {
+		if ($this->request->data('Media.id')) {
+			$src = $this->Media->imageUrl($this->request->data, 'noresize');
+		} else {
+			$src = '/img/no-photo.jpg';
+		}
 ?>
                 <img id="<?=$this->request->data('Media.id')?>" src="<?=$src?>" alt="" />
+<?
+	}
+?>
             </div>
         </div>
 <?
 	if ($id) {
 ?>
-        <div class="settings-avatar-info fs13 text-grey mb60">
-            <input class="fileuploader filestyle" type="file" data-object_type="Profile" data-object_id="<?=$id?>" style="display: inline" />
-            <div id="progress-bar">
-            	<div id="progress-stats"></div>
-            </div>
-        </div>
+			<div class="col-md-12 col-sm-12 col-xs-9">
+                <input class="fileuploader filestyle" type="file" data-object_type="Profile" data-object_id="<?=$id?>" />
+                <div id="progress-bar">
+	            	<div id="progress-stats"></div>
+	            </div>
+	            <div class="mb30">
+		            <a href="/tickets/tickets" target="_blank"><?=__('Tech.support')?></a>
+		        </div>
+	        </div>
 <?
 	}
 ?>
-        <div class="mb30">
-            <a href="/tickets/tickets" target="_blank"><?=__('Tech.support')?></a>
-        </div>
         <!--div class="settings-link">
             <a href="#"><span class="glyphicon-extended glyphicon-mailfull"></span> <?=__('Change email')?></a>
         </div>
@@ -149,7 +153,7 @@
                 <input type="submit" class="btn btn-default" value="<?=__('Save')?>" />
             </div>
             <div class="col-md-10 col-sm-10 taright">
-                <a href="<?=$this->Html->url(array('controller' => 'Profile', 'action' => 'view'))?>"><?=__('How other people see this page')?></a>
+                <a class="my-page-view-user" href="<?=$this->Html->url(array('controller' => 'Profile', 'action' => 'view'))?>"><?=__('How other people see this page')?></a>
             </div>
         </div>
         <!--div class="settings-input-row nbb clearfix">

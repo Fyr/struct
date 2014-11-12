@@ -471,3 +471,25 @@ msgstr "Как другие люди видят эту страницу"
 
 msgid "You can easily remove your profile from the site, just click the button and all information will be deleted permanently."
 msgstr "Вы можете легко удалить ваш профиль с сайта, просто нажмите кнопку и вся информация будет сразу же удалена."
+
+msgid "Contractor phone"
+msgstr "Телефон контрагента"
+
+msgid "Youtube.com URL"
+msgstr "Ссылка на Youtube.com"
+
+msgid "Upload video"
+msgstr "Загрузить видео"
+
+msgid "Achievements"
+msgstr "Достижения"
+
+msgid "Upload image"
+msgstr "Загрузить изображение"
+
+msgid "English"
+msgstr "English"
+
+msgid "Russian"
+msgstr "Русский"
+

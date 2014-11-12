@@ -12,7 +12,7 @@
     padding: 0; }
   .settings-page .settings-avatar img {
     width: 100%;
-    margin-bottom: 25px; }
+    padding-right: 15px; }
 
 .ui-autocomplete {
   z-index: 100;
@@ -36,5 +36,16 @@
     .ui-autocomplete li:hover {
       background: #22b5ae;
       color: #fff; }
+
+.user-avatar img {
+  max-width: 195px;
+  width: 100%; }
+
+.galery-box .galery-box-item {
+  width: 25%;
+  margin-bottom: 20px;
+  float: left; }
+  .galery-box .galery-box-item img {
+    width: 100%; }
 
 /*# sourceMappingURL=settings-page.css.map */

@@ -12,7 +12,7 @@ var Group = {
 		$(".searchBlock .searchInput", Group.panel).click(function(){
 			this.select();
 		});
-		$(".searchBlock .searchButton", Group.panel).change(function(){
+		$(".searchBlock .searchButton", Group.panel).click(function(){
 			Group.filterContactList($(".searchBlock .searchInput", Group.panel).val());
 		});
 	},
@@ -37,12 +37,16 @@ var Group = {
 		*/
 	},
 	
-	renderGalleryAdmin: function(data) {
-		return tmpl('group-gallery-admin', data);
+	renderGalleryVideoAdmin: function(data) {
+		return tmpl('group-gallery-video-admin', data);
+	},
+	
+	renderGalleryImageAdmin: function(data) {
+		return tmpl('group-gallery-image-admin', data);
 	},
 	
 	showGalleryAdmin: function(data) {
-		$('.gallery-add-list').html(Group.renderGalleryAdmin(data));
+		$('.gallery-add-list').html(Group.renderGalleryVideoAdmin(data.videos) + Group.renderGalleryImageAdmin(data.images));
 		
 		$('.gallery-add-list .add-video').on('click', function(){
 			$(this).parent().parent().parent().parent().find('.drop-add-video').addClass('open');
@@ -52,13 +56,13 @@ var Group = {
 		});
 		
 		$('.gallery-uploader').hide();
-		if (data.length < groupDef.maxImages) {
+		if ((data.images.length + data.videos.length) < groupDef.maxImages) {
 			$('.gallery-uploader').show();
 		}
 	},
 	
 	updateGalleryAdmin: function(group_id) {
-		$.get(groupURL.getGallery + '/' + group_id + '.json', null, function(response){
+		$.post(groupURL.getGallery, {data: {group_id: group_id}}, function(response){
 			if (checkJson(response)) {
 				Group.showGalleryAdmin(response.data);
 			}
@@ -67,6 +71,27 @@ var Group = {
 	
 	delGalleryImage: function(group_id, id) {
 		$.get(groupURL.delGalleryImage + '/' + group_id + '/'  + id + '.json', null, function(response){
+			if (checkJson(response)) {
+				Group.showGalleryAdmin(response.data);
+			}
+		});
+	},
+	
+	addGalleryVideo: function(group_id) {
+		var url = $('.gallery-add #add-new-video').val();
+		if (url) {
+			$('.gallery-add .drop-add-video').removeClass('open');
+			$.post(groupURL.addGalleryVideo, {data: {group_id: group_id, url: url}}, function(response){
+				if (checkJson(response)) {
+					$('.gallery-add #add-new-video').val('');
+					Group.showGalleryAdmin(response.data);
+				}
+			});
+		}
+	},
+	
+	delGalleryVideo: function(group_id, id) {
+		$.post(groupURL.delGalleryVideo, {data: {group_id: group_id, id: id}}, function(response){
 			if (checkJson(response)) {
 				Group.showGalleryAdmin(response.data);
 			}

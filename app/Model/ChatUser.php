@@ -11,7 +11,50 @@ class ChatUser extends AppModel {
 		)
 	);
 	
+	public $validate = array(
+		'username' => array(
+			'checkNotEmpty' => array(
+				'rule' => 'notEmpty',
+				'message' => 'Field is mandatory',
+			),
+			'checkEmail' => array(
+				'rule' => 'email',
+				'message' => 'Email is incorrect'
+			),
+			'checkIsUnique' => array(
+				'rule' => 'isUnique',
+				'message' => 'This email has already been used'
+			)
+		),
+		'password' => array(
+			'checkNotEmpty' => array(
+				'rule' => array('notEmpty'),
+				'message' => 'Field is mandatory'
+			),
+			'checkPswLen' => array(
+				'rule' => array('between', 4, 15),
+				'message' => 'The password must be between 4 and 15 characters'
+			),
+		),
+	);
+	
 	protected $ChatEvent, $ChatRoom, $Profile, $Media, $Group;
+	
+	public function beforeValidate($options = array()) {
+		if (Hash::get($options, 'validate')) {
+			if (!Hash::get($this->data, 'ChatUser.password')) {
+				$this->validator()->remove('password');
+				$this->validator()->remove('password_confirm');
+			}
+		}
+	}
+
+	public function beforeSave($options = array()) {
+		if (isset($this->data['ChatUser']['password'])) {
+			$this->data['ChatUser']['password'] = AuthComponent::password($this->data['ChatUser']['password']);
+		}
+		return true;
+	}
 	
 	protected function _initUserData($user) {
 		$user['ChatUser']['name'] = (trim($user['ChatUserData']['full_name'])) ? $user['ChatUserData']['full_name'] : $user['ChatUser']['username'];
@@ -113,7 +156,7 @@ class ChatUser extends AppModel {
 	
 	public function dashboardEvents($currUserID, $date) {
 		$fields = array('ChatUser.create_time', 'ChatUser.id');
-		$conditions = $this->dateRange('ChatUser.create_time', $date);
+		// $conditions = $this->dateRange('ChatUser.create_time', $date);
 		$order = 'ChatUser.create_time';
 		return $this->find('all', compact('fields', 'conditions', 'order'));
 	}

@@ -70,7 +70,7 @@ $(document).ready(function(){
 	));
 	echo $this->Form->input('Contractor.phone', array(
 		'type' => 'text',
-		'placeholder' => __('+7(906)785-45-48').'...',
+		'placeholder' => __('Contractor phone').'...',
 		'style' => 'max-width:274px'
 	));
 	echo $this->Form->input('Contractor.title', array(

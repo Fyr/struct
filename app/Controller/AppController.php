@@ -6,8 +6,16 @@ class AppController extends Controller {
 	
 	public $uses = array('ChatUser', 'Profile');
 	public $helpers = array('Html', 'Form');
+	public $components = array('Auth' => array(
+			'authorize'      => array('Controller'),
+			'loginAction'    => array('controller' => 'Users', 'action' => 'login'),
+			'loginRedirect'  => array('controller' => 'Profile', 'action' => 'edit'),
+			'logoutRedirect' => '/',
+			'authError'      => "You cannot access that page"
+		),
+	);
 	
-	protected $currUser = array(), $currUserID, $profile;
+	protected $currUser = array(), $currUserID, $profile, $user;
 	
 	public function __construct($request = null, $response = null) {
 		$this->_beforeInit();
@@ -34,11 +42,17 @@ class AppController extends Controller {
 	*/
 	
 	public function isAuthorized($user) {
-    	$this->set('currUser', $user);
-		return Hash::get($user, 'active');
+		return true;
+	}
+	
+	public function beforeFilter() {
+		$this->Auth->allow(array('index', 'register', 'login'));
+		// fdebug($this->Auth->user(), 'auth_user.log');
+		// $this->_checkAuth();
 	}
 	
 	protected function _checkAuth() {
+		/*
 		if (TEST_ENV) {
 			$this->currUserID = $this->Session->read('currUser.id');
 		} else {
@@ -50,6 +64,12 @@ class AppController extends Controller {
 			$this->autoRender = false;
 			exit('You must be authorized');
 		}
+		*/
+		if (!$this->Auth->loggedIn()) {
+			return $this->redirect('/');
+		}
+		$this->currUserID = $this->Auth->user('id');
+		
 		$this->loadModel('ChatUser');
 		$this->loadModel('Profile');
 		$this->currUser = $this->ChatUser->getUser($this->currUserID);

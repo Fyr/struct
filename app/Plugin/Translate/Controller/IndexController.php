@@ -7,11 +7,6 @@ class IndexController extends AdminController {
 	
 	private $msgFile = '', $count = 0;
 	
-	public function _afterInit() {
-		parent::_afterInit();
-		$this->msgFile = '../Locale/'.Configure::read('Config.language').'/LC_MESSAGES/default.po';
-	}
-
 	public function _process($fname, $path, $aParams = array()) {
 		$file = file_get_contents($path.$fname);
 		$msgFile = file_get_contents($this->msgFile);
@@ -35,6 +30,11 @@ class IndexController extends AdminController {
 	public function generate() {
 		$this->autoRender = false;
 		App::uses('Path', 'Core.Vendor');
+		
+		Configure::write('Config.language', 'rus');
+		$msgFile = '../Locale/'.Configure::read('Config.language').'/LC_MESSAGES/default.';
+		$this->msgFile = $msgFile.'po';
+		file_put_contents($msgFile.'bak', file_get_contents($msgFile.'po'), false);
 		
 		Path::process(Path::dirContent('../'), array($this, '_process'), true);
 		echo $this->count.' label(s) processed';

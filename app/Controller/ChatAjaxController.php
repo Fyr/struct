@@ -91,7 +91,6 @@ class ChatAjaxController extends PAjaxController {
 	
 	public function updateState() {
 		try {
-			$data = $this->ChatEvent->getActiveEvents($this->currUserID);
 			// fdebug($data, 'update_chat.log', false);
 			// $this->setResponse($data);
 			$data = $this->ChatEvent->getActiveEvents($this->currUserID);
