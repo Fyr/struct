@@ -13,13 +13,13 @@ $(function () {
     });
     $('.group-hide-view input[type="checkbox"]').change();
 
+
     $('.gallery-add .add-video').on('click', function(){
-       $('.gallery-add .drop-add-video').addClass('open');
+        $('.gallery-add .drop-add-video').addClass('open');
     });
     $('.gallery-add .drop-add-video .close-block').on('click', function(){
-       $('.gallery-add .drop-add-video').removeClass('open');
+        $('.gallery-add .drop-add-video').removeClass('open');
     });
-
 
     $('.panel-users-block .remove').on('click', function(){
         if($(this).parent().parent().hasClass('remove-open')){
@@ -37,4 +37,6 @@ $(function () {
             event.stopPropagation();
         });
     });
+
+
 });

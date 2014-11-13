@@ -3,7 +3,7 @@
 <head>
 	<?=$this->Html->charset(); ?>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title><?=$title_for_layout; ?></title>
 	
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

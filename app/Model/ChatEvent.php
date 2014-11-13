@@ -151,11 +151,15 @@ class ChatEvent extends AppModel {
 	}
 	
 	public function dashboardEvents($currUserID, $date) {
+		/*
 		$conditions = array_merge(
-			// $this->dateRange('ChatEvent.created', $date),
+			$this->dateRange('ChatEvent.created', $date),
 			array('ChatEvent.user_id' => $currUserID, 'ChatEvent.active' => 1)
 		);
-		$order = 'ChatEvent.created';
-		return $this->find('all', compact('conditions', 'order'));
+		*/
+		$conditions = array('ChatEvent.event_type' => array(self::INCOMING_MSG, self::FILE_DOWNLOAD_AVAIL));
+		$order = 'ChatEvent.created DESC';
+		$limit = 5;
+		return $this->find('all', compact('conditions', 'order', 'limit'));
 	}
 }

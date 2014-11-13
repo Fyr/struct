@@ -20,9 +20,9 @@
   height: 100%;
   width: 90px;
   font-family: "Open Sans";
-  z-index: 10000;
+  z-index: 1000000;
   left: 0;
-  bottom: 0;
+  top: 0;
   /*  DropDown Panel Style  */ }
   .main-panel .main-panel-block {
     position: relative;
@@ -85,6 +85,17 @@
           display: none; }
         .main-panel .main-panel-list ul li.active a {
           color: #fff; }
+        .main-panel .main-panel-list ul li.active:after {
+          border-bottom: 6px solid transparent;
+          border-right: 10px solid #fff;
+          border-top: 6px solid transparent;
+          content: "";
+          height: 0;
+          margin-top: -5px;
+          position: absolute;
+          right: 0;
+          top: 50%;
+          width: 0; }
         .main-panel .main-panel-list ul li.open:after {
           border-bottom: 6px solid transparent;
           border-right: 10px solid #fff;
@@ -147,17 +158,17 @@
       position: absolute;
       height: 100%;
       width: 270px;
-      -webkit-transition: left 0.7s ease-in-out;
-      -moz-transition: left 0.7s ease-in-out;
-      transition: left 0.7s ease-in-out;
+      -webkit-transition: left 0.4s ease-in-out;
+      -moz-transition: left 0.4s ease-in-out;
+      transition: left 0.4s ease-in-out;
       background: #f4f4f4;
       left: -180px;
       top: 0;
       overflow: hidden; }
       .main-panel .main-panel-dropdown .dropdown-panel.dropdown-open {
-        -webkit-transition: left 0.7s ease-in-out;
-        -moz-transition: left 0.7s ease-in-out;
-        transition: left 0.7s ease-in-out;
+        -webkit-transition: left 0.4s ease-in-out;
+        -moz-transition: left 0.4s ease-in-out;
+        transition: left 0.4s ease-in-out;
         left: 90px; }
       .main-panel .main-panel-dropdown .dropdown-panel .dropdown-panel-wrapper {
         position: relative;
@@ -375,8 +386,7 @@
         overflow: hidden;
         border-bottom: 2px solid transparent;
         text-align: center;
-        margin-right: 15px;
-        overflow: hidden; }
+        margin-right: 15px; }
         .main-panel .dropdown-chatPanel .messages-list li .messages-user.rate-10 {
           border-color: #23b5ae; }
         .main-panel .dropdown-chatPanel .messages-list li .messages-user.rate-0 {
@@ -503,9 +513,9 @@
     left: 0;
     z-index: 100; }
     .main-panel .dropdown-groupPanel .create-group .btn-default {
-      background: transparent; }
+      background-color: transparent; }
       .main-panel .dropdown-groupPanel .create-group .btn-default:hover {
-        background: #22b5ae; }
+        background: #22B5AE; }
   .main-panel .dropdown-groupPanel .group-list {
     width: 270px;
     padding: 150px 0 0 0; }
@@ -645,7 +655,6 @@
           .main-panel .dropdown-ipadPanel .drop-device-list .drop-device-list-cell .drop-device-info .select-option .box-select .btn {
             border-radius: 2px;
             padding: 4px 12px 5px;
-            background-color: transparent;
             font-weight: 600;
             color: #616161; }
             .main-panel .dropdown-ipadPanel .drop-device-list .drop-device-list-cell .drop-device-info .select-option .box-select .btn:hover {

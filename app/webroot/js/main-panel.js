@@ -16,7 +16,7 @@ $(function() {
                 setTimeout(function() {
                     var number_find = $('.main-panel-list li.open').index();
                     panel_list.eq(number_find).addClass('dropdown-open');
-                }, 1100)
+                }, 650)
             }else{
                 main_panel_li.removeClass('open');
                 $(this).parent().addClass('open');
@@ -31,7 +31,7 @@ $(function() {
                 setTimeout(function() {
                     main_panel_li.removeClass('open');
                     panel_list.removeClass('dropdown-open');
-                }, 1000);
+                }, 650);
             event.stopPropagation();
         });
     });

@@ -28,6 +28,7 @@ class ProfileController extends SiteController {
 		$this->set('user', $this->ChatUser->getUser($id));
 	}
 	
+	/*
 	public function getAvatar() {
 		$this->autoRender = false;
 		$id = Hash::get($this->profile, 'Media.id');
@@ -71,4 +72,5 @@ class ProfileController extends SiteController {
 		}
 		exit;
 	}
+	*/
 }

@@ -12,7 +12,8 @@
     padding: 0; }
   .settings-page .settings-avatar img {
     width: 100%;
-    padding-right: 15px; }
+    padding-right: 15px;
+    margin-bottom: 15px; }
 
 .ui-autocomplete {
   z-index: 100;

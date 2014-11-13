@@ -123,22 +123,23 @@
       box-shadow: none;
       color: #888; }
   .jq-file:hover .jq-file__browse {
-    color: #FFF !important;
-    background-color: #22B5AE;
-    border-color: #22B5AE; }
+    color: #fff !important;
+    background-color: #15a099;
+    border-color: #15a099; }
   .jq-file .jq-file__name {
     display: none; }
   .jq-file .jq-file__browse {
     width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    line-height: 30px;
+    border-radius: 3px;
     font-size: 13px;
-    padding: 0;
+    line-height: 1.5;
+    padding: 6px 10px;
     text-align: center;
     cursor: pointer;
-    color: #333;
     left: 1px;
-    top: 1px; }
+    top: 1px;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid  #ccc; }
 
 /*# sourceMappingURL=content.css.map */

@@ -150,12 +150,17 @@
                 border-bottom-right-radius: 50%;
                 top: -10px;
                 right: -10px;
-                padding: 0 0 0 4px;
+                padding: 0 0 0 5px;
                 background: #fff;
                 cursor: pointer;
                 font-size: 12px;
                 color: #CBCBCB;
                 z-index: 20; }
+                .group-page .group-create .group-create-cell fieldset .gallery-add .gallery-add-list li .remove-media .glyphicons {
+                  margin-top: -1px; }
+                .group-page .group-create .group-create-cell fieldset .gallery-add .gallery-add-list li .remove-media:hover {
+                  background: #23b5ae;
+                  color: #fff; }
               .group-page .group-create .group-create-cell fieldset .gallery-add .gallery-add-list li .gallery-video {
                 position: relative; }
                 .group-page .group-create .group-create-cell fieldset .gallery-add .gallery-add-list li .gallery-video:hover:before {
