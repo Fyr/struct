@@ -188,7 +188,7 @@ msgid "Oct"
 msgstr "Окт"
 
 msgid "Nov"
-msgstr "Нов"
+msgstr "Ноя"
 
 msgid "Dec"
 msgstr "Дек"

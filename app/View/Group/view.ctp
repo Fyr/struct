@@ -4,7 +4,7 @@
 	
 	$id = Hash::get($group, 'Group.id');
 	$title = Hash::get($group, 'Group.title');
-	$src = $this->Media->imageUrl($group, '50x');
+	$src = $this->Media->imageUrl($group, '100x');
 	if (!$src) {
 		$src = '/img/group-create-pl-image.jpg';
 	}
@@ -13,7 +13,7 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="col-md-10 col-sm-10 col-xs-10">
             <div class="page-title">
-                <img style="width: 50px" alt="<?=$title?>" src="<?=$src?>">
+                <img style="width: 100px" alt="<?=$title?>" src="<?=$src?>">
                 <?=$title?>
             </div>
         </div>

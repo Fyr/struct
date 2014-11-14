@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name = "format-detection" content = "telephone=no">
-	<title><?=$title_for_layout; ?></title>
+	<title>Konstruktor: <?=__('Timeline')?></title>
 	
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -64,9 +64,9 @@
 	echo $this->fetch('script');
 ?>
 	<script src="<?=$this->Html->url(array('controller' => 'ChatAjax', 'action' => 'jsSettings'))?>"></script>
-	<!--script src="<?=$this->Html->url(array('controller' => 'DeviceAjax', 'action' => 'jsSettings'))?>"></script>
+	<script src="<?=$this->Html->url(array('controller' => 'DeviceAjax', 'action' => 'jsSettings'))?>"></script>
 	<script src="<?=$this->Html->url(array('controller' => 'ProfileAjax', 'action' => 'jsSettings'))?>"></script>
-	<script src="<?=$this->Html->url(array('controller' => 'GroupAjax', 'action' => 'jsSettings'))?>"></script-->
+	<script src="<?=$this->Html->url(array('controller' => 'GroupAjax', 'action' => 'jsSettings'))?>"></script>
 <script>
 $(function() {
 	$(window).resize(function() {
@@ -77,12 +77,11 @@ $(function() {
 		fileBrowse: '<?=__('Upload image')?>'
 	});
 	$('input.clock-mask').setMask('time');
-	/*
+	
 	Search.initPanel($('.dropdown-searchPanel .dropdown-panel-wrapper').get(0));
 	Chat.initPanel($('.dropdown-chatPanel .dropdown-panel-wrapper').get(0));
 	Struct.initPanel($('.dropdown-ipadPanel .dropdown-panel-wrapper').get(0));
 	Group.initPanel($('.dropdown-groupPanel .dropdown-panel-wrapper').get(0));
-	*/
 });
 </script>
 </head>
@@ -96,30 +95,20 @@ $(function() {
             <div class="row user-page-header-inner">
                 <div class="col-md-12 col-sm-12 col-xs-12 ">
                     <div class="col-md-6 col-sm-6 col-xs-6">
-                        <!--<div class="group-menu page-menu t-a-left">-->
-                            <!--<a href="#">Мои статьи</a>-->
-                            <!--<a href="#">Избранные пользователи</a>-->
-                        <!--</div>-->
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6">
                         <div class="group-menu page-menu t-a-right">
                             <div class="btn-group btn-group-sm">
-                                <button type="button" class="btn btn-default">День</button>
-                                <button type="button" class="btn btn-default">Неделя</button>
-                                <!--<button type="button" class="btn btn-default">Год</button>-->
+                                <button id="showDay" type="button" class="btn btn-default"><?=__('Day')?></button>
+                                <button id="showWeek" type="button" class="btn"><?=__('Week')?></button>
                             </div>
-                            <!--<button type="button" class="btn btn-default btn-sm">-->
-                                <!--<span class="glyphicon glyphicon-stats"> </span> Статистика-->
-                            <!--</button>-->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="container-fluid user-page-wrapp">
-            <div class="row">
-                <?=$this->fetch('content')?>
-            </div>
+			<?=$this->fetch('content')?>
         </div>
     </div>
 </div>

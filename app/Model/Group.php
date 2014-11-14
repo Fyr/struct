@@ -42,10 +42,22 @@ class Group extends AppModel {
 	
 	public function dashboardEvents($currUserID, $date) {
 		$fields = array('Group.id', 'Group.title', 'Group.created', 'Group.descr');
-		// $conditions = $this->dateRange('Group.created', $date);
 		$order = 'Group.created DESC';
 		$limit = 2;
-		$recursive = -1;
-		return $this->find('all', compact('fields', 'conditions', 'order', 'limit', 'recursive'));
+		$aGroups = $this->find('all', compact('conditions', 'order', 'limit'));
+		
+		foreach($aGroups as &$group) {
+			$group['Group']['image_url'] = '/img/group-create-pl-image.jpg';
+			if (Hash::get($group, 'Media.id')) {
+				$media = $group['Media'];
+				$group['Group']['image_url'] = $this->Media->getPHMedia()->getImageUrl($media['object_type'], $media['id'], 'thumb50x50', $media['file'].$media['ext']);
+			}
+			unset($group['Media']);
+			unset($group['GroupGallery']);
+			unset($group['GroupVideo']);
+			unset($group['GroupAddress']);
+			unset($group['GroupAchievement']);
+		}
+		return $aGroups;
 	}
 }

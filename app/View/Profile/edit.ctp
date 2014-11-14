@@ -40,7 +40,7 @@
                 <div id="progress-bar">
 	            	<div id="progress-stats"></div>
 	            </div>
-	            <div class="mb30">
+	            <div class="mb30" style="margin-top: 30px;">
 		            <a href="/tickets/tickets" target="_blank"><?=__('Tech.support')?></a>
 		        </div>
 	        </div>

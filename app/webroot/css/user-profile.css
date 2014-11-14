@@ -152,20 +152,24 @@
   font-weight: 700; }
 
 /* cell list time-line */
-.time-line-list .time {
+.time-line-list .time,
+.time-line-list .time-get-start {
   color: #808080;
   font-size: 9px;
   font-weight: 400; }
 
-.time-line-list .time > span {
+.time-line-list .time > span,
+.time-line-list .time-get-start > span {
   position: relative;
   display: inline-block;
   background: #fff;
   padding: 1px 2px 3px; }
 
-.time-line-list .time > span {
+.time-line-list .time > span,
+.time-line-list .time-get-start > span {
   position: relative; }
-  .time-line-list .time > span:before {
+  .time-line-list .time > span:before,
+  .time-line-list .time-get-start > span:before {
     content: '';
     position: absolute;
     height: 50px;
@@ -174,10 +178,13 @@
     left: 50%;
     margin: -25px 0 0 -25px;
     z-index: 20; }
-  .time-line-list .time > span:hover .add-event-time, .time-line-list .time > span.open-plus .add-event-time {
+  .time-line-list .time > span:hover .add-event-time, .time-line-list .time > span.open-plus .add-event-time,
+  .time-line-list .time-get-start > span:hover .add-event-time,
+  .time-line-list .time-get-start > span.open-plus .add-event-time {
     display: block;
     z-index: 30; }
-  .time-line-list .time > span .add-event-time:after {
+  .time-line-list .time > span .add-event-time:after,
+  .time-line-list .time-get-start > span .add-event-time:after {
     content: '';
     position: absolute;
     height: 40px;
@@ -237,11 +244,11 @@
 .drop-down-add-event .calendar-select {
   padding: 21px 0 0; }
 
-.time-line-list .time .title-registration {
+.time-line-list .time-get-start .title-registration {
   position: relative;
-  color: #313131; }
+  color: #000; }
 
-.time-line-list .time .title-time {
+.time-line-list .time-get-start .title-time {
   color: #313131;
   position: absolute;
   font-family: "Roboto";

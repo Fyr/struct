@@ -4,11 +4,12 @@ $(function() {
         pickTime: false
     });
 
+    /*
     $('.toggle-dotted-line').on('click', function(){
         $('.toggle-dotted-btn').fadeOut('fast');
         $(this).parent().parent().parent().find('.toggle-dotted-cont').stop(true, false).slideDown();
     });
-
+	*/
 
     $('.time span').on('touchstart click', function(event){
         $('.add-event-time').removeClass('open-plus');

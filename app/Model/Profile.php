@@ -55,12 +55,10 @@ class Profile extends AppModel {
 			$created = $user['ChatUser']['created'];
 			$data['events'][$created]['SelfRegistration'] = array(
 				'created' => $created,
-				'msg' => __('I registered on the site')
 			);
 			$created = Configure::read('Konstructor.created');
 			$data['events'][$created]['KonstructorCreation'] = array(
 				'created' => $created,
-				'msg' => __('Launching Kostruktor')
 			);
 			krsort($data['events']);
 			

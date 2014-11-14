@@ -795,4 +795,28 @@
   .main-panel .dropdown-calendarPanel {
     display: none; }
 
+
+/**
+
+     HOT FIXES!!!
+**/
+a.btn-default, button.btn-default, input.btn-default {
+	color: #fff !important;
+	background-color: #21b4ad !important;
+}
+
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active,
+.btn-default.active,
+.open > .dropdown-toggle.btn-default {
+    color: #fff !important;
+    background-color: #22b5ae;
+    border-color: #22b5ae;
+}
+
+.main-panel .service-menu li.active a {
+    color: #fff;
+}
+
 /*# sourceMappingURL=main-panel.css.map */
