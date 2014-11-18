@@ -7,14 +7,22 @@ var Timeline = {
 	topDate: null,
 	bottomDate: null,
 	lEnableUpdate: true,
+	timer: null,
 	
-	init: function(container, topDay, bottomDay, loadPeriod) {
+	init: function(container, topDay, bottomDay, loadPeriod, data) {
 		Timeline.canvas = container;
 		Timeline.topDay = topDay;
 		Timeline.bottomDay = bottomDay;
 		Timeline.loadPeriod = loadPeriod;
 		Timeline.topDate = Date.fromSqlDate(todayDate).addDays(Timeline.topDay);
 		Timeline.bottomDate = Date.fromSqlDate(todayDate).addDays(Timeline.bottomDay);
+		// Timeline.render(data);
+		var html = Timeline.renderEvents(data);
+		$(Timeline.canvas).append(html);
+		Timeline.insertCurrentTime();
+		Timeline.collapseEmptyCells();
+		Timeline.scrollCurrentTime();
+		Timeline.initHandlers();
 	},
 	
 	update: function(lPrepend) {
@@ -25,6 +33,28 @@ var Timeline = {
 			}
 			Timeline.lEnableUpdate = true;
 		});
+	},
+	
+	insertCurrentTime: function() {
+		if (!$('.curr-time-cell').length) {
+			var _now = new Date();
+			var id = 'timeline' + _now.toSqlDate() + '_' + zeroFormat(_now.getHours()) + '00';
+			$('#' + id).before(tmpl('curr-time'));
+			clearInterval(Timeline.timer);
+			Timeline.timer = setInterval(function(){
+				var _now = new Date();
+				var time = Date.HoursMinutes(_now);
+				if ($('.curr-time-value').html().indexOf(':') > -1) {
+					time = time.replace(/\:/, ' ');
+				}
+				$('.curr-time-value').html(time);
+			}, 500);
+		}
+	},
+	
+	scrollCurrentTime: function () {
+		$('.curr-time-cell').get(0).scrollIntoView();
+		window.scrollBy(0, -40);
 	},
 	
 	renderEvents: function(data) {
@@ -40,11 +70,6 @@ var Timeline = {
 		return html;
 	},
 	
-	renderCurrentTime: function() {
-		var id = 'timeline' + now.toSqlDate() + zeroFormat(now.getHours()) + '00';
-		// $('#' + id).before();
-	},
-	
 	render: function(data, lPrepend) {
 		var html = Timeline.renderEvents(data);
 		if (lPrepend) {
@@ -52,7 +77,9 @@ var Timeline = {
 		} else {
 			$(Timeline.canvas).append(html);
 		}
+		// Timeline.insertCurrentTime();
 		Timeline.collapseEmptyCells();
+		// Timeline.scrollCurrentTime();
 		Timeline.initHandlers();
 	},
 	
@@ -64,6 +91,7 @@ var Timeline = {
 			$('#' + id + ' > .time-line-cell').each(function(){
 				var leftBox = $('.t-a-right.event-box', this).length && $('.t-a-right.event-box', this).html().replace(/\s*/, '');
 				var rightBox = $('.t-a-left.event-box', this).length && $('.t-a-left.event-box', this).html().replace(/\s*/, '');
+				var centerBox = $('.t-a-left.event-box', this).length && $('.t-a-center', this).html().replace(/\s*/, '');
 				var html = '';
 				if (!leftBox && !rightBox) {
 					$(this).addClass('empty-cell');
@@ -95,10 +123,12 @@ var Timeline = {
 		$('.toggle-dotted-btn').click(function(){
 			$(this).fadeOut('fast');
 			$(this).parent().find('.toggle-dotted-cells').stop(true, false).slideDown();
+			// $(this).parent().find('.toggle-dotted-cells').show();
 		});
 		
 		$('.day-calendar').click(function(){
 			$(this).parent().parent().find('.time-line-list').stop(true,false).slideToggle('slow');
+			// $(this).parent().parent().find('.time-line-list').toggle();
 		});
 		
 		$(window).off('scroll');

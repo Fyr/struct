@@ -78,12 +78,12 @@ $(function() {
 		fileBrowse: '<?=__('Upload image')?>'
 	});
 	$('input.clock-mask').setMask('time');
-	
+	/*
 	Search.initPanel($('.dropdown-searchPanel .dropdown-panel-wrapper').get(0));
 	Chat.initPanel($('.dropdown-chatPanel .dropdown-panel-wrapper').get(0));
 	Struct.initPanel($('.dropdown-ipadPanel .dropdown-panel-wrapper').get(0));
 	Group.initPanel($('.dropdown-groupPanel .dropdown-panel-wrapper').get(0));
-	
+	*/
 });
 </script>
 </head>

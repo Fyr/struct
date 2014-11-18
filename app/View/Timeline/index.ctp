@@ -13,8 +13,9 @@ var startDay = <?=-floor((time() - strtotime(Configure::read('Konstructor.create
 $(document).ready(function(){
 	todayDate = '<?=date('Y-m-d')?>';
 	now = Date.fromSqlDate('<?=date('Y-m-d H:i:s')?>');
-	Timeline.init($('.user-page-wrapp .row').get(0), <?=$topDay?>, <?=$bottomDay?>, <?=Configure::read('timeline.loadPeriod')?>);
-	Timeline.render(timeline);
+	Timeline.init($('.user-page-wrapp .row').get(0), <?=$topDay?>, <?=$bottomDay?>, <?=Configure::read('timeline.loadPeriod')?>, timeline);
+	// Timeline.render(timeline);
+	// Timeline.insertCurrentTime();
 	
 	// $('.add-event-block .save-button').off();
 	$('.add-event-block .save-button').click(function(){
@@ -38,6 +39,7 @@ $(document).ready(function(){
 		$('#showDay').removeClass('save-button');
 		$('#showDay').addClass('save-button');
 		$('#showWeek').removeClass('save-button');
+		Timeline.scrollCurrentTime();
 	});
 });
 </script>
@@ -130,6 +132,15 @@ $(document).ready(function(){
 <script type="text/x-tmpl" id="toggle-dotted-btn">
 <div class="time-line-cell clearfix toggle-dotted-btn">
     <div class="col-md-12 col-sm-12 col-xs-12 t-a-center time"><span class="toggle-dotted-line">...</span></div>
+</div>
+</script>
+
+<script type="text/x-tmpl" id="curr-time">
+<div class="time-line-cell clearfix curr-time-cell">
+	<div class="col-md-5 col-sm-5 col-xs-12 t-a-right event-box">&nbsp;</div>
+    <div class="col-md-12 col-sm-12 col-xs-12 t-a-center time-get-start">
+        <span class="title-registration curr-time-value"></span>
+    </div>
 </div>
 </script>
 
