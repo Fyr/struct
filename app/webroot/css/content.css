@@ -130,6 +130,11 @@
     display: none; }
   .jq-file .jq-file__browse {
     width: 100%;
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     border-radius: 3px;
     font-size: 13px;
     line-height: 1.5;

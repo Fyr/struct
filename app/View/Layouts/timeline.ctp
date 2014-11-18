@@ -54,7 +54,8 @@
 		'group-script',
 		'group',
 		'user-profile-script',
-		'timeline'
+		'timeline',
+		'/Table/js/format'
 	);
 	
 	echo $this->Html->script($aScripts);
@@ -72,16 +73,16 @@ $(function() {
 	$(window).resize(function() {
 		Chat.fixPanelHeight();
 	});
-	
 	$('select.formstyler, input.filestyle').styler({
 		fileBrowse: '<?=__('Upload image')?>'
 	});
 	$('input.clock-mask').setMask('time');
-	
+	/*
 	Search.initPanel($('.dropdown-searchPanel .dropdown-panel-wrapper').get(0));
 	Chat.initPanel($('.dropdown-chatPanel .dropdown-panel-wrapper').get(0));
 	Struct.initPanel($('.dropdown-ipadPanel .dropdown-panel-wrapper').get(0));
 	Group.initPanel($('.dropdown-groupPanel .dropdown-panel-wrapper').get(0));
+	*/
 });
 </script>
 </head>
@@ -114,5 +115,6 @@ $(function() {
 </div>
 
 <?=$this->element('js_templates')?>
+<?//$this->element('sql_dump')?>
 </body>
 </html>

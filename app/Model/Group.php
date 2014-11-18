@@ -40,8 +40,9 @@ class Group extends AppModel {
 		return $this->find('all', compact('conditions', 'order'));
 	}
 	
-	public function dashboardEvents($currUserID, $date) {
+	public function timelineEvents($currUserID, $date, $date2) {
 		$fields = array('Group.id', 'Group.title', 'Group.created', 'Group.descr');
+		// $conditions = $this->dateRange('Group.created', $date, $date2);
 		$order = 'Group.created DESC';
 		$limit = 2;
 		$aGroups = $this->find('all', compact('conditions', 'order', 'limit'));

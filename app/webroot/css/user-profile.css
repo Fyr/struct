@@ -31,7 +31,7 @@
 .time-line-bg:before {
   content: '';
   max-width: 1px;
-  position: absolute;
+  position: fixed;
   background: #d5d5d5;
   margin-left: 44px;
   height: 100%;
@@ -99,8 +99,7 @@
   position: relative;
   padding-top: 110px; }
 
-.start-day-data .day-calendar,
-.end-day-data .day-calendar {
+.day-data .day-calendar {
   position: relative;
   display: inline-block;
   width: 109px;
@@ -110,29 +109,25 @@
   cursor: pointer;
   font-size: 13px; }
 
-.start-day-data .day-calendar .data,
-.end-day-data .day-calendar .data {
+.day-data .day-calendar .data {
   padding: 29px 0 5px;
   font-size: 42px;
   line-height: 1; }
 
-.start-day-data .day-calendar .day,
-.end-day-data .day-calendar .day {
+.day-data .day-calendar .day {
   position: absolute;
   right: -3px;
   top: 49px;
   color: #818181;
   width: 25px; }
 
-.start-day-data .day-calendar .month,
-.end-day-data .day-calendar .month {
+.day-data .day-calendar .month {
   color: #616161; }
 
-.end-day-data .day-calendar .data,
-.red-day-data .day-calendar .data {
+.red-day .day-calendar .data {
   color: #FF6363 !important; }
 
-.start-day-data .day-calendar .data {
+.day-data .day-calendar .data {
   color: #23B5AE; }
 
 .konstructor {
@@ -144,12 +139,15 @@
 .konstructor .start-project {
   position: absolute;
   left: 125px;
-  top: 45px;
+  top: 37px;
   color: #313131;
   font-family: "Roboto";
   white-space: nowrap;
   font-size: 18px;
   font-weight: 700; }
+  .konstructor .start-project img {
+    display: inline-block;
+    padding-right: 15px; }
 
 /* cell list time-line */
 .time-line-list .time,
@@ -266,8 +264,9 @@
   margin: 10px 0; }
 
 .time-line-list .time-line-cell .event-box {
-  padding: 5px 0;
-  background: #fff; }
+  padding: 5px 0 15px;
+  background: #fff;
+  min-height: 53px; }
 
 .time-line-list .time-line-cell .event-box .event-box-cell {
   margin-top: 10px; }

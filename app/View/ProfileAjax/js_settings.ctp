@@ -5,5 +5,6 @@
 var profileURL = {
 	panel: '<?=$this->Html->url(array('controller' => 'ProfileAjax', 'action' => 'panel'))?>',
 	removeAvatar: '<?=$this->Html->url(array('plugin' => 'media', 'controller' => 'ajax', 'action' => 'delete'))?>',
-	dashboardEvents: '<?=$this->Html->url(array('controller' => 'ProfileAjax', 'action' => 'dashboardEvents'))?>.json'
+	timelineEvents: '<?=$this->Html->url(array('controller' => 'ProfileAjax', 'action' => 'timelineEvents'))?>.json',
+	addEvent: '<?=$this->Html->url(array('controller' => 'ProfileAjax', 'action' => 'addEvent'))?>.json'
 }

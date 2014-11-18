@@ -8,20 +8,24 @@
 var timeline = <?=json_encode($aTimeline)?>;
 var aMonths = <?=json_encode(array(__('Jan'), __('Feb'), __('Mar'), __('Apr'), __('May'), __('Jul'), __('Jun'), __('Aug'), __('Sep'), __('Oct'), __('Nov'), __('Dec')))?>;
 var aDays = <?=json_encode(array(__('Sun'), __('Mon'), __('Tue'), __('Wen'), __('Thu'), __('Fri'), __('Sat')))?>;
-var todayDate = '<?=date('Y-m-d')?>';
-var timelineURL = {
-	addEvent: '<?=$this->Html->url(array('controller' => 'ProfileAjax', 'action' => 'addEvent'))?>.json'
-}
+var todayDate = null;
+var startDay = <?=-floor((time() - strtotime(Configure::read('Konstructor.created'))) / DAY)?>;
 $(document).ready(function(){
-	Timeline.init($('.user-page-wrapp .row').get(0));
+	todayDate = '<?=date('Y-m-d')?>';
+	
+	Timeline.init($('.user-page-wrapp .row').get(0), <?=$topDay?>, <?=$bottomDay?>, <?=Configure::read('timeline.loadPeriod')?>);
 	Timeline.render(timeline);
 	
-	$('.add-event-block .save-button').off();
+	// $('.add-event-block .save-button').off();
 	$('.add-event-block .save-button').click(function(){
 		if ($('#UserEventTitle').val() && $('#UserEventTimeEvent').val && $('#UserEventDateEvent').val()) {
 			$('.add-event-block').removeClass('open');
 			Timeline.addEvent();
 		}
+	});
+	
+	$('.add-event-block .close-block').on('touchstart click', function(){
+		Timeline.closeEventPopup();
 	});
 	
 	$('#showWeek').click(function() {
@@ -74,7 +78,7 @@ $(document).ready(function(){
 ?>
         </div>
         <div class="fieldset-block">
-            <button type="button" class="btn btn-default save-button" onclick="Timeline.addEvent(); return false;"><?=__('Save')?></button>
+            <a class="btn btn-default save-button" href="javascript:void(0)"><?=__('Save')?></a>
         </div>
     <?=$this->Form->end()?>
 </div>
@@ -82,33 +86,41 @@ $(document).ready(function(){
 <script type="text/x-tmpl" id="row-day-event">
 <div class="row-day-events">
 {%
-	var js_date = Date.sqlDate(o.sql_date);
-	var firstHour = Object.keys(o.data)[0];
-	var firstEvent = o.globalData.events[o.data[firstHour][0]];
-	if (firstEvent.KonstructorCreation) {
-		include('konstructor-creation', {event: firstEvent.KonstructorCreation});
+	var js_date = Date.fromSqlDate(o.sql_date);
+%}
+    <div id="time-list{%=o.sql_date%}" class="col-md-12 col-sm-12 col-xs-12 time-line-list">
+{% 
+	for(hour = 23; hour >= 0; hour--) {
+		include('time-line-cell', {
+			globalData: o.globalData, 
+			hour: hour, 
+			sql_date: o.sql_date, 
+			data: (o.data && o.data[zeroFormat(hour)]) ? o.data[zeroFormat(hour)] : {} 
+		});
+	}
+%}
+    </div>
+{%
+	var event = null;
+	if (o.data) {
+		var firstHour = Object.keys(o.data)[0];
+		if (firstHour) {
+			var firstEvent = o.globalData.events[o.data[firstHour][0]];
+			if (firstEvent.KonstructorCreation) {
+				event = firstEvent.KonstructorCreation;
+			}
+		}
+	}
+	if (event) {
+		include('konstructor-creation', {event: event});
 	} else {
 %}
-    <div class="col-md-12 col-sm-12 col-xs-12 {%=(o.sql_date == todayDate) ? 'end-day-data' : 'start-day-data'%} t-a-center">
+    <div id="day{%=o.sql_date%}" class="col-md-12 col-sm-12 col-xs-12 day-data {%=(o.sql_date == todayDate) ? 'red-day' : ''%} t-a-center">
         <div class="day-calendar">
             <div class="data">{%=js_date.getDate()%}</div>
             <div class="day">{%=aDays[js_date.getDay()]%}</div>
             <div class="month">{%=aMonths[js_date.getMonth()]%}</div>
         </div>
-    </div>
-    <div id="time-list{%=o.sql_date%}" class="col-md-12 col-sm-12 col-xs-12 time-line-list">
-{% 
-	// console.log('begin date');
-	// console.log({startHour: 23, endHour: parseInt(firstHour), sql_date: o.sql_date});
-	include('empty-events', {startHour: 23, endHour: parseInt(firstHour), sql_date: o.sql_date});
-	for(var hour in o.data) {
-		// console.log({hour: hour, sql_date: o.sql_date});
-		include('time-line-cell', {globalData: o.globalData, hour: hour, sql_date: o.sql_date, data: o.data[hour]});
-	}
-	// console.log({startHour: parseInt(hour), endHour: 0, sql_date: o.sql_date});
-	include('empty-events', {startHour: parseInt(hour), endHour: 0, sql_date: o.sql_date});
-	// console.log('end date');
-%}
     </div>
 {%
 	}
@@ -116,32 +128,15 @@ $(document).ready(function(){
 </div>
 </script>
 
-<script type="text/x-tmpl" id="empty-events">
-{%
-	if (o.startHour > (o.endHour + 2)) {
-%}
-	<div class="toggle-dotted-cont">
-{% 
-		for(var hour = o.startHour; hour > o.endHour; hour--) {
-			include('time-line-cell', {sql_date: o.sql_date, hour: hour, data: []});
-		}
-%}
-	</div>
-	<div class="time-line-cell clearfix toggle-dotted-btn">
-	    <div class="col-md-12 col-sm-12 col-xs-12 t-a-center time"><span id="dotted{%=o.sql_date%}" class="toggle-dotted-line">...</span></div>
-	</div>
-{%
-	} else {
-		for(var hour = o.startHour; hour > o.endHour; hour--) {
-			include('time-line-cell', {sql_date: o.sql_date, hour: hour, data: []});
-		}
-	}
-%}
+<script type="text/x-tmpl" id="toggle-dotted-btn">
+<div class="time-line-cell clearfix toggle-dotted-btn">
+    <div class="col-md-12 col-sm-12 col-xs-12 t-a-center time"><span class="toggle-dotted-line">...</span></div>
+</div>
 </script>
 
 <script type="text/x-tmpl" id="time-line-cell">
 {%
-	var js_date = Date.sqlDate(o.sql_date);
+	var js_date = Date.fromSqlDate(o.sql_date);
 	js_date.setHours(o.hour);
 	js_date.setMinutes(0);
 	var id = 'timeline' + o.sql_date + '_' + zeroFormat(js_date.getHours()) + zeroFormat(js_date.getMinutes());
@@ -154,26 +149,6 @@ $(document).ready(function(){
 	}
 %}
 <div id="{%=id%}" class="time-line-cell clearfix">
-    <div class="col-md-12 col-sm-12 col-xs-12 t-a-center {%=(event && event.SelfRegistration) ? 'time-get-start' : 'time'%}" onclick="Timeline.showEventPopup(this, '{%=o.sql_date%}', '{%=Date.HoursMinutes(js_date)%}')">
-{%
-	
-	if (event && event.SelfRegistration) {
-%}
-		<span class="title-registration"> {%=Date.HoursMinutes(Date.sqlDate(event.SelfRegistration.created))%}
-			<div class="title-time"><?=__('I registered on this site')?></div>
-		</span>
-{%
-	} else {
-		console.log([js_date, o.hour]);
-%}
-        <span>{%=Date.HoursMinutes(js_date)%}
-            <span class="add-event-time"><i class="glyphicon glyphicons circle_plus"></i></span>
-        </span>
-
-{%
-	}
-%}
-    </div>
     <div class="col-md-5 col-sm-5 col-xs-12 t-a-right event-box">
 {%
 	for(var i = 0; i < o.data.length; i++) {
@@ -202,12 +177,31 @@ $(document).ready(function(){
 	}
 %}
     </div>
+    <div class="col-md-12 col-sm-12 col-xs-12 t-a-center {%=(event && event.SelfRegistration) ? 'time-get-start' : 'time'%}">
+{%
+	
+	if (event && event.SelfRegistration) {
+%}
+		<span class="title-registration"> {%=Date.HoursMinutes(Date.fromSqlDate(event.SelfRegistration.created))%}
+			<div class="title-time"><?=__('I registered on this site')?></div>
+		</span>
+{%
+	} else if (js_date.getHours() > 0) {
+%}
+        <span onclick="Timeline.showEventPopup(this, '{%=o.sql_date%}', '{%=zeroFormat(js_date.getHours()) + ':' + zeroFormat(js_date.getMinutes())%}')">{%=Date.HoursMinutes(js_date)%}
+            <span class="add-event-time"><i class="glyphicon glyphicons circle_plus"></i></span>
+        </span>
+
+{%
+	}
+%}
+    </div>
 </div>
 </script>
 
 <script type="text/x-tmpl" id="user-event">
 {%
-	var js_date = Date.sqlDate(o.event.event_time);
+	var js_date = Date.fromSqlDate(o.event.event_time);
 %}
 <div class="event-box-cell clearfix">
     <div class="time-event col-md-1 col-sm-1 col-xs-12">{%=Date.HoursMinutes(js_date)%}</div>
@@ -220,7 +214,7 @@ $(document).ready(function(){
 
 <script type="text/x-tmpl" id="chat-event-msg">
 {%
-	var js_date = Date.sqlDate(o.event.created);
+	var js_date = Date.fromSqlDate(o.event.created);
 	var user = o.globalData.users[o.event.initiator_id];
 	var url = '<?=$this->Html->url(array('controller' => 'Chat', 'action' => 'index', '~user_id'))?>';
 %}
@@ -244,7 +238,7 @@ $(document).ready(function(){
 
 <script type="text/x-tmpl" id="chat-event-file">
 {%
-	var js_date = Date.sqlDate(o.event.created);
+	var js_date = Date.fromSqlDate(o.event.created);
 	var file = o.globalData.files[o.event.file_id];
 %}
 <div class="event-box-cell clearfix">
@@ -291,21 +285,24 @@ $(document).ready(function(){
 
 <script type="text/x-tmpl" id="konstructor-creation">
 {%
-	var js_date = Date.sqlDate(o.event.created);
+	var js_date = Date.fromSqlDate(o.event.created);
 %}
 <div class="col-md-12 col-sm-12 col-xs-12 start-day-data t-a-center">
     <div class="day-calendar konstructor">
-        <div class="konstructor-logo"><img alt="This site was created during long sleepless nights!" src="img/user-profile/t_logo2.png"></div>
+    	<div class="data">{%=js_date.getDate()%}</div>
         <div class="day">{%=aDays[js_date.getDay()]%}</div>
-        <div class="month">{%=Date.fullDate(js_date)%}</div>
-        <div class="start-project"><?=__('Launching Kostruktor')?></div>
+        <div class="month">{%=aMonths[js_date.getMonth()]%} {%=js_date.getFullYear()%}</div>
+        <div class="start-project">
+        	<img src="/img/user-profile/t_logo2.png" alt="This site was created during long sleepless nights..." />
+        	<?=__('Updated site began to work')?>
+        </div>
     </div>
 </div>
 </script>
 
 <script type="text/x-tmpl" id="self-registered">
 {%
-	var js_date = Date.sqlDate(o.event.created);
+	var js_date = Date.fromSqlDate(o.event.created);
 %}
 <div class="event-box-cell clearfix">
     <div class="event-text">

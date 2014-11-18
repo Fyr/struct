@@ -11,6 +11,14 @@ class TimelineController extends SiteController {
 	public $helpers = array('Media');
 	
 	public function index() {
-		$this->set('aTimeline', $this->Profile->getTimeLine($this->currUserID));
+		$topDay = Configure::read('timeline.initialPeriod.1');
+		$bottomDay = Configure::read('timeline.initialPeriod.0');
+		$this->set('topDay', $topDay);
+		$this->set('bottomDay', $bottomDay);
+		
+		$today = time();
+		$date = $today + DAY * $bottomDay;
+		$date2 = $today + DAY * $topDay;
+		$this->set('aTimeline', $this->Profile->getTimeLine($this->currUserID, date('Y-m-d', $date), date('Y-m-d', $date2)));
 	}
 }

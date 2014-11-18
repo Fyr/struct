@@ -154,11 +154,11 @@ class ChatUser extends AppModel {
 		return $aUsers;
 	}
 	
-	public function dashboardEvents($currUserID, $date) {
+	public function timelineEvents($currUserID, $date, $date2) {
 		$fields = array('ChatUser.created', 'ChatUser.id');
-		// $conditions = $this->dateRange('ChatUser.create_time', $date);
+		// $conditions = $this->dateRange('ChatUser.created', $date, $date2);
 		$order = 'ChatUser.created DESC';
-		$limit = 3;
+		$limit = 5;
 		$recursive = -1;
 		return $this->find('all', compact('fields', 'conditions', 'order', 'limit', 'recursive'));
 	}

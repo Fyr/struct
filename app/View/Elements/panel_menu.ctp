@@ -6,7 +6,7 @@
     <div class="main-panel-block">
         <div class="main-panel-wrapper">
             <div class="user-image">
-                <a id="user<?=$currUser['ChatUser']['id']?>" href="#"><img src="<?=$currUser['Avatar']['url']?>" alt="<?=$currUser['ChatUser']['name']?>" style="width: 90px;"/></a>
+                <a id="user<?=$currUser['ChatUser']['id']?>" href="<?=$this->Html->url(array('controller' => 'Timeline', 'action' => 'index'))?>" onclick="return false;"><img src="<?=$currUser['Avatar']['url']?>" alt="<?=$currUser['ChatUser']['name']?>" style="width: 90px;"/></a>
             </div>
             <?=$this->element('panel_icons')?>
         </div>

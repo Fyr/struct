@@ -150,12 +150,14 @@ class ChatEvent extends AppModel {
 		return $this->find('all', compact('fields', 'conditions', 'joins', 'order', 'group'));
 	}
 	
-	public function dashboardEvents($currUserID, $date) {
-		$conditions = array(
-			// $this->dateRange('ChatEvent.created', $date),
-			'ChatEvent.event_type' => array(self::INCOMING_MSG, self::FILE_DOWNLOAD_AVAIL),
-			'ChatEvent.user_id' => $currUserID,
-			'ChatEvent.active' => 1
+	public function timelineEvents($currUserID, $date, $date2) {
+		$conditions = array_merge(
+			$this->dateRange('ChatEvent.created', $date, $date2),
+			array(
+				'ChatEvent.event_type' => array(self::INCOMING_MSG, self::FILE_DOWNLOAD_AVAIL),
+				'ChatEvent.user_id' => $currUserID,
+				'ChatEvent.active' => 1
+			)
 		);
 		$order = 'ChatEvent.created DESC';
 		$limit = 5;

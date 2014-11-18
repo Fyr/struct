@@ -24,16 +24,10 @@ class ProfileAjaxController extends PAjaxController {
 		}
 	}
 	
-	public function dashboardEvents() {
+	public function timelineEvents() {
 		$this->loadModel('Profile');
 		try {
-			$date = $this->request->data('date');
-			if (!$date) {
-				$date = date('Y-m-d');
-			}
-			
-			$data = $this->Profile->getTimeline($this->currUserID, $date);
-			fdebug($data);
+			$data = $this->Profile->getTimeline($this->currUserID, $this->request->data('date'), $this->request->data('date2'));
 			return $this->setResponse($data);
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
@@ -47,7 +41,7 @@ class ProfileAjaxController extends PAjaxController {
 			$this->request->data('UserEvent.user_id', $this->currUserID);
 			$this->request->data('UserEvent.event_time', $this->request->data('UserEvent.date_event').' '.$this->request->data('UserEvent.time_event'));
 			$this->UserEvent->save($this->request->data);
-			$this->dashboardEvents();
+			$this->timelineEvents();
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
 		}
