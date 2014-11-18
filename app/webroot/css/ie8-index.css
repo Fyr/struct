@@ -1,0 +1,27 @@
+            .index-wrapper{
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+            .index-wrapper .col-md-4 {
+                width: 33.3333%;
+                float: left;
+            }
+            .index-wrapper .col-md-6 {
+                width: 50%;
+                float: right;
+            }
+            .index-wrapper .col-md-7 {
+                width: 58.3333%;
+                float: right;
+            }
+            .index-wrapper .footer{
+                width: 100%;
+            }
+            .index-wrapper .footer .container{
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+            .index-wrapper .footer .container .col-md-6 {
+                width: 50%;
+                float: left;
+            }

@@ -40,6 +40,11 @@ var Timeline = {
 		return html;
 	},
 	
+	renderCurrentTime: function() {
+		var id = 'timeline' + now.toSqlDate() + zeroFormat(now.getHours()) + '00';
+		// $('#' + id).before();
+	},
+	
 	render: function(data, lPrepend) {
 		var html = Timeline.renderEvents(data);
 		if (lPrepend) {
@@ -55,7 +60,8 @@ var Timeline = {
 		var lGroup = false, groupID = 0, html = '';
 		$('.row-day-events .time-line-list').each(function(){
 			lGroup = false;
-			$('.time-line-cell', this).each(function(){
+			var id = $(this).prop('id');
+			$('#' + id + ' > .time-line-cell').each(function(){
 				var leftBox = $('.t-a-right.event-box', this).length && $('.t-a-right.event-box', this).html().replace(/\s*/, '');
 				var rightBox = $('.t-a-left.event-box', this).length && $('.t-a-left.event-box', this).html().replace(/\s*/, '');
 				var html = '';
@@ -74,14 +80,15 @@ var Timeline = {
 		});
 		for(var i = 1; i <= groupID; i++) {
 			html = '';
-			$('.empty-cell.cellGroup-' + i).each(function(){
+			$('.time-line-list > .empty-cell.cellGroup-' + i).each(function(){
 				html+= Format.tag('div', {id: $(this).prop('id'), class: 'time-line-cell clearfix'}, $(this).html());
 			});
-			$('.cellGroup-' + i).wrapAll('<div class="toggle-dotted"><div class="toggle-dotted-cells" /></div>');
-			$('.cellGroup-' + i).removeClass('cellGroup-' + i);
+			$('.time-line-list > .cellGroup-' + i).wrapAll('<div class="toggle-dotted inactive"><div class="toggle-dotted-cells" /></div>');
+			$('.time-line-list > .cellGroup-' + i).removeClass('cellGroup-' + i);
 		}
-		$('.toggle-dotted').append(tmpl('toggle-dotted-btn'));
+		$('.toggle-dotted.inactive').append(tmpl('toggle-dotted-btn')).removeClass('inactive');;
 		$('.toggle-dotted-cells').hide();
+		$('.toggle-dotted-btn').show();
 	},
 	
 	initHandlers: function() {

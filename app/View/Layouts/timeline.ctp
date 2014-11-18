@@ -78,12 +78,12 @@ $(function() {
 		fileBrowse: '<?=__('Upload image')?>'
 	});
 	$('input.clock-mask').setMask('time');
-	/*
+	
 	Search.initPanel($('.dropdown-searchPanel .dropdown-panel-wrapper').get(0));
 	Chat.initPanel($('.dropdown-chatPanel .dropdown-panel-wrapper').get(0));
 	Struct.initPanel($('.dropdown-ipadPanel .dropdown-panel-wrapper').get(0));
 	Group.initPanel($('.dropdown-groupPanel .dropdown-panel-wrapper').get(0));
-	*/
+	
 });
 </script>
 </head>
@@ -101,8 +101,8 @@ $(function() {
                     <div class="col-md-6 col-sm-6 col-xs-6">
                         <div class="group-menu page-menu t-a-right">
                             <div class="btn-group btn-group-sm">
-                                <button id="showDay" type="button" class="btn btn-default"><?=__('Day')?></button>
-                                <button id="showWeek" type="button" class="btn"><?=__('Week')?></button>
+                                <button id="showDay" type="button" class="btn btn-default save-button"><?=__('Day')?></button>
+                                <button id="showWeek" type="button" class="btn btn-default"><?=__('Week')?></button>
                             </div>
                         </div>
                     </div>

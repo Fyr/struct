@@ -60,5 +60,9 @@ $(function() {
 
 
     window.scrollBy(0, 1);
-	
+
+//    hide menu list
+	$('.main-panel-list li:nth-child(4),.main-panel-list li:nth-child(5),' +
+    '.main-panel-list li:nth-child(6),.main-panel-list li:nth-child(7),' +
+    '.main-panel-list li:nth-child(8),.main-panel-list li:nth-child(10)').hide();
 });

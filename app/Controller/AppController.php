@@ -9,7 +9,7 @@ class AppController extends Controller {
 	public $components = array('Auth' => array(
 			'authorize'      => array('Controller'),
 			'loginAction'    => array('controller' => 'Users', 'action' => 'login'),
-			'loginRedirect'  => array('controller' => 'Profile', 'action' => 'edit'),
+			'loginRedirect'  => array('controller' => 'Profile', 'action' => 'index'),
 			'logoutRedirect' => '/',
 			'authError'      => "You cannot access that page"
 		),

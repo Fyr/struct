@@ -62,9 +62,13 @@ class Profile extends AppModel {
 		
 		// -= Special events =-
 		// Self-registration
-		$user = $this->ChatUser->findById($currUserID);
-		$created = $user['ChatUser']['created'];
-		if (strtotime($date) <= $created && $created <= strtotime($date2)) {
+		$conditions = array_merge(
+			array('id' => $currUserID),
+			$this->dateRange('ChatUser.created', $date, $date2)
+		);
+		$user = $this->ChatUser->find('first', compact('conditions'));
+		if ($user) {
+			$created = $user['ChatUser']['created'];
 			$data['events'][$created]['SelfRegistration'] = array(
 				'created' => $created,
 			);

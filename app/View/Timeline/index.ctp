@@ -8,11 +8,11 @@
 var timeline = <?=json_encode($aTimeline)?>;
 var aMonths = <?=json_encode(array(__('Jan'), __('Feb'), __('Mar'), __('Apr'), __('May'), __('Jul'), __('Jun'), __('Aug'), __('Sep'), __('Oct'), __('Nov'), __('Dec')))?>;
 var aDays = <?=json_encode(array(__('Sun'), __('Mon'), __('Tue'), __('Wen'), __('Thu'), __('Fri'), __('Sat')))?>;
-var todayDate = null;
-var startDay = <?=-ceil((time() - strtotime(Configure::read('Konstructor.created'))) / DAY)?>;
+var todayDate = null, now;
+var startDay = <?=-floor((time() - strtotime(Configure::read('Konstructor.created'))) / DAY)?>;
 $(document).ready(function(){
 	todayDate = '<?=date('Y-m-d')?>';
-	
+	now = Date.fromSqlDate('<?=date('Y-m-d H:i:s')?>');
 	Timeline.init($('.user-page-wrapp .row').get(0), <?=$topDay?>, <?=$bottomDay?>, <?=Configure::read('timeline.loadPeriod')?>);
 	Timeline.render(timeline);
 	
@@ -29,15 +29,15 @@ $(document).ready(function(){
 	
 	$('#showWeek').click(function() {
 		$('.time-line-list').hide();
-		$('#showWeek').removeClass('btn-default');
-		$('#showWeek').addClass('btn-default');
-		$('#showDay').removeClass('btn-default');
+		$('#showWeek').removeClass('save-button');
+		$('#showWeek').addClass('save-button');
+		$('#showDay').removeClass('save-button');
 	});
 	$('#showDay').click(function() {
 		$('.time-line-list').show();
-		$('#showDay').removeClass('btn-default');
-		$('#showDay').addClass('btn-default');
-		$('#showWeek').removeClass('btn-default');
+		$('#showDay').removeClass('save-button');
+		$('#showDay').addClass('save-button');
+		$('#showWeek').removeClass('save-button');
 	});
 });
 </script>
@@ -303,6 +303,15 @@ $(document).ready(function(){
 {%
 	var js_date = Date.fromSqlDate(o.event.created);
 %}
+<div class="event-box-cell clearfix">
+    <div class="event-text">
+        <div class="h2-title">{%=Date.fullDate(js_date)%} {%=Date.HoursMinutes(js_date)%}</div>
+        <p>{%=o.event.msg%}</p>
+    </div>
+</div>
+</script>
+
+<script type="text/x-tmpl" id="timer">
 <div class="event-box-cell clearfix">
     <div class="event-text">
         <div class="h2-title">{%=Date.fullDate(js_date)%} {%=Date.HoursMinutes(js_date)%}</div>

@@ -6,6 +6,7 @@
 	<![endif]-->
     <?=$this->Html->charset(); ?>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Konstruktor: <?=__('Main page')?></title>
     <meta name="description" content="">
     <meta name="author" content="">
@@ -22,35 +23,7 @@
 		document.createElement('video');
 	</script>
 
-    <style>
-        .index-wrapper{
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .col-md-4 {
-            width: 33.3333%;
-            float: left;
-        }
-        .col-md-6 {
-            width: 50%;
-            float: right;
-        }
-        .col-md-7 {
-            width: 58.3333%;
-            float: right;
-        }
-        .footer{
-            width: 100%;
-        }
-        .footer .container{
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .footer .container .col-md-6 {
-            width: 50%;
-            float: left;
-        }
-    </style>
+<?=$this->Html->css('ie8-index')?>
 	<![endif]-->
 <?
 	echo $this->Html->meta('icon');
@@ -102,7 +75,7 @@
                 <div class="col-md-6 col-sm-6">
                     <div class="copyright-wrap">
                         <div class="copyright">
-                            © KONSRTRUKTOR US lab LLC
+                            © KONSTRUKTOR US lab LLC
                             <div class="copyright-year">2002-2014</div>
                         </div>
                     </div>

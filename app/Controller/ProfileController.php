@@ -7,6 +7,11 @@ class ProfileController extends SiteController {
 	public $uses = array('Profile', 'ChatUserData');
 	public $helpers = array('Media');
 	
+	public function index() {
+		$this->autoRender = false;
+		return $this->redirect(array('controller' => 'Timeline', 'action' => 'index'));
+	}
+	
 	public function edit() {
 		if ($this->request->is('post') || $this->request->is('put')) {
 			$this->request->data('Profile.user_id', $this->currUserID);
