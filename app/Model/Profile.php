@@ -22,7 +22,7 @@ class Profile extends AppModel {
 		if (!$date2) {
 			$date2 = date('Y-m-d', strtotime($date) + DAY * Configure::read('timeline.loadPeriod'));
 		}
-		fdebug(array($date, $date2), 'tmp.log', false);
+		// fdebug(array($date, $date2), 'tmp.log', false);
 		
 		$aModels = array('ChatUser' => 'last_users', 'Group' => 'last_groups', 'ChatEvent' => 'unread_msgs', 'UserEvent' => 'user_events');
 		$data = array();
@@ -64,13 +64,18 @@ class Profile extends AppModel {
 		// Self-registration
 		$user = $this->ChatUser->findById($currUserID);
 		$created = $user['ChatUser']['created'];
-		$data['events'][$created]['SelfRegistration'] = array(
-			'created' => $created,
-		);
+		if (strtotime($date) <= $created && $created <= strtotime($date2)) {
+			$data['events'][$created]['SelfRegistration'] = array(
+				'created' => $created,
+			);
+		}
+		
 		$created = Configure::read('Konstructor.created');
-		$data['events'][$created]['KonstructorCreation'] = array(
-			'created' => $created,
-		);
+		if (strtotime($date) <= strtotime($created) && strtotime($created) <= strtotime($date2)) {
+			$data['events'][$created]['KonstructorCreation'] = array(
+				'created' => $created,
+			);
+		}
 		krsort($data['events']);
 		
 		// Group events by day
@@ -79,7 +84,7 @@ class Profile extends AppModel {
 			$_date = strtotime($datetime);
 			$data['days'][date('Y-m-d', $_date)][date('H', $_date)][] = $datetime;
 		}
-		fdebug($data, 'tmp.log');
+		// fdebug($data, 'tmp.log');
 		return $data;
 	}
 }

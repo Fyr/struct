@@ -4,7 +4,7 @@ class UserEvent extends AppModel {
 	
 	public function timelineEvents($currUserID, $date, $date2) {
 		$conditions = array_merge(
-			$this->dateRange('UserEvent.created', $date, $date2),
+			$this->dateRange('UserEvent.event_time', $date, $date2),
 			array('UserEvent.user_id' => $currUserID)
 		);
 		$order = array('UserEvent.event_time', 'created');

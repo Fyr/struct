@@ -9,7 +9,7 @@ var timeline = <?=json_encode($aTimeline)?>;
 var aMonths = <?=json_encode(array(__('Jan'), __('Feb'), __('Mar'), __('Apr'), __('May'), __('Jul'), __('Jun'), __('Aug'), __('Sep'), __('Oct'), __('Nov'), __('Dec')))?>;
 var aDays = <?=json_encode(array(__('Sun'), __('Mon'), __('Tue'), __('Wen'), __('Thu'), __('Fri'), __('Sat')))?>;
 var todayDate = null;
-var startDay = <?=-floor((time() - strtotime(Configure::read('Konstructor.created'))) / DAY)?>;
+var startDay = <?=-ceil((time() - strtotime(Configure::read('Konstructor.created'))) / DAY)?>;
 $(document).ready(function(){
 	todayDate = '<?=date('Y-m-d')?>';
 	
@@ -19,7 +19,6 @@ $(document).ready(function(){
 	// $('.add-event-block .save-button').off();
 	$('.add-event-block .save-button').click(function(){
 		if ($('#UserEventTitle').val() && $('#UserEventTimeEvent').val && $('#UserEventDateEvent').val()) {
-			$('.add-event-block').removeClass('open');
 			Timeline.addEvent();
 		}
 	});
@@ -84,10 +83,10 @@ $(document).ready(function(){
 </div>
 
 <script type="text/x-tmpl" id="row-day-event">
-<div class="row-day-events">
 {%
 	var js_date = Date.fromSqlDate(o.sql_date);
 %}
+<div id="row-day_{%=o.sql_date%}" class="row-day-events">
     <div id="time-list{%=o.sql_date%}" class="col-md-12 col-sm-12 col-xs-12 time-line-list">
 {% 
 	for(hour = 23; hour >= 0; hour--) {
@@ -287,7 +286,7 @@ $(document).ready(function(){
 {%
 	var js_date = Date.fromSqlDate(o.event.created);
 %}
-<div class="col-md-12 col-sm-12 col-xs-12 start-day-data t-a-center">
+<div class="col-md-12 col-sm-12 col-xs-12 day-data t-a-center">
     <div class="day-calendar konstructor">
     	<div class="data">{%=js_date.getDate()%}</div>
         <div class="day">{%=aDays[js_date.getDay()]%}</div>

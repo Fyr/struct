@@ -168,7 +168,7 @@
                     </label>
                 </div-->
                 <div class="page-menu clearfix">
-                    <input type="submit" class="btn btn-default" value="<?=__('Save')?>" />
+                    <input type="submit" class="btn btn-default save-button" value="<?=__('Save')?>" />
 <?
 	if ($id) {
 ?>

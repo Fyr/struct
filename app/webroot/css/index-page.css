@@ -141,6 +141,8 @@
     position: absolute;
     top: 1px;
     left: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=00)";
+    filter: alpha(opacity=0);
     opacity: 0; }
   .terms-of-use .glyphicons {
     display: inline-block;

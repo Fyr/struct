@@ -27,28 +27,25 @@ var Timeline = {
 		});
 	},
 	
+	renderEvents: function(data) {
+		var jsDate = Date.fromSqlDate(todayDate), html = '';
+		for(var time = Timeline.topDate.getTime(); time >= Timeline.bottomDate.getTime(); time-= Date.timeDays(1)) {
+			jsDate.setTime(time);
+			html+= tmpl('row-day-event', {
+				globalData: data, 
+				sql_date: jsDate.toSqlDate(), 
+				data: (data.days && data.days[jsDate.toSqlDate()]) ? data.days[jsDate.toSqlDate()] : {}
+			});
+		}
+		return html;
+	},
+	
 	render: function(data, lPrepend) {
-		var jsDate = Date.fromSqlDate(todayDate), html;
+		var html = Timeline.renderEvents(data);
 		if (lPrepend) {
-			for(var time = Timeline.bottomDate.getTime(); time <= Timeline.topDate.getTime(); time+= Date.timeDays(1)) {
-				jsDate.setTime(time);
-				var html = tmpl('row-day-event', {
-					globalData: data, 
-					sql_date: jsDate.toSqlDate(), 
-					data: (data.days && data.days[jsDate.toSqlDate()]) ? data.days[jsDate.toSqlDate()] : {}
-				});
-				$(Timeline.canvas).prepend(html);
-			}
+			$(Timeline.canvas).prepend(html);
 		} else {
-			for(var time = Timeline.topDate.getTime(); time >= Timeline.bottomDate.getTime(); time-= Date.timeDays(1)) {
-				jsDate.setTime(time);
-				html = tmpl('row-day-event', {
-					globalData: data, 
-					sql_date: jsDate.toSqlDate(), 
-					data: (data.days && data.days[jsDate.toSqlDate()]) ? data.days[jsDate.toSqlDate()] : {}
-				});
-				$(Timeline.canvas).append(html);
-			}
+			$(Timeline.canvas).append(html);
 		}
 		Timeline.collapseEmptyCells();
 		Timeline.initHandlers();
@@ -59,8 +56,8 @@ var Timeline = {
 		$('.row-day-events .time-line-list').each(function(){
 			lGroup = false;
 			$('.time-line-cell', this).each(function(){
-				var leftBox = $('.t-a-right.event-box', this).html().replace(/\s*/, '');
-				var rightBox = $('.t-a-right.event-box', this).html().replace(/\s*/, '');
+				var leftBox = $('.t-a-right.event-box', this).length && $('.t-a-right.event-box', this).html().replace(/\s*/, '');
+				var rightBox = $('.t-a-left.event-box', this).length && $('.t-a-left.event-box', this).html().replace(/\s*/, '');
 				var html = '';
 				if (!leftBox && !rightBox) {
 					$(this).addClass('empty-cell');
@@ -127,11 +124,18 @@ var Timeline = {
 	},
 	
 	addEvent: function() {
-		console.log('addEvent');
+		Timeline.lEnableUpdate = false;
 		$.post(profileURL.addEvent, $('.add-event-block form').serialize(), function(response){
 			if (checkJson(response)) {
-				Timeline.render(response.data);
+				var sql_date = $('#UserEventDateEvent').val();
+				Timeline.topDate = Date.fromSqlDate(sql_date);
+				Timeline.bottomDate = Date.fromSqlDate(sql_date);
+				var html = Timeline.renderEvents(response.data);
+				$('#row-day_' + sql_date).replaceWith(html);
+				Timeline.collapseEmptyCells();
+				Timeline.initHandlers();
 			}
+			Timeline.closeEventPopup();
 		});
 	},
 	

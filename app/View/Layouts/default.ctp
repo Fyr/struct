@@ -1,16 +1,16 @@
 <!doctype html>
 <html lang="ru">
 <head>
+	<!--[if lt IE 8]>
+		<meta http-equiv="Refresh" content="0; URL=/html/include/ie.html" />
+	<![endif]-->
 	<?=$this->Html->charset(); ?>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Konstruktor: <?=__('Messanger')?></title>
 	
-	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
-	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<?=$this->Html->script('vendor/html5shiv.min')?>
+<?=$this->Html->script('vendor/respond.min')?>
 	<script>
 		document.createElement('video');
 	</script>

@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<!--[if lt IE 8]>
+		<meta http-equiv="Refresh" content="0; URL=/html/include/ie.html" />
+	<![endif]-->
     <?=$this->Html->charset(); ?>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Konstruktor: <?=__('Main page')?></title>
     <meta name="description" content="">
     <meta name="author" content="">
@@ -13,15 +15,43 @@
     <link href="img/favicon/apple-touch-icon-72x72-precomposed.png" rel="apple-touch-icon-precomposed" sizes="72x72" />
     <link href="img/favicon/apple-touch-icon-57x57-precomposed.png" rel="apple-touch-icon-precomposed" />
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <script>
-        document.createElement('video');
-    </script>
-    <![endif]-->
+	<!--[if lt IE 9]>
+<?=$this->Html->script('vendor/html5shiv.min')?>
+<?=$this->Html->script('vendor/respond.min')?>
+	<script>
+		document.createElement('video');
+	</script>
+
+    <style>
+        .index-wrapper{
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .col-md-4 {
+            width: 33.3333%;
+            float: left;
+        }
+        .col-md-6 {
+            width: 50%;
+            float: right;
+        }
+        .col-md-7 {
+            width: 58.3333%;
+            float: right;
+        }
+        .footer{
+            width: 100%;
+        }
+        .footer .container{
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .footer .container .col-md-6 {
+            width: 50%;
+            float: left;
+        }
+    </style>
+	<![endif]-->
 <?
 	echo $this->Html->meta('icon');
 	

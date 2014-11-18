@@ -724,4 +724,12 @@
       font-size: 16px;
       color: #313131; }
 
+@media (max-width: 950px) {
+  .konstructor .start-project {
+    left: 125px;
+    top: 50px;
+    font-size: 12px; }
+    .konstructor .start-project img {
+      max-width: 30px; } }
+
 /*# sourceMappingURL=user-profile.css.map */

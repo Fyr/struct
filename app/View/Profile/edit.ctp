@@ -150,7 +150,7 @@
         </div-->
         <div class="settings-input-row nbb clearfix mb100">
             <div class="col-md-2 col-sm-2 npl">
-                <input type="submit" class="btn btn-default" value="<?=__('Save')?>" />
+                <input type="submit" class="btn btn-default save-button" value="<?=__('Save')?>" />
             </div>
             <div class="col-md-10 col-sm-10 taright">
                 <a class="my-page-view-user" href="<?=$this->Html->url(array('controller' => 'Profile', 'action' => 'view'))?>"><?=__('How other people see this page')?></a>

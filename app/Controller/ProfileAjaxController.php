@@ -28,7 +28,7 @@ class ProfileAjaxController extends PAjaxController {
 		$this->loadModel('Profile');
 		try {
 			$data = $this->Profile->getTimeline($this->currUserID, $this->request->data('date'), $this->request->data('date2'));
-			return $this->setResponse($data);
+			$this->setResponse($data);
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
 		}
@@ -37,11 +37,13 @@ class ProfileAjaxController extends PAjaxController {
 	public function addEvent() {
 		$this->loadModel('UserEvent');
 		try {
-			
 			$this->request->data('UserEvent.user_id', $this->currUserID);
-			$this->request->data('UserEvent.event_time', $this->request->data('UserEvent.date_event').' '.$this->request->data('UserEvent.time_event'));
+			$event_time = $this->request->data('UserEvent.date_event').' '.$this->request->data('UserEvent.time_event');
+			$this->request->data('UserEvent.event_time', $event_time);
 			$this->UserEvent->save($this->request->data);
-			$this->timelineEvents();
+			
+			$data = $this->Profile->getTimeline($this->currUserID, $event_time, $event_time);
+			$this->setResponse($data);
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
 		}
