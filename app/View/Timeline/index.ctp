@@ -18,10 +18,11 @@ $(document).ready(function(){
 	// Timeline.insertCurrentTime();
 	
 	// $('.add-event-block .save-button').off();
-	$('.add-event-block .save-button').click(function(){
-		if ($('#UserEventTitle').val() && $('#UserEventTimeEvent').val && $('#UserEventDateEvent').val()) {
-			Timeline.addEvent();
-		}
+	$('.add-event-block .fieldset-block .save-button').click(function(){
+		Timeline.updateEvent();
+	});
+	$('.add-event-block .fieldset-block .delete-button').click(function(){
+		Timeline.deleteEvent();
 	});
 	
 	$('.add-event-block .close-block').on('touchstart click', function(){
@@ -78,9 +79,14 @@ $(document).ready(function(){
 	));
 ?>
         </div>
-        <div class="fieldset-block">
-            <a class="btn btn-default save-button" href="javascript:void(0)"><?=__('Save')?></a>
+        <div class="fieldset-block create-event">
+            <a class="btn btn-default save-button" href="javascript:void(0)"><?=__('Create')?></a>
         </div>
+        <div class="fieldset-block edit-event" style="display: none">
+            <a class="btn btn-default save-button" href="javascript:void(0)"><?=__('Save')?></a>
+            <a class="btn btn-default delete-button" href="javascript:void(0)"><?=__('Delete')?></a>
+        </div>
+        <?=$this->Form->hidden('id');?>
     <?=$this->Form->end()?>
 </div>
 
@@ -115,8 +121,9 @@ $(document).ready(function(){
 	if (event) {
 		include('konstructor-creation', {event: event});
 	} else {
+		var red_day = (js_date.getDay() == 0 || js_date.getDay() == 6) ? 'red-day' : '';
 %}
-    <div id="day{%=o.sql_date%}" class="col-md-12 col-sm-12 col-xs-12 day-data {%=(o.sql_date == todayDate) ? 'red-day' : ''%} t-a-center">
+    <div id="day{%=o.sql_date%}" class="col-md-12 col-sm-12 col-xs-12 day-data {%=red_day%} t-a-center">
         <div class="day-calendar">
             <div class="data">{%=js_date.getDate()%}</div>
             <div class="day">{%=aDays[js_date.getDay()]%}</div>
@@ -198,7 +205,7 @@ $(document).ready(function(){
 {%
 	} else if (js_date.getHours() > 0) {
 %}
-        <span onclick="Timeline.showEventPopup(this, '{%=o.sql_date%}', '{%=zeroFormat(js_date.getHours()) + ':' + zeroFormat(js_date.getMinutes())%}')">{%=Date.HoursMinutes(js_date)%}
+        <span onclick="Timeline.addEventPopup('{%=o.sql_date%}', '{%=zeroFormat(js_date.getHours())%}')">{%=Date.HoursMinutes(js_date)%}
             <span class="add-event-time"><i class="glyphicon glyphicons circle_plus"></i></span>
         </span>
 
@@ -212,12 +219,14 @@ $(document).ready(function(){
 <script type="text/x-tmpl" id="user-event">
 {%
 	var js_date = Date.fromSqlDate(o.event.event_time);
+	var time = zeroFormat(js_date.getHours()) + ':' + zeroFormat(js_date.getMinutes());
 %}
-<div class="event-box-cell clearfix">
+<div id="user-event_{%=o.event.id%}" class="event-box-cell clearfix" onclick="Timeline.editEventPopup('{%=js_date.toSqlDate()%}', '{%=time%}', {%=o.event.id%})" style="cursor: pointer">
     <div class="time-event col-md-1 col-sm-1 col-xs-12">{%=Date.HoursMinutes(js_date)%}</div>
     <div class="user-page-event meeting col-md-11 col-sm-11 col-xs-12">
         <div class="icon glyphicons calendar"></div>
-        {%=o.event.title%}
+        <span class="user-event-title">{%=o.event.title%}</span>
+        <span class="user-event-descr hide">{%=o.event.descr%}</span>
     </div>
 </div>
 </script>
@@ -227,18 +236,19 @@ $(document).ready(function(){
 	var js_date = Date.fromSqlDate(o.event.created);
 	var user = o.globalData.users[o.event.initiator_id];
 	var url = '<?=$this->Html->url(array('controller' => 'Chat', 'action' => 'index', '~user_id'))?>';
+	url = url.replace(/~user_id/, o.event.initiator_id);
 %}
 <div class="event-box-cell clearfix">
     <div class="time-event col-md-1 col-sm-1 col-xs-12">{%=(Date.HoursMinutes(js_date))%}</div>
     <div class="user-page-event col-md-11 col-sm-11 col-xs-12">
         <div class="massage-post clearfix">
             <figure>
-            	<a href="{%=url.replace(/~user_id/, o.event.user_id)%}">
+            	<a href="{%=url%}">
             		<img alt="{%=user.ChatUser.name%}" src="{%=user.Avatar.url%}" style="width: 50px">
             	</a>
             </figure>
             		
-            <div class="massage-chat">
+            <div class="massage-chat" onclick="window.location.href='{%=url%}'" style="cursor: pointer;">
                 <p>{%=o.globalData.messages[o.event.msg_id].message%}</p>
             </div>
         </div>

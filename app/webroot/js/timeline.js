@@ -145,35 +145,82 @@ var Timeline = {
 		});
 	},
 	
-	showEventPopup: function(e, sql_date, time) {
+	showEventPopup: function(sql_date, hours, event_id) {
 		Timeline.lEnableUpdate = false;
-		$('.add-event-time').removeClass('open-plus');
-		$(e).parent().find('add-event-time').addClass('open-plus');
-		$('.add-event-block').removeClass('open').css({'top':$(e).offset().top}).addClass('open');
-		
-		$('#UserEventTimeEvent').val(time);
-		$('#UserEventDateEvent').val(sql_date);
+		var id = 'timeline' + sql_date + '_' + zeroFormat(hours) + zeroFormat(0);
+		var e = $('#' + id + ' .t-a-center > span');
+		if (event_id) {
+			$('.fieldset-block.create-event').hide();
+			$('.fieldset-block.edit-event').show();
+		} else {
+			$('.fieldset-block.create-event').show();
+			$('.fieldset-block.edit-event').hide();
+		}
+		$('.add-event-block').css({'top':$(e).offset().top}).removeClass('open').addClass('open');
 	},
 	
 	closeEventPopup: function() {
-		$('.add-event-block .close-block').parent().removeClass('open');
+		$('.add-event-block').removeClass('open');
 		setTimeout(function(){ Timeline.lEnableUpdate = true; }, 50); // to prevent immidiate onScrollBottom event
 	},
 	
-	addEvent: function() {
+	addEventPopup: function(sql_date, hours)  {
+		$('.add-event-block input').val('');
+		$('#UserEventTimeEvent').val(zeroFormat(hours) + ':' + zeroFormat(0));
+		$('#UserEventDateEvent').val(sql_date);
+		Timeline.showEventPopup(sql_date, hours, 0);
+	}, 
+	
+	editEventPopup: function(sql_date, time, event_id) {
+		var aHoursMinutes = time.split(':');
+		var hours = aHoursMinutes[0];
+		var e = $('#user-event_' + event_id).get(0);
+		
+		$('#UserEventId').val(event_id);
+		$('#UserEventTimeEvent').val(time);
+		$('#UserEventDateEvent').val(sql_date);
+		$('#UserEventTitle').val($('.user-event-title', e).html());
+		$('#UserEventDescr').val($('.user-event-descr', e).html());
+		Timeline.showEventPopup(sql_date, hours, event_id);
+	},
+	
+	eventIsValid: function() {
+		return $('#UserEventTitle').val() && $('#UserEventTimeEvent').val() && $('#UserEventDateEvent').val();
+	},
+	
+	updateEvent: function() {
 		Timeline.lEnableUpdate = false;
-		$.post(profileURL.addEvent, $('.add-event-block form').serialize(), function(response){
-			if (checkJson(response)) {
-				var sql_date = $('#UserEventDateEvent').val();
-				Timeline.topDate = Date.fromSqlDate(sql_date);
-				Timeline.bottomDate = Date.fromSqlDate(sql_date);
-				var html = Timeline.renderEvents(response.data);
-				$('#row-day_' + sql_date).replaceWith(html);
-				Timeline.collapseEmptyCells();
-				Timeline.initHandlers();
-			}
-			Timeline.closeEventPopup();
-		});
+		if (Timeline.eventIsValid()) {
+			$.post(profileURL.updateEvent, $('.add-event-block form').serialize(), function(response){
+				if (checkJson(response)) {
+					Timeline.updateDay($('#UserEventDateEvent').val(), response.data);
+				}
+				Timeline.closeEventPopup();
+			});
+		}
+	},
+	
+	deleteEvent: function() {
+		Timeline.lEnableUpdate = false;
+		if (Timeline.eventIsValid()) {
+			$.post(profileURL.deleteEvent, $('.add-event-block form').serialize(), function(response){
+				if (checkJson(response)) {
+					var js_date = Date.fromSqlDate(response.data.event.UserEvent.event_time);
+					js_date.setHours(0);
+					Timeline.updateDay(js_date.toSqlDate(), response.data.timeline);
+				}
+				Timeline.closeEventPopup();
+			});
+		}
+	},
+	
+	updateDay: function(sql_date, data) {
+		Timeline.topDate = Date.fromSqlDate(sql_date);
+		Timeline.bottomDate = Date.fromSqlDate(sql_date);
+		var html = Timeline.renderEvents(data);
+		$('#row-day_' + sql_date).replaceWith(html);
+		Timeline.collapseEmptyCells();
+		Timeline.initHandlers();
 	},
 	
 	onScrollTop: function() {
@@ -216,7 +263,7 @@ Date.prototype.toSqlDate = function() {
 }
 Date.HoursMinutes = function(jsdate) {
 	var hours = jsdate.getHours();
-	return zeroFormat((hours > 12) ? hours - 12 : hours) + ':' + zeroFormat(jsdate.getMinutes()) + ((hours > 12) ? 'pm' : 'am');
+	return zeroFormat((hours > 12) ? hours - 12 : hours) + ':' + zeroFormat(jsdate.getMinutes()) + ((hours >= 12) ? 'pm' : 'am');
 }
 Date.fullDate = function(js_date) {
 	return zeroFormat(js_date.getDate()) + '.' + zeroFormat(js_date.getMonth()) + '.' + js_date.getFullYear();
