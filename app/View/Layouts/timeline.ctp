@@ -9,14 +9,6 @@
     <meta name = "format-detection" content = "telephone=no">
 	<title>Konstruktor: <?=__('Timeline')?></title>
 	
-	<!--[if lt IE 9]>
-<?=$this->Html->script('vendor/html5shiv.min')?>
-<?=$this->Html->script('vendor/respond.min')?>
-	<script>
-		document.createElement('video');
-	</script>
-	<![endif]-->
-	
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 
 <?php
@@ -36,7 +28,7 @@
 	
 	$aScripts = array(
 		'vendor/jquery/jquery-1.10.2.min',
-		'vendor/jquery/jquery-1.10.2.min',
+		'vendor/jquery.backgroundSize',
 		'vendor/jquery/jquery-ui.min',
 		'vendor/easing.1.3',
 		'vendor/formstyler',
@@ -65,6 +57,16 @@
 	echo $this->fetch('css');
 	echo $this->fetch('script');
 ?>
+
+	<!--[if lt IE 9]>
+<?=$this->Html->css('ie8')?>
+<?=$this->Html->script('vendor/html5shiv.min')?>
+<?=$this->Html->script('vendor/respond.min')?>
+	<script>
+		document.createElement('video');
+	</script>
+	<![endif]-->
+	
 	<script src="<?=$this->Html->url(array('controller' => 'ChatAjax', 'action' => 'jsSettings'))?>"></script>
 	<script src="<?=$this->Html->url(array('controller' => 'DeviceAjax', 'action' => 'jsSettings'))?>"></script>
 	<script src="<?=$this->Html->url(array('controller' => 'ProfileAjax', 'action' => 'jsSettings'))?>"></script>

@@ -8,14 +8,6 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<title>Konstruktor: <?=__('Messanger')?></title>
 	
-	<!--[if lt IE 9]>
-<?=$this->Html->script('vendor/html5shiv.min')?>
-<?=$this->Html->script('vendor/respond.min')?>
-	<script>
-		document.createElement('video');
-	</script>
-	<![endif]-->
-	
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 
 <?php
@@ -37,6 +29,7 @@
 	$aScripts = array(
 		'vendor/jquery/jquery-1.10.2.min',
 		'vendor/jquery/jquery.easing.1.3',
+		'vendor/jquery.backgroundSize',
 		'vendor/formstyler',
 		'vendor/tmpl.min',
 		'/core/js/json_handler',
@@ -60,6 +53,16 @@
 	echo $this->fetch('css');
 	echo $this->fetch('script');
 ?>
+
+	<!--[if lt IE 9]>
+<?=$this->Html->css('ie8')?>
+<?=$this->Html->script('vendor/html5shiv.min')?>
+<?=$this->Html->script('vendor/respond.min')?>
+	<script>
+		document.createElement('video');
+	</script>
+	<![endif]-->
+	
 	<script type="text/javascript" src="<?=$this->Html->url(array('controller' => 'ChatAjax', 'action' => 'jsSettings'))?>"></script>
 	<script type="text/javascript" src="<?=$this->Html->url(array('controller' => 'DeviceAjax', 'action' => 'jsSettings'))?>"></script>
 	<script type="text/javascript" src="<?=$this->Html->url(array('controller' => 'ProfileAjax', 'action' => 'jsSettings'))?>"></script>

@@ -1,33 +1,25 @@
-.index-block {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  width: auto;
-  height: auto;
-  min-width: 100%;
-  min-height: 100%; }
-  .index-block .index-block-bg {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: url(../img/vidbg.jpg) no-repeat 50% 50%;
-    background-size: cover;
-    z-index: -1; }
-
 .index-wrapper {
+  width: 100%;
+  min-height: 100%;
+  height: auto !important;
+  background: url(../img/vidbg.jpg) no-repeat 50% 50%;
+  background-size: cover;
   font-size: 15px;
-  margin-bottom: 30%; }
+  height: 100%; }
+  .index-wrapper .iw-content {
+    padding-bottom: 100px; }
   .index-wrapper .container {
     padding-top: 20px; }
 
-.logo-company .logo-image {
-  width: 220px; }
-.logo-company .logo-text {
-  color: #fff;
+.logo-company {
   display: inline-block;
-  padding: 0 0 0 46px; }
+  padding-bottom: 15px; }
+  .logo-company .logo-image {
+    width: 220px; }
+  .logo-company .logo-text {
+    color: #fff;
+    display: inline-block;
+    padding: 0 0 0 46px; }
 
 .func-link-box .func-link {
   color: #fff;
@@ -100,16 +92,12 @@
 .login-box .fright {
   float: right; }
 
-.footer,
-.footer_placeholder {
-  height: 60px; }
-
 .footer {
-  position: absolute;
-  cursor: default;
-  left: 0;
-  bottom: 0;
-  right: 0; }
+  position: relative;
+  margin: -100px auto 0;
+  padding-top: 50px;
+  height: 100px;
+  cursor: default; }
   .footer .copyright-wrap {
     position: relative; }
     .footer .copyright-wrap .copyright {
@@ -120,15 +108,21 @@
       text-align: right;
       font-size: 11px;
       opacity: 0.6; }
-  .footer .footer-menu li {
-    list-style: none;
-    display: inline-block;
-    margin: 0 0 0 10px; }
-    .footer .footer-menu li a {
-      color: #fff;
-      display: block;
-      text-decoration: none;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.3); }
+  .footer .footer-menu-block {
+    padding: 0 5px 0 0; }
+  .footer .footer-menu {
+    text-align: right; }
+    .footer .footer-menu li {
+      list-style: none;
+      display: inline-block;
+      margin: 0 0 0 10px; }
+      .footer .footer-menu li a {
+        color: #fff;
+        display: block;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3); }
+        .footer .footer-menu li a:hover {
+          border-bottom-color: transparent; }
 
 .terms-of-use {
   position: relative;

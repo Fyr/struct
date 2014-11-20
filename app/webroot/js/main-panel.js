@@ -1,5 +1,7 @@
 $(function() {
 
+    $('.logo-icon').css({backgroundSize: "cover"});
+
     // click panel icon jobs
     $('.main-panel-list a').on('click', function(){
         var panel_list = $('.main-panel-dropdown .dropdown-panel'),
@@ -24,7 +26,7 @@ $(function() {
                 panel_list.eq($(this).parent().index()).addClass('dropdown-open');
             }
         }
-        $(window).on('touchstart click', function(event){
+        $(document).on('touchstart click', function(event){
             if ($(event.target).closest($('.main-panel')).length) return true;
                 main_panel_li.removeClass('open');
                 panel_list.removeClass('dropdown-open');

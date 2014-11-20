@@ -493,3 +493,5 @@ msgstr "English"
 msgid "Russian"
 msgstr "Русский"
 
+msgid "University"
+msgstr "Университет"

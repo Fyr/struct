@@ -16,15 +16,6 @@
     <link href="img/favicon/apple-touch-icon-72x72-precomposed.png" rel="apple-touch-icon-precomposed" sizes="72x72" />
     <link href="img/favicon/apple-touch-icon-57x57-precomposed.png" rel="apple-touch-icon-precomposed" />
 
-	<!--[if lt IE 9]>
-<?=$this->Html->script('vendor/html5shiv.min')?>
-<?=$this->Html->script('vendor/respond.min')?>
-	<script>
-		document.createElement('video');
-	</script>
-
-<?=$this->Html->css('ie8-index')?>
-	<![endif]-->
 <?
 	echo $this->Html->meta('icon');
 	
@@ -50,6 +41,17 @@
 	echo $this->fetch('css');
 	echo $this->fetch('script');
 ?>
+
+	<!--[if lt IE 9]>
+<?=$this->Html->script('vendor/html5shiv.min')?>
+<?=$this->Html->script('vendor/respond.min')?>
+	<script>
+		document.createElement('video');
+	</script>
+
+<?//$this->Html->css('ie8-index')?>
+	<![endif]-->
+	
 </head>
 <body>
 <script type="text/javascript">
@@ -61,32 +63,33 @@
     /*]]>*/
 </script>
 
-<div class="index-block">
-    <div class="index-block-bg"></div>
-</div>
 <div class="index-wrapper">
     <div class="container">
 		<?=$this->fetch('content')?>
     </div>
-    <div class="footer_placeholder"></div>
-    <div class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-sm-6">
-                    <div class="copyright-wrap">
-                        <div class="copyright">
-                            © KONSTRUKTOR US lab LLC
-                            <div class="copyright-year">2002-2014</div>
-                        </div>
+</div>
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-sm-8 col-xs-8">
+                <div class="copyright-wrap">
+                    <div class="copyright">
+                        © KONSRTRUKTOR US lab LLC
+                        <div class="copyright-year">2002-2014</div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-4 col-md-offset-2 col-sm-offset-2 taright">
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-4 taright footer-menu-block">
+                <div class="footer-menu">
+                    <ul>
+                        <!--<li><a href="#">О проекте</a></li>-->
+                        <li><a href="/policy.pdf" target="_blank">Privacy Policy</a></li>
+                        <!--<li><a href="#">Помощь</a></li>-->
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
-
-
 </div>
 </body>
 </html>

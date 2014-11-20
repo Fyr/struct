@@ -193,6 +193,23 @@
       margin: 0; }
     .main-panel .service-menu li {
       position: relative; }
+      .main-panel .service-menu li.active a {
+        color: #fff; }
+      .main-panel .service-menu li.active.logo-li:after {
+        top: 23px; }
+      .main-panel .service-menu li.active:after {
+        border-bottom: 6px solid transparent;
+        border-right: 10px solid #fff;
+        border-top: 6px solid transparent;
+        content: "";
+        height: 0;
+        margin-top: -5px;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        width: 0; }
+      .main-panel .service-menu li.active .logo-icon {
+        background-position: 0 100%; }
       .main-panel .service-menu li.logo-li {
         margin-top: 28px; }
       .main-panel .service-menu li a {
