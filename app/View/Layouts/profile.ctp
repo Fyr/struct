@@ -29,7 +29,7 @@
 	
 	$aScripts = array(
 		'vendor/jquery/jquery-1.10.2.min',
-		'vendor/jquery.backgroundSize',
+		'vendor/jquery/jquery.backgroundSize',
 		'vendor/jquery/jquery-ui.min',
 		'vendor/easing.1.3',
 		'vendor/formstyler',
@@ -102,6 +102,20 @@ $(function() {
         <div class="container-fluid">
             <?=$this->fetch('content')?>
         </div>
+        <!--div class="fixed-message">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-11 col-sm-10 col-xs-8">
+                        <div class="col-md-4 col-md-offset-8">
+                            <div class="user-added">
+                                <img src="img/temp/smallava1.jpg" alt="" />
+                                Варфаламей Константинопольский добавлен в ваши друзья.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div-->
     </div>
 </div>
 <?=$this->element('js_templates')?>

@@ -109,6 +109,14 @@
         </div>
         <div class="settings-input-row">
             <div class="comments-box-send-info">
+                <?=__('Speciality')?>
+            </div>
+            <div class="input-group settings-input col-md-12 col-sm-12">
+            	<?=$this->Form->input('Profile.speciality', array('type' => 'text', 'label' => false, 'class' => 'form-control col-md-12 col-sm-12', 'id' => 'tokenfield'))?>
+            </div>
+        </div>
+        <div class="settings-input-row">
+            <div class="comments-box-send-info">
                 <?=__('Birthday')?>
             </div>
             <div id="datetimepicker1" class="input-group date settings-input col-md-12 col-sm-12">

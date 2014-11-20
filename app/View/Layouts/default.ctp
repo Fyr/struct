@@ -29,7 +29,7 @@
 	$aScripts = array(
 		'vendor/jquery/jquery-1.10.2.min',
 		'vendor/jquery/jquery.easing.1.3',
-		'vendor/jquery.backgroundSize',
+		'vendor/jquery/jquery.backgroundSize',
 		'vendor/formstyler',
 		'vendor/tmpl.min',
 		'/core/js/json_handler',

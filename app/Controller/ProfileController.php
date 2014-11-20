@@ -27,10 +27,12 @@ class ProfileController extends SiteController {
 	}
 
 	public function view($id = 0) {
+		$this->loadModel('Group');
 		if (!$id) {
 			$id = $this->currUserID;
 		}
 		$this->set('user', $this->ChatUser->getUser($id));
+		$this->set('aGroups', $this->Group->findAllByOwnerId($id));
 	}
 	
 	/*

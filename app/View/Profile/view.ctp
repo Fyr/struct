@@ -3,7 +3,7 @@
         <div class="col-md-9 col-sm-9">
             <div class="page-title"><?=Hash::get($user, 'ChatUser.name')?></div>
             <div class="user-spec"><?=Hash::get($user, 'Profile.skills')?></div>
-            <div class="user-menu page-menu">
+            <!--div class="user-menu page-menu">
                 <div class="btn-group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                         В избранное <span class="halflings chevron-down"></span>
@@ -57,7 +57,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div-->
         </div>
         <div class="col-md-3 col-sm-3">
             <div class="user-avatar taright">
@@ -80,7 +80,7 @@
         </div>
         <div class="col-md-4">
             <div class="user-education">
-                <img src="/img/temp/t_logo.png" alt="" />
+                <!--img src="/img/temp/t_logo.png" alt="" /-->
                 <div class="fs15"><?=Hash::get($user, 'Profile.university')?></div>
                 <div class="fs13"><?=Hash::get($user, 'Profile.speciality')?></div>
             </div>
@@ -95,7 +95,7 @@
         </div>
     </div>
 </div>
-<div class="row">
+<!--div class="row">
     <div class="col-md-11 col-sm-10 col-xs-8">
         <div class="col-md-12">
             <div class="subheading">Достижения</div>
@@ -132,7 +132,11 @@
             </div>
         </div>
     </div>
-</div>
+</div-->
+
+<?
+	if ($aGroups) {
+?>
 <div class="row">
     <div class="col-md-11 col-sm-10 col-xs-8">
         <div class="col-md-12">
@@ -142,206 +146,44 @@
 </div>
 <div class="row">
     <div class="col-md-11 col-sm-10 col-xs-8">
+<?
+		foreach($aGroups as $i => $group) {
+			$title = Hash::get($group, 'Group.title');
+			$src = $this->Media->imageUrl($group, 'thumb50x50');
+			$src = ($src) ? $src : '/img/group-create-pl-image.jpg';
+?>
         <div class="col-md-4">
             <div class="news-article group-type">
-                <a href="#">
+                <a href="<?=$this->Html->url(array('controller' => 'Group', 'action' => 'view', Hash::get($group, 'Group.id')))?>">
                     <div class="news-article-title">
-                        Администратор
+                        Администратор <?=$i % 3?> <?=($i > 0 && !($i % 3))?>
                     </div>
                     <div class="news-article-title subtitle clearfix">
                         <div class="subtitle-image">
-                            <img src="/img/temp/t_logo1.png" alt="" />
+                            <img src="<?=$src?>" alt="<?=$title?>" style="width: 50px"/>
                         </div>
                         <div class="subtitle-body">
-                            uWebDesign
+                            <?=$title?>
                             <div class="subtitle-body-info ">
-                                13 909 участников
+                                1 <?=__('Members')?>
                             </div>
                         </div>
                     </div>
                 </a>
                 <div class="news-article-pubdate">
-                    Практические советы начинающим программистам (Ruby, JSP, C++).
-                </div>
-            </div>
-            <div class="news-article group-type">
-                <a href="#">
-                    <div class="news-article-title">
-                        Администратор
-                    </div>
-                    <div class="news-article-title subtitle clearfix">
-                        <div class="subtitle-image">
-                            <img src="/img/temp/t_logo1.png" alt="" />
-                        </div>
-                        <div class="subtitle-body">
-                            uWebDesign
-                            <div class="subtitle-body-info ">
-                                13 909 участников
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <div class="news-article-pubdate">
-                    Практические советы начинающим программистам (Ruby, JSP, C++).
-                </div>
-            </div>
-            <div class="news-article group-type">
-                <a href="#">
-                    <div class="news-article-title">
-                        Администратор
-                    </div>
-                    <div class="news-article-title subtitle clearfix">
-                        <div class="subtitle-image">
-                            <img src="/img/temp/t_logo1.png" alt="" />
-                        </div>
-                        <div class="subtitle-body">
-                            uWebDesign
-                            <div class="subtitle-body-info ">
-                                13 909 участников
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <div class="news-article-pubdate">
-                    Практические советы начинающим программистам (Ruby, JSP, C++).
+                    <?=Hash::get($group, 'Group.descr')?>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="news-article group-type">
-                <a href="#">
-                    <div class="news-article-title">
-                        Администратор
-                    </div>
-                    <div class="news-article-title subtitle clearfix">
-                        <div class="subtitle-image">
-                            <img src="/img/temp/t_logo1.png" alt="" />
-                        </div>
-                        <div class="subtitle-body">
-                            uWebDesign
-                            <div class="subtitle-body-info ">
-                                13 909 участников
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <div class="news-article-pubdate">
-                    Практические советы начинающим программистам (Ruby, JSP, C++).
-                </div>
-            </div>
-            <div class="news-article group-type">
-                <a href="#">
-                    <div class="news-article-title">
-                        Администратор
-                    </div>
-                    <div class="news-article-title subtitle clearfix">
-                        <div class="subtitle-image">
-                            <img src="/img/temp/t_logo1.png" alt="" />
-                        </div>
-                        <div class="subtitle-body">
-                            uWebDesign
-                            <div class="subtitle-body-info ">
-                                13 909 участников
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <div class="news-article-pubdate">
-                    Практические советы начинающим программистам (Ruby, JSP, C++).
-                </div>
-            </div>
-            <div class="news-article group-type">
-                <a href="#">
-                    <div class="news-article-title">
-                        Администратор
-                    </div>
-                    <div class="news-article-title subtitle clearfix">
-                        <div class="subtitle-image">
-                            <img src="/img/temp/t_logo1.png" alt="" />
-                        </div>
-                        <div class="subtitle-body">
-                            uWebDesign
-                            <div class="subtitle-body-info ">
-                                13 909 участников
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <div class="news-article-pubdate">
-                    Практические советы начинающим программистам (Ruby, JSP, C++).
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="news-article group-type">
-                <a href="#">
-                    <div class="news-article-title">
-                        Администратор
-                    </div>
-                    <div class="news-article-title subtitle clearfix">
-                        <div class="subtitle-image">
-                            <img src="/img/temp/t_logo1.png" alt="" />
-                        </div>
-                        <div class="subtitle-body">
-                            uWebDesign
-                            <div class="subtitle-body-info ">
-                                13 909 участников
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <div class="news-article-pubdate">
-                    Практические советы начинающим программистам (Ruby, JSP, C++).
-                </div>
-            </div>
-            <div class="news-article group-type bb-pink">
-                <a href="#">
-                    <div class="news-article-title">
-                        Администратор
-                    </div>
-                    <div class="news-article-title subtitle clearfix">
-                        <div class="subtitle-image">
-                            <img src="/img/temp/t_logo1.png" alt="" />
-                        </div>
-                        <div class="subtitle-body">
-                            uWebDesign
-                            <div class="subtitle-body-info ">
-                                13 909 участников
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <div class="news-article-pubdate">
-                    Креативная среда
-                </div>
-            </div>
-            <div class="news-article group-type bb-aqua">
-                <span class="glyphicon glyphicon-user glyphicons user"></span>
-                <span class="glyphicon-extended glyphicon-coins glyphicons coins"></span>
-                <a href="#">
-                    <div class="news-article-title">
-                        Администратор
-                    </div>
-                    <div class="news-article-title subtitle clearfix">
-                        <div class="subtitle-image">
-                            <img src="/img/temp/t_logo1.png" alt="" />
-                        </div>
-                        <div class="subtitle-body">
-                            uWebDesign
-                            <div class="subtitle-body-info ">
-                                13 909 участников
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <div class="news-article-pubdate">
-                    Практические советы начинающим программистам (Ruby, JSP, C++).
-                </div>
-            </div>
-        </div>
+<?
+		}
+?>
     </div>
 </div>
-<div class="row mb40">
+<?
+	}
+?>
+<!--div class="row mb40">
     <div class="col-md-11 col-sm-10 col-xs-8">
         <div class="col-md-12">
             <div class="morelink">
@@ -352,8 +194,8 @@
             </div>
         </div>
     </div>
-</div>
-<div class="row">
+</div-->
+<!--div class="row">
     <div class="col-md-11 col-sm-10 col-xs-8">
         <div class="col-md-12">
             <div class="subheading page-menu">
@@ -485,4 +327,4 @@
             </div>
         </div>
     </div>
-</div>
+</div-->
