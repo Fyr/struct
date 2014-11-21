@@ -5,15 +5,23 @@
 </style>
 <div class="row"></div>
 <script type="text/javascript">
-var timeline = <?=json_encode($aTimeline)?>;
 var aMonths = <?=json_encode(array(__('Jan'), __('Feb'), __('Mar'), __('Apr'), __('May'), __('Jul'), __('Jun'), __('Aug'), __('Sep'), __('Oct'), __('Nov'), __('Dec')))?>;
 var aDays = <?=json_encode(array(__('Sun'), __('Mon'), __('Tue'), __('Wen'), __('Thu'), __('Fri'), __('Sat')))?>;
-var todayDate = null, now;
-var startDay = <?=-floor((time() - strtotime(Configure::read('Konstructor.created'))) / DAY)?>;
+var todayDate, now;
+var startDay;
 $(document).ready(function(){
 	todayDate = '<?=date('Y-m-d')?>';
 	now = Date.fromSqlDate('<?=date('Y-m-d H:i:s')?>');
-	Timeline.init($('.user-page-wrapp .row').get(0), <?=$topDay?>, <?=$bottomDay?>, <?=Configure::read('timeline.loadPeriod')?>, timeline);
+	startDay = <?=-floor((time() - strtotime(Configure::read('Konstructor.created'))) / DAY)?>;
+	
+	var timelineData = <?=json_encode($aTimeline)?>;
+	Timeline.init({
+		canvas: $('.user-page-wrapp .row').get(0), 
+		topDay: <?=$topDay?>, 
+		bottomDay: <?=$bottomDay?>, 
+		loadPeriod: <?=Configure::read('timeline.loadPeriod')?>,
+		updateTime: <?=Configure::read('timeline.updateTime')?>,
+	}, timelineData);
 	// Timeline.render(timeline);
 	// Timeline.insertCurrentTime();
 	
@@ -95,7 +103,7 @@ $(document).ready(function(){
 	var js_date = Date.fromSqlDate(o.sql_date);
 %}
 <div id="row-day_{%=o.sql_date%}" class="row-day-events">
-    <div id="time-list{%=o.sql_date%}" class="col-md-12 col-sm-12 col-xs-12 time-line-list">
+    <div id="time-list{%=o.sql_date%}" class="col-md-12 col-sm-12 col-xs-12 time-line-list events-expanded">
 {% 
 	for(hour = 23; hour >= 0; hour--) {
 		include('time-line-cell', {
@@ -146,7 +154,7 @@ $(document).ready(function(){
 <div class="time-line-cell clearfix curr-time-cell">
 	<div class="col-md-5 col-sm-5 col-xs-12 t-a-right event-box">&nbsp;</div>
     <div class="col-md-12 col-sm-12 col-xs-12 t-a-center time-get-start">
-        <span class="title-registration curr-time-value"></span>
+        <span class="title-registration curr-time-value">{%=o.time%}</span>
     </div>
 </div>
 </script>
@@ -332,14 +340,14 @@ $(document).ready(function(){
 </div>
 </script>
 
-<script type="text/x-tmpl" id="timer">
+<!--script type="text/x-tmpl" id="timer">
 <div class="event-box-cell clearfix">
     <div class="event-text">
         <div class="h2-title">{%=Date.fullDate(js_date)%} {%=Date.HoursMinutes(js_date)%}</div>
         <p>{%=o.event.msg%}</p>
     </div>
 </div>
-</script>
+</script-->
 
 <script type="text/x-tmpl" id="last-registered">
 <div class="event-box-cell clearfix">

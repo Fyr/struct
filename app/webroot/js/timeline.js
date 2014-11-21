@@ -7,22 +7,28 @@ var Timeline = {
 	topDate: null,
 	bottomDate: null,
 	lEnableUpdate: true,
-	timer: null,
+	clockTimer: null,
+	updateTimer: null,
+	updateTime: null,
 	
-	init: function(container, topDay, bottomDay, loadPeriod, data) {
-		Timeline.canvas = container;
-		Timeline.topDay = topDay;
-		Timeline.bottomDay = bottomDay;
-		Timeline.loadPeriod = loadPeriod;
+	init: function(options, data) {
+		Timeline = $.extend(Timeline, options);
+		
 		Timeline.topDate = Date.fromSqlDate(todayDate).addDays(Timeline.topDay);
 		Timeline.bottomDate = Date.fromSqlDate(todayDate).addDays(Timeline.bottomDay);
-		// Timeline.render(data);
 		var html = Timeline.renderEvents(data);
 		$(Timeline.canvas).append(html);
 		Timeline.insertCurrentTime();
 		Timeline.collapseEmptyCells();
 		Timeline.scrollCurrentTime();
 		Timeline.initHandlers();
+		
+		if (Timeline.updateTime) {
+			Timeline.updateTimer = setInterval(function(){
+				Timeline.updateState();
+				//clearInterval(Timeline.updateTimer);
+			}, Timeline.updateTime);
+		}
 	},
 	
 	update: function(lPrepend) {
@@ -39,9 +45,9 @@ var Timeline = {
 		if (!$('.curr-time-cell').length) {
 			var _now = new Date();
 			var id = 'timeline' + _now.toSqlDate() + '_' + zeroFormat(_now.getHours()) + '00';
-			$('#' + id).before(tmpl('curr-time'));
-			clearInterval(Timeline.timer);
-			Timeline.timer = setInterval(function(){
+			$('#' + id).before(tmpl('curr-time', {time: Date.HoursMinutes(_now)}));
+			clearInterval(Timeline.clockTimer);
+			Timeline.clockTimer = setInterval(function(){
 				var _now = new Date();
 				var time = Date.HoursMinutes(_now);
 				if ($('.curr-time-value').html().indexOf(':') > -1) {
@@ -109,7 +115,7 @@ var Timeline = {
 		for(var i = 1; i <= groupID; i++) {
 			html = '';
 			$('.time-line-list > .empty-cell.cellGroup-' + i).each(function(){
-				html+= Format.tag('div', {id: $(this).prop('id'), class: 'time-line-cell clearfix'}, $(this).html());
+				html+= Format.tag('div', {'id': $(this).prop('id'), 'class': 'time-line-cell clearfix'}, $(this).html());
 			});
 			$('.time-line-list > .cellGroup-' + i).wrapAll('<div class="toggle-dotted inactive"><div class="toggle-dotted-cells" /></div>');
 			$('.time-line-list > .cellGroup-' + i).removeClass('cellGroup-' + i);
@@ -117,6 +123,7 @@ var Timeline = {
 		$('.toggle-dotted.inactive').append(tmpl('toggle-dotted-btn')).removeClass('inactive');;
 		$('.toggle-dotted-cells').hide();
 		$('.toggle-dotted-btn').show();
+		// $('.row-day-events .time-line-list.events-expanded').removeClass('events-expanded').addClass('events-collapsed');
 	},
 	
 	initHandlers: function() {
@@ -124,6 +131,13 @@ var Timeline = {
 			$(this).fadeOut('fast');
 			$(this).parent().find('.toggle-dotted-cells').stop(true, false).slideDown();
 			// $(this).parent().find('.toggle-dotted-cells').show();
+			if (Timeline.updateTime) {
+				clearInterval(Timeline.updateTimer);
+				Timeline.updateTimer = setInterval(function(){
+					Timeline.updateState();
+					//clearInterval(Timeline.updateTimer);
+				}, Timeline.updateTime);
+			}
 		});
 		
 		$('.day-calendar').click(function(){
@@ -189,8 +203,8 @@ var Timeline = {
 	},
 	
 	updateEvent: function() {
-		Timeline.lEnableUpdate = false;
 		if (Timeline.eventIsValid()) {
+			Timeline.lEnableUpdate = false;
 			$.post(profileURL.updateEvent, $('.add-event-block form').serialize(), function(response){
 				if (checkJson(response)) {
 					Timeline.updateDay($('#UserEventDateEvent').val(), response.data);
@@ -214,11 +228,24 @@ var Timeline = {
 		}
 	},
 	
+	updateState: function() {
+		Timeline.lEnableUpdate = false;
+		$.post(profileURL.timelineEvents, {data: {date: todayDate, date2: todayDate}}, function(response){
+			if (checkJson(response)) {
+				Timeline.updateDay(todayDate, response.data);
+			}
+			Timeline.lEnableUpdate = true;
+		});
+	},
+	
 	updateDay: function(sql_date, data) {
 		Timeline.topDate = Date.fromSqlDate(sql_date);
 		Timeline.bottomDate = Date.fromSqlDate(sql_date);
 		var html = Timeline.renderEvents(data);
 		$('#row-day_' + sql_date).replaceWith(html);
+		if (sql_date == todayDate) {
+			Timeline.insertCurrentTime();
+		}
 		Timeline.collapseEmptyCells();
 		Timeline.initHandlers();
 	},
@@ -229,6 +256,7 @@ var Timeline = {
 		Timeline.topDate = Date.fromSqlDate(todayDate).addDays(Timeline.topDay);
 		Timeline.bottomDate = Date.fromSqlDate(todayDate).addDays(Timeline.topDay - Timeline.loadPeriod);
 		Timeline.update(true);
+		window.scrollBy(0, 10);
 	},
 	
 	onScrollBottom: function() {
@@ -243,6 +271,7 @@ var Timeline = {
 		
 		if (Timeline.topDate.getTime() >= Timeline.bottomDate.getTime()) {
 			Timeline.update();
+			window.scrollBy(0, -10);
 		}
 	}
 }

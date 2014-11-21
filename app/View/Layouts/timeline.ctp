@@ -28,7 +28,7 @@
 	
 	$aScripts = array(
 		'vendor/jquery/jquery-1.10.2.min',
-		'vendor/jquery.backgroundSize',
+		'vendor/jquery/jquery.backgroundSize',
 		'vendor/jquery/jquery-ui.min',
 		'vendor/easing.1.3',
 		'vendor/formstyler',
