@@ -1,6 +1,7 @@
 <?
 App::uses('AppModel', 'Model');
 App::uses('Media', 'Media.Model');
+App::uses('ProfileAchievement', 'Model');
 class Profile extends AppModel {
 	
 	public $hasOne = array(
@@ -8,6 +9,19 @@ class Profile extends AppModel {
 			'className' => 'Media.Media',
 			'foreignKey' => 'object_id',
 			'conditions' => array('Media.object_type' => 'Profile'),
+			'dependent' => true
+		),
+		'MediaUniversity' => array(
+			'className' => 'Media.Media',
+			'foreignKey' => 'object_id',
+			'conditions' => array('MediaUniversity.object_type' => 'ProfileUniversity'),
+			'dependent' => true
+		)
+	);
+	
+	public $hasMany = array(
+		'ProfileAchievement' => array(
+			'order' => array('ProfileAchievement.id DESC'),
 			'dependent' => true
 		)
 	);

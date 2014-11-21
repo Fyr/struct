@@ -8,5 +8,13 @@
     display: block;
     margin-left: auto;
     margin-right: auto; }
+  .search-page .add-to-favorites .jq-selectbox {
+    width: 155px !important; }
+  .search-page .user-avatar img {
+    max-width: 165px;
+    width: 100%; }
+  .search-page .achivement-block {
+    display: inline-block;
+    margin-bottom: 25px; }
 
 /*# sourceMappingURL=search-page.css.map */

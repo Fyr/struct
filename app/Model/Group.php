@@ -17,9 +17,11 @@ class Group extends AppModel {
 	
 	public $hasMany = array(
 		'GroupAddress' => array(
+			'order' => array('GroupAddress.id DESC'),
 			'dependent' => true
 		),
 		'GroupAchievement' => array(
+			'order' => array('GroupAchievement.id DESC'),
 			'dependent' => true
 		),
 		'GroupGallery' => array(

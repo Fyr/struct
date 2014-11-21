@@ -419,7 +419,7 @@ msgid "Create group"
 msgstr "Создать группу"
 
 msgid "Group has been successfully saved"
-msgstr "Группа была успешно удалена"
+msgstr "Группа была успешно сохранена"
 
 msgid "Group video"
 msgstr "Видео группы"

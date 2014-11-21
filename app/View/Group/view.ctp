@@ -134,6 +134,9 @@
 </div>
 
 <div class="row mb40 achieve-list">
+<?
+	if (count($aGroupAchievement) > 3) {
+?>
 	<div class="col-md-12 col-sm-12 col-xs-12">
 		<div class="col-md-12">
 			<div class="morelink">
@@ -145,6 +148,9 @@
 			</div>
         </div>
 	</div>
+<?
+	}
+?>
 </div>
 <?
 	}

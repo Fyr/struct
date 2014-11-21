@@ -26,15 +26,17 @@ $(function () {
 	                	var fileData = response.data[0].Media;
 	                	Chat.sendFile(fileData);
                 	} else if (file.object_type == 'GroupGallery') {
-                		Group.showGalleryAdmin(response.data);
-                	} else {
-                		var mediaID = $('.settings-avatar img').prop('id');
+                		Group.updateGalleryAdmin($(data.fileInput).data('object_id'));
+                	} else { // Profile Avatar, Profile University, Group Avatar
+                		var imgID = $(data.fileInput).data('object_type') + $(data.fileInput).data('object_id');
+                		var mediaID = $('#' + imgID).data('media_id');
                 		if (mediaID) {
-                			$.get(profileURL.removeAvatar + '/' + file.object_type + '/' + file.object_id + '/' + $('.settings-avatar img').prop('id') + '.json');
+                			$(data.fileInput).data('id', mediaID);
+                			$.post(mediaURL.delete, {data: $(data.fileInput).data()}, null, 'json');
                 		}
-                		$('.settings-avatar img').prop('src', response.data[0].Media.image.replace(/100x80/, '200x'));
-                		$('.settings-avatar img').prop('id', response.data[0].Media.id);
                 		
+                		$('#' + imgID).prop('src', response.data[0].Media.image.replace(/100x80/, $('#' + imgID).data('resize')));
+                		$('#' + imgID).data('media_id', response.data[0].Media.id);
                 	}
                 }
             }, 'json');

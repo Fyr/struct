@@ -70,10 +70,8 @@ var Group = {
 	},
 	
 	delGalleryImage: function(group_id, id) {
-		$.get(groupURL.delGalleryImage + '/' + group_id + '/'  + id + '.json', null, function(response){
-			if (checkJson(response)) {
-				Group.showGalleryAdmin(response.data);
-			}
+		$.post(mediaURL.delete, {data: {object_type: 'GroupGallery', object_id: group_id, id: id}}, function(response){
+			Group.updateGalleryAdmin(group_id);
 		});
 	},
 	

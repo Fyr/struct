@@ -66,6 +66,9 @@
   margin-left: auto;
   margin-right: auto;
   background: #fff; }
+  .user-page-header .user-page-header-inner .group-menu a {
+    display: inline-block;
+    margin-right: 10px; }
 
 .user-page-header .user-page-header-inner:before {
   content: '';
@@ -637,7 +640,7 @@
   background: #fff;
   left: 50%;
   top: 0;
-  margin-left: -190px;
+  margin-left: -145px;
   padding: 19px 20px;
   z-index: 50; }
   .add-event-block.open {

@@ -35,7 +35,16 @@ class AjaxController extends PAjaxController {
 	    $this->setResponse($this->Media->getList(compact('object_type', 'object_id'), array('Media.id' => 'DESC')));
 	}
 	
-	public function delete($object_type, $object_id, $id) {
+	public function delete($object_type = '', $object_id = '', $id = '') {
+		if (!$object_type) {
+			$object_type = $this->request->data('object_type');
+		}
+		if (!$object_id) {
+			$object_id = $this->request->data('object_id');
+		}
+		if (!$id) {
+			$id = $this->request->data('id');
+		}
 		$this->Media->delete($id);
 		$this->Media->initMain($object_type, $object_id);
 		$this->setResponse($this->Media->getList(compact('object_type', 'object_id')));

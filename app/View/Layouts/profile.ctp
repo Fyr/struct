@@ -119,5 +119,6 @@ $(function() {
     </div>
 </div>
 <?=$this->element('js_templates')?>
+<?//$this->element('sql_dump')?>
 </body>
 </html>

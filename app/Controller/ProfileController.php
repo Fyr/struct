@@ -15,7 +15,14 @@ class ProfileController extends SiteController {
 	public function edit() {
 		if ($this->request->is('post') || $this->request->is('put')) {
 			$this->request->data('Profile.user_id', $this->currUserID);
-			$this->Profile->save($this->request->data);
+			if ($this->request->data('ProfileAchievement')) {
+				foreach($this->request->data('ProfileAchievement') as $i => $data) {
+					$this->request->data('ProfileAchievement.'.$i.'.url', 
+						(strpos($data['url'], 'http://') === false) ? 'http://'.$data['url'] : $data['url']
+					);
+				}
+			}
+			$this->Profile->saveAll($this->request->data);
 			
 			$this->request->data('ChatUserData.user_id', $this->currUserID);
 			$this->request->data('ChatUserData.full_name', $this->request->data('Profile.full_name'));

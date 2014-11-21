@@ -15,10 +15,12 @@ class GroupController extends SiteController {
 		if ($this->request->is('post') || $this->request->is('put')) {
 			$this->request->data('Group.owner_id', $this->currUserID);
 			$this->request->data('Group.hidden', $this->request->data('Group.hidden') && true);
-			foreach($this->request->data('GroupAchievement') as $i => $data) {
-				$this->request->data('GroupAchievement.'.$i.'.url', 
-					(strpos($data['url'], 'http://') === false) ? 'http://'.$data['url'] : $data['url']
-				);
+			if ($this->request->data('GroupAchievement')) {
+				foreach($this->request->data('GroupAchievement') as $i => $data) {
+					$this->request->data('GroupAchievement.'.$i.'.url', 
+						(strpos($data['url'], 'http://') === false) ? 'http://'.$data['url'] : $data['url']
+					);
+				}
 			}
 			$this->Group->saveAll($this->request->data);
 			return $this->redirect(array('controller' => $this->name, 'action' => 'edit', $this->Group->id, '?' => array('success' => '1')));
