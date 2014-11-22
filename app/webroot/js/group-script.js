@@ -28,7 +28,7 @@ $(function () {
             $('.panel-users-block').removeClass('remove-open');
             $(this).parent().parent().addClass('remove-open');
         }
-        $('.remove-button a').on('click', function(){
+        $('.remove-button a.not_removed').on('click', function(){
             $('.panel-users-block').removeClass('remove-open');
         });
         $(document).click( function(event){

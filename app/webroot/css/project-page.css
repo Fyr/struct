@@ -51,6 +51,13 @@
         display: inline-block;
         font-size: 15px;
         top: -10px; }
+        .project-page .description-project-page .deadline-date .date .input-calendar {
+          display: inline-block; }
+          .project-page .description-project-page .deadline-date .date .input-calendar input {
+            border: none;
+            font-size: 15px;
+            cursor: pointer;
+            width: 110px; }
       .project-page .description-project-page .deadline-date .glyphicons {
         margin-top: -5px;
         font-size: 16px; }
@@ -359,5 +366,121 @@
             font-weight: 400;
             padding: 4px 0 16px;
             border-bottom: 1px solid #eeeeee; }
+
+.drop-add-sub-project {
+  display: none;
+  position: absolute;
+  height: 170px;
+  width: 370px;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  box-shadow: 0 3px 13px rgba(0, 0, 0, 0.41);
+  border: 1px solid #cccccc;
+  background: #fff;
+  top: 50%;
+  left: 50%;
+  text-align: left;
+  padding: 16px 25px;
+  margin: -85px 0 0 -185px;
+  z-index: 500; }
+  .drop-add-sub-project .close-block {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: #C5C5C5;
+    font-size: 15px;
+    cursor: pointer; }
+  .drop-add-sub-project label {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    font-size: 11px;
+    color: #818181; }
+  .drop-add-sub-project input {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #eeeeee;
+    margin-bottom: 25px;
+    padding: 11px 0 12px;
+    color: #313131;
+    font-family: "Roboto";
+    font-size: 17px; }
+
+.drop-add-sub-project-user {
+  display: none;
+  position: absolute;
+  height: 360px;
+  width: 370px;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  box-shadow: 0 3px 13px rgba(0, 0, 0, 0.41);
+  border: 1px solid #cccccc;
+  background: #fff;
+  top: 50%;
+  left: 50%;
+  text-align: left;
+  padding: 16px 25px;
+  margin: -180px 0 0 -185px;
+  z-index: 500; }
+  .drop-add-sub-project-user .close-block {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: #C5C5C5;
+    font-size: 15px;
+    cursor: pointer; }
+  .drop-add-sub-project-user label {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    font-size: 11px;
+    color: #818181; }
+  .drop-add-sub-project-user input {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #eeeeee;
+    margin-bottom: 25px;
+    padding: 11px 0 12px;
+    color: #313131;
+    font-family: "Roboto";
+    font-size: 17px; }
+  .drop-add-sub-project-user .user-box-list .user-add-cell {
+    margin-bottom: 20px; }
+    .drop-add-sub-project-user .user-box-list .user-add-cell:after {
+      content: "";
+      display: table;
+      clear: both; }
+  .drop-add-sub-project-user .user-box-list figure {
+    position: relative;
+    border-bottom: 3px solid transparent;
+    overflow: hidden;
+    margin: 0 16px 6px 0;
+    float: left; }
+    .drop-add-sub-project-user .user-box-list figure.rate-10 {
+      border-color: #23b5ae; }
+    .drop-add-sub-project-user .user-box-list figure.rate-0 {
+      border-color: #ff6363; }
+    .drop-add-sub-project-user .user-box-list figure img {
+      display: block;
+      min-height: 50px;
+      min-width: 50px; }
+  .drop-add-sub-project-user .user-box-list .name {
+    width: 250px;
+    float: left; }
+    .drop-add-sub-project-user .user-box-list .name .name-link {
+      display: inline-block;
+      margin-bottom: 5px;
+      color: #313131;
+      font-size: 15px; }
+      .drop-add-sub-project-user .user-box-list .name .name-link:hover {
+        text-decoration: none; }
+    .drop-add-sub-project-user .user-box-list .name .profession {
+      color: #616161;
+      font-size: 13px;
+      cursor: default; }
 
 /*# sourceMappingURL=project-page.css.map */

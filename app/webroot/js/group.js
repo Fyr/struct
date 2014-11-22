@@ -94,5 +94,14 @@ var Group = {
 				Group.showGalleryAdmin(response.data);
 			}
 		});
+	},
+	
+	join: function(group_id, user_id) {
+		$.post(groupURL.join, {data: {group_id: group_id, user_id: user_id}}, function(response){
+			if (checkJson(response)) {
+				alert($('.joined').html());
+				$('#joinGroup').hide();
+			}
+		});
 	}
 }

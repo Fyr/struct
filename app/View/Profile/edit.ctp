@@ -153,7 +153,9 @@
 	            	<?=$this->Form->input('Profile.university', array('type' => 'text', 'label' => false, 'class' => 'form-control'))?>
 	            </div>
 	        </div>
-            
+<?
+	if ($id) {
+?>            
             <div class="group-create-cell">
                 <fieldset class="gallery-block">
                     <label>Фотографии</label>
@@ -193,7 +195,9 @@
                     </div>
                 </fieldset>
             </div>
-            
+<?
+	}
+?>            
         </div>
     </div>
 </div>
@@ -219,8 +223,8 @@
 						</fieldset>
                     </div>
 <?
-	}
-	foreach($aAchiev as $i => $row) {
+	} else {
+		foreach($aAchiev as $i => $row) {
 ?>
                 
 					<div class="group-fieldset">
@@ -240,6 +244,7 @@
                         </fieldset>
                     </div>
 <?
+		}
 	}
 ?>
                 </div>
@@ -272,9 +277,15 @@
                     <!--a href="#" class="btn btn-default save-button">Сохранить</a-->
                     <input type="submit" class="btn btn-default save-button" value="<?=__('Save')?>" />
                 </div>
+<?
+	if ($id) {
+?>
                 <div class="col-md-6 col-sm-6 col-xs-6  taright">
                     <a class="my-page-view-user" href="<?=$this->Html->url(array('controller' => 'Profile', 'action' => 'view'))?>"><?=__('How other people see this page')?></a>
                 </div>
+<?
+	}
+?>
                 <!--div class="col-md-3 col-sm-3 col-xs-3 taright">
                     <a href="#" class="btn btn-default"><?=__('Delete')?></a>
                 </div-->

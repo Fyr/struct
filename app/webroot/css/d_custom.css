@@ -946,8 +946,8 @@ a.autor-link img{
     padding: 0;
 }
 .galery-box-item{
-    float:left;
-    width:25%;
+    /*float:left;*/
+    /*width:25%;*/
 }
 .galery-box-item  button{
     width:100%;
@@ -1156,7 +1156,7 @@ a.autor-link img{
         clear: left;
     }
     .galery-box-item{
-        width: 50%;
+        /*width: 50%;*/
     }
     .main-header{
         margin-bottom: 20px;

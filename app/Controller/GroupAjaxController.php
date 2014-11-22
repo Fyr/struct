@@ -94,4 +94,13 @@ class GroupAjaxController extends PAjaxController {
 		}
 	}
 	
+	public function join() {
+		try {
+			$this->loadModel('GroupMember');
+			$this->GroupMember->save($this->request->data);
+			$this->setResponse();
+		} catch (Exception $e) {
+			$this->setError($e->getMessage());
+		}
+	}
 }
