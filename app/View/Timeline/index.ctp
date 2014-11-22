@@ -182,6 +182,8 @@ $(document).ready(function(){
 			include('user-event', {globalData: o.globalData, event: event.UserEvent});
 		} else if (event.ChatEvent && event.ChatEvent.file_id) {
 			include('chat-event-file', {globalData: o.globalData, event: event.ChatEvent});
+		} else if (event.GroupMember) {
+			include('joined-group', {globalData: o.globalData, event: event.GroupMember});
 		} else if (event.SelfRegistration) {
 			include('last_groups', {globalData: o.globalData});
 		}
@@ -309,6 +311,42 @@ $(document).ready(function(){
 {%
 	}
 %}
+</script>
+
+<script type="text/x-tmpl" id="joined-group">
+{%
+	var group = o.globalData.groups[o.event.group_id].Group;
+	var url = '<?=$this->Html->url(array('controller' =>'Group', 'action' => 'view', '~group_id'))?>';
+%}
+<?=__('You joined this group as ')?>{%=o.event.role%}
+<div class="news-article group-type progect-type">
+    <a href="{%=url.replace(/~group_id/g, group.id)%}">
+        <div class="news-article-title"></div>
+        <div class="news-article-title subtitle clearfix">
+            <div class="subtitle-image">
+                <img alt="{%=group.title%}" src="{%=group.image_url%}" style="width: 50px;">
+            </div>
+            <div class="subtitle-body">
+                {%=group.title%}
+                <div class="subtitle-body-info">
+                    <!--11 участников -->
+                </div>
+            </div>
+        </div>
+        <div class="news-article-pubdate">{%=group.descr%}</div>
+    </a>
+</div>
+</script>
+
+<script type="text/x-tmpl" id="join-group-request">
+<div class="user-page-event user-visited">
+    <?=__('You received a request to join your group')?>
+    <ul class="user-visited-list clearfix">
+        <li class="good"><a href="#"><img alt="" src="img/user-profile/massage-user-1.png"></a></li>
+        <li class="bad"><a href="#"><img alt="" src="img/user-profile/massage-user-4.png"></a></li>
+        <li class="good"><a href="#"><img alt="" src="img/user-profile/massage-user-5.png"></a></li>
+    </ul>
+</div>
 </script>
 
 <script type="text/x-tmpl" id="konstructor-creation">

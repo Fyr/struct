@@ -129,8 +129,8 @@ var Timeline = {
 	initHandlers: function() {
 		$('.toggle-dotted-btn').click(function(){
 			$(this).fadeOut('fast');
-			$(this).parent().find('.toggle-dotted-cells').stop(true, false).slideDown();
-			// $(this).parent().find('.toggle-dotted-cells').show();
+			// $(this).parent().find('.toggle-dotted-cells').stop(true, false).slideDown();
+			$(this).parent().find('.toggle-dotted-cells').show();
 			if (Timeline.updateTime) {
 				clearInterval(Timeline.updateTimer);
 				Timeline.updateTimer = setInterval(function(){
@@ -141,8 +141,8 @@ var Timeline = {
 		});
 		
 		$('.day-calendar').click(function(){
-			$(this).parent().parent().find('.time-line-list').stop(true,false).slideToggle('slow');
-			// $(this).parent().parent().find('.time-line-list').toggle();
+			// $(this).parent().parent().find('.time-line-list').stop(true,false).slideToggle('slow');
+			$(this).parent().parent().find('.time-line-list').toggle();
 		});
 		
 		$(window).off('scroll');

@@ -38,7 +38,13 @@ class Profile extends AppModel {
 		}
 		// fdebug(array($date, $date2), 'tmp.log', false);
 		
-		$aModels = array('ChatUser' => 'last_users', 'Group' => 'last_groups', 'ChatEvent' => 'unread_msgs', 'UserEvent' => 'user_events');
+		$aModels = array(
+			'ChatUser' => 'last_users', 
+			'Group' => 'last_groups', 
+			'ChatEvent' => 'unread_msgs', 
+			'UserEvent' => 'user_events',
+			'GroupMember' => 'group_member'
+		);
 		$data = array();
 		foreach($aModels as $model => $key) {
 			$this->loadModel($model);
@@ -49,7 +55,8 @@ class Profile extends AppModel {
 		// Get users data ("vocabluary" array(ID => data))
 		$aID = array_merge(
 			Hash::extract($data['last_users'], '{n}.ChatUser.id'),
-			Hash::extract($data['unread_msgs'], '{n}.ChatEvent.initiator_id')
+			Hash::extract($data['unread_msgs'], '{n}.ChatEvent.initiator_id'),
+			Hash::extract($data['group_member']['request'], '{n}.GroupMember.user_id')
 		);
 		$data['users'] = $this->ChatUser->getUsers($aID);
 		$data['users'] = Hash::combine($data['users'], '{n}.ChatUser.id', '{n}');
@@ -66,13 +73,26 @@ class Profile extends AppModel {
 		$data['files'] = $this->Media->getList(array('id' => $aID), 'Media.id');
 		$data['files'] = Hash::combine($data['files'], '{n}.Media.id', '{n}.Media');
 		
+		// Get joined groups data
+		$aID = Hash::extract($data['group_member']['joined'], '{n}.GroupMember.group_id');
+		$data['groups'] = $this->Group->findAllById($aID);
+		foreach($data['groups'] as &$group) {
+			$media = $group['Media'];
+			$group['Group']['image_url'] = $this->Media->getPHMedia()->getImageUrl($media['object_type'], $media['id'], 'thumb50x50', $media['file'].$media['ext']);
+		}
+		$data['groups'] = Hash::combine($data['groups'], '{n}.Group.id', '{n}');
+		
 		// Sort all sortable events by time creation
 		$data['unread_msgs'] = Hash::combine($data['unread_msgs'], '{n}.ChatEvent.created', '{n}');
 		$data['user_events'] = Hash::combine($data['user_events'], '{n}.UserEvent.event_time', '{n}');
-		$data['events'] = Hash::merge($data['unread_msgs'], $data['user_events']);
+		$data['joined_groups'] = Hash::combine($data['group_member']['joined'], '{n}.GroupMember.approve_date', '{n}');
+		// $data['join_request'] = Hash::combine($data['group_member']['request'], '{n}.GroupMember.created', '{n}');
+		$data['events'] = Hash::merge($data['unread_msgs'], $data['user_events'], $data['joined_groups']);
 		
+		// remove already unused data
 		unset($data['unread_msgs']);
 		unset($data['user_events']);
+		unset($data['group_member']);
 		
 		// -= Special events =-
 		// Self-registration

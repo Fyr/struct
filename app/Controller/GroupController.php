@@ -76,6 +76,7 @@ class GroupController extends SiteController {
 		
 		if ($this->request->is('post') || $this->request->is('put')) {
 			$this->request->data('GroupMember.approved', 1);
+			$this->request->data('GroupMember.approve_date', date('Y-m-d H:i:s'));
 			$this->GroupMember->save($this->request->data);
 			return $this->redirect(array('action' => 'members', $id));
 		}
