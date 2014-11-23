@@ -121,7 +121,7 @@ class ProjectController extends SiteController {
 		$this->Subproject->save($this->request->data);
 		$project_id = $this->request->data('Subproject.project_id');
 		$this->ProjectEvent->addEvent(ProjectEvent::SUBPROJECT_CREATED, $project_id, $this->currUserID, $this->Subproject->id);
-		$this->redirect(array('action' => 'view', $projectID));
+		$this->redirect(array('action' => 'view', $project_id));
 	}
 	
 	public function addTask($project_id) {
