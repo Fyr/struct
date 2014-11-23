@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ru">
 <head>
-	<!--[if lt IE 8]>
+	<!--[if lt IE 9]>
 		<meta http-equiv="Refresh" content="0; URL=/html/include/ie.html" />
 	<![endif]-->
 	<?=$this->Html->charset(); ?>
