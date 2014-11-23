@@ -27,6 +27,8 @@ $(function () {
 	                	Chat.sendFile(fileData);
                 	} else if (file.object_type == 'GroupGallery') {
                 		Group.updateGalleryAdmin($(data.fileInput).data('object_id'));
+                	} else if (file.object_type == 'ProjectEvent') {
+                		window.location.reload();
                 	} else { // Profile Avatar, Profile University, Group Avatar
                 		var imgID = $(data.fileInput).data('object_type') + $(data.fileInput).data('object_id');
                 		var mediaID = $('#' + imgID).data('media_id');

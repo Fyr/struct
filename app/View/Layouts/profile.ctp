@@ -23,7 +23,8 @@
 		'content',
 		'd_custom',
 		'settings-page',
-		'group-page'
+		'group-page',
+		'project-page'
 	);
 	echo $this->Html->css($css);
 	
@@ -46,7 +47,8 @@
 		'search',
 		'settings-script',
 		'group-script',
-		'group'
+		'group',
+		'project-page'
 	);
 	
 	// Files required for upload
@@ -98,7 +100,7 @@ $(function() {
 <?=$this->element('panel_menu')?>
 
 <div class="wrapper-container">
-    <div class="settings-page search-page group-page">
+    <div class="settings-page search-page group-page project-page">
         <div class="container-fluid">
             <?=$this->fetch('content')?>
         </div>

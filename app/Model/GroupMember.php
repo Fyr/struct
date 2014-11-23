@@ -1,5 +1,6 @@
 <?
 App::uses('AppModel', 'Model');
+App::uses('Group', 'Model');
 class GroupMember extends AppModel {
 	
 	public $belongsTo = array('Group');

@@ -247,102 +247,66 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-11 col-sm-10 col-xs-8">
+    <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="col-md-12">
-            <div class="subheading">Проекты</div>
+            <div class="subheading">
+                <?=__('Projects')?>
+                <a class="btn btn-default" href="<?=$this->Html->url(array('controller' => 'Project', 'action' => 'edit', 'Project.group_id' => $groupID))?>">
+                    <?=__('New project')?>
+                </a>
+            </div>
         </div>
     </div>
 </div>
-<div class="row">
+
+<?
+	if ($aProjects) {
+		
+		$aContainer = array('', '', '');
+		$i = 0;
+		foreach($aProjects as $j => $project) {
+			$aContainer[$i].= $this->element('group_projects', array('project' => $project, 'hide' => ($j >= 3)));
+			$i++;
+			if ($i >= 3) {
+				$i = 0;
+			}
+		}
+?>
+<div class="row group-projects">
     <div class="col-md-11 col-sm-10 col-xs-8">
+<?
+		foreach($aContainer as $container) {
+?>
         <div class="col-md-4">
-            <div class="news-article group-type progect-type">
-                <a href="#">
-                    <div class="news-article-title">
-
-                    </div>
-                    <div class="news-article-title subtitle clearfix">
-                        <div class="subtitle-image">
-                            <img src="/img/temp/t_logo2.png" alt="" />
-                        </div>
-                        <div class="subtitle-body">
-                            KONSTRUKTOR
-                            <div class="subtitle-body-info ">
-                                11 участников
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <div class="news-article-pubdate">
-                    Креативная среда
-                </div>
-            </div>
-
+        	<?=$container?>
         </div>
-        <div class="col-md-4">
-            <div class="news-article group-type progect-type">
-                <a href="#">
-                    <div class="news-article-title">
-
-                    </div>
-                    <div class="news-article-title subtitle clearfix">
-                        <div class="subtitle-image">
-                            <img src="/img/temp/t_logo3.png" alt="" />
-                        </div>
-                        <div class="subtitle-body">
-                            Yandex
-                            <div class="subtitle-body-info ">
-                                4 участника
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <div class="news-article-pubdate">
-                    Помогать людям решать задачи и достигать своих целей в жизни
-                </div>
-            </div>
-
-
-        </div>
-        <div class="col-md-4">
-            <div class="news-article group-type progect-type bb-aqua">
-                <span class="glyphicon-extended glyphicon-coins glyphicons coins"></span>
-                <a href="#">
-                    <div class="news-article-title">
-
-                    </div>
-                    <div class="news-article-title subtitle clearfix">
-                        <div class="subtitle-image">
-                            <img src="/img/temp/t_logo4.png" alt="" />
-                        </div>
-                        <div class="subtitle-body">
-                            Qimini™ Deuce, wireless charger & powerbank
-                            <div class="subtitle-body-info ">
-                                139 участников
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <div class="news-article-pubdate">
-                    Карманное беспроводное зарядное устройство, которое заряжает ваш мобильный телефон без проводов.
-                </div>
-            </div>
-        </div>
+<?
+		}
+?>
     </div>
 </div>
-<div class="row mb40">
+<div class="row mb40 group-projects">
+<?
+		if (count($aProjects) > 3) {
+?>
     <div class="col-md-11 col-sm-10 col-xs-8">
         <div class="col-md-12">
             <div class="morelink">
-                <a href="#">
-                    <span class="morelink-text">Показать ещё</span>
-                    <span class="glyphicon glyphicon-repeat glyphicons repeat"></span>
+                <a href="javascript:void(0)" onclick="$('.group-projects .can-hide').toggle(); return false;">
+                    <span class="morelink-text can-hide"><?=__('Show more')?></span>
+                    <span class="morelink-text can-hide" style="display: none;"><?=__('Collapse')?></span>
+                    <span class="glyphicon glyphicons repeat"></span>
                 </a>
             </div>
         </div>
     </div>
+<?
+		}
+?>
 </div>
-
+<?
+	}
+?>
 <script type="text/javascript">
 $(document).ready(function(){
 	$('.fancybox').fancybox({

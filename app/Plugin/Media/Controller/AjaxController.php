@@ -6,6 +6,13 @@ class AjaxController extends PAjaxController {
 	// public $components = array('Core.PCAuth');
 	public $uses = array('Media.Media');
 	
+	protected $ProjectEvent;
+	
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this->_checkAuth();
+	}
+	
 	public function upload() {
 		$this->autoRender = false;
 		App::uses('UploadHandler', 'Media.Vendor');
@@ -26,7 +33,12 @@ class AjaxController extends PAjaxController {
 		$ext = '.'.$path['extension'];
 		
 		$data = compact('media_type', 'object_type', 'object_id', 'tmp_name', 'file', 'ext', 'orig_fname');
-		$this->Media->uploadMedia($data);
+		$media_id = $this->Media->uploadMedia($data);
+		
+		if ($object_type == 'ProjectEvent') {
+			$this->loadModel('ProjectEvent');
+			$this->ProjectEvent->addTaskFile($this->currUserID, $object_id, $media_id);
+		}
 		
 		$this->getList($object_type, $object_id);
 	}

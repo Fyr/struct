@@ -446,6 +446,11 @@
       .group-page .group-list-ur li .name {
         font-size: 15px;
         line-height: 22px;
+        display: inline-block;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
         color: #313131; }
       .group-page .group-list-ur li .profession {
         font-size: 13px;

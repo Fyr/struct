@@ -189,7 +189,7 @@
 </div>
 <div class="row mb40 profile-groups">
 <?
-	if (count($aGroups) > 3) {
+		if (count($aGroups) > 3) {
 ?>
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="col-md-12">
@@ -203,7 +203,7 @@
         </div>
     </div>
 <?
-	}
+		}
 ?>
 </div>
 <?

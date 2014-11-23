@@ -48,6 +48,7 @@ class GroupController extends SiteController {
 	public function view($id) {
 		$this->loadModel('Media.Media');
 		$this->loadModel('GroupMember');
+		$this->loadModel('Project');
 		
 		$group = $this->Group->findById($id);
 		$this->set('group', $group);
@@ -64,6 +65,8 @@ class GroupController extends SiteController {
 		$aUsers = $this->ChatUser->getUsers($aID);
 		$aUsers = Hash::combine($aUsers, '{n}.ChatUser.id', '{n}');
 		$this->set('aUsers', $aUsers);
+		
+		$this->set('aProjects', $this->Project->findAllByGroupId($id));
 	}
 	
 	public function members($id) {
