@@ -34,7 +34,7 @@
 			if (!$member['GroupMember']['approved']) {
 				$user = $aUsers[$member['GroupMember']['user_id']];
 				$userID = Hash::get($user, 'ChatUser.id');
-				$urlView = ($profileID) ? $this->Html->url(array('controller' => 'Profile', 'action' => 'view', $user['ChatUser']['id'])) : 'javascript:void(0)';
+				$urlView = $this->Html->url(array('controller' => 'Profile', 'action' => 'view', $user['ChatUser']['id']));
 				$urlJoinApprove = $this->Html->url(array('controller' => 'Group', 'action' => 'memberApprove', $groupID, $userID));
 				$urlRemove = $this->Html->url(array('controller' => 'Group', 'action' => 'memberRemove', $groupID, $userID));
 ?>

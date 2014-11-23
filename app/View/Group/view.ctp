@@ -213,7 +213,7 @@
 <div class="row">
     <div class="col-md-11 col-sm-10 col-xs-8">
         <div class="col-md-12">
-            <div class="subheading">Команда</div>
+            <div class="subheading"><?=__('Team')?></div>
         </div>
     </div>
 </div>

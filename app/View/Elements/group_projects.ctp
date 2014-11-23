@@ -15,9 +15,9 @@
             </div-->
             <div class="subtitle-body">
                 <?=$title?>
-                <div class="subtitle-body-info ">
+                <!--div class="subtitle-body-info ">
                     1 <?=__('Members')?>
-                </div>
+                </div-->
             </div>
         </div>
         <div class="news-article-pubdate">

@@ -62,7 +62,7 @@ class GroupController extends SiteController {
 		$this->set('group', $group);
 		$this->set('isGroupAdmin', Hash::get($group, 'Group.owner_id') == $this->currUserID);
 		
-		$conditions = array('group_id' => $id, 'user_id' => $this->currUserID, 'approved' => 0);
+		$conditions = array('group_id' => $id, 'user_id' => $this->currUserID);
 		$joined = $this->GroupMember->find('first', compact('conditions'));
 		$this->set('joined', $joined);
 		

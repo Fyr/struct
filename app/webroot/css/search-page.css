@@ -41,4 +41,8 @@
         .search-page .link-video a .t:hover {
           text-decoration: none; }
 
+.user-info .user-info-block {
+  min-height: 60px;
+  margin-bottom: 25px; }
+
 /*# sourceMappingURL=search-page.css.map */

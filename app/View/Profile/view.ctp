@@ -79,7 +79,7 @@
     </div>
 </div>
 <div class="row user-info">
-    <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="col-md-12 col-sm-12 col-xs-12 user-info-block">
         <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="user-adress">
                 <div class="fs15"><?=Hash::get($user, 'Profile.live_place')?></div>
@@ -87,7 +87,7 @@
                 <div class="fs15 mt10"><?=Hash::get($user, 'Profile.birthday')?></div>
             </div>
         </div>
-        <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="col-md-4 col-sm-6 col-xs-12 user-info-block">
             <div class="user-education">
 <?
 	$university = Hash::get($user, 'Profile.university');
@@ -99,7 +99,7 @@
                 <div class="fs13"><?=Hash::get($user, 'Profile.speciality')?></div>
             </div>
         </div>
-        <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="col-md-4 col-sm-6 col-xs-12 user-info-block">
             <div class="vp10">
                 <div class="fs15 mt10"><?=Hash::get($user, 'Profile.phone')?></div>
                 <div class="fs15 mt10">
