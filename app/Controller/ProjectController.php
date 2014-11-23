@@ -48,21 +48,27 @@ class ProjectController extends SiteController {
 		$this->set('project', $project);
 		$this->set('isProjectAdmin', Hash::get($project, 'Project.owner_id') == $this->currUserID);
 		
-		$aSubprojects = $this->Subproject->findAllByProjectId($id);
-		$this->set('aSubprojects', $aSubprojects);
-		
-		$aMembers = $this->GroupMember->findAllByGroupIdAndApproved($project['Project']['group_id'], 1);
-		$aID = Hash::extract($aMembers, '{n}.GroupMember.user_id');
-		$aUsers = $this->ChatUser->getUsers($aID);
-		$this->set('aUsers', Hash::combine($aUsers, '{n}.ChatUser.id', '{n}'));
-		
-		$aMembers = Hash::combine($aUsers, '{n}.ChatUser.id', '{n}.ChatUser.name');
-		$this->set('aMemberOptions', $aMembers);
-		
-		$aID = Hash::extract($aSubprojects, '{n}.Subproject.id');
+		$subprojects = $this->Subproject->findAllByProjectId($id);
+		$subprojects = Hash::combine($subprojects, '{n}.Subproject.id', '{n}');
+
+		$aID = array_keys($subprojects);
 		$aTasks = $this->Task->findAllBySubprojectId($aID);
-		$aTasks = Hash::combine($aTasks, '{n}.Task.id', '{n}', '{n}.Task.subproject_id');
-		$this->set('aTasks', $aTasks);
+
+		$members = $this->GroupMember->getList($project['Project']['group_id']);
+		$this->set('aUsers', $members);
+		
+		$this->set('aMemberOptions', Hash::combine($members, '{n}.ChatUser.id', '{n}.ChatUser.name'));
+		
+		$conditions = array('ProjectEvent.project_id' => $id);
+		$order = 'ProjectEvent.created DESC';
+		$limit = 10;
+		$aEvents = $this->ProjectEvent->find('all', compact('conditions', 'order', 'limit'));
+		
+		$aID = Hash::extract($aEvents, '{n}.ProjectEvent.file_id');
+		$files = $this->Media->getList(array('id' => $aID), 'Media.id');
+		$files = Hash::combine($files, '{n}.Media.id', '{n}.Media');
+		
+		$this->set(compact('subprojects', 'aEvents', 'aTasks', 'files'));
 	}
 	
 	public function task($id) {
@@ -95,12 +101,18 @@ class ProjectController extends SiteController {
 		$files = $this->Media->getList(array('id' => $aID), 'Media.id');
 		$files = Hash::combine($files, '{n}.Media.id', '{n}.Media');
 		
-		$members = $this->GroupMember->findAllByGroupIdAndApproved($project['Project']['group_id'], 1);
-		$aID = Hash::extract($members, '{n}.GroupMember.user_id');
+		$members = $this->GroupMember->getList($project['Project']['group_id']);
+		// $members = $this->ChatUser->getUsers($members);
+		/*
+		$group_id = $project['Project']['group_id'];
+		$aMembers = $this->GroupMember->findAllByGroupIdAndApproved($group_id, 1);
+		$aID = Hash::extract($aMembers, '{n}.GroupMember.user_id');
+		
+		
+		$group = $this->Group->findById($group_id);
 		$aID[] = $group['Group']['owner_id'];
 		$members = $this->ChatUser->getUsers($aID);
-		$members = Hash::combine($members, '{n}.ChatUser.id', '{n}');
-		
+		*/
 		$this->set(compact('task', 'subproject', 'project', 'group', 'messages', 'files', 'members', 'aEvents'));
 	}
 	

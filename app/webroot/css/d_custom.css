@@ -291,7 +291,12 @@ border-radius: 20px;
     height: auto;width: 350px;bottom: 0;position: fixed;top: 0; overflow: hidden; 
 }
 .page-title{
-    line-height: 50px; font-weight: bold; font-size: 36px; color: #313131;font-family: 'Roboto', sans-serif; font-weight: 900; padding: 20px 0;
+    line-height: 50px;
+    font-weight: bold;
+    font-size: 2.25em;
+    color: #313131;
+    font-family: 'Roboto', sans-serif;
+    padding: 20px 0;
 }
 .page-title-group-image{
     display: inline-block;

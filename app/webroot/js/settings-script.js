@@ -1,9 +1,6 @@
 $(function () {
     $('select.formstyler').styler();
-    $('#datetimepicker1').datetimepicker({
-        pickTime: false
-    });
-    $('#datetimepicker6').datetimepicker({
+    $('.datetimepicker').datetimepicker({
         pickTime: false
     });
 

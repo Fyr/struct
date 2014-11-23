@@ -1,14 +1,24 @@
 <?
 	$projectID = Hash::get($project, 'Project.id');
+	$tasks = Hash::combine($aTasks, '{n}.Task.id', '{n}');
+	$aTasks = Hash::combine($aTasks, '{n}.Task.id', '{n}', '{n}.Task.subproject_id');
 ?>
 <div class="row header-project-page clearfix">
     <div class="project-page-title col-md-4 col-sm-12 col-xs-12"><?=Hash::get($project, 'Project.title')?></div>
     <div class="title-button page-menu col-md-8 col-sm-12 col-xs-12 clearfix">
     	<a href="<?=$this->Html->url(array('controller' => 'Group', 'action' => 'view', Hash::get($project, 'Project.group_id')))?>" class="btn btn-default"><span class="glyphicons parents"></span></a>
+    	<!--
         <a class="btn btn-default" href="#"><span class="glyphicons coins"></span></a>
         <a class="btn btn-default" href="#"><span class="glyphicons pause"></span></a>
-        <a class="btn btn-default" href="#">Завершить</a>
+        -->
+<?
+	if ($isProjectAdmin) {
+?>
+        <a class="btn btn-default" href="<?=$this->Html->url(array('controller' => 'Project', 'action' => 'close', $projectID))?>"><?=__('Close')?></a>
         <a class="btn btn-default wrench" href="<?=$this->Html->url(array('controller' => 'Project', 'action' => 'edit', $projectID))?>"><span class="glyphicons wrench"></span></a>
+<?
+	}
+?>
     </div>
 </div>
 <div class="row description-project-page clearfix">
@@ -32,67 +42,74 @@
            <?=__('Last updates')?>
         </div>
         <ul class="list-timeline">
+<?
+	foreach($aEvents as $event) {
+		$user = $aUsers[$event['ProjectEvent']['user_id']];
+		// $profileUrl = $this->Html->url(array('controller' => 'Profile', 'action' => 'view', Hash::get($user, 'Profile.id')));
+		$userLink = $this->element('user_link', compact('user'));
+?>
             <li class="clearfix">
-                <div class="time col-md-3 col-sm-3 col-xs-12">10 октября, 15:33</div>
+                <div class="time col-md-3 col-sm-3 col-xs-12"><?=$event['ProjectEvent']['created']?></div>
                 <div class="timeline-text col-md-9 col-sm-9 col-xs-12">
-                    <a href="#" class="user-link">
-                    <span class="user-avatar rate-0"><img src="/img/temp/smallava.jpg" alt=""/></span>
-                    Альберт Леманн
-                    </a> <a href="#">прокомментировал</a> в «Главная страница»
+<?
+		switch ($event['ProjectEvent']['event_type']) {
+			case ProjectEvent::PROJECT_CREATED: echo __('%s created this project', $userLink); break;
+			case ProjectEvent::SUBPROJECT_CREATED: 
+				$subproject = $subprojects[$event['ProjectEvent']['subproject_id']];
+				echo __('%s created subproject "%s"', $userLink, $subproject['Subproject']['title']); 
+				break;
+			case ProjectEvent::TASK_CREATED: 
+				$task = $tasks[$event['ProjectEvent']['task_id']];
+				echo __('%s created task %s', $userLink, $this->Html->link($task['Task']['title'], array('action' => 'task', $task['Task']['id']))); 
+				break;
+			case ProjectEvent::PROJECT_CLOSED: echo __('closed this project'); break;
+			case ProjectEvent::SUBPROJECT_CLOSED: 
+				$subproject = $subprojects[$event['ProjectEvent']['subproject_id']];
+				echo __('%s closed subproject "%s"', $userLink, $subproject['Subproject']['title']); 
+				break;
+			case ProjectEvent::TASK_CLOSED: 
+				$task = $tasks[$event['ProjectEvent']['task_id']];
+				echo __('%s closed task %s', $userLink, $this->Html->link($task['Task']['title'], array('action' => 'task', $task['Task']['id']))); 
+				break;
+			case ProjectEvent::TASK_COMMENT: 
+				$task = $tasks[$event['ProjectEvent']['task_id']];
+				$taskLink = $this->Html->link($task['Task']['title'], array('action' => 'task', $task['Task']['id'], '#' => 'post'.$event['ProjectEvent']['id']));
+				echo __('%s commented task %s', $userLink, $taskLink); 
+				break;
+			case ProjectEvent::FILE_ATTACHED: 
+				$task = $tasks[$event['ProjectEvent']['task_id']];
+				$taskLink = $this->Html->link($task['Task']['title'], array('action' => 'task', $task['Task']['id'], '#' => 'post'.$event['ProjectEvent']['id']));
+				$file = $files[$event['ProjectEvent']['file_id']];
+				$fileLink = $this->Html->link($file['orig_fname'], $file['url_download']);
+				echo __('%s attached %s to task %s', $userLink, $fileLink, $taskLink); 
+				break;
+		}
+?>
                 </div>
             </li>
-            <li class="clearfix">
-                <div class="time col-md-3 col-sm-3 col-xs-12">10 октября, 9:47</div>
-                <div class="timeline-text col-md-9 col-sm-9 col-xs-12">
-                    <a href="#" class="user-link">
-                    <span class="user-avatar rate-10"><img src="/img/temp/mava.jpg" alt=""/></span>
-                    Дмитрий Перековский
-                    </a> создал новую задачу <a href="#">«Страница пользователя»</a>
-                </div>
-            </li>
-            <li class="clearfix">
-                <div class="time col-md-3 col-sm-3 col-xs-12">9 октября, 14:59</div>
-                <div class="timeline-text col-md-9 col-sm-9 col-xs-12">
-                    <a href="#" class="user-link">
-                    <span class="user-avatar rate-0"><img src="/img/temp/smallava.jpg" alt=""/></span>
-                    Лия Усманова
-                    </a> закрыла задачу <a href="#">«Статистика»</a>
-                </div>
-            </li>
-            <li class="clearfix">
-                <div class="time col-md-3 col-sm-3 col-xs-12">1 октября, 11:26</div>
-                <div class="timeline-text col-md-9 col-sm-9 col-xs-12">
-                    <a href="#" class="user-link">
-                    <span class="user-avatar rate-10"><img src="/img/temp/mava.jpg" alt=""/></span>
-                    Евгений Николаев
-                    </a>создал новую задачу <a href="#">«Облачное хранилище»</a>
-                </div>
-            </li>
-            <li class="clearfix">
-                <div class="time col-md-3 col-sm-3 col-xs-12">29 сентября, 21:12</div>
-                <div class="timeline-text col-md-9 col-sm-9 col-xs-12">
-                    <a href="#" class="user-link">
-                        <span class="user-avatar rate-10"><img src="/img/temp/smallava.jpg" alt=""/></span>
-                        Альберт Леманн
-                    </a> закрыл задачу <a href="#">«Группы и сообщества»</a>
-                </div>
-            </li>
+<?
+	}
+?>
         </ul>
     </div>
 </div>
 <div class="row under-project">
+<?
+	if ($isProjectAdmin) {
+?>
     <div class="page-menu new-under-project">
         <a href="javascript:void(0)" class="btn btn-default new-under-project-btn">Новый подпроект</a>
     </div>
 <?
-	foreach($aSubprojects as $subproject) {
-		$subprojectID = Hash::get($subproject, 'Subproject.id')
+	}
+	foreach($subprojects as $subprojectID => $subproject) {
+		// $subprojectID = Hash::get($subproject, 'Subproject.id')
 ?>
     <div class="under-project-cell clearfix">
         <div class="cell-title clearfix">
             <div class="col-md-3 col-sm-3 col-xs-12 title-under-project"><?=Hash::get($subproject, 'Subproject.title')?></div>
             <div class="col-md-9 col-sm-9 col-xs-12 sub-title">
-                <div class="col-md-9 col-sm-9 col-xs-9 sub-title-label"><?=__('Assigned')?></div>
+                <div class="col-md-9 col-sm-9 col-xs-9 sub-title-label"><?=__('Assigned to')?></div>
                 <div class="col-md-3 col-sm-3 col-xs-3 sub-title-label"><span class="glyphicons anchor"></span><?=__('Deadline')?></div>
             </div>
         </div>
@@ -118,6 +135,9 @@
 		}
 ?>
         </ul>
+<?
+		if ($isProjectAdmin) {
+?>
         <div class="page-menu new-task">
             <a href="#" class="add-new-task-project" onclick="addNewTask(<?=$subprojectID?>)">
                 <button class="btn btn-default"><span class="glyphicons plus"></span></button>
@@ -125,7 +145,8 @@
             </a>
         </div>
 <?
-	if ($closedTasks) {
+		}
+		if ($closedTasks) {
 ?>
         <div class="end-under-project-list">
             <div class="title-end-under-project">
@@ -135,27 +156,31 @@
                 <div class="under-project-cell">
                     <ul class="cell-list">
 <?
-		if (isset($aTasks[$subprojectID]) && ($tasks = $aTasks[$subprojectID])) {
-			foreach($tasks as $taskID => $task) {
-				if ($task['Task']['closed']) {
-					$user = $aUsers[$task['Task']['user_id']];
-					echo $this->element('project_tasks', compact('task', 'user'));
+			if (isset($aTasks[$subprojectID]) && ($tasks = $aTasks[$subprojectID])) {
+				foreach($tasks as $taskID => $task) {
+					if ($task['Task']['closed']) {
+						$user = $aUsers[$task['Task']['user_id']];
+						echo $this->element('project_tasks', compact('task', 'user'));
+					}
 				}
 			}
-		}
 ?>
                     </ul>
                 </div>
             </div>
         </div>
 <?
-	}
+		}
 ?>
     </div>
 <?
 	} // $aSubproject
 ?>
 </div>
+
+<?
+	if ($isProjectAdmin) {
+?>
 
 <div class="drop-add-sub-project popup-block">
     <div class="close-block glyphicons circle_remove"></div>
@@ -179,7 +204,7 @@
         <?=$this->Form->input('deadline', array('type' => 'text', 'class' => 'datetimepicker', 'data-date-format' => 'YYYY-MM-DD'))?>
         <label><?=__('Manager')?></label>
         <?=$this->Form->input('manager_id', array('options' => $aMemberOptions, 'class' => 'formstyler', 'label' => false))?>
-        <label><?=__('Assignee')?></label>
+        <label><?=__('Assigned to')?></label>
         <?=$this->Form->input('user_id', array('options' => $aMemberOptions, 'class' => 'formstyler', 'label' => false))?>
         <?=$this->Form->input('descr', array('label' => array('text' => __('Description'))))?>
         <div class="page-menu clearfix">
@@ -206,3 +231,6 @@ $(document).ready(function(){
 });
 
 </script>
+<?
+	}
+?>

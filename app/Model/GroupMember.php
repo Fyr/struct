@@ -5,6 +5,8 @@ class GroupMember extends AppModel {
 	
 	public $belongsTo = array('Group');
 	
+	protected $ChatUser;
+	
 	function timelineEvents($currUserID, $date, $date2) {
 		$conditions = array_merge(
 			$this->dateRange('GroupMember.approve_date', $date, $date2),
@@ -21,4 +23,16 @@ class GroupMember extends AppModel {
 		$data['request'] = $this->find('all', compact('conditions', 'order'));
 		return $data;
 	}
+	
+	public function getList($group_id) {
+		$aMembers = $this->findAllByGroupIdAndApproved($group_id, 1);
+		$aID = Hash::extract($aMembers, '{n}.GroupMember.user_id');
+		
+		$group = $this->Group->findById($group_id);
+		$aID[] = $group['Group']['owner_id'];
+		
+		$this->loadModel('ChatUser');
+		return Hash::combine($this->ChatUser->getUsers($aID), '{n}.ChatUser.id', '{n}');
+	}
+	
 }

@@ -44,7 +44,7 @@
                 </div>
             </li>
             <li class="clearfix">
-                <div class="user-rights col-md-3 col-sm-3 col-xs-12"><?=__('Assignee')?></div>
+                <div class="user-rights col-md-3 col-sm-3 col-xs-12"><?=__('Assigned to')?></div>
                 <div class="user-name col-md-9 col-sm-9 col-xs-12">
 <?
 	$user = $aUsers[Hash::get($task, 'Task.user_id')];
@@ -96,6 +96,7 @@
 <?
 	foreach($aEvents as $event) {
 		$user = $members[$event['ProjectEvent']['user_id']];
+		if (in_array($event['ProjectEvent']['event_type'], array(ProjectEvent::TASK_CREATED, ProjectEvent::TASK_CLOSED, ProjectEvent::TASK_COMMENT, ProjectEvent::FILE_ATTACHED))) {
 ?>
             <div class="descution-massages-cell col-md-12 col-sm-12 col-xs-12">
                 <div class="user-avatar col-md-1 col-sm-1 col-xs-2">
@@ -104,9 +105,26 @@
                 <div class="massages-cont col-md-11 col-sm-11 col-xs-10">
                     <div class="massages-cont-text col-md-9 col-sm-9 col-xs-12">
                         <div class="massage-user">
+                        	<a name="post<?=$event['ProjectEvent']['id']?>"></a>
 <?
-		if ($event['ProjectEvent']['event_type'] == ProjectEvent::FILE_ATTACHED) {
-			$file = $files[$event['ProjectEvent']['file_id']];
+			switch ($event['ProjectEvent']['event_type']) {
+				case ProjectEvent::TASK_CREATED: 
+					echo __('Task was created');
+					break;
+					
+				case ProjectEvent::TASK_CLOSED: 
+					echo __('Task was closed');
+					break;
+					
+				case ProjectEvent::TASK_COMMENT: 
+					$msg_id = $event['ProjectEvent']['msg_id'];
+?>
+							<p><?=$messages[$msg_id]['message']?></p>
+<?
+					break;
+					
+				case ProjectEvent::FILE_ATTACHED: 
+					$file = $files[$event['ProjectEvent']['file_id']];
 ?>
                             <a href="<?=$file['url_download']?>">
                                 <figure>
@@ -114,11 +132,8 @@
                                 </figure>
                             </a>
 <?
-		} else {
-?>
-                            <p><?=$messages[$event['ProjectEvent']['msg_id']]['message']?></p>
-<?
-		}
+					break;
+			}
 ?>
                         </div>
                     </div>
@@ -129,6 +144,7 @@
                 </div>
             </div>
 <?
+		}
 	}
 ?>
         </div>

@@ -32,7 +32,8 @@ body { font-family: 'Open Sans', sans-serif; color: #313131; }
 	.usersInChat img.active { border-bottom-color: #ff7b84;}
 	.usersInChat .icon_add { float: right;}
 	
-.dialog { padding: 0 47px 0 35px;overflow: auto;}
+.dialog {padding-bottom: 250px;}
+    .innerDialog{padding: 0 47px 0 35px; overflow: auto;}
 	.dialog .text { -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; font-size: 15px; padding: 9px 25px 15px 20px; position: relative; color: #313131; line-height: 24px;}
 	.dialog .time { color: #aaa; font-size: 11px; padding-top: 5px;}
 	.dialog .date { color: #616161; font-size: 13px; text-align: center; font-weight: 700; margin-top: 49px; }
@@ -51,7 +52,7 @@ body { font-family: 'Open Sans', sans-serif; color: #313131; }
 	.dialog .text.anotherText { margin-top: 8px;}
 	.dialog .text.anotherText:before { border: none;}
 
-.bottom { position: fixed; left: 90px; bottom: 0; width: 100%; z-index: 100; background: #fff;}	
+.bottom { position: fixed; left: 90px; bottom: 0; width: 100%; z-index: 100; background: #fff;}
 	
 .openChats { padding: 0; }
 	.openChats .item { border: 1px solid #eee; border-left: none; position: relative; float: left; }
@@ -137,7 +138,7 @@ body { font-family: 'Open Sans', sans-serif; color: #313131; }
 		.pageOrder .myOrders tr td.status { font-weight: 700;}
 
 @media (max-width: 600px) { 
-	.dialog { padding: 0 15px 0 100px;}
+	/*.dialog { padding: 0 15px 0 100px;}*/
 	.dialog .text { padding-left: 5px; padding-right: 5px; font-size: 12px; line-height: 20px; }
 	.dialog .leftMessage .text { margin-left: 60px;}
 }		

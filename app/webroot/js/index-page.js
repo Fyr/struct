@@ -1,6 +1,6 @@
 $(function () {
     $('.terms-of-use input[type="checkbox"]').each(function () {
-        //$(this).removeAttr('checked');
+        $(this).removeAttr('checked');
         $(this).change(function () {
             if ($(this).is(':checked')) {
                 $(this).parent().removeClass('checkedOut');
@@ -12,4 +12,9 @@ $(function () {
         });
         $(this).change();
     });
+
+    //$(window).resize(function(){
+    //   var terms_popup_width = $('.terms-popup').width()/2;
+    //    $('.terms-popup').css({'margin-left':-terms_popup_width})
+    //});
 });

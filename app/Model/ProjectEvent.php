@@ -43,8 +43,6 @@ class ProjectEvent extends AppModel {
 		$this->loadModel('Subproject');
 		$this->loadModel('Project');
 		
-		fdebug(array($user_id, $task_id, $file_id));
-		
 		$task = $this->Task->findById($task_id);
 		$subproject = $this->Subproject->findById($task['Task']['subproject_id']);
 		$project_id = $subproject['Subproject']['project_id'];
