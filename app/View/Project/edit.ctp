@@ -31,7 +31,7 @@
                 <fieldset>
                     <label for="group-create-3"><?=__('Deadline')?></label>
                     <div class="input-boxing clearfix">
-                    	<?=$this->Form->input('Project.deadline', array('type' => 'text', 'label' => false, 'class' => 'datepicker date datepickertime', 'data-date-format' => 'YYYY-MM-DD'))?>
+                    	<?=$this->Form->input('Project.deadline', array('type' => 'text', 'label' => false, 'class' => 'datetimepicker', 'data-date-format' => 'YYYY-MM-DD'))?>
                     </div>
                 </fieldset>
                 <fieldset>
@@ -44,9 +44,7 @@
             </div>
         </div>
 
-        <div class="group-create-cell col-md-12 col-sm-12 col-xs-12">
-            <div class="group-create-left col-md-3 col-sm-3 col-xs-12"></div>
-            <div class="group-create-right col-md-9 col-sm-9 col-xs-12">
+        <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="page-menu clearfix">
                     <input type="submit" class="btn btn-default save-button" value="<?=__('Save')?>" />
 <?
@@ -57,13 +55,10 @@
 	}
 ?>
                 </div>
-            </div>
         </div>
 </div>
 <?=$this->Form->end()?>
 <script type="text/javascript">
-$(document).ready(function(){
-	$('.datepicker').datepicker();
-});
+
 </script>
 

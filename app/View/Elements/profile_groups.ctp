@@ -8,7 +8,7 @@
 <div class="news-article group-type <?=$class?>" <?=$style?>>
     <a href="<?=$this->Html->url(array('controller' => 'Group', 'action' => 'view', Hash::get($group, 'Group.id')))?>">
         <div class="news-article-title">
-            Администратор
+            <?=($currUserID == Hash::get($group, 'Group.owner_id')) ? __('Administrator') : Hash::get($group, 'GroupMember.role')?>
         </div>
         <div class="news-article-title subtitle clearfix">
             <div class="subtitle-image">
@@ -21,8 +21,8 @@
                 </div>
             </div>
         </div>
+	    <div class="news-article-pubdate">
+	        <?=Hash::get($group, 'Group.descr')?>
+	    </div>
     </a>
-    <div class="news-article-pubdate">
-        <?=Hash::get($group, 'Group.descr')?>
-    </div>
 </div>

@@ -26,8 +26,16 @@ class GroupController extends SiteController {
 					);
 				}
 			}
+			if ($this->request->data('GroupAddress')) {
+				foreach($this->request->data('GroupAddress') as $i => $data) {
+					$this->request->data('GroupAddress.'.$i.'.url', 
+						(strpos($data['url'], 'http://') === false) ? 'http://'.$data['url'] : $data['url']
+					);
+				}
+			}
 			$this->Group->saveAll($this->request->data);
-			return $this->redirect(array('controller' => $this->name, 'action' => 'edit', $this->Group->id, '?' => array('success' => '1')));
+			// return $this->redirect(array('controller' => $this->name, 'action' => 'edit', $this->Group->id, '?' => array('success' => '1')));
+			return $this->redirect(array('controller' => $this->name, 'action' => 'view', $this->Group->id));
 		} else {
 			$this->request->data = $group;
 		}
@@ -54,19 +62,14 @@ class GroupController extends SiteController {
 		$this->set('group', $group);
 		$this->set('isGroupAdmin', Hash::get($group, 'Group.owner_id') == $this->currUserID);
 		
-		$conditions = array('group_id' => $id, 'user_id' => $this->currUserID);
+		$conditions = array('group_id' => $id, 'user_id' => $this->currUserID, 'approved' => 0);
 		$joined = $this->GroupMember->find('first', compact('conditions'));
 		$this->set('joined', $joined);
 		
-		$aMembers = $this->GroupMember->findAllByGroupIdAndApproved($id, 1);
+		$aMembers = $this->GroupMember->getList($id);
 		$this->set('aMembers', $aMembers);
 		
-		$aID = Hash::extract($aMembers, '{n}.GroupMember.user_id');
-		$aUsers = $this->ChatUser->getUsers($aID);
-		$aUsers = Hash::combine($aUsers, '{n}.ChatUser.id', '{n}');
-		$this->set('aUsers', $aUsers);
-		
-		$this->set('aProjects', $this->Project->findAllByGroupId($id));
+		$this->set('aProjects', $this->Project->findAllByGroupIdAndClosed($id, 0));
 	}
 	
 	public function members($id) {

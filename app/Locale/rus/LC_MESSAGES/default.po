@@ -495,3 +495,177 @@ msgstr "Русский"
 
 msgid "University"
 msgstr "Университет"
+msgid "Incorrect event ID"
+msgstr "rus:Incorrect event ID!"
+
+msgid "Administrator"
+msgstr "rus:Administrator!"
+
+msgid "Add group address"
+msgstr "rus:Add group address!"
+
+msgid "No addresses yet"
+msgstr "rus:No addresses yet!"
+
+msgid "Add group achievement"
+msgstr "rus:Add group achievement!"
+
+msgid "No achivements yet"
+msgstr "rus:No achivements yet!"
+
+msgid "Are you sure to delete this user"
+msgstr "rus:Are you sure to delete this user!"
+
+msgid "Add member"
+msgstr "rus:Add member!"
+
+msgid "Join this group"
+msgstr "rus:Join this group!"
+
+msgid "Your invitation has been sent to group administrator"
+msgstr "rus:Your invitation has been sent to group administrator!"
+
+msgid "Projects"
+msgstr "rus:Projects!"
+
+msgid "New project"
+msgstr "rus:New project!"
+
+msgid "No projects yet"
+msgstr "rus:No projects yet!"
+
+msgid "Messanger"
+msgstr "rus:Messanger!"
+
+msgid "Main page"
+msgstr "rus:Main page!"
+
+msgid "Timeline"
+msgstr "rus:Timeline!"
+
+msgid "Day"
+msgstr "rus:Day!"
+
+msgid "Week"
+msgstr "rus:Week!"
+
+msgid "Country of residence"
+msgstr "rus:Country of residence!"
+
+msgid "City of residence"
+msgstr "rus:City of residence!"
+
+msgid "Add user achievement"
+msgstr "rus:Add user achievement!"
+
+msgid "Video with me"
+msgstr "rus:Video with me!"
+
+msgid "Groups"
+msgstr "rus:Groups!"
+
+msgid "Project settings"
+msgstr "rus:Project settings!"
+
+msgid "Create project"
+msgstr "rus:Create project!"
+
+msgid "Project has been successfully saved"
+msgstr "rus:Project has been successfully saved!"
+
+msgid "Project title"
+msgstr "rus:Project title!"
+
+msgid "Deadline"
+msgstr "rus:Deadline!"
+
+msgid "Close"
+msgstr "rus:Close!"
+
+msgid "Manager"
+msgstr "rus:Manager!"
+
+msgid "Assigned to"
+msgstr "rus:Assigned to!"
+
+msgid "Discussion"
+msgstr "rus:Discussion!"
+
+msgid "Task was created"
+msgstr "rus:Task was created!"
+
+msgid "Task was closed"
+msgstr "rus:Task was closed!"
+
+msgid "Go to Group"
+msgstr "rus:Go to Group!"
+
+msgid "Closed"
+msgstr "rus:Closed!"
+
+msgid "Last updates"
+msgstr "rus:Last updates!"
+
+msgid "closed this project"
+msgstr "rus:closed this project!"
+
+msgid "No open tasks"
+msgstr "rus:No open tasks!"
+
+msgid "New task"
+msgstr "rus:New task!"
+
+msgid "Closed tasks"
+msgstr "rus:Closed tasks!"
+
+msgid "Add subproject"
+msgstr "rus:Add subproject!"
+
+msgid "Add task"
+msgstr "rus:Add task!"
+
+msgid "Sun"
+msgstr "rus:Sun!"
+
+msgid "Mon"
+msgstr "rus:Mon!"
+
+msgid "Tue"
+msgstr "rus:Tue!"
+
+msgid "Wen"
+msgstr "rus:Wen!"
+
+msgid "Thu"
+msgstr "rus:Thu!"
+
+msgid "Fri"
+msgstr "rus:Fri!"
+
+msgid "Sat"
+msgstr "rus:Sat!"
+
+msgid "Event title"
+msgstr "rus:Event title!"
+
+msgid "Event description"
+msgstr "rus:Event description!"
+
+msgid "I registered on this site"
+msgstr "rus:I registered on this site!"
+
+msgid "Last created groups"
+msgstr "rus:Last created groups!"
+
+msgid "You joined this group as "
+msgstr "rus:You joined this group as !"
+
+msgid "You received a request to join your group"
+msgstr "rus:You received a request to join your group!"
+
+msgid "Updated site began to work"
+msgstr "rus:Updated site began to work!"
+
+msgid "Last registered users"
+msgstr "rus:Last registered users!"
+

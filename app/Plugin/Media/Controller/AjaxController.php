@@ -32,6 +32,13 @@ class AjaxController extends PAjaxController {
 		$file = $media_type; // $path['filename'];
 		$ext = '.'.$path['extension'];
 		
+		if (in_array($object_type, array('Profile', 'Group', 'ProfileUniversity'))) {
+			$aMedia = $this->Media->getObjectList($object_type, $object_id);
+			foreach($aMedia as $media) {
+				$this->Media->delete($media['Media']['id']);
+			}
+		}
+		
 		$data = compact('media_type', 'object_type', 'object_id', 'tmp_name', 'file', 'ext', 'orig_fname');
 		$media_id = $this->Media->uploadMedia($data);
 		

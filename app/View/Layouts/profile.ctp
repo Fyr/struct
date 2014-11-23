@@ -22,6 +22,7 @@
 		'main-panel',
 		'content',
 		'd_custom',
+		'search-page',
 		'settings-page',
 		'group-page',
 		'project-page'

@@ -1,0 +1,1 @@
+<a href="<?=$this->Html->url(array('controller' => 'Profile', 'action' => 'view', $user['ChatUser']['id']))?>" class="user-link"><span class="user-avatar rate-0"><img src="<?=$user['Avatar']['url']?>" alt="<?=$user['ChatUser']['name']?>"/></span><?=$user['ChatUser']['name']?></a>

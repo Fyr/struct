@@ -36,7 +36,7 @@
 <?
 	$user = $aUsers[Hash::get($task, 'Task.manager_id')];
 ?>
-                    <a class="clearfix" href="<?=$this->Html->url(array('controller' => 'Profile', 'action' => 'view', Hash::get($user, 'Profile.id')))?>">
+                    <a class="clearfix" href="<?=$this->Html->url(array('controller' => 'Profile', 'action' => 'view', $user['ChatUser']['id']))?>">
                         <div class="user-avatar">
                             <span class="user-avatar rate-10"><img src="<?=$user['Avatar']['url']?>" alt="<?=$user['ChatUser']['name']?>"/></span>
                         </div> <?=$user['ChatUser']['name']?>
@@ -49,7 +49,7 @@
 <?
 	$user = $aUsers[Hash::get($task, 'Task.user_id')];
 ?>
-                    <a class="clearfix" href="<?=$this->Html->url(array('controller' => 'Profile', 'action' => 'view', Hash::get($user, 'Profile.id')))?>">
+                    <a class="clearfix" href="<?=$this->Html->url(array('controller' => 'Profile', 'action' => 'view', $user['ChatUser']['id']))?>">
                         <div class="user-avatar">
                             <span class="user-avatar rate-10"><img src="<?=$user['Avatar']['url']?>" alt="<?=$user['ChatUser']['name']?>"/></span>
                         </div> <?=$user['ChatUser']['name']?>
@@ -100,7 +100,7 @@
 ?>
             <div class="descution-massages-cell col-md-12 col-sm-12 col-xs-12">
                 <div class="user-avatar col-md-1 col-sm-1 col-xs-2">
-                    <a href="<?=$this->Html->url(array('controller' => 'Profile', 'action' => 'view', Hash::get($user, 'Profile.id')))?>" class="rate-0"><img src="<?=$user['Avatar']['url']?>" alt="<?=$user['ChatUser']['name']?>" /></a>
+                    <a href="<?=$this->Html->url(array('controller' => 'Profile', 'action' => 'view', $user['ChatUser']['id']))?>" class="rate-0"><img src="<?=$user['Avatar']['url']?>" alt="<?=$user['ChatUser']['name']?>" /></a>
                 </div>
                 <div class="massages-cont col-md-11 col-sm-11 col-xs-10">
                     <div class="massages-cont-text col-md-9 col-sm-9 col-xs-12">

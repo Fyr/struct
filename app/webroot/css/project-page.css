@@ -38,11 +38,14 @@
         .project-page .header-project-page .title-button .btn-default.wrench {
           margin-left: 15px; }
   .project-page .description-project-page {
-    display: table; }
-    .project-page .description-project-page .text-description p {
-      font-size: 13px;
-      margin-bottom: 15px;
-      line-height: 20px; }
+    display: table;
+    width: 100%; }
+    .project-page .description-project-page .text-description {
+      padding: 0; }
+      .project-page .description-project-page .text-description p {
+        font-size: 13px;
+        margin-bottom: 15px;
+        line-height: 20px; }
     .project-page .description-project-page .deadline-date {
       text-align: right;
       color: #313131; }

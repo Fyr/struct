@@ -208,8 +208,8 @@
 </div>
 <?
 	}
+	if ($aMembers) {
 ?>
-
 <div class="row">
     <div class="col-md-11 col-sm-10 col-xs-8">
         <div class="col-md-12">
@@ -222,12 +222,10 @@
         <div class="col-md-12">
             <div class="units-list clearfix">
 <?
-	foreach($aMembers as $member) {
-		$user = $aUsers[$member['GroupMember']['user_id']];
-		$profileID = Hash::get($user, 'Profile.id');
+		foreach($aMembers as $user) {
 ?>
                 <div class="units-list-item">
-                    <a href="<?=$this->html->url(array('controller' => 'Profile', 'action' => 'view', $profileID))?>">
+                    <a href="<?=$this->html->url(array('controller' => 'Profile', 'action' => 'view', $user['ChatUser']['id']))?>">
                         <div class="units-list-item-image bb-aqua">
                             <img src="<?=$user['Avatar']['url']?>" alt="<?=$user['ChatUser']['name']?>" />
                         </div>
@@ -235,33 +233,41 @@
                             <?=$user['ChatUser']['name']?>
                         </div>
                         <div class="units-list-item-spec">
-                            <?=Hash::get($member, 'GroupMember.role')?>
+                            <?=($user['ChatUser']['id'] == $group['Group']['owner_id']) ? __('Administrator') : Hash::get($user, 'GroupMember.role')?>
                         </div>
                     </a>
                 </div>
 <?
-	}
+		}
 ?>
             </div>
         </div>
     </div>
 </div>
+<?
+	}
+	if (in_array($currUserID, array_keys($aMembers))) {
+?>
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="col-md-12">
             <div class="subheading">
                 <?=__('Projects')?>
+<?
+		if ($isGroupAdmin) {
+?>
                 <a class="btn btn-default" href="<?=$this->Html->url(array('controller' => 'Project', 'action' => 'edit', 'Project.group_id' => $groupID))?>">
                     <?=__('New project')?>
                 </a>
+<?
+		}
+?>
             </div>
         </div>
     </div>
 </div>
 
 <?
-	if ($aProjects) {
-		
 		$aContainer = array('', '', '');
 		$i = 0;
 		foreach($aProjects as $j => $project) {
@@ -275,10 +281,18 @@
 <div class="row group-projects">
     <div class="col-md-11 col-sm-10 col-xs-8">
 <?
-		foreach($aContainer as $container) {
+		if ($aProjects) {
+			foreach($aContainer as $container) {
 ?>
         <div class="col-md-4">
         	<?=$container?>
+        </div>
+<?
+			}
+		} else {
+?>
+		<div class="col-md-4">
+        	<?=__('No projects yet')?>
         </div>
 <?
 		}

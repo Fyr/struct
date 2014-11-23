@@ -14,13 +14,12 @@ $(function () {
 			file.object_type = $(data.fileInput).data('object_type');
 			file.object_id = $(data.fileInput).data('object_id');
 			
-			$('#progress-bar', getProgressContext(data)).hide();
-			$('#processFile', getProgressContext(data)).show();
-
 			$('.inputFile').hide();
 			$.post(mediaURL.move, file, function(response){
                 $('#processFile', getProgressContext(data)).hide();
                 $('.inputFile').show();
+                $('#progress-bar', getProgressContext(data)).hide();
+				$('#processFile', getProgressContext(data)).show();
                 if (checkJson(response)) {
                 	if (file.object_type == 'Chat') {
 	                	var fileData = response.data[0].Media;
@@ -34,9 +33,11 @@ $(function () {
                 		var mediaID = $('#' + imgID).data('media_id');
                 		if (mediaID) {
                 			$(data.fileInput).data('id', mediaID);
-                			$.post(mediaURL.delete, {data: $(data.fileInput).data()}, null, 'json');
+                			/*
+                			$.post(mediaURL.delete, {data: $(data.fileInput).data()}, function(){
+                			}, 'json');
+                			*/
                 		}
-                		
                 		$('#' + imgID).prop('src', response.data[0].Media.image.replace(/100x80/, $('#' + imgID).data('resize')));
                 		$('#' + imgID).data('media_id', response.data[0].Media.id);
                 	}

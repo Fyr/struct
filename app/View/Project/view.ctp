@@ -6,32 +6,47 @@
 <div class="row header-project-page clearfix">
     <div class="project-page-title col-md-4 col-sm-12 col-xs-12"><?=Hash::get($project, 'Project.title')?></div>
     <div class="title-button page-menu col-md-8 col-sm-12 col-xs-12 clearfix">
-    	<a href="<?=$this->Html->url(array('controller' => 'Group', 'action' => 'view', Hash::get($project, 'Project.group_id')))?>" class="btn btn-default"><span class="glyphicons parents"></span></a>
+    	<a href="<?=$this->Html->url(array('controller' => 'Group', 'action' => 'view', Hash::get($project, 'Project.group_id')))?>" class="btn btn-default"><?=__('Go to Group')?></a>
     	<!--
         <a class="btn btn-default" href="#"><span class="glyphicons coins"></span></a>
         <a class="btn btn-default" href="#"><span class="glyphicons pause"></span></a>
         -->
 <?
 	if ($isProjectAdmin) {
+		echo $this->Html->link(__('Close'), array('controller' => 'Project', 'action' => 'close', $projectID), array('class' => 'btn btn-default'), __('Are you sure to close this project?'));
 ?>
-        <a class="btn btn-default" href="<?=$this->Html->url(array('controller' => 'Project', 'action' => 'close', $projectID))?>"><?=__('Close')?></a>
+        <!-- a class="btn btn-default" href="<?=$this->Html->url(array('controller' => 'Project', 'action' => 'close', $projectID))?>"><?=__('Close')?></a-->
         <a class="btn btn-default wrench" href="<?=$this->Html->url(array('controller' => 'Project', 'action' => 'edit', $projectID))?>"><span class="glyphicons wrench"></span></a>
 <?
 	}
 ?>
     </div>
 </div>
-<div class="row description-project-page clearfix">
+
+<!--div class="row description-project-page clearfix">
     <div class="col-md-9 col-sm-9 col-xs-12 text-description">
         <p><?=Hash::get($project, 'Project.descr')?></p>
     </div>
     <div class="col-md-12 col-sm-12 col-xs-12 deadline-date">
         <div class="date">
+        	<?=(Hash::get($project, 'Project.closed')) ? __('Closed') : ''?><br/>
             <span class="glyphicons anchor"></span>
-            <?=__('Deadline')?>
-            <div class="input-calendar">
-                <input data-format="dd/MM" class="datetimepicker" value="" type="text"/>
-            </div>
+            <?=__('Deadline')?><?=(Hash::get($project, 'Project.deadline')) ? ': '.Hash::get($project, 'Project.deadline') : ': - '?>
+        </div>
+    </div>
+</div-->
+
+<div class="row description-project-page clearfix">
+    <div class="col-md-12 col-sm-12 col-xs-12 text-description">
+     <div class="col-md-9 col-sm-9 col-xs-12">
+         <p><?=Hash::get($project, 'Project.descr')?></p>
+     </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12 deadline-date">
+        <div class="date">
+            <?=(Hash::get($project, 'Project.closed')) ? __('Closed') : ''?><br/>
+            <span class="glyphicons anchor"></span>
+            <?=__('Deadline')?><?=(Hash::get($project, 'Project.deadline')) ? ': '.Hash::get($project, 'Project.deadline') : ': - '?>
         </div>
     </div>
 </div>
@@ -45,7 +60,6 @@
 <?
 	foreach($aEvents as $event) {
 		$user = $aUsers[$event['ProjectEvent']['user_id']];
-		// $profileUrl = $this->Html->url(array('controller' => 'Profile', 'action' => 'view', Hash::get($user, 'Profile.id')));
 		$userLink = $this->element('user_link', compact('user'));
 ?>
             <li class="clearfix">

@@ -1,30 +1,41 @@
 <div class="col-md-12 col-sm-12 col-xs-12 mutant-title">
     <div class="col-md-9 col-sm-9 col-xs-12">
         <div class="page-title"><?=Hash::get($user, 'ChatUser.name')?></div>
-        <div class="user-spec"><?=Hash::get($user, 'Profile.skills')?></div>
+        <div class="user-spec">
+            <div class="spec"><?=Hash::get($user, 'Profile.skills')?></div>
+<?
+	if ($video = Hash::get($user, 'Profile.video_url')) {
+?>
+        	<div class="link-video">
+                <a href="<?=$video?>" target="_blank"><span class="glyphicons play_button"></span><span class="t"><?=__('Video with me')?></span></a>
+            </div>
+<?
+	}
+?>
+        </div>
         <!--div class="user-menu page-menu">
             <div class="btn-group add-to-favorites">
-                <select class="formstyler" name="" id="">
+                <div style="display: inline-block; position: relative; z-index:100" class="jq-selectbox jqselect formstyler"><select id="" name="" class="formstyler" style="margin: 0px; padding: 0px; position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; opacity: 0;">
                     <option value="0">В избранное</option>
                     <option value="1">Друзья</option>
                     <option value="2">Одноклассники</option>
                     <option value="3">Одногруппники</option>
                     <option value="4">Сотрудники</option>
                     <option value="5">Подруги</option>
-                </select>
+                </select><div style="position: relative" class="jq-selectbox__select"><div class="jq-selectbox__select-text">В избранное</div><div class="jq-selectbox__trigger"><div class="jq-selectbox__trigger-arrow"></div></div></div><div style="position: absolute; display: none;" class="jq-selectbox__dropdown"><ul style="position: relative; list-style: none; overflow: auto; overflow-x: hidden"><li class="selected sel" style="display: block; white-space: nowrap;">В избранное</li><li class="" style="display: block; white-space: nowrap;">Друзья</li><li class="" style="display: block; white-space: nowrap;">Одноклассники</li><li class="" style="display: block; white-space: nowrap;">Одногруппники</li><li class="" style="display: block; white-space: nowrap;">Сотрудники</li><li class="" style="display: block; white-space: nowrap;">Подруги</li></ul></div></div>
             </div>
             <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                <button data-toggle="dropdown" id="dropdownMenu1" type="button" class="btn btn-default dropdown-toggle">
                     Отправить сообщение
                 </button>
-                <div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <div aria-labelledby="dropdownMenu1" role="menu" class="dropdown-menu">
                     <div class="dropdown-wrap">
                         <div class="dropdown-close">
                             <span class="glyphicons circle_remove"></span>
                         </div>
                         <div class="dropdown-body inner-content">
                             <div class="comments-box-send">
-                                <img src="/img/temp/smallava1.jpg" alt="">
+                                <img alt="" src="img/temp/smallava1.jpg">
                                 <div class="comments-box-send-info">
                                     Оставьте свой комментарий
                                 </div>
@@ -40,10 +51,10 @@
                                 </form>
                                 <div class="comments-box-send-info bottom-info">
                                     <div class="comments-box-bottom-buttons">
-                                        <a href="#" class="btn btn-default">
+                                        <a class="btn btn-default" href="#">
                                             <span class="glyphicons paperclip"></span>
                                         </a>
-                                        <a href="#" class="btn btn-default">
+                                        <a class="btn btn-default" href="#">
                                             <span class="glyphicons facetime_video"></span>
                                         </a>
 
@@ -62,21 +73,21 @@
 <?
 	$src = (Hash::get($user, 'Media.id')) ? $this->Media->imageUrl($user, 'thumb150x150') : '/img/no-photo.jpg';
 ?>
-				<img style="width: 150px" src="<?=$src?>" alt="<?=Hash::get($user, 'ChatUser.username')?>" />
+			<img style="width: 150px" src="<?=$src?>" alt="<?=Hash::get($user, 'ChatUser.username')?>" />
 
         </div>
     </div>
 </div>
 <div class="row user-info">
-    <div class="col-md-11 col-sm-10 col-xs-8">
-        <div class="col-md-4">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="user-adress">
                 <div class="fs15"><?=Hash::get($user, 'Profile.live_place')?></div>
                 <div class="fs13 text-grey"><?=Hash::get($user, 'Profile.live_country')?></div>
                 <div class="fs15 mt10"><?=Hash::get($user, 'Profile.birthday')?></div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="user-education">
 <?
 	$university = Hash::get($user, 'Profile.university');
@@ -88,7 +99,7 @@
                 <div class="fs13"><?=Hash::get($user, 'Profile.speciality')?></div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="vp10">
                 <div class="fs15 mt10"><?=Hash::get($user, 'Profile.phone')?></div>
                 <div class="fs15 mt10">
@@ -169,7 +180,7 @@
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="col-md-12">
-            <div class="subheading">Группы</div>
+            <div class="subheading"><?__('Groups')?></div>
         </div>
     </div>
 </div>
@@ -211,7 +222,7 @@
 ?>
 
 <!--div class="row">
-    <div class="col-md-11 col-sm-10 col-xs-8">
+    <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="col-md-12">
             <div class="subheading page-menu">
                 Статьи
@@ -223,7 +234,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-11 col-sm-10 col-xs-8">
+    <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="col-md-4">
             <div class="news-article">
                 <div class="dimention-link">
@@ -332,7 +343,7 @@
     </div>
 </div>
 <div class="row mb40">
-    <div class="col-md-11 col-sm-10 col-xs-8">
+    <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="col-md-12">
             <div class="morelink">
                 <a href="#">

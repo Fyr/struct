@@ -30,5 +30,15 @@
     .search-page .link-video a {
       display: inline-block;
       margin-top: -6px; }
+      .search-page .link-video a .glyphicons {
+        font-size: 29px;
+        color: #70cfcb; }
+      .search-page .link-video a .t {
+        display: inline-block;
+        text-decoration: underline;
+        position: relative;
+        top: 5px; }
+        .search-page .link-video a .t:hover {
+          text-decoration: none; }
 
 /*# sourceMappingURL=search-page.css.map */

@@ -17,15 +17,18 @@ class ProjectController extends SiteController {
 			return $this->redirect(array('controller' => 'Project', 'action' => 'view', $id));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
-			$this->request->data('Project.group_id', $this->request->named['Project.group_id']);
-			$this->request->data('Project.owner_id', $this->currUserID);
-			$this->request->data('Project.hidden', $this->request->data('Project.hidden') && true);
+			if (!$id) {
+				$this->request->data('Project.group_id', $this->request->named['Project.group_id']);
+				$this->request->data('Project.owner_id', $this->currUserID);
+				$this->request->data('Project.hidden', $this->request->data('Project.hidden') && true);
+			}
 			$this->Project->save($this->request->data);
 			
 			if (!$id) { 
 				$this->ProjectEvent->addEvent(ProjectEvent::PROJECT_CREATED, $this->Project->id, $this->currUserID);
 			}
-			return $this->redirect(array('controller' => $this->name, 'action' => 'edit', $this->Project->id, '?' => array('success' => '1')));
+			// return $this->redirect(array('controller' => $this->name, 'action' => 'edit', $this->Project->id, '?' => array('success' => '1')));
+			return $this->redirect(array('controller' => $this->name, 'action' => 'view', $this->Project->id));
 		} else {
 			$this->request->data = $Project;
 		}
@@ -48,15 +51,18 @@ class ProjectController extends SiteController {
 		$this->set('project', $project);
 		$this->set('isProjectAdmin', Hash::get($project, 'Project.owner_id') == $this->currUserID);
 		
+		$members = $this->GroupMember->getList($project['Project']['group_id']);
+		if (!in_array($this->currUserID, Hash::extract($members, '{n}.ChatUser.id'))) {
+			return $this->redirect(array('controller' => 'Group', 'action' => 'view', $project['Project']['group_id']));
+		}
+		$this->set('aUsers', $members);
+		
 		$subprojects = $this->Subproject->findAllByProjectId($id);
 		$subprojects = Hash::combine($subprojects, '{n}.Subproject.id', '{n}');
 
 		$aID = array_keys($subprojects);
 		$aTasks = $this->Task->findAllBySubprojectId($aID);
 
-		$members = $this->GroupMember->getList($project['Project']['group_id']);
-		$this->set('aUsers', $members);
-		
 		$this->set('aMemberOptions', Hash::combine($members, '{n}.ChatUser.id', '{n}.ChatUser.name'));
 		
 		$conditions = array('ProjectEvent.project_id' => $id);
@@ -80,6 +86,11 @@ class ProjectController extends SiteController {
 		$project = $this->Project->findById($project_id);
 		$group = $this->Group->findById($project['Project']['group_id']);
 		
+		$members = $this->GroupMember->getList($project['Project']['group_id']);
+		if (!in_array($this->currUserID, array_keys($members))) {
+			return $this->redirect(array('controller' => 'Group', 'action' => 'view', $project['Project']['group_id']));
+		}
+		
 		if ($this->request->is('put') || $this->request->is('post')) {
 			$this->ProjectEvent->addTaskComment(
 				$this->currUserID, 
@@ -101,23 +112,10 @@ class ProjectController extends SiteController {
 		$files = $this->Media->getList(array('id' => $aID), 'Media.id');
 		$files = Hash::combine($files, '{n}.Media.id', '{n}.Media');
 		
-		$members = $this->GroupMember->getList($project['Project']['group_id']);
-		// $members = $this->ChatUser->getUsers($members);
-		/*
-		$group_id = $project['Project']['group_id'];
-		$aMembers = $this->GroupMember->findAllByGroupIdAndApproved($group_id, 1);
-		$aID = Hash::extract($aMembers, '{n}.GroupMember.user_id');
-		
-		
-		$group = $this->Group->findById($group_id);
-		$aID[] = $group['Group']['owner_id'];
-		$members = $this->ChatUser->getUsers($aID);
-		*/
 		$this->set(compact('task', 'subproject', 'project', 'group', 'messages', 'files', 'members', 'aEvents'));
 	}
 	
 	public function addSubproject() {
-		$autoRender = false;
 		$this->Subproject->save($this->request->data);
 		$project_id = $this->request->data('Subproject.project_id');
 		$this->ProjectEvent->addEvent(ProjectEvent::SUBPROJECT_CREATED, $project_id, $this->currUserID, $this->Subproject->id);
@@ -125,19 +123,23 @@ class ProjectController extends SiteController {
 	}
 	
 	public function addTask($project_id) {
-		$autoRender = false;
 		$this->Task->save($this->request->data);
-		$this->ProjectEvent->addEvent(ProjectEvent::SUBPROJECT_CREATED, $project_id, $this->currUserID, $this->Task->id);
+		$this->ProjectEvent->addEvent(ProjectEvent::TASK_CREATED, $project_id, $this->currUserID, $this->Task->id);
 		$this->redirect(array('action' => 'view', $project_id));
 	}
 	
 	public function closeTask($id) {
-		$autoRender = false;
 		$this->Task->save(array('id' => $id, 'closed' => 1));
 		$task = $this->Task->findById($id);
 		$subproject = $this->Subproject->findById($task['Task']['subproject_id']);
-		$this->ProjectEvent->addEvent(ProjectEvent::SUBPROJECT_CREATED, $subproject['Subproject']['project_id'], $this->currUserID, $this->Task->id);
+		$this->ProjectEvent->addEvent(ProjectEvent::TASK_CLOSED, $subproject['Subproject']['project_id'], $this->currUserID, $this->Task->id);
 		$this->redirect(array('action' => 'task', $id));
+	}
+	
+	public function close($id) {
+		$project = $this->Project->findById($id);
+		$this->Project->close($this->currUserID, $id);
+		$this->redirect(array('controller' => 'Group', 'action' => 'view', $project['Project']['group_id']));
 	}
 	
 }
