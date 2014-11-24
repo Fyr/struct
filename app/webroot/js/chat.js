@@ -16,7 +16,7 @@ var Chat = {
 	
 	fixPanelHeight: function () {
 		var dialogHeight = $(window).height() - $(".bottom").height();
-        $(".dialog").height(dialogHeight);
+        // $(".dialog").height(dialogHeight);
 	},
 	
 	scrollTop: function () {

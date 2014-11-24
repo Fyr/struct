@@ -43,7 +43,8 @@ class Profile extends AppModel {
 			'Group' => 'last_groups', 
 			'ChatEvent' => 'unread_msgs', 
 			'UserEvent' => 'user_events',
-			'GroupMember' => 'group_member'
+			'GroupMember' => 'group_member',
+			'ProjectEvent' => 'project_events'
 		);
 		$data = array();
 		foreach($aModels as $model => $key) {
@@ -56,31 +57,39 @@ class Profile extends AppModel {
 		$aID = array_merge(
 			Hash::extract($data['last_users'], '{n}.ChatUser.id'),
 			Hash::extract($data['unread_msgs'], '{n}.ChatEvent.initiator_id'),
-			Hash::extract($data['group_member']['request'], '{n}.GroupMember.user_id')
+			Hash::extract($data['group_member']['request'], '{n}.GroupMember.user_id'),
+			Hash::extract($data['project_events'], '{n}.ProjectEvent.user_id')
 		);
 		$data['users'] = $this->ChatUser->getUsers($aID);
 		$data['users'] = Hash::combine($data['users'], '{n}.ChatUser.id', '{n}');
 		
 		// Get messages data
 		$this->loadModel('ChatMessage');
-		$aID = Hash::extract($data['unread_msgs'], '{n}.ChatEvent.msg_id');
+		$aID = array_merge(
+			Hash::extract($data['unread_msgs'], '{n}.ChatEvent.msg_id'),
+			Hash::extract($data['project_events'], '{n}.ProjectEvent.msg_id')
+		);
 		$data['messages'] = $this->ChatMessage->findAllById($aID);
 		$data['messages'] = Hash::combine($data['messages'], '{n}.ChatMessage.id', '{n}.ChatMessage');
 		
 		// Get Media data
 		$this->loadModel('Media.Media');
-		$aID = Hash::extract($data['unread_msgs'], '{n}.ChatEvent.file_id');
+		$aID = array_merge(
+			Hash::extract($data['unread_msgs'], '{n}.ChatEvent.file_id'),
+			Hash::extract($data['project_events'], '{n}.ProjectEvent.file_id')
+		);
 		$data['files'] = $this->Media->getList(array('id' => $aID), 'Media.id');
 		$data['files'] = Hash::combine($data['files'], '{n}.Media.id', '{n}.Media');
 		
 		// Get joined groups data
-		$aID = Hash::extract($data['group_member']['joined'], '{n}.GroupMember.group_id');
-		$data['groups'] = $this->Group->findAllById($aID);
+		// $aID = Hash::extract($data['group_member']['joined'], '{n}.GroupMember.group_id');
+		// $data['groups'] = $this->Group->findAllById($aID);
+		$data['groups'] = $this->GroupMember->getUserGroups($currUserID);
 		foreach($data['groups'] as &$group) {
 			$media = $group['Media'];
 			$group['Group']['image_url'] = $this->Media->getPHMedia()->getImageUrl($media['object_type'], $media['id'], 'thumb50x50', $media['file'].$media['ext']);
 		}
-		$data['groups'] = Hash::combine($data['groups'], '{n}.Group.id', '{n}');
+		// $data['groups'] = Hash::combine($data['groups'], '{n}.Group.id', '{n}');
 		
 		// Sort all sortable events by time creation
 		$data['unread_msgs'] = Hash::combine($data['unread_msgs'], '{n}.ChatEvent.created', '{n}');

@@ -70,7 +70,7 @@ class GroupMember extends AppModel {
 				$group['GroupMember'] = $member[$group_id]['GroupMember'];
 			}
 		}
-		return $groups;
+		return Hash::combine($groups, '{n}.Group.id', '{n}');
 	}
 	
 }

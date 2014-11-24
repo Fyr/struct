@@ -10,7 +10,7 @@ class ProjectEvent extends AppModel {
 	const TASK_COMMENT = 7;
 	const FILE_ATTACHED = 8;
 	
-	protected $ChatMessage, $Task, $Subproject, $Project;
+	protected $ChatMessage, $Task, $Subproject, $Project, $GroupMember;
 	
 	public function addEvent($event_type, $project_id, $user_id, $object_id = 0) {
 		$data = compact('event_type', 'project_id', 'user_id');
@@ -48,5 +48,21 @@ class ProjectEvent extends AppModel {
 		$project_id = $subproject['Subproject']['project_id'];
 		$project = $this->Project->findById($project_id);
 		$this->addEvent(self::FILE_ATTACHED, $project_id, $user_id, compact('task_id', 'file_id'));
+	}
+	
+	public function timelineEvents($currUserID, $date, $date2) {
+		$this->loadModel('GroupMember');
+		$groups = $this->GroupMember->getUserGroups($currUserID);
+		$aID = Hash::extract($groups, '{n}.Group.id');
+		
+		$this->loadModel('Project');
+		$projects = $this->Project->findAllByGroupId($aID);
+		
+		$conditions = array(array_merge(
+			$this->dateRange('ProjectEvent.created', $date, $date2),
+			array('ProjectEvent.project_id' => Hash::extract($projects, '{n}.Project.id'))
+		));
+		$order = 'ProjectEvent.created DESC';
+		return $this->find('all', compact('conditions', 'order'));
 	}
 }
