@@ -33,7 +33,8 @@
 		'vendor/jquery/jquery-1.10.2.min',
 		'vendor/easing.1.3',
 		'vendor/bootstrap.min',
-		'index-page'
+		'index-page',
+		'timezone_cookie'
 	);
 	echo $this->Html->script($aScripts);
 

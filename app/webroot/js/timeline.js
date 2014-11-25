@@ -161,8 +161,8 @@ var Timeline = {
 	
 	showEventPopup: function(sql_date, hours, event_id) {
 		Timeline.lEnableUpdate = false;
-		var id = 'timeline' + sql_date + '_' + zeroFormat(hours) + zeroFormat(0);
-		var e = $('#' + id + ' .t-a-center > span');
+		var id = 'timeline' + sql_date + '_' + zeroFormat(hours) + '00';
+		var $e = $('#' + id + ' .t-a-center > span');
 		if (event_id) {
 			$('.fieldset-block.create-event').hide();
 			$('.fieldset-block.edit-event').show();
@@ -170,7 +170,7 @@ var Timeline = {
 			$('.fieldset-block.create-event').show();
 			$('.fieldset-block.edit-event').hide();
 		}
-		$('.add-event-block').css({'top':$(e).offset().top}).removeClass('open').addClass('open');
+		$('.add-event-block').css({'top':$e.offset().top}).removeClass('open').addClass('open');
 	},
 	
 	closeEventPopup: function() {
@@ -180,7 +180,9 @@ var Timeline = {
 	
 	addEventPopup: function(sql_date, hours)  {
 		$('.add-event-block input').val('');
-		$('#UserEventTimeEvent').val(zeroFormat(hours) + ':' + zeroFormat(0));
+		var js_date = Date.fromSqlDate(sql_date);
+		js_date.setHours(hours);
+		$('#UserEventTimeEvent').val(Date.HoursMinutes(js_date));
 		$('#UserEventDateEvent').val(sql_date);
 		Timeline.showEventPopup(sql_date, hours, 0);
 	}, 
@@ -229,13 +231,15 @@ var Timeline = {
 	},
 	
 	updateState: function() {
-		Timeline.lEnableUpdate = false;
-		$.post(profileURL.timelineEvents, {data: {date: todayDate, date2: todayDate}}, function(response){
-			if (checkJson(response)) {
-				Timeline.updateDay(todayDate, response.data);
-			}
-			Timeline.lEnableUpdate = true;
-		});
+		if (Timeline.lEnableUpdate) {
+			Timeline.lEnableUpdate = false;
+			$.post(profileURL.timelineEvents, {data: {date: todayDate, date2: todayDate}}, function(response){
+				if (checkJson(response)) {
+					Timeline.updateDay(todayDate, response.data);
+				}
+				Timeline.lEnableUpdate = true;
+			});
+		}
 	},
 	
 	updateDay: function(sql_date, data) {
@@ -302,5 +306,6 @@ Date.prototype.addDays = function(days) {
 	return this;
 }
 function zeroFormat(n) {
+	n = parseInt(n);
 	return (n >= 10) ? '' + n : '0' + n;
 }

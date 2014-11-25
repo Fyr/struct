@@ -10,7 +10,12 @@ var aDays = <?=json_encode(array(__('Sun'), __('Mon'), __('Tue'), __('Wen'), __(
 var todayDate, now;
 var startDay;
 $(document).ready(function(){
+	
+	todayDate = new Date;
+	todayDate = todayDate.toSqlDate(); // 
 	todayDate = '<?=date('Y-m-d')?>';
+	now = new Date(); // 
+	now = now.toSqlDate();
 	now = Date.fromSqlDate('<?=date('Y-m-d H:i:s')?>');
 	startDay = <?=-floor((time() - strtotime(Configure::read('Konstructor.created'))) / DAY)?>;
 	
@@ -68,13 +73,13 @@ $(document).ready(function(){
             <div class="select-day-event-block">
                 <span class="glyphicons clock"></span>
 <?
-	echo $this->Form->input('time_event', array('label' => false, 'class' => 'input-tyme clock-mask'));
+	echo $this->Form->input('time_event', array('label' => false, 'class' => 'input-tyme'));
 ?>
             </div>
             <div class="input-date-block">
                 <span class="glyphicons calendar"></span>
 <?
-	echo $this->Form->input('date_event', array('label' => false, 'class' => 'datetimepicker select-data-for-event', 'data-date-format' => "YYYY-MM-DD"));
+	echo $this->Form->input('date_event', array('label' => false, 'class' => 'select-data-for-event datetimepicker', 'data-date-format' => "YYYY-MM-DD")); // 
 ?>
             </div>
         </div>
@@ -95,7 +100,7 @@ $(document).ready(function(){
             <a class="btn btn-default delete-button" href="javascript:void(0)"><?=__('Delete')?></a>
         </div>
         <?=$this->Form->hidden('id');?>
-    <?=$this->Form->end()?>
+		<?=$this->Form->end()?>
 </div>
 
 <script type="text/x-tmpl" id="row-day-event">
@@ -315,6 +320,8 @@ $(document).ready(function(){
 
 <script type="text/x-tmpl" id="joined-group">
 {%
+	console.log(o.event.group_id);
+	console.log(o.globalData.groups);
 	var group = o.globalData.groups[o.event.group_id].Group;
 	var url = '<?=$this->Html->url(array('controller' =>'Group', 'action' => 'view', '~group_id'))?>';
 %}

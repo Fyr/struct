@@ -165,11 +165,12 @@
 </div>
 <?
 	if ($aGroups) {
-		
 		$aContainer = array('', '', '');
 		$i = 0;
-		foreach($aGroups as $j => $group) {
+		$j = 0;
+		foreach($aGroups as $group) {
 			$aContainer[$i].= $this->element('profile_groups', array('group' => $group, 'hide' => ($j >= 3)));
+			$j++;
 			$i++;
 			if ($i >= 3) {
 				$i = 0;

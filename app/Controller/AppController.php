@@ -73,7 +73,12 @@ class AppController extends Controller {
 		$this->loadModel('ChatUser');
 		$this->loadModel('Profile');
 		$this->currUser = $this->ChatUser->getUser($this->currUserID);
+		
 		$this->profile = $this->Profile->findByUserId($this->currUserID);
+		$timezone = Hash::get($this->profile, 'Profile.timezone');
+		date_default_timezone_set(($timezone) ? $timezone : 'UTC');
+		$this->Profile->query('SET `time_zone`= "'.date('P').'"');
+		
 		$lang = Hash::get($this->profile, 'Profile.lang');
 		$lang = ($lang == 'rus') ? $lang : 'eng';
 		Configure::write('Config.language', $lang);

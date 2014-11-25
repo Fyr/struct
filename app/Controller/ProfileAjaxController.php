@@ -38,7 +38,13 @@ class ProfileAjaxController extends PAjaxController {
 		$this->loadModel('UserEvent');
 		try {
 			$this->request->data('UserEvent.user_id', $this->currUserID);
-			$event_time = $this->request->data('UserEvent.date_event').' '.$this->request->data('UserEvent.time_event');
+			list($hours, $mins) = explode(':', $this->request->data('UserEvent.time_event'));
+			$mins = intval(str_replace(array('am', 'pm'), '', $mins));
+			if (strpos($this->request->data('UserEvent.time_event'), 'pm') !== false && $hours < 12) {
+				$hours+= 12;
+			}
+
+			$event_time = $this->request->data('UserEvent.date_event').' '.$hours.':'.$mins;
 			$this->request->data('UserEvent.event_time', $event_time);
 			$this->UserEvent->save($this->request->data);
 			

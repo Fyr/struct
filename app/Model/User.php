@@ -1,7 +1,7 @@
 <?php
 App::uses('AppModel', 'Model');
 class User extends AppModel {
-	public $useDbConfig = 'users';
+	// public $useDbConfig = 'users';
 	public $useTable = 'clients';
 	
 	public $validate = array(
