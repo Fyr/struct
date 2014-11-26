@@ -32,8 +32,12 @@ body { font-family: 'Open Sans', sans-serif; color: #313131; }
 	.usersInChat img.active { border-bottom-color: #ff7b84;}
 	.usersInChat .icon_add { float: right;}
 	
+/*	
 .dialog {padding-bottom: 250px;}
     .innerDialog{padding: 0 47px 0 35px; overflow: auto;}
+*/
+   
+    .dialog { padding: 0 47px 0 35px;overflow: auto;}
 	.dialog .text { -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; font-size: 15px; padding: 9px 25px 15px 20px; position: relative; color: #313131; line-height: 24px;}
 	.dialog .time { color: #aaa; font-size: 11px; padding-top: 5px;}
 	.dialog .date { color: #616161; font-size: 13px; text-align: center; font-weight: 700; margin-top: 49px; }

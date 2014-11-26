@@ -1,8 +1,8 @@
-msgid "Username"
-msgstr "Пользователь"
+﻿msgid "Username"
+msgstr "Имя пользователя"
 
 msgid "Invalid username or password, try again"
-msgstr "Неправильное имя пользователя или пароль"
+msgstr "Неправильное имя пользователя или пароль, попробуйте снова"
 
 msgid "Settings"
 msgstr "Настройки"
@@ -11,7 +11,7 @@ msgid "Home"
 msgstr "Главная"
 
 msgid "You must log in to access this page"
-msgstr "Вы должны авторизоваться"
+msgstr "Авторизируйтесь для входа на страницу"
 
 msgid "Your session has been expired. Please, relogin to perform this action"
 msgstr "Авторизация истекла. Пож-ста, авторизуйтесь снова"
@@ -86,10 +86,10 @@ msgid "Delete record"
 msgstr "Удалить запись"
 
 msgid "Delete checked records"
-msgstr "Удалить помеченные записи"
+msgstr "Удалить просмотренные записи"
 
 msgid "Dashboard"
-msgstr "Главная"
+msgstr "Панель инструментов"
 
 msgid "User name"
 msgstr "Имя пользователя"
@@ -223,7 +223,7 @@ msgstr "Заказы"
 msgid "FAQ"
 msgstr "FAQ"
 
-msgid "New order"
+msgid "New orders"
 msgstr "Новые заказы"
 
 msgid "My orders"
@@ -317,7 +317,7 @@ msgid "- No products in this order -"
 msgstr "Нет продуктов в текущем заказе"
 
 msgid "month"
-msgstr "месяцы"
+msgstr "месяц"
 
 msgid "Requires a payment"
 msgstr "Требует оплату"
@@ -326,7 +326,7 @@ msgid "Shipping"
 msgstr "Покупка"
 
 msgid "Ready"
-msgstr "Готов"
+msgstr "Готово"
 
 msgid "Find user..."
 msgstr "Найти пользователя..."
@@ -419,7 +419,7 @@ msgid "Create group"
 msgstr "Создать группу"
 
 msgid "Group has been successfully saved"
-msgstr "Группа была успешно сохранена"
+msgstr "Группа успешно сохранена"
 
 msgid "Group video"
 msgstr "Видео группы"
@@ -458,13 +458,13 @@ msgid "Show more"
 msgstr "Показать ещё"
 
 msgid "Create your profile"
-msgstr "Создайте ваш профиль"
+msgstr "Создайте свой профиль"
 
 msgid "Full name"
 msgstr "Полное имя"
 
 msgid "I am looking for a job"
-msgstr "Я в поисках работы"
+msgstr "Я ищу  работу"
 
 msgid "How other people see this page"
 msgstr "Как другие люди видят эту страницу"
@@ -496,176 +496,176 @@ msgstr "Русский"
 msgid "University"
 msgstr "Университет"
 msgid "Incorrect event ID"
-msgstr "rus:Incorrect event ID!"
+msgstr "Неверное ID событие!"
 
 msgid "Administrator"
-msgstr "rus:Administrator!"
+msgstr "Администратор!"
 
 msgid "Add group address"
-msgstr "rus:Add group address!"
+msgstr "Добавить адрес группы!"
 
 msgid "No addresses yet"
-msgstr "rus:No addresses yet!"
+msgstr "Адрес не задан!"
 
 msgid "Add group achievement"
-msgstr "rus:Add group achievement!"
+msgstr "Добавить достижение группы!"
 
 msgid "No achivements yet"
-msgstr "rus:No achivements yet!"
+msgstr "У вас пока нет никаких достижени!"
 
-msgid "Are you sure to delete this user"
-msgstr "rus:Are you sure to delete this user!"
+msgid "Are you sure to delete this user?"
+msgstr "Вы точно хотите удалить этого пользователя?!"
 
-msgid "Add member"
-msgstr "rus:Add member!"
+msgid "Add user"
+msgstr "Добавить пользователя!"
 
 msgid "Join this group"
-msgstr "rus:Join this group!"
+msgstr "Вступить в группу!"
 
 msgid "Your invitation has been sent to group administrator"
-msgstr "rus:Your invitation has been sent to group administrator!"
+msgstr "Ваше приглашение администратору группы отправлено!"
 
 msgid "Projects"
-msgstr "rus:Projects!"
+msgstr "Проекты!"
 
 msgid "New project"
-msgstr "rus:New project!"
+msgstr "Новый проект!"
 
 msgid "No projects yet"
-msgstr "rus:No projects yet!"
+msgstr "У вас пока нет проектов!"
 
-msgid "Messanger"
-msgstr "rus:Messanger!"
+msgid "Messanges"
+msgstr "Сообщения!"
 
 msgid "Main page"
-msgstr "rus:Main page!"
+msgstr "Главная страница!"
 
 msgid "Timeline"
-msgstr "rus:Timeline!"
+msgstr "Временная лента!"
 
 msgid "Day"
-msgstr "rus:Day!"
+msgstr "День!"
 
 msgid "Week"
-msgstr "rus:Week!"
+msgstr "Неделя!"
 
 msgid "Country of residence"
-msgstr "rus:Country of residence!"
+msgstr "Страна!"
 
 msgid "City of residence"
-msgstr "rus:City of residence!"
+msgstr "Город!"
 
 msgid "Add user achievement"
-msgstr "rus:Add user achievement!"
+msgstr "Добавить достижения пользователя!"
 
 msgid "Video with me"
-msgstr "rus:Video with me!"
+msgstr "Мое видео!"
 
 msgid "Groups"
-msgstr "rus:Groups!"
+msgstr "Группы!"
 
 msgid "Project settings"
-msgstr "rus:Project settings!"
+msgstr "Настройки проекта!"
 
 msgid "Create project"
-msgstr "rus:Create project!"
+msgstr "Создать проект!"
 
 msgid "Project has been successfully saved"
-msgstr "rus:Project has been successfully saved!"
+msgstr "Проект успешно сохранен!"
 
 msgid "Project title"
-msgstr "rus:Project title!"
+msgstr "Название проекта!"
 
 msgid "Deadline"
-msgstr "rus:Deadline!"
+msgstr "Крайний срок!"
 
 msgid "Close"
-msgstr "rus:Close!"
+msgstr "Завершить!"
 
-msgid "Manager"
-msgstr "rus:Manager!"
+msgid "Managing"
+msgstr "Управление!"
 
 msgid "Assigned to"
-msgstr "rus:Assigned to!"
+msgstr "Подписаться!"
 
 msgid "Discussion"
-msgstr "rus:Discussion!"
+msgstr "Обсуждение!"
 
-msgid "Task was created"
-msgstr "rus:Task was created!"
+msgid "Create task"
+msgstr "Создать задачу!"
 
-msgid "Task was closed"
-msgstr "rus:Task was closed!"
+msgid "Close task"
+msgstr "Завершить задачу!"
 
 msgid "Go to Group"
 msgstr "rus:Go to Group!"
 
 msgid "Closed"
-msgstr "rus:Closed!"
+msgstr "Завершено!"
 
 msgid "Last updates"
-msgstr "rus:Last updates!"
+msgstr "Послдние обновления!"
 
-msgid "closed this project"
-msgstr "rus:closed this project!"
+msgid "close this project"
+msgstr "Завершить задачу!"
 
 msgid "No open tasks"
-msgstr "rus:No open tasks!"
+msgstr "Нет текущих задач!"
 
 msgid "New task"
-msgstr "rus:New task!"
+msgstr "Новые задачи!"
 
 msgid "Closed tasks"
-msgstr "rus:Closed tasks!"
+msgstr "Завершенные задачи!"
 
 msgid "Add subproject"
-msgstr "rus:Add subproject!"
+msgstr "Добавить подпроект!"
 
 msgid "Add task"
-msgstr "rus:Add task!"
+msgstr "Добавить задачу!"
 
 msgid "Sun"
-msgstr "rus:Sun!"
+msgstr "Воскр!"
 
 msgid "Mon"
-msgstr "rus:Mon!"
+msgstr "Пн!"
 
 msgid "Tue"
-msgstr "rus:Tue!"
+msgstr "Вт!"
 
 msgid "Wen"
-msgstr "rus:Wen!"
+msgstr "Ср!"
 
 msgid "Thu"
-msgstr "rus:Thu!"
+msgstr "Чт!"
 
 msgid "Fri"
-msgstr "rus:Fri!"
+msgstr "Пт!"
 
 msgid "Sat"
-msgstr "rus:Sat!"
+msgstr "Сб"
 
 msgid "Event title"
-msgstr "rus:Event title!"
+msgstr "Название события!"
 
 msgid "Event description"
-msgstr "rus:Event description!"
+msgstr "Описание события!"
 
 msgid "I registered on this site"
-msgstr "rus:I registered on this site!"
+msgstr "Я зарегистрировался на сайте!"
 
 msgid "Last created groups"
-msgstr "rus:Last created groups!"
+msgstr "Последние созданные группы!"
 
 msgid "You joined this group as "
-msgstr "rus:You joined this group as !"
+msgstr "Вы вступили в эту группу !"
 
 msgid "You received a request to join your group"
-msgstr "rus:You received a request to join your group!"
+msgstr  "Вы предложение присоединиться к своей группе !"
 
 msgid "Updated site began to work"
-msgstr "rus:Updated site began to work!"
+msgstr "Сайт работает после обноления!"
 
 msgid "Last registered users"
-msgstr "rus:Last registered users!"
+msgstr "Последний зарегистрированный пользователь!"
 
