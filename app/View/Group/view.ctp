@@ -223,6 +223,11 @@
             <div class="units-list clearfix">
 <?
 		foreach($aMembers as $user) {
+			$role = ($user['ChatUser']['id'] == $group['Group']['owner_id']) ? __('Administrator') : Hash::get($user, 'GroupMember.role');
+			if ($user['ChatUser']['id'] == $group['Group']['owner_id'] && $group['Group']['id'] == Configure::read('Konstructor.groupID')) {
+				$role = __('CEO');
+			}
+			
 ?>
                 <div class="units-list-item">
                     <a href="<?=$this->html->url(array('controller' => 'Profile', 'action' => 'view', $user['ChatUser']['id']))?>">
@@ -233,7 +238,7 @@
                             <?=$user['ChatUser']['name']?>
                         </div>
                         <div class="units-list-item-spec">
-                            <?=($user['ChatUser']['id'] == $group['Group']['owner_id']) ? __('Administrator') : Hash::get($user, 'GroupMember.role')?>
+                            <?=$role?>
                         </div>
                     </a>
                 </div>

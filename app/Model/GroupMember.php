@@ -30,8 +30,8 @@ class GroupMember extends AppModel {
 		// $aID = Hash::extract($aMembers, '{n}.GroupMember.user_id');
 		$aID = array_keys($aMembers);
 		
-		$group = $this->Group->findById($group_id);
-		$aID = array_merge(array($group['Group']['owner_id']), $aID);
+		// $group = $this->Group->findById($group_id);
+		// $aID = array_merge(array($group['Group']['owner_id']), $aID);
 		
 		$this->loadModel('ChatUser');
 		$aUsers = $this->ChatUser->getUsers($aID);
@@ -43,6 +43,8 @@ class GroupMember extends AppModel {
 				$members[$user_id] = array_merge($members[$user_id], $aMembers[$user_id]);
 			}
 		}
+		$group = $this->Group->findById($group_id);
+		$members = array_merge(array($this->ChatUser->getUser($group['Group']['owner_id'])), $members);
 		/*
 		$aMembers = Hash::combine($this->ChatUser->getUsers($aID), '{n}.ChatUser.id', '{n}');
 		$aMembers = array_merge(
