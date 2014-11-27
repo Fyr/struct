@@ -5,16 +5,17 @@ $(document).ready(function () {
         //var dialogHeight = $(window).height() - $(".bottom").height();
         //$(".dialog").height(dialogHeight);
 
-        $('.dialog').css({'padding-bottom':$('.bottom').height()});
+        $('.dialog').css({'max-height':$(window).height() - $('.bottom').height()});
+		
 
     });
-    
-    $('.dialog').css({'padding-bottom':$('.bottom').height()});
+
+    $('.dialog').css({'max-height':$(window).height() - $('.bottom').height()});
 
     //var dialogHeight = $(window).height() - $(".bottom").height();
     //$(".dialog").height(dialogHeight);
 
-    //$(".dialog").scrollTop($(".innerDialog").height() - $(".dialog").height() + 97);
+    $(".dialog").scrollTop($(".innerDialog").height() - $(".dialog").height() + 97);
 
 
 
