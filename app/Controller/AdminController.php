@@ -24,12 +24,15 @@ class AdminController extends AppController {
 		);
 		$this->aBottomLinks = $this->aNavBar;
 	}
-	/*
+	
 	public function isAuthorized($user) {
 		$this->set('currUser', $user);
-		return Hash::get($user, 'is_admin');
+		if (!Hash::get($user, 'is_admin')) {
+			$this->redirect($this->Auth->loginAction);
+		}
+		return true;// Hash::get($user, 'is_admin');
 	}
-	*/
+	
 	public function beforeFilter() {
 	    $this->currMenu = $this->_getCurrMenu();
 	    $this->currLink = $this->currMenu;

@@ -92,5 +92,6 @@
         </div>
     </div>
 </div>
+<?//$this->element('sql_dump')?>
 </body>
 </html>

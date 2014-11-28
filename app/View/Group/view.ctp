@@ -224,7 +224,7 @@
 <?
 		foreach($aMembers as $user) {
 			$role = ($user['ChatUser']['id'] == $group['Group']['owner_id']) ? __('Administrator') : Hash::get($user, 'GroupMember.role');
-			if ($user['ChatUser']['id'] == $group['Group']['owner_id'] && $group['Group']['id'] == Configure::read('Konstructor.groupID')) {
+			if ($user['ChatUser']['id'] == $group['Group']['owner_id'] && $groupID == Configure::read('Konstructor.groupID')) {
 				$role = __('CEO');
 			}
 			
@@ -251,7 +251,7 @@
 </div>
 <?
 	}
-	if (in_array($currUserID, array_keys($aMembers))) {
+	if (in_array($currUserID, array_keys($aMembers)) || $groupID == Configure::read('Konstructor.groupID')) {
 ?>
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">

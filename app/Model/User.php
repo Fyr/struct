@@ -1,8 +1,29 @@
 <?php
 App::uses('AppModel', 'Model');
+App::uses('Media', 'Media.Model');
 class User extends AppModel {
-	// public $useDbConfig = 'users';
-	public $useTable = 'clients';
+	
+	public $hasOne = array(
+		'Media' => array(
+			'className' => 'Media.Media',
+			'foreignKey' => 'object_id',
+			'conditions' => array('Media.object_type' => 'User'),
+			'dependent' => true
+		),
+		'MediaUniversity' => array(
+			'className' => 'Media.Media',
+			'foreignKey' => 'object_id',
+			'conditions' => array('MediaUniversity.object_type' => 'UserUniversity'),
+			'dependent' => true
+		)
+	);
+	
+	public $hasMany = array(
+		'UserAchievement' => array(
+			'order' => array('UserAchievement.id DESC'),
+			'dependent' => true
+		)
+	);
 	
 	public $validate = array(
 		'username' => array(
@@ -39,20 +60,22 @@ class User extends AppModel {
 		return false;
 	}
 */
+/*
 	public function beforeValidate($options = array()) {
 		if (Hash::get($options, 'validate')) {
 			if (!Hash::get($this->data, 'User.password')) {
+				fdebug('validator_remove');
 				$this->validator()->remove('password');
 				$this->validator()->remove('password_confirm');
 			}
 		}
 	}
-
+*/
 	public function beforeSave($options = array()) {
 		if (isset($this->data['User']['password'])) {
 			$this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
 		}
 		return true;
 	}
-
+	
 }

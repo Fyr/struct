@@ -3,7 +3,6 @@ App::uses('AppController', 'Controller');
 class UsersController extends AppController {
 	public $name = 'Users';
 	public $layout = 'home';
-	public $uses = array('User', 'ChatUser', 'Profile');
 	
 	public function register() {
 		if ($this->request->is('put') || $this->request->is('post')) {
@@ -11,11 +10,10 @@ class UsersController extends AppController {
 			if ( !(isset($_COOKIE['tzo']) && isset($_COOKIE['tzd'])) ) {
 				exit('Sorry, your browser must support Cookies and Javascript');
 			}
-			if ($this->ChatUser->save($this->request->data('ChatUser'))) {
-				$timezone = timezone_name_from_abbr('', -$_COOKIE['tzo'] * 60, $_COOKIE['tzd']);
-				$this->Profile->save(array('user_id' => $this->ChatUser->id, 'timezone' => $timezone));
-				$user = $this->ChatUser->findById($this->ChatUser->id);
-				$this->Auth->login($user['ChatUser']);
+			$timezone = timezone_name_from_abbr('', -$_COOKIE['tzo'] * 60, $_COOKIE['tzd']);
+			$this->request->data('User.timezone', $timezone);
+			if ($this->User->save($this->request->data('User'))) {
+				$this->Auth->login();
 				return $this->redirect($this->Auth->redirect());
 			}
 		}
@@ -28,12 +26,10 @@ class UsersController extends AppController {
 					exit('Sorry, your browser must support Cookies and Javascript');
 				}
 				$timezone = timezone_name_from_abbr('', -$_COOKIE['tzo'] * 60, $_COOKIE['tzd']);
-				$user = $this->ChatUser->findByUsername($this->request->data('User.username'));
-				$profile = $this->Profile->findByUserId($user['ChatUser']['id']);
-				$this->Profile->save(array('id' => Hash::get($profile, 'Profile.id'), 'user_id' => $user['ChatUser']['id'], 'timezone' => $timezone));
+				$this->User->save(array('id' => $this->Auth->user('id'), 'timezone' => $timezone));
 				return $this->redirect($this->Auth->redirect());
 			} else {
-				$this->set('authError', AUTH_ERROR);
+				$this->Session->setFlash(AUTH_ERROR, null, null, 'auth');
 			}
 		}
 	}

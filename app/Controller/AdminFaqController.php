@@ -2,7 +2,7 @@
 App::uses('AdminController', 'Controller');
 class AdminFaqController extends AdminController {
 	public $name = 'AdminFaq';
-	public $components = array('Auth', 'Table.PCTableGrid');
+	public $components = array('Table.PCTableGrid');
 	public $uses = array('Faq');
 	
 	public function index() {

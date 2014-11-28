@@ -1,9 +1,9 @@
-<?=$this->Form->create('ChatUser', array('url' => array('controller' => 'Users', 'action' => 'register'), 'class' => 'form', 'id' => 'registerForm'))?>
+<?=$this->Form->create('User', array('url' => array('controller' => 'Users', 'action' => 'register'), 'class' => 'form', 'id' => 'registerForm'))?>
     <div class="input-box-item">
-        <?=$this->Form->input('ChatUser.username', array('label' => false, 'placeholder' => 'Email'))?>
+        <?=$this->Form->input('username', array('label' => false, 'placeholder' => 'Email'))?>
     </div>
     <div class="input-box-item">
-    	<?=$this->Form->input('ChatUser.password', array('label' => false, 'placeholder' => 'Password', 'required' => true))?>
+    	<?=$this->Form->input('password', array('label' => false, 'placeholder' => 'Password', 'required' => true))?>
     </div>
     <div class="login-box">
         <label for="terms-of-use" class="terms-of-use">

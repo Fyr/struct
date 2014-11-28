@@ -8,7 +8,6 @@ class ProfileController extends SiteController {
 	public $helpers = array('Media');
 	
 	public function index() {
-		$this->autoRender = false;
 		return $this->redirect(array('controller' => 'Timeline', 'action' => 'index'));
 	}
 	

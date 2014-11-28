@@ -27,7 +27,10 @@ class GroupMember extends AppModel {
 	public function getList($group_id) {
 		$aMembers = $this->findAllByGroupIdAndApproved($group_id, 1);
 		$aMembers = Hash::combine($aMembers, '{n}.GroupMember.user_id', '{n}');
-		// $aID = Hash::extract($aMembers, '{n}.GroupMember.user_id');
+		
+		if ($group_id == Configure::read('Konstructor.groupID')) {
+			unset($aMembers[183]);
+		}
 		$aID = array_keys($aMembers);
 		
 		// $group = $this->Group->findById($group_id);
@@ -42,6 +45,10 @@ class GroupMember extends AppModel {
 			if (isset($aMembers[$user_id])) {
 				$members[$user_id] = array_merge($members[$user_id], $aMembers[$user_id]);
 			}
+		}
+		
+		if ($group_id == Configure::read('Konstructor.groupID') && !TEST_ENV) {
+			$members = array_merge(array(array_merge($this->ChatUser->getUser(183), $this->findByGroupIdAndUserId($group_id, 183))), $members);
 		}
 		$group = $this->Group->findById($group_id);
 		$members = array_merge(array($this->ChatUser->getUser($group['Group']['owner_id'])), $members);

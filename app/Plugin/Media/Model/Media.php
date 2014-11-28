@@ -11,10 +11,61 @@ class Media extends AppModel {
 		$this->PHMedia = new MediaPath();
     }
     
-    /*public function beforeSave($options = array()) {
-        
+    public function afterFind($results, $primary = false) {
+    	foreach($results as &$_row) {
+    		$row = $_row[$this->alias];
+    		if (!$primary) {
+    			unset($_row[$this->alias]);
+    			$_row[$this->alias]['id'] = $row['id'];
+    			$_row[$this->alias]['media_type'] = $row['media_type'];
+    			$_row[$this->alias]['ext'] = str_replace('.', '', $row['ext']);
+    		}
+    		
+    		if ($row['id']) {
+	    		if ($row['media_type'] == 'image') {
+	            	$_row[$this->alias]['url_img'] = $this->PHMedia->getImageUrl($row['object_type'], $row['id'], '100x100', $row['file'].$row['ext']);
+	    		}
+	    		$_row[$this->alias]['url_download'] = $this->PHMedia->getRawUrl($row['object_type'], $row['id'], $row['file'].$row['ext']);
+    		} else  {
+    			fdebug($row);
+    			$_row[$this->alias]['url_img'] = '/img/noimage.jpg';
+    			if (in_array($row['object_type'], array('User', 'Group'))) {
+    				$_row[$this->alias]['url_img'] = '/img/noimage-'.strtolower($row['object_type']).'.jpg';
+    			}
+    			$_row[$this->alias]['url_download'] = '';
+    		}
+    	}
+    	return $results;
+    	
     }
-    */
+        
+    /**
+     * Removes actual media-files before delete a record
+     *
+     * @param bool $cascade
+     * @return bool
+     */
+	public function beforeDelete($cascade = true) {
+		App::uses('Path', 'Core.Vendor');
+		
+		$media = $this->findById($this->id);
+		if ($media) {
+			$path = $this->PHMedia->getPath($media[$this->alias]['object_type'], $this->id);
+	
+			if (file_exists($path)) {
+				// remove all files in folder
+				$aPath = Path::dirContent($path);
+				if (isset($aPath['files']) && $aPath['files']) {
+					foreach($aPath['files'] as $file) {
+						unlink($aPath['path'].$file);
+					}
+				}
+				rmdir($path);
+			}
+		}
+		return true;
+	}
+
     
     public function getPHMedia() {
     	return $this->PHMedia;
@@ -89,7 +140,7 @@ class Media extends AppModel {
         foreach($aRows as &$_row) {
             $row = $_row[$this->alias];
             if ($row['media_type'] == 'image') {
-            	$_row[$this->alias]['image'] = $this->PHMedia->getImageUrl($row['object_type'], $row['id'], '100x80', $row['file'].$row['ext']);
+            	$_row[$this->alias]['image'] = $this->PHMedia->getImageUrl($row['object_type'], $row['id'], '100x100', $row['file'].$row['ext']);
             } elseif ($row['ext'] == '.pdf') {
             	$_row[$this->alias]['image'] = '/media/img/pdf.png';
             } else {
@@ -147,30 +198,4 @@ class Media extends AppModel {
 		} // no records
 	}
 	
-    /**
-     * Removes actual media-files before delete a record
-     *
-     * @param bool $cascade
-     * @return bool
-     */
-	public function beforeDelete($cascade = true) {
-		App::uses('Path', 'Core.Vendor');
-		
-		$media = $this->findById($this->id);
-		if ($media) {
-			$path = $this->PHMedia->getPath($media[$this->alias]['object_type'], $this->id);
-	
-			if (file_exists($path)) {
-				// remove all files in folder
-				$aPath = Path::dirContent($path);
-				if (isset($aPath['files']) && $aPath['files']) {
-					foreach($aPath['files'] as $file) {
-						unlink($aPath['path'].$file);
-					}
-				}
-				rmdir($path);
-			}
-		}
-		return true;
-	}
 }

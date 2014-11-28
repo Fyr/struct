@@ -10,7 +10,7 @@ class ChatUser extends AppModel {
 			'foreignKey' => 'user_id'
 		)
 	);
-	
+	/*
 	public $validate = array(
 		'username' => array(
 			'checkNotEmpty' => array(
@@ -37,9 +37,10 @@ class ChatUser extends AppModel {
 			),
 		),
 	);
-	
+	*/
 	protected $ChatEvent, $ChatRoom, $Profile, $Media, $Group;
 	
+	/*
 	public function beforeValidate($options = array()) {
 		if (Hash::get($options, 'validate')) {
 			if (!Hash::get($this->data, 'ChatUser.password')) {
@@ -55,7 +56,7 @@ class ChatUser extends AppModel {
 		}
 		return true;
 	}
-	
+	*/
 	protected function _initUserData($user) {
 		$user['ChatUser']['name'] = (trim($user['ChatUserData']['full_name'])) ? $user['ChatUserData']['full_name'] : $user['ChatUser']['username'];
 		// $user['Avatar']['url'] = (trim($user['ChatUserData']['avatar'])) ? $user['ChatUserData']['avatar'] : '/img/no-photo.jpg';
