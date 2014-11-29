@@ -223,19 +223,19 @@
             <div class="units-list clearfix">
 <?
 		foreach($aMembers as $user) {
-			$role = ($user['ChatUser']['id'] == $group['Group']['owner_id']) ? __('Administrator') : Hash::get($user, 'GroupMember.role');
-			if ($user['ChatUser']['id'] == $group['Group']['owner_id'] && $groupID == Configure::read('Konstructor.groupID')) {
+			$role = ($user['User']['id'] == $group['Group']['owner_id']) ? __('Administrator') : Hash::get($user, 'GroupMember.role');
+			if ($user['User']['id'] == $group['Group']['owner_id'] && $groupID == Configure::read('Konstructor.groupID')) {
 				$role = __('CEO');
 			}
 			
 ?>
                 <div class="units-list-item">
-                    <a href="<?=$this->html->url(array('controller' => 'Profile', 'action' => 'view', $user['ChatUser']['id']))?>">
+                    <a href="<?=$this->html->url(array('controller' => 'Profile', 'action' => 'view', $user['User']['id']))?>">
                         <div class="units-list-item-image bb-aqua">
-                            <img src="<?=$user['Avatar']['url']?>" alt="<?=$user['ChatUser']['name']?>" />
+                            <img src="<?=$user['Media']['url_img']?>" alt="<?=$user['User']['full_name']?>" />
                         </div>
                         <div class="units-list-item-name">
-                            <?=$user['ChatUser']['name']?>
+                            <?=$user['User']['full_name']?>
                         </div>
                         <div class="units-list-item-spec">
                             <?=$role?>

@@ -15,11 +15,11 @@ class ProfileAjaxController extends PAjaxController {
 	}
 	
 	public function panel() {
-		$this->loadModel('ChatUser');
+		$this->loadModel('User');
 		$this->loadModel('Group');
 		$q = $this->request->data('q');
 		if ($q) {
-			$this->set('aUsers', $this->ChatUser->search($this->currUserID, $q));
+			$this->set('aUsers', $this->User->search($this->currUserID, $q));
 			$this->set('aGroups', $this->Group->search($this->currUserID, $q));
 		}
 	}

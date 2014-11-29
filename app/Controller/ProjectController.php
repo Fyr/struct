@@ -8,7 +8,7 @@ App::uses('SiteController', 'Controller');
 class ProjectController extends SiteController {
 	public $name = 'Project';
 	public $layout = 'profile';
-	public $uses = array('Project', 'ProjectEvent', 'Subproject', 'Task', 'GroupMember', 'ChatUser', 'Group', 'Media.Media', 'ChatMessage');
+	public $uses = array('Project', 'ProjectEvent', 'Subproject', 'Task', 'GroupMember', 'User', 'Group', 'Media.Media', 'ChatMessage');
 	public $helpers = array('Media');
 	
 	public function edit($id = 0) {
@@ -52,7 +52,7 @@ class ProjectController extends SiteController {
 		$this->set('isProjectAdmin', Hash::get($project, 'Project.owner_id') == $this->currUserID);
 		
 		$members = $this->GroupMember->getList($project['Project']['group_id']);
-		if (!in_array($this->currUserID, Hash::extract($members, '{n}.ChatUser.id'))) {
+		if (!in_array($this->currUserID, Hash::extract($members, '{n}.User.id'))) {
 			return $this->redirect(array('controller' => 'Group', 'action' => 'view', $project['Project']['group_id']));
 		}
 		$this->set('aUsers', $members);
@@ -63,7 +63,7 @@ class ProjectController extends SiteController {
 		$aID = array_keys($subprojects);
 		$aTasks = $this->Task->findAllBySubprojectId($aID);
 
-		$this->set('aMemberOptions', Hash::combine($members, '{n}.ChatUser.id', '{n}.ChatUser.name'));
+		$this->set('aMemberOptions', Hash::combine($members, '{n}.User.id', '{n}.User.full_name'));
 		
 		$conditions = array('ProjectEvent.project_id' => $id);
 		$order = 'ProjectEvent.created DESC';
@@ -79,8 +79,8 @@ class ProjectController extends SiteController {
 	
 	public function task($id) {
 		$task = $this->Task->findById($id);
-		$aUsers = $this->ChatUser->getUsers(array($task['Task']['manager_id'], $task['Task']['user_id']));
-		$this->set('aUsers', Hash::combine($aUsers, '{n}.ChatUser.id', '{n}'));
+		$aUsers = $this->User->getUsers(array($task['Task']['manager_id'], $task['Task']['user_id']));
+		$this->set('aUsers', Hash::combine($aUsers, '{n}.User.id', '{n}'));
 		$subproject = $this->Subproject->findById($task['Task']['subproject_id']);
 		$project_id = $subproject['Subproject']['project_id'];
 		$project = $this->Project->findById($project_id);

@@ -5,7 +5,7 @@ class GroupMember extends AppModel {
 	
 	public $belongsTo = array('Group');
 	
-	protected $ChatUser;
+	protected $User;
 	
 	function timelineEvents($currUserID, $date, $date2) {
 		$conditions = array_merge(
@@ -36,11 +36,11 @@ class GroupMember extends AppModel {
 		// $group = $this->Group->findById($group_id);
 		// $aID = array_merge(array($group['Group']['owner_id']), $aID);
 		
-		$this->loadModel('ChatUser');
-		$aUsers = $this->ChatUser->getUsers($aID);
+		$this->loadModel('User');
+		$aUsers = $this->User->getUsers($aID);
 		$members = array();
 		foreach($aUsers as $user) {
-			$user_id = $user['ChatUser']['id'];
+			$user_id = $user['User']['id'];
 			$members[$user_id] = $user;
 			if (isset($aMembers[$user_id])) {
 				$members[$user_id] = array_merge($members[$user_id], $aMembers[$user_id]);
@@ -48,17 +48,17 @@ class GroupMember extends AppModel {
 		}
 		
 		if ($group_id == Configure::read('Konstructor.groupID') && !TEST_ENV) {
-			$members = array_merge(array(array_merge($this->ChatUser->getUser(183), $this->findByGroupIdAndUserId($group_id, 183))), $members);
+			$members = array_merge(array(array_merge($this->User->getUser(183), $this->findByGroupIdAndUserId($group_id, 183))), $members);
 		}
 		$group = $this->Group->findById($group_id);
-		$members = array_merge(array($this->ChatUser->getUser($group['Group']['owner_id'])), $members);
+		$members = array_merge(array($this->User->getUser($group['Group']['owner_id'])), $members);
 		/*
-		$aMembers = Hash::combine($this->ChatUser->getUsers($aID), '{n}.ChatUser.id', '{n}');
+		$aMembers = Hash::combine($this->User->getUsers($aID), '{n}.User.id', '{n}');
 		$aMembers = array_merge(
-			Hash::combine($this->ChatUser->getUsers($aID), '{n}.ChatUser.id', '{n}'),
+			Hash::combine($this->User->getUsers($aID), '{n}.User.id', '{n}'),
 			Hash::combine($aMembers, '{n}.GroupMember.user_id', '{n}')
 		);
-		$aMembers = Hash::combine($aMembers, '{n}.ChatUser.id', '{n}');
+		$aMembers = Hash::combine($aMembers, '{n}.User.id', '{n}');
 		return $aMembers;
 		*/
 		return $members;

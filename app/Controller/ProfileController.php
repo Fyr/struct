@@ -4,7 +4,7 @@ App::uses('SiteController', 'Controller');
 class ProfileController extends SiteController {
 	public $name = 'Profile';
 	public $layout = 'profile';
-	public $uses = array('Profile', 'ChatUserData');
+	public $uses = array('Profile', 'UserData');
 	public $helpers = array('Media');
 	
 	public function index() {
@@ -23,9 +23,9 @@ class ProfileController extends SiteController {
 			}
 			$this->Profile->saveAll($this->request->data);
 			
-			$this->request->data('ChatUserData.user_id', $this->currUserID);
-			$this->request->data('ChatUserData.full_name', $this->request->data('Profile.full_name'));
-			$this->ChatUserData->save($this->request->data);
+			$this->request->data('UserData.user_id', $this->currUserID);
+			$this->request->data('UserData.full_name', $this->request->data('Profile.full_name'));
+			$this->UserData->save($this->request->data);
 			return $this->redirect(array('controller' => $this->name, 'action' => 'edit', '?' => array('success' => '1')));
 		} else {
 			$this->request->data = $this->profile;
@@ -37,7 +37,7 @@ class ProfileController extends SiteController {
 		if (!$id) {
 			$id = $this->currUserID;
 		}
-		$this->set('user', $this->ChatUser->getUser($id));
+		$this->set('user', $this->User->getUser($id));
 		$this->set('aGroups', $this->GroupMember->getUserGroups($id));
 	}
 	

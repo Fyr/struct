@@ -1,6 +1,6 @@
 <div class="col-md-12 col-sm-12 col-xs-12 mutant-title">
     <div class="col-md-9 col-sm-9 col-xs-12">
-        <div class="page-title"><?=Hash::get($user, 'ChatUser.name')?></div>
+        <div class="page-title"><?=Hash::get($user, 'User.full_name')?></div>
         <div class="user-spec">
             <div class="spec"><?=Hash::get($user, 'Profile.skills')?></div>
 <?
@@ -73,7 +73,7 @@
 <?
 	$src = (Hash::get($user, 'Media.id')) ? $this->Media->imageUrl($user, 'thumb150x150') : '/img/no-photo.jpg';
 ?>
-			<img style="width: 150px" src="<?=$src?>" alt="<?=Hash::get($user, 'ChatUser.username')?>" />
+			<img style="width: 150px" src="<?=$src?>" alt="<?=Hash::get($user, 'User.username')?>" />
 
         </div>
     </div>
@@ -103,7 +103,7 @@
             <div class="vp10">
                 <div class="fs15 mt10"><?=Hash::get($user, 'Profile.phone')?></div>
                 <div class="fs15 mt10">
-                    <a href="mailto:<?//Hash::get($user, 'ChatUser.username')?>"><?//Hash::get($user, 'ChatUser.username')?></a>
+                    <a href="mailto:<?//Hash::get($user, 'User.username')?>"><?//Hash::get($user, 'User.username')?></a>
                 </div>
             </div>
         </div>

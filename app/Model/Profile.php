@@ -39,7 +39,7 @@ class Profile extends AppModel {
 		// fdebug(array($date, $date2), 'tmp.log', false);
 		
 		$aModels = array(
-			'ChatUser' => 'last_users', 
+			'User' => 'last_users', 
 			'Group' => 'last_groups', 
 			'ChatEvent' => 'unread_msgs', 
 			'UserEvent' => 'user_events',
@@ -55,13 +55,13 @@ class Profile extends AppModel {
 		
 		// Get users data ("vocabluary" array(ID => data))
 		$aID = array_merge(
-			Hash::extract($data['last_users'], '{n}.ChatUser.id'),
+			Hash::extract($data['last_users'], '{n}.User.id'),
 			Hash::extract($data['unread_msgs'], '{n}.ChatEvent.initiator_id'),
 			Hash::extract($data['group_member']['request'], '{n}.GroupMember.user_id'),
 			Hash::extract($data['project_events'], '{n}.ProjectEvent.user_id')
 		);
-		$data['users'] = $this->ChatUser->getUsers($aID);
-		$data['users'] = Hash::combine($data['users'], '{n}.ChatUser.id', '{n}');
+		$data['users'] = $this->User->getUsers($aID);
+		$data['users'] = Hash::combine($data['users'], '{n}.User.id', '{n}');
 		
 		// Get messages data
 		$this->loadModel('ChatMessage');
@@ -107,11 +107,11 @@ class Profile extends AppModel {
 		// Self-registration
 		$conditions = array_merge(
 			array('id' => $currUserID),
-			$this->dateRange('ChatUser.created', $date, $date2)
+			$this->dateRange('User.created', $date, $date2)
 		);
-		$user = $this->ChatUser->find('first', compact('conditions'));
+		$user = $this->User->find('first', compact('conditions'));
 		if ($user) {
-			$created = $user['ChatUser']['created'];
+			$created = $user['User']['created'];
 			$data['events'][$created]['SelfRegistration'] = array(
 				'created' => $created,
 			);

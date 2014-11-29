@@ -259,7 +259,7 @@ $(document).ready(function(){
         <div class="massage-post clearfix">
             <figure>
             	<a href="{%=url%}">
-            		<img alt="{%=user.ChatUser.name%}" src="{%=user.Avatar.url%}" style="width: 50px">
+            		<img alt="{%=user.User.full_name%}" src="{%=user.Avatar.url%}" style="width: 50px">
             	</a>
             </figure>
             		
@@ -401,10 +401,10 @@ $(document).ready(function(){
         <ul class="user-visited-list clearfix">
 {%
 	for(var i = 0; i < o.globalData.last_users.length; i++) {
-		var user = o.globalData.users[o.globalData.last_users[i].ChatUser.id];
+		var user = o.globalData.users[o.globalData.last_users[i].User.id];
 		var url = '<?=$this->Html->url(array('controller' => 'Profile', 'action' => 'view', '~user_id'))?>';
 %}
-            <li class="good"><a href="{%=url.replace(/~user_id/g, user.ChatUser.id)%}"><img alt="{%=user.ChatUser.name%}" src="{%=user.Avatar.url%}" style="width: 50px;"></a></li>
+            <li class="good"><a href="{%=url.replace(/~user_id/g, user.User.id)%}"><img alt="{%=user.User.full_name%}" src="{%=user.Avatar.url%}" style="width: 50px;"></a></li>
 {%
 	}
 %}

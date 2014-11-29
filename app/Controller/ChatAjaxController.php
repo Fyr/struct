@@ -3,7 +3,7 @@ App::uses('AppController', 'Controller');
 App::uses('PAjaxController', 'Core.Controller');
 class ChatAjaxController extends PAjaxController {
 	public $name = 'ChatAjax';
-	public $uses = array('ChatUser', 'ChatMessage', 'ChatEvent');
+	public $uses = array('User', 'ChatMessage', 'ChatEvent');
 
 	public function beforeFilter() {
 		parent::beforeFilter();
@@ -16,7 +16,7 @@ class ChatAjaxController extends PAjaxController {
 	
 	public function panel() {
 		/*
-		$aUsers = $this->ChatUser->getContactListUsers($this->currUserID);
+		$aUsers = $this->User->getContactListUsers($this->currUserID);
 		$this->set('aUsers', $aUsers);
 		*/
 		$this->contactList();
@@ -25,7 +25,7 @@ class ChatAjaxController extends PAjaxController {
 	public function contactList() {
 		/*
 		try {
-			$aUsers = $this->ChatUser->getContactListUsers($this->currUserID);
+			$aUsers = $this->User->getContactListUsers($this->currUserID);
 			$this->setResponse($aUsers);
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
@@ -34,9 +34,9 @@ class ChatAjaxController extends PAjaxController {
 		$aUsers = array();
 		$q = $this->request->data('q');
 		if ($q) {
-			$aUsers = $this->ChatUser->search($this->currUserID, $q);
+			$aUsers = $this->User->search($this->currUserID, $q);
 		} else {
-			$aUsers = $this->ChatUser->getContactListUsers($this->currUserID);
+			$aUsers = $this->User->getContactListUsers($this->currUserID);
 		}
 		$this->set('aUsers', $aUsers);
 	}
@@ -49,7 +49,7 @@ class ChatAjaxController extends PAjaxController {
 			}
 			
 			$room = $this->ChatEvent->openRoom($this->currUserID, $userID);
-			$user = $this->ChatUser->getUser($userID);
+			$user = $this->User->getUser($userID);
 			$events = $this->ChatEvent->getAllRoomEvents($this->currUserID, $room['ChatRoom']['id']);
 			return $this->setResponse(compact('room', 'user', 'events'));
 		} catch (Exception $e) {

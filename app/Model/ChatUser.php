@@ -1,12 +1,12 @@
 <?php
 App::uses('AppModel', 'Model');
-class ChatUser extends AppModel {
+class User extends AppModel {
 	// public $useDbConfig = 'users';
 	public $useTable = 'clients';
 	// public $primaryKey = 'id';
 	
 	public $hasOne = array(
-		'ChatUserData' => array(
+		'UserData' => array(
 			'foreignKey' => 'user_id'
 		)
 	);
@@ -43,7 +43,7 @@ class ChatUser extends AppModel {
 	/*
 	public function beforeValidate($options = array()) {
 		if (Hash::get($options, 'validate')) {
-			if (!Hash::get($this->data, 'ChatUser.password')) {
+			if (!Hash::get($this->data, 'User.password')) {
 				$this->validator()->remove('password');
 				$this->validator()->remove('password_confirm');
 			}
@@ -51,20 +51,20 @@ class ChatUser extends AppModel {
 	}
 
 	public function beforeSave($options = array()) {
-		if (isset($this->data['ChatUser']['password'])) {
-			$this->data['ChatUser']['password'] = AuthComponent::password($this->data['ChatUser']['password']);
+		if (isset($this->data['User']['password'])) {
+			$this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
 		}
 		return true;
 	}
 	*/
 	protected function _initUserData($user) {
-		$user['ChatUser']['name'] = (trim($user['ChatUserData']['full_name'])) ? $user['ChatUserData']['full_name'] : $user['ChatUser']['username'];
-		// $user['Avatar']['url'] = (trim($user['ChatUserData']['avatar'])) ? $user['ChatUserData']['avatar'] : '/img/no-photo.jpg';
+		$user['User']['full_name'] = (trim($user['UserData']['full_name'])) ? $user['UserData']['full_name'] : $user['User']['username'];
+		// $user['Media']['url_img'] = (trim($user['UserData']['avatar'])) ? $user['UserData']['avatar'] : '/img/no-photo.jpg';
 
-		// $user['ChatUser']['name'] = $user['ChatUser']['username'];
+		// $user['User']['full_name'] = $user['User']['username'];
 		
 		$this->loadModel(array('Profile', 'Media.Media'));
-		$profile = $this->Profile->findByUserId($user['ChatUser']['id']);
+		$profile = $this->Profile->findByUserId($user['User']['id']);
 		if ($profile) {
 			$user = array_merge($user, $profile);
 		}
@@ -74,7 +74,7 @@ class ChatUser extends AppModel {
 		} else {
 			$src = '/img/no-photo.jpg';
 		}
-		$user['Avatar']['url'] = $src;
+		$user['Media']['url_img'] = $src;
 		return $user;
 	}
 
@@ -89,7 +89,7 @@ class ChatUser extends AppModel {
 		$aActiveRooms = $this->ChatEvent->getActiveRooms($currUserID);
 		$aID = Hash::extract($aActiveRooms, '{n}.ChatEvent.initiator_id');
 		$aUsers = $this->getUsers($aID);
-		$aUsers = Hash::combine($aUsers, '{n}.ChatUser.id', '{n}');
+		$aUsers = Hash::combine($aUsers, '{n}.User.id', '{n}');
 		foreach($aActiveRooms as &$user) {
 			$user_id = Hash::get($user, 'ChatEvent.initiator_id');
 			$user = array_merge($user, $aUsers[$user_id]);
@@ -117,7 +117,7 @@ class ChatUser extends AppModel {
 	public function getUsers($aID = array()) {
 		$aUsers = array();
 		if ($aID) {
-			$fields = array('ChatUser.id', 'ChatUser.username', 'ChatUserData.full_name');
+			$fields = array('User.id', 'User.username', 'UserData.full_name');
 			$conditions = array('id' => $aID);
 			$aUsers = $this->find('all', compact('fields', 'conditions'));
 		}
@@ -129,13 +129,13 @@ class ChatUser extends AppModel {
 	
 	public function search($currUserID, $q) {
 		$this->loadModel('Profile');
-		$fields = 'ChatUser.id, ChatUser.username';
+		$fields = 'User.id, User.username';
 		$conditions = array(
-			'ChatUser.id <> '.$currUserID,
+			'User.id <> '.$currUserID,
 			'AND' => array(
 				'OR' => array(
-					array('ChatUserData.full_name LIKE ?' => '%'.$q.'%'),
-					array('ChatUser.username LIKE ?' => '%'.$q.'%'),
+					array('UserData.full_name LIKE ?' => '%'.$q.'%'),
+					array('User.username LIKE ?' => '%'.$q.'%'),
 					array('Profile.skills LIKE ?' => '%'.$q.'%'),
 					// array('Profile.live_place LIKE ?' => '%'.$q.'%'),
 					// array('Group.title LIKE ?' => '%'.$q.'%'),
@@ -143,12 +143,12 @@ class ChatUser extends AppModel {
 			)
 		);
 		$joins = array(
-			array('type' => 'left', 'table' => $this->Profile->getTableName(), 'alias' => 'Profile', 'conditions' => array('Profile.user_id = ChatUser.id')),
-			// array('type' => 'left', 'table' => $this->Group->getTableName(), 'alias' => 'Group', 'conditions' => array('Group.owner_id = ChatUser.id'))
+			array('type' => 'left', 'table' => $this->Profile->getTableName(), 'alias' => 'Profile', 'conditions' => array('Profile.user_id = User.id')),
+			// array('type' => 'left', 'table' => $this->Group->getTableName(), 'alias' => 'Group', 'conditions' => array('Group.owner_id = User.id'))
 		);
-		$order = array('ChatUser.username');
+		$order = array('User.username');
 		$aUsers = $this->find('all', compact('fields', 'conditions', 'order', 'joins'));
-		$aID = Hash::extract($aUsers, '{n}.ChatUser.id');
+		$aID = Hash::extract($aUsers, '{n}.User.id');
 		
 		// get all user except current
 		$aUsers = $this->getUsers($aID);
@@ -156,9 +156,9 @@ class ChatUser extends AppModel {
 	}
 	
 	public function timelineEvents($currUserID, $date, $date2) {
-		$fields = array('ChatUser.created', 'ChatUser.id');
-		// $conditions = $this->dateRange('ChatUser.created', $date, $date2);
-		$order = 'ChatUser.created DESC';
+		$fields = array('User.created', 'User.id');
+		// $conditions = $this->dateRange('User.created', $date, $date2);
+		$order = 'User.created DESC';
 		$limit = 5;
 		$recursive = -1;
 		return $this->find('all', compact('fields', 'conditions', 'order', 'limit', 'recursive'));

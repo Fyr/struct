@@ -2,7 +2,7 @@
 <?
 	if ($aUsers) {
 		foreach($aUsers as $user) {
-			$name = Hash::get($user, 'ChatUser.name');
+			$name = Hash::get($user, 'User.full_name');
 			$message = Hash::get($user, 'ChatMessage.message');
 			$time = Hash::get($user, 'ChatEvent.created');
 			if ($time) {
@@ -14,9 +14,9 @@
 				$count = '10+';
 			}
 			if ($this->request->data('type') == 'internal') {
-				$onclick = "Chat.openRoom(".$user['ChatUser']['id'].")";
+				$onclick = "Chat.openRoom(".$user['User']['id'].")";
 			} else {
-				$onclick = "window.location.href='".$this->Html->url(array('controller' => 'Chat', 'action' => 'index', $user['ChatUser']['id']), true)."'";
+				$onclick = "window.location.href='".$this->Html->url(array('controller' => 'Chat', 'action' => 'index', $user['User']['id']), true)."'";
 			}
 			
 			if ($this->request->data('q')) {
@@ -24,7 +24,7 @@
 			}
 ?>
             <li class="messages-new clearfix" onclick="<?=$onclick?>">
-                <figure class="messages-user rate-10"><img class="ava" src="<?=$user['Avatar']['url']?>" alt="<?=$name?>" style="width: 50px; height: auto;"/></figure>
+                <figure class="messages-user rate-10"><img class="ava" src="<?=$user['Media']['url_img']?>" alt="<?=$name?>" style="width: 50px; height: auto;"/></figure>
                 <div class="text">
                     <div class="name"><?=$name?></div>
                     <div class="message clearfix">

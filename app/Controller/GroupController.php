@@ -91,8 +91,8 @@ class GroupController extends SiteController {
 		$this->set('aMembers', $aMembers);
 		
 		$aID = Hash::extract($aMembers, '{n}.GroupMember.user_id');
-		$aUsers = $this->ChatUser->getUsers($aID);
-		$aUsers = Hash::combine($aUsers, '{n}.ChatUser.id', '{n}');
+		$aUsers = $this->User->getUsers($aID);
+		$aUsers = Hash::combine($aUsers, '{n}.User.id', '{n}');
 		$this->set('aUsers', $aUsers);
 	}
 	

@@ -97,7 +97,7 @@ class ChatEvent extends AppModel {
 	}
 	
 	protected function _getEvents($currUserID, $conditions) {
-		$this->loadModel(array('ChatMessage', 'ChatUser', 'Media.Media'));
+		$this->loadModel(array('ChatMessage', 'User', 'Media.Media'));
 		
 		$conditions = array_merge(array('user_id' => $currUserID), $conditions);
 		$order = array('room_id', 'created');
@@ -111,7 +111,7 @@ class ChatEvent extends AppModel {
 		$aMsgID = Hash::extract($events, '{n}.ChatEvent.msg_id');
 		$messages = $this->ChatMessage->findAllById($aMsgID);
 		$aAuthorsID = Hash::extract($events, '{n}.ChatEvent.initiator_id');
-		$authors = $this->ChatUser->getUsers($aAuthorsID);
+		$authors = $this->User->getUsers($aAuthorsID);
 		
 		// Get info about sent files
 		$aFilesID = Hash::extract($events, '{n}.ChatEvent.file_id');
@@ -120,7 +120,7 @@ class ChatEvent extends AppModel {
 		// rebuild data to have IDs as keys 
 		// $events = Hash::combine($events, '{n}.ChatEvent.id', '{n}.ChatEvent');
 		$messages = Hash::combine($messages, '{n}.ChatMessage.id', '{n}.ChatMessage');
-		$authors = Hash::combine($authors, '{n}.ChatUser.id', '{n}');
+		$authors = Hash::combine($authors, '{n}.User.id', '{n}');
 		$files = Hash::combine($files, '{n}.Media.id', '{n}.Media');
 		return compact('events', 'messages', 'authors', 'files');
 	}

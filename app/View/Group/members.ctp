@@ -33,8 +33,8 @@
 		foreach($aMembers as $member) {
 			if (!$member['GroupMember']['approved']) {
 				$user = $aUsers[$member['GroupMember']['user_id']];
-				$userID = Hash::get($user, 'ChatUser.id');
-				$urlView = $this->Html->url(array('controller' => 'Profile', 'action' => 'view', $user['ChatUser']['id']));
+				$userID = Hash::get($user, 'User.id');
+				$urlView = $this->Html->url(array('controller' => 'Profile', 'action' => 'view', $user['User']['id']));
 				$urlJoinApprove = $this->Html->url(array('controller' => 'Group', 'action' => 'memberApprove', $groupID, $userID));
 				$urlRemove = $this->Html->url(array('controller' => 'Group', 'action' => 'memberRemove', $groupID, $userID));
 ?>
@@ -43,10 +43,10 @@
                 <a href="<?=$urlView?>">
                     <div class="l-users-block">
                         <figure class="rate-10">
-                            <img src="<?=$user['Avatar']['url']?>" alt="<?=$user['ChatUser']['name']?>" style="width: 50px"/>
+                            <img src="<?=$user['Media']['url_img']?>" alt="<?=$user['User']['full_name']?>" style="width: 50px"/>
                         </figure>
                         <div class="text">
-                            <div class="name"><?=$user['ChatUser']['name']?></div>
+                            <div class="name"><?=$user['User']['full_name']?></div>
                             <div class="skills"><?=Hash::get($user, 'Profile.skills')?></div>
                         </div>
                     </div>
@@ -58,7 +58,7 @@
                 </div>
                 <div class="remove-block-drop">
                     <div class="remove-text">
-                        <?=__('Are you sure to delete this user')?> <a href="<?=$urlView?>" target="_blank"><?=$user['ChatUser']['name']?></a> ?
+                        <?=__('Are you sure to delete this user')?> <a href="<?=$urlView?>" target="_blank"><?=$user['User']['full_name']?></a> ?
                         <div class="remove-button">
                             <a href="javascript:void(0)" class="ok_removed" onclick="window.location.href='<?=$urlRemove?>'; return true;">да</a>
                             <a href="javascript:void(0)" class="not_removed">нет</a>
@@ -95,9 +95,9 @@
 	foreach($aMembers as $member) {
 		if ($member['GroupMember']['approved']) {
 			$user = $aUsers[$member['GroupMember']['user_id']];
-			$userID = Hash::get($user, 'ChatUser.id');
+			$userID = Hash::get($user, 'User.id');
 			$profileID = Hash::get($user, 'Profile.id');
-			$urlView = ($profileID) ? $this->Html->url(array('controller' => 'Profile', 'action' => 'view', $user['ChatUser']['id'])) : 'javascript:void(0)';
+			$urlView = ($profileID) ? $this->Html->url(array('controller' => 'Profile', 'action' => 'view', $user['User']['id'])) : 'javascript:void(0)';
 			$urlRemove = $this->Html->url(array('controller' => 'Group', 'action' => 'memberRemove', $groupID, $userID));
 ?>
             <li>
@@ -112,9 +112,9 @@
 ?>
                 <a href="<?=$urlView?>">
                     <figure class="rate-10">
-                        <img src="<?=$user['Avatar']['url']?>" alt="<?=$user['ChatUser']['name']?>"/>
+                        <img src="<?=$user['Media']['url_img']?>" alt="<?=$user['User']['full_name']?>"/>
                     </figure>
-                    <div class="name"><?=$user['ChatUser']['name']?></div>
+                    <div class="name"><?=$user['User']['full_name']?></div>
                     <span class="profession"><?=$member['GroupMember']['role']?></span>
                 </a>
             </li>
@@ -133,7 +133,7 @@ function showAddUser(memberID, userID) {
 	var user = aUsers[userID];
 	user.GroupMember = {id: memberID};
 	$('.drop-add-list-user form').remove();
-	$('.drop-add-list-user').append(tmpl('group-member', user).replace(/~userID/g, user.ChatUser.id));
+	$('.drop-add-list-user').append(tmpl('group-member', user).replace(/~userID/g, user.User.id));
 	$('.drop-add-list-user').show();
 }
 
@@ -165,10 +165,10 @@ $(document).ready(function(){
 <?
 	$urlView = $this->Html->url(array('controller' => 'Profile', 'action' => 'view', '~userID'));
 ?>
-                    <a href="<?=$urlView?>"><img alt="{%=o.ChatUser.name%}" src="{%=o.Avatar.url%}" style="width: 50px"></a>
+                    <a href="<?=$urlView?>"><img alt="{%=o.User.full_name%}" src="{%=o.Avatar.url%}" style="width: 50px"></a>
                 </figure>
                 <div class="name">
-                    <a href="<?=$urlView?>" class="name-link">{%=o.ChatUser.name%}</a>
+                    <a href="<?=$urlView?>" class="name-link">{%=o.User.full_name%}</a>
                     <div class="profession">{%=(o.Profile) ? o.Profile.skills : ''%}</div>
                 </div>
             </li>

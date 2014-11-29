@@ -10,12 +10,12 @@
 <?
 		if (isset($aUsers) && $aUsers) {
 			foreach($aUsers as $user) {
-				$name = Hash::get($user, 'ChatUser.name');
+				$name = Hash::get($user, 'User.full_name');
 ?>
         <li class="simple-list-item">
-            <a href="<?=$this->Html->url(array('controller' => 'Profile', 'action' => 'view', $user['ChatUser']['id']))?>">
+            <a href="<?=$this->Html->url(array('controller' => 'Profile', 'action' => 'view', $user['User']['id']))?>">
                 <div class="user-list-item clearfix">
-                    <div class="user-list-item-avatar rate-10"><img src="<?=$user['Avatar']['url']?>" alt="<?=$name?>" style="width: 50px; height: auto;" /></div>
+                    <div class="user-list-item-avatar rate-10"><img src="<?=$user['Media']['url_img']?>" alt="<?=$name?>" style="width: 50px; height: auto;" /></div>
                     <div class="user-list-item-body">
                         <div class="user-list-item-name"><?=$name?></div>
                         <div class="user-list-item-spec"><?=Hash::get($user, 'Profile.skills')?></div>
