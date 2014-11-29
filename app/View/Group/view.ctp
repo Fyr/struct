@@ -4,10 +4,7 @@
 	
 	$groupID = Hash::get($group, 'Group.id');
 	$title = Hash::get($group, 'Group.title');
-	$src = $this->Media->imageUrl($group, '50x');
-	if (!$src) {
-		$src = '/img/group-create-pl-image.jpg';
-	}
+	$src = $this->Media->imageUrl(Hash::get($group, 'GroupMedia'), 'thumb50x50');
 ?>
 
 <div class="row">
@@ -15,7 +12,7 @@
         <div class="col-md-5 col-sm-12 col-xs-12">
             <div class="page-title">
                 <div class="page-title-group-image">
-                    <img alt="<?=$title?>" src="<?=$src?>">
+                    <img alt="<?=$title?>" src="<?=$src?>" />
                 </div> <?=$title?>
             </div>
         </div>
@@ -208,7 +205,6 @@
 </div>
 <?
 	}
-	if ($aMembers) {
 ?>
 <div class="row">
     <div class="col-md-11 col-sm-10 col-xs-8">
@@ -222,17 +218,14 @@
         <div class="col-md-12">
             <div class="units-list clearfix">
 <?
-		foreach($aMembers as $user) {
-			$role = ($user['User']['id'] == $group['Group']['owner_id']) ? __('Administrator') : Hash::get($user, 'GroupMember.role');
-			if ($user['User']['id'] == $group['Group']['owner_id'] && $groupID == Configure::read('Konstructor.groupID')) {
-				$role = __('CEO');
-			}
-			
+	foreach($aMembers as $member) {
+		$user = $aUsers[$member['GroupMember']['user_id']];
+		$role = $member['GroupMember']['role'];
 ?>
                 <div class="units-list-item">
-                    <a href="<?=$this->html->url(array('controller' => 'Profile', 'action' => 'view', $user['User']['id']))?>">
+                    <a href="<?=$this->html->url(array('controller' => 'User', 'action' => 'view', $user['User']['id']))?>">
                         <div class="units-list-item-image bb-aqua">
-                            <img src="<?=$user['Media']['url_img']?>" alt="<?=$user['User']['full_name']?>" />
+                            <img src="<?=$this->Media->imageUrl($user['UserMedia'], 'thumb100x100')?>" alt="<?=$user['User']['full_name']?>" style="width: 100px;" />
                         </div>
                         <div class="units-list-item-name">
                             <?=$user['User']['full_name']?>
@@ -243,15 +236,14 @@
                     </a>
                 </div>
 <?
-		}
+	}
 ?>
             </div>
         </div>
     </div>
 </div>
 <?
-	}
-	if (in_array($currUserID, array_keys($aMembers)) || $groupID == Configure::read('Konstructor.groupID')) {
+	// if (in_array($currUserID, array_keys($aMembers)) || $groupID == Configure::read('Konstructor.groupID')) {
 ?>
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -324,7 +316,7 @@
 ?>
 </div>
 <?
-	}
+	// }
 ?>
 <script type="text/javascript">
 $(document).ready(function(){

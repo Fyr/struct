@@ -7,7 +7,6 @@ App::uses('SiteController', 'Controller');
 class TimelineController extends SiteController {
 	public $name = 'Timeline';
 	public $layout = 'timeline';
-	public $uses = array('Profile');
 	public $helpers = array('Media');
 	
 	public function index() {
@@ -19,6 +18,6 @@ class TimelineController extends SiteController {
 		$today = time();
 		$date = $today + DAY * $bottomDay;
 		$date2 = $today + DAY * $topDay;
-		$this->set('aTimeline', $this->Profile->getTimeLine($this->currUserID, date('Y-m-d', $date), date('Y-m-d', $date2)));
+		$this->set('aTimeline', $this->User->getTimeline($this->currUserID, date('Y-m-d', $date), date('Y-m-d', $date2)));
 	}
 }

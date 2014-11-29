@@ -1,7 +1,7 @@
 <script type="text/x-tmpl" id="room-tab">
 <div id="roomTab_{%=o.room.ChatRoom.id%}" class="item" onclick="var e = arguments[0] || window.event; if ($(e.target).hasClass('circle_remove') ) { Chat.removeRoom({%=o.room.ChatRoom.id%}); } else { Chat.activateRoom({%=o.room.ChatRoom.id%}); }">
 	<span class="badge badge-important">{%=o.msg_count%}</span>
-	<img class="ava" src="{%=o.user.Avatar.url%}" alt="{%=o.user.User.full_name%}" />
+	<img class="ava" src="{%=o.user.UserMedia.url_img.replace(/noresize/, 'thumb100x100')%}" alt="{%=o.user.User.full_name%}" />
 	<div class="remove"><a class="glyphicons circle_remove" href="javascript: void(0)"></a></div>
 	<div class="name">{%=o.user.User.full_name%}</div>
 </div>
@@ -14,7 +14,7 @@
 <script type="text/x-tmpl" id="chat-msg">
 <div class="{%=((o.user) ? 'leftMessage' : 'rightMessage')%} clearfix">
 {% if (o.user) { %}
-	<img class="ava" src="{%=o.user.Avatar.url%}" alt="{%=o.user.User.full_name%}" style="width: 50px" />
+	<img class="ava" src="{%=o.user.UserMedia.url_img.replace(/noresize/, 'thumb100x100')%}" alt="{%=o.user.User.full_name%}" style="width: 50px" />
 {% } %}
 	<div class="time">{%=o.time%}</div>
 	<div class="text">{%=o.msg%}</div>

@@ -5,15 +5,15 @@ class AppController extends Controller {
 	public $pageTitle = '';
 	
 	public $uses = array('User', 'Media.Media');
-	public $helpers = array('Html', 'Form');
+	public $helpers = array('Html', 'Form', 'Core.PHTime', 'Media');
 	public $components = array(
 		'Session',
 		'Auth' => array(
 			'authorize'      => array('Controller'),
-			'loginAction'    => array('controller' => 'Users', 'action' => 'login'),
-			'loginRedirect'  => array('controller' => 'Profile', 'action' => 'edit'),
+			'loginAction'    => array('controller' => 'User', 'action' => 'login'),
+			'loginRedirect'  => array('controller' => 'User', 'action' => 'edit'),
 			'logoutRedirect' => '/',
-			'authError'      => 'You must log in access that page'
+			'authError'      => 'You must sign in to access that page'
 		),
 	);
 	
@@ -48,7 +48,8 @@ class AppController extends Controller {
 	}
 	
 	public function beforeFilter() {
-		$this->Auth->allow(array('index', 'register', 'login'));
+		$this->Auth->allow(array('register', 'login'));
+		$this->_checkAuth();
 	}
 	
 	protected function _initTimezone($timezone) {
@@ -62,23 +63,21 @@ class AppController extends Controller {
 	}
 	
 	protected function _checkAuth() {
+		/*
 		if (!$this->Auth->loggedIn()) {
-			fdebug('!!!');
 			return $this->redirect('/');
 		}
-		$this->currUserID = $this->Auth->user('id');
-		$this->currUser = $this->Auth->user();
-		$this->_initTimezone($this->Auth->user('timezone'));
-		$this->_initLang($this->Auth->user('lang'));
-		
-		if (TEST_ENV) {
-			fdebug($this->currUser, 'curr_user.log', false);
+		*/
+		if ($this->Auth->loggedIn()) {
+			$this->currUserID = $this->Auth->user('id');
+			$this->currUser = $this->User->findById($this->currUserID);
+			$this->_initTimezone($this->Auth->user('timezone'));
+			$this->_initLang($this->Auth->user('lang'));
+			
+			if (TEST_ENV) {
+				fdebug($this->currUser, 'curr_user.log', false);
+			}
 		}
-		
-		$this->set('balance', '0');
-		$this->set('PU_', '$');
-		$this->set('_PU', '');
-		
 		$this->set('currUser', $this->currUser);
 		$this->set('currUserID', $this->currUserID);
 		$this->set('pageTitle', $this->pageTitle);

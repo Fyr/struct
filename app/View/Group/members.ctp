@@ -1,15 +1,12 @@
 <?
 	$groupID = Hash::get($group, 'Group.id');
 	$title = Hash::get($group, 'Group.title');
-	$src = $this->Media->imageUrl($group, '50x');
-	if (!$src) {
-		$src = '/img/group-create-pl-image.jpg';
-	}
+	$src = $this->Media->imageUrl(Hash::get($group, 'GroupMedia'), 'thumb50x50');
 ?>
 <div class="row header-group-create clearfix">
     <div class="group-page-title col-md-6 col-sm-6 col-xs-12">
         <div class="page-title-group-image">
-            <img alt="<?=$title?>" src="<?=$src?>">
+            <img alt="<?=$title?>" src="<?=$src?>" style="width: 50px">
         </div> <?=$title?>
     </div>
     <div class="title-button page-menu col-md-6 col-sm-6 col-xs-12">
@@ -34,7 +31,7 @@
 			if (!$member['GroupMember']['approved']) {
 				$user = $aUsers[$member['GroupMember']['user_id']];
 				$userID = Hash::get($user, 'User.id');
-				$urlView = $this->Html->url(array('controller' => 'Profile', 'action' => 'view', $user['User']['id']));
+				$urlView = $this->Html->url(array('controller' => 'User', 'action' => 'view', $user['User']['id']));
 				$urlJoinApprove = $this->Html->url(array('controller' => 'Group', 'action' => 'memberApprove', $groupID, $userID));
 				$urlRemove = $this->Html->url(array('controller' => 'Group', 'action' => 'memberRemove', $groupID, $userID));
 ?>
@@ -43,11 +40,11 @@
                 <a href="<?=$urlView?>">
                     <div class="l-users-block">
                         <figure class="rate-10">
-                            <img src="<?=$user['Media']['url_img']?>" alt="<?=$user['User']['full_name']?>" style="width: 50px"/>
+                            <img src="<?=$this->Media->imageUrl($user['UserMedia'], 'thumb50x50')?>" alt="<?=$user['User']['full_name']?>" style="width: 50px"/>
                         </figure>
                         <div class="text">
                             <div class="name"><?=$user['User']['full_name']?></div>
-                            <div class="skills"><?=Hash::get($user, 'Profile.skills')?></div>
+                            <div class="skills"><?=Hash::get($user, 'User.skills')?></div>
                         </div>
                     </div>
                 </a>
@@ -96,8 +93,8 @@
 		if ($member['GroupMember']['approved']) {
 			$user = $aUsers[$member['GroupMember']['user_id']];
 			$userID = Hash::get($user, 'User.id');
-			$profileID = Hash::get($user, 'Profile.id');
-			$urlView = ($profileID) ? $this->Html->url(array('controller' => 'Profile', 'action' => 'view', $user['User']['id'])) : 'javascript:void(0)';
+			$profileID = Hash::get($user, 'User.id');
+			$urlView = ($profileID) ? $this->Html->url(array('controller' => 'User', 'action' => 'view', $user['User']['id'])) : 'javascript:void(0)';
 			$urlRemove = $this->Html->url(array('controller' => 'Group', 'action' => 'memberRemove', $groupID, $userID));
 ?>
             <li>
@@ -112,7 +109,7 @@
 ?>
                 <a href="<?=$urlView?>">
                     <figure class="rate-10">
-                        <img src="<?=$user['Media']['url_img']?>" alt="<?=$user['User']['full_name']?>"/>
+                        <img src="<?=$this->Media->imageUrl($user['UserMedia'], 'thumb100x100')?>" alt="<?=$user['User']['full_name']?>" />
                     </figure>
                     <div class="name"><?=$user['User']['full_name']?></div>
                     <span class="profession"><?=$member['GroupMember']['role']?></span>
@@ -163,13 +160,13 @@ $(document).ready(function(){
             <li class="user-add-cell">
                 <figure class="rate-10">
 <?
-	$urlView = $this->Html->url(array('controller' => 'Profile', 'action' => 'view', '~userID'));
+	$urlView = $this->Html->url(array('controller' => 'User', 'action' => 'view', '~userID'));
 ?>
-                    <a href="<?=$urlView?>"><img alt="{%=o.User.full_name%}" src="{%=o.Avatar.url%}" style="width: 50px"></a>
+                    <a href="<?=$urlView?>"><img alt="{%=o.User.full_name%}" src="{%=o.UserMedia.url_img%}" style="width: 50px"></a>
                 </figure>
                 <div class="name">
                     <a href="<?=$urlView?>" class="name-link">{%=o.User.full_name%}</a>
-                    <div class="profession">{%=(o.Profile) ? o.Profile.skills : ''%}</div>
+                    <div class="profession">{%=(o.User) ? o.User.skills : ''%}</div>
                 </div>
             </li>
         </ul>

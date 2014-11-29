@@ -2,9 +2,9 @@
     <div class="col-md-9 col-sm-9 col-xs-12">
         <div class="page-title"><?=Hash::get($user, 'User.full_name')?></div>
         <div class="user-spec">
-            <div class="spec"><?=Hash::get($user, 'Profile.skills')?></div>
+            <div class="spec"><?=Hash::get($user, 'User.skills')?></div>
 <?
-	if ($video = Hash::get($user, 'Profile.video_url')) {
+	if ($video = Hash::get($user, 'User.video_url')) {
 ?>
         	<div class="link-video">
                 <a href="<?=$video?>" target="_blank"><span class="glyphicons play_button"></span><span class="t"><?=__('Video with me')?></span></a>
@@ -70,10 +70,7 @@
     </div>
     <div class="col-md-3 col-sm-3 col-xs-12">
         <div class="user-avatar taright">
-<?
-	$src = (Hash::get($user, 'Media.id')) ? $this->Media->imageUrl($user, 'thumb150x150') : '/img/no-photo.jpg';
-?>
-			<img style="width: 150px" src="<?=$src?>" alt="<?=Hash::get($user, 'User.username')?>" />
+			<img style="width: 150px" src="<?=$this->Media->imageUrl($user['UserMedia'], 'thumb200x200')?>" alt="<?=Hash::get($user, 'User.username')?>" />
 
         </div>
     </div>
@@ -82,26 +79,25 @@
     <div class="col-md-12 col-sm-12 col-xs-12 user-info-block">
         <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="user-adress">
-                <div class="fs15"><?=Hash::get($user, 'Profile.live_place')?></div>
-                <div class="fs13 text-grey"><?=Hash::get($user, 'Profile.live_country')?></div>
-                <div class="fs15 mt10"><?=Hash::get($user, 'Profile.birthday')?></div>
+                <div class="fs15"><?=Hash::get($user, 'User.live_place')?></div>
+                <div class="fs13 text-grey"><?=Hash::get($user, 'User.live_country')?></div>
+                <div class="fs15 mt10"><?=Hash::get($user, 'User.birthday')?></div>
             </div>
         </div>
         <div class="col-md-4 col-sm-6 col-xs-12 user-info-block">
             <div class="user-education">
 <?
-	$university = Hash::get($user, 'Profile.university');
-	$src = $this->Media->imageUrl(array('Media' => Hash::get($user, 'MediaUniversity')), 'thumb50x50');
-	$src = ($src) ? $src : '/img/group-create-pl-image.jpg';
+	$university = Hash::get($user, 'User.university');
+	$src = $this->Media->imageUrl(Hash::get($user, 'UniversityMedia'), 'thumb50x50');
 ?>
                 <img src="<?=$src?>" alt="<?=$university?>" style="width: 50px" />
                 <div class="fs15"><?=$university?></div>
-                <div class="fs13"><?=Hash::get($user, 'Profile.speciality')?></div>
+                <div class="fs13"><?=Hash::get($user, 'User.speciality')?></div>
             </div>
         </div>
         <div class="col-md-4 col-sm-6 col-xs-12 user-info-block">
             <div class="vp10">
-                <div class="fs15 mt10"><?=Hash::get($user, 'Profile.phone')?></div>
+                <div class="fs15 mt10"><?=Hash::get($user, 'User.phone')?></div>
                 <div class="fs15 mt10">
                     <a href="mailto:<?//Hash::get($user, 'User.username')?>"><?//Hash::get($user, 'User.username')?></a>
                 </div>
@@ -110,7 +106,7 @@
     </div>
 </div>
 <?
-	if ($aAchiev = Hash::get($user, 'ProfileAchievement')) {
+	if ($aAchiev = Hash::get($user, 'UserAchievement')) {
 		$aContainer = array('', '', '');
 		$i = 0;
 		foreach($aAchiev as $j => $achiev) {

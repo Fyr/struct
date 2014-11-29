@@ -76,7 +76,7 @@
 
 	<script src="<?=$this->Html->url(array('controller' => 'ChatAjax', 'action' => 'jsSettings'))?>"></script>
 	<script src="<?=$this->Html->url(array('controller' => 'DeviceAjax', 'action' => 'jsSettings'))?>"></script>
-	<script src="<?=$this->Html->url(array('controller' => 'ProfileAjax', 'action' => 'jsSettings'))?>"></script>
+	<script src="<?=$this->Html->url(array('controller' => 'UserAjax', 'action' => 'jsSettings'))?>"></script>
 	<script src="<?=$this->Html->url(array('controller' => 'GroupAjax', 'action' => 'jsSettings'))?>"></script>
 <script>
 $(function() {
@@ -105,20 +105,6 @@ $(function() {
         <div class="container-fluid">
             <?=$this->fetch('content')?>
         </div>
-        <!--div class="fixed-message">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-11 col-sm-10 col-xs-8">
-                        <div class="col-md-4 col-md-offset-8">
-                            <div class="user-added">
-                                <img src="img/temp/smallava1.jpg" alt="" />
-                                Варфаламей Константинопольский добавлен в ваши друзья.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div-->
     </div>
 </div>
 <?=$this->element('js_templates')?>

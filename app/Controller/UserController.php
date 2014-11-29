@@ -1,10 +1,11 @@
 <?php
 App::uses('AppController', 'Controller');
-class UsersController extends AppController {
-	public $name = 'Users';
-	public $layout = 'home';
+class UserController extends AppController {
+	public $name = 'User';
+	public $layout = 'profile';
 	
 	public function register() {
+		$this->layout = 'home';
 		if ($this->request->is('put') || $this->request->is('post')) {
 			$this->request->data('User.user_group_id', 2);
 			if ( !(isset($_COOKIE['tzo']) && isset($_COOKIE['tzd'])) ) {
@@ -21,6 +22,7 @@ class UsersController extends AppController {
 	}
 	
 	public function login() {
+		$this->layout = 'home';
 		if ($this->request->is('post')) {
 			if ($this->Auth->login()) {
 				if ( !(isset($_COOKIE['tzo']) && isset($_COOKIE['tzd'])) ) {
@@ -39,4 +41,33 @@ class UsersController extends AppController {
 		$this->redirect($this->Auth->logout());
 	}
 
+	public function index() {
+		return $this->redirect(array('controller' => 'Timeline', 'action' => 'index'));
+	}
+	
+	public function edit() {
+		if ($this->request->is('post') || $this->request->is('put')) {
+			$this->request->data('User.user_id', $this->currUserID);
+			if ($this->request->data('UserAchievement')) {
+				foreach($this->request->data('UserAchievement') as $i => $data) {
+					$this->request->data('UserAchievement.'.$i.'.url', 
+						(strpos($data['url'], 'http://') !== false) ? 'http://'.$data['url'] : $data['url']
+					);
+				}
+			}
+			$this->User->saveAll($this->request->data);
+			return $this->redirect(array('controller' => $this->name, 'action' => 'edit', '?' => array('success' => '1')));
+		} else {
+			$this->request->data = $this->currUser;
+		}
+	}
+
+	public function view($id = 0) {
+		$this->loadModel('GroupMember');
+		if (!$id) {
+			$id = $this->currUserID;
+		}
+		$this->set('user', $this->User->getUser($id));
+		$this->set('aGroups', $this->GroupMember->getUserGroups($id));
+	}
 }

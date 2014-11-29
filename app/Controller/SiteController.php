@@ -18,14 +18,17 @@ class SiteController extends AppController {
 	}
 	
 	*/
+	/*
 	public function isAuthorized($user) {
 		return true;
 	}
-	
+	*/
+	/*
 	public function beforeFilter() {
 		$this->Auth->allow(array('index', 'view', 'register'));
 		$this->_checkAuth();
 	}
+	*/
 	/*
 	public function beforeRender() {
 		parent::beforeRender();

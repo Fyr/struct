@@ -20,11 +20,11 @@
 			}
 			
 			if ($this->request->data('q')) {
-				$message = Hash::get($user, 'Profile.skills');
+				$message = Hash::get($user, 'User.skills');
 			}
 ?>
             <li class="messages-new clearfix" onclick="<?=$onclick?>">
-                <figure class="messages-user rate-10"><img class="ava" src="<?=$user['Media']['url_img']?>" alt="<?=$name?>" style="width: 50px; height: auto;"/></figure>
+                <figure class="messages-user rate-10"><img class="ava" src="<?=$this->Media->imageUrl($user['UserMedia'], 'thumb100x100')?>" alt="<?=$name?>" style="width: 50px; height: auto;"/></figure>
                 <div class="text">
                     <div class="name"><?=$name?></div>
                     <div class="message clearfix">

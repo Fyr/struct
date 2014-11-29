@@ -32,7 +32,7 @@ class AjaxController extends PAjaxController {
 		$file = $media_type; // $path['filename'];
 		$ext = '.'.$path['extension'];
 		
-		if (in_array($object_type, array('Profile', 'Group', 'ProfileUniversity'))) {
+		if (in_array($object_type, array('User', 'Group', 'UserUniversity'))) {
 			$aMedia = $this->Media->getObjectList($object_type, $object_id);
 			foreach($aMedia as $media) {
 				$this->Media->delete($media['Media']['id']);

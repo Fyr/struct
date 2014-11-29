@@ -28,7 +28,7 @@ $(function () {
                 		Group.updateGalleryAdmin($(data.fileInput).data('object_id'));
                 	} else if (file.object_type == 'ProjectEvent') {
                 		window.location.reload();
-                	} else { // Profile Avatar, Profile University, Group Avatar
+                	} else { // User Avatar, User University, Group Avatar
                 		var imgID = $(data.fileInput).data('object_type') + $(data.fileInput).data('object_id');
                 		var mediaID = $('#' + imgID).data('media_id');
                 		if (mediaID) {
@@ -38,7 +38,7 @@ $(function () {
                 			}, 'json');
                 			*/
                 		}
-                		$('#' + imgID).prop('src', response.data[0].Media.image.replace(/100x80/, $('#' + imgID).data('resize')));
+                		$('#' + imgID).prop('src', response.data[0].Media.url_img.replace(/noresize/, $('#' + imgID).data('resize')));
                 		$('#' + imgID).data('media_id', response.data[0].Media.id);
                 	}
                 }

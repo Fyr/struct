@@ -4,7 +4,7 @@
 	$isChatActive = ($this->request->controller == 'Chat') ? ' class="active"' : '';
 	$isGroupActive = ($this->request->controller == 'Group' && !$isKonstructorActive) ? ' class="active"' : '';
 	$isDeviceActive = ($this->request->controller == 'Device') ? ' class="active"' : '';
-	$isProfileActive = ($this->request->controller == 'Profile' && $this->request->action == 'edit') ? ' class="active"' : '';
+	$isUserActive = ($this->request->controller == 'User' && $this->request->action == 'edit') ? ' class="active"' : '';
 	
 ?>
 <div class="main-panel-list">
@@ -23,8 +23,8 @@
 </div>
 <div class="service-menu">
     <ul>
-        <li<?=$isProfileActive?>><a href="<?=$this->Html->url(array('controller' => 'Profile', 'action' => 'edit'))?>"><span class="glyphicons settings"></span></a></li>
-        <li><a href="<?=$this->Html->url(array('controller' => 'Users', 'action' => 'logout'))?>"><span class="glyphicons exit"></span></a></li>
+        <li<?=$isUserActive?>><a href="<?=$this->Html->url(array('controller' => 'User', 'action' => 'edit'))?>"><span class="glyphicons settings"></span></a></li>
+        <li><a href="<?=$this->Html->url(array('controller' => 'User', 'action' => 'logout'))?>"><span class="glyphicons exit"></span></a></li>
         <li class="logo-li<?=$isKonstructorActive?>"><a href="<?=$this->Html->url(array('controller' => 'Group', 'action' => 'view', Configure::read('Konstructor.groupID')))?>"><span class="logo-icon"></span></a></li>
     </ul>
 </div>

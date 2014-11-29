@@ -7,10 +7,10 @@ App::uses('GroupVideo', 'Model');
 class Group extends AppModel {
 	
 	public $hasOne = array(
-		'Media' => array(
+		'GroupMedia' => array(
 			'className' => 'Media.Media',
 			'foreignKey' => 'object_id',
-			'conditions' => array('Media.object_type' => 'Group'),
+			'conditions' => array('GroupMedia.object_type' => 'Group'),
 			'dependent' => true
 		)
 	);	
@@ -48,7 +48,7 @@ class Group extends AppModel {
 		$order = 'Group.created DESC';
 		$limit = 2;
 		$aGroups = $this->find('all', compact('conditions', 'order', 'limit'));
-		
+		/*
 		foreach($aGroups as &$group) {
 			$group['Group']['image_url'] = '/img/group-create-pl-image.jpg';
 			if (Hash::get($group, 'Media.id')) {
@@ -61,6 +61,7 @@ class Group extends AppModel {
 			unset($group['GroupAddress']);
 			unset($group['GroupAchievement']);
 		}
+		*/
 		return $aGroups;
 	}
 }

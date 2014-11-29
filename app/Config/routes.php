@@ -1,6 +1,6 @@
 <?php
 Router::parseExtensions('html', 'json');
-Router::connect('/', array('controller' => 'Users', 'action' => 'login'));
+Router::connect('/', array('controller' => 'User', 'action' => 'login'));
 
 CakePlugin::routes();
 

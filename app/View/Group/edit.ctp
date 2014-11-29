@@ -14,14 +14,9 @@
                 
 <?
 	if ($id) {
-		if ($this->request->data('Media.id')) {
-			$src = $this->Media->imageUrl($this->request->data, '200x');
-		} else {
-			$src = '/img/group-create-pl-image.jpg';
-		}
 ?>
 				<figure class="col-md-12 col-sm-12 col-xs-5">
-                    <img id="Group<?=$id?>" src="<?=$src?>" alt="" data-resize="noresize" data-id="<?=$this->request->data('Media.id')?>" />
+                    <img id="Group<?=$id?>" src="<?=$this->Media->imageUrl($this->request->data('GroupMedia'), '200x')?>" alt="" data-resize="200x" data-id="<?=$this->request->data('Media.id')?>" />
                 </figure>
                 <input class="fileuploader filestyle" type="file" data-object_type="Group" data-object_id="<?=$id?>" data-progress_id="progress-Group<?=$id?>" />
                 <span id="progress-Group<?=$id?>">
@@ -64,6 +59,13 @@
                     <label for="group-create-3"><?=__('Description')?></label>
                     <div class="input-boxing clearfix">
                     	<?=$this->Form->input('Group.descr', array('type' => 'textarea', 'label' => false, 'class' => 'textarea-auto animated', 'placeholder' => __('Description'), 'style' => 'overflow: hidden; word-wrap: break-word; height: 235px;'))?>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <label for="group-create-3"><?=__('Your role in group')?></label>
+                    <div class="input-boxing clearfix">
+                    	<?=$this->Form->hidden('GroupMember.id')?>
+                    	<?=$this->Form->input('GroupMember.role', array('type' => 'text', 'label' => false, 'placeholder' => __('Your role in group').'...'))?>
                     </div>
                 </fieldset>
 <?

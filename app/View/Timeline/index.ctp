@@ -259,7 +259,7 @@ $(document).ready(function(){
         <div class="massage-post clearfix">
             <figure>
             	<a href="{%=url%}">
-            		<img alt="{%=user.User.full_name%}" src="{%=user.Avatar.url%}" style="width: 50px">
+            		<img alt="{%=user.User.full_name%}" src="{%=user.UserMedia.url_img.replace(/noresize/, 'thumb100x100')%}" style="width: 50px">
             	</a>
             </figure>
             		
@@ -301,7 +301,7 @@ $(document).ready(function(){
         <div class="news-article-title"></div>
         <div class="news-article-title subtitle clearfix">
             <div class="subtitle-image">
-                <img alt="{%=group.title%}" src="{%=group.image_url%}" style="width: 50px;">
+                <img alt="{%=group.title%}" src="{%=group.GroupMedia.url_img.replace(/noresize/, 'thumb50x50')%}" style="width: 50px;">
             </div>
             <div class="subtitle-body">
                 {%=group.title%}
@@ -320,9 +320,7 @@ $(document).ready(function(){
 
 <script type="text/x-tmpl" id="joined-group">
 {%
-	console.log(o.event.group_id);
-	console.log(o.globalData.groups);
-	var group = o.globalData.groups[o.event.group_id].Group;
+	var group = o.globalData.groups[o.event.group_id];
 	var url = '<?=$this->Html->url(array('controller' =>'Group', 'action' => 'view', '~group_id'))?>';
 %}
 <?=__('You joined this group as ')?>{%=o.event.role%}
@@ -331,16 +329,16 @@ $(document).ready(function(){
         <div class="news-article-title"></div>
         <div class="news-article-title subtitle clearfix">
             <div class="subtitle-image">
-                <img alt="{%=group.title%}" src="{%=group.image_url%}" style="width: 50px;">
+                <img alt="{%=group.title%}" src="{%=group.GroupMedia.url_img.replace(/noresize/, 'thumb50x50')%}" style="width: 50px;">
             </div>
             <div class="subtitle-body">
-                {%=group.title%}
+                {%=group.Group.title%}
                 <div class="subtitle-body-info">
                     <!--11 участников -->
                 </div>
             </div>
         </div>
-        <div class="news-article-pubdate">{%=group.descr%}</div>
+        <div class="news-article-pubdate">{%=group.Group.descr%}</div>
     </a>
 </div>
 </script>
@@ -402,9 +400,9 @@ $(document).ready(function(){
 {%
 	for(var i = 0; i < o.globalData.last_users.length; i++) {
 		var user = o.globalData.users[o.globalData.last_users[i].User.id];
-		var url = '<?=$this->Html->url(array('controller' => 'Profile', 'action' => 'view', '~user_id'))?>';
+		var url = '<?=$this->Html->url(array('controller' => 'User', 'action' => 'view', '~user_id'))?>';
 %}
-            <li class="good"><a href="{%=url.replace(/~user_id/g, user.User.id)%}"><img alt="{%=user.User.full_name%}" src="{%=user.Avatar.url%}" style="width: 50px;"></a></li>
+            <li class="good"><a href="{%=url.replace(/~user_id/g, user.User.id)%}"><img alt="{%=user.User.full_name%}" src="{%=user.UserMedia.url_img.replace(/noresize/, 'thumb100x100')%}" style="width: 50px;"></a></li>
 {%
 	}
 %}

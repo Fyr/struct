@@ -1,7 +1,6 @@
 <?
 	$title = Hash::get($group, 'Group.title');
-	$src = $this->Media->imageUrl($group, 'thumb50x50');
-	$src = ($src) ? $src : '/img/group-create-pl-image.jpg';
+	$src = $this->Media->imageUrl($group['GroupMedia'], 'thumb50x50');
 	$class = ($hide) ? 'can-hide' : '';
 	$style = ($hide) ? 'style="display: none"' : ''
 ?>

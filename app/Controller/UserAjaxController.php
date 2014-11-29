@@ -1,8 +1,8 @@
 <?php
 App::uses('AppController', 'Controller');
 App::uses('PAjaxController', 'Core.Controller');
-class ProfileAjaxController extends PAjaxController {
-	public $name = 'ProfileAjax';
+class UserAjaxController extends PAjaxController {
+	public $name = 'UserAjax';
 	public $uses = array();
 	public $helpers = array('Media');
 	
@@ -25,9 +25,9 @@ class ProfileAjaxController extends PAjaxController {
 	}
 	
 	public function timelineEvents() {
-		$this->loadModel('Profile');
+		$this->loadModel('User');
 		try {
-			$data = $this->Profile->getTimeline($this->currUserID, $this->request->data('date'), $this->request->data('date2'));
+			$data = $this->User->getTimeline($this->currUserID, $this->request->data('date'), $this->request->data('date2'));
 			$this->setResponse($data);
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
@@ -48,7 +48,7 @@ class ProfileAjaxController extends PAjaxController {
 			$this->request->data('UserEvent.event_time', $event_time);
 			$this->UserEvent->save($this->request->data);
 			
-			$data = $this->Profile->getTimeline($this->currUserID, $event_time, $event_time);
+			$data = $this->User->getTimeline($this->currUserID, $event_time, $event_time);
 			$this->setResponse($data);
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
@@ -67,7 +67,7 @@ class ProfileAjaxController extends PAjaxController {
 			$this->UserEvent->delete($id);
 			$event_time = Hash::get($data, 'event.UserEvent.event_time');
 			
-			$data['timeline'] = $this->Profile->getTimeline($this->currUserID, $event_time, $event_time);
+			$data['timeline'] = $this->User->getTimeline($this->currUserID, $event_time, $event_time);
 			$this->setResponse($data);
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());

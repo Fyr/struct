@@ -1,4 +1,4 @@
-<?=$this->Form->create('User', array('url' => array('controller' => 'Users', 'action' => 'login'), 'class' => 'form', 'id' => 'loginForm'))?>
+<?=$this->Form->create('User', array('url' => array('controller' => 'User', 'action' => 'login'), 'class' => 'form', 'id' => 'loginForm'))?>
     <div class="input-box-item">
     	<?=$this->Form->input('username', array('label' => false, 'placeholder' => 'Email'))?>
     </div>

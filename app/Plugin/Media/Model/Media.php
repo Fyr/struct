@@ -17,18 +17,18 @@ class Media extends AppModel {
     		if (!$primary) {
     			unset($_row[$this->alias]);
     			$_row[$this->alias]['id'] = $row['id'];
+    			$_row[$this->alias]['object_type'] = $row['object_type'];
+    			$_row[$this->alias]['object_id'] = $row['object_id']; // required for relations btw/ models :(
     			$_row[$this->alias]['media_type'] = $row['media_type'];
     			$_row[$this->alias]['ext'] = str_replace('.', '', $row['ext']);
     		}
-    		
     		if ($row['id']) {
 	    		if ($row['media_type'] == 'image') {
-	            	$_row[$this->alias]['url_img'] = $this->PHMedia->getImageUrl($row['object_type'], $row['id'], '100x100', $row['file'].$row['ext']);
+	            	$_row[$this->alias]['url_img'] = $this->PHMedia->getImageUrl($row['object_type'], $row['id'], 'noresize', $row['file'].$row['ext']);
 	    		}
 	    		$_row[$this->alias]['url_download'] = $this->PHMedia->getRawUrl($row['object_type'], $row['id'], $row['file'].$row['ext']);
     		} else  {
-    			fdebug($row);
-    			$_row[$this->alias]['url_img'] = '/img/noimage.jpg';
+    			$_row[$this->alias]['url_img'] = '/img/no-photo.jpg';
     			if (in_array($row['object_type'], array('User', 'Group'))) {
     				$_row[$this->alias]['url_img'] = '/img/noimage-'.strtolower($row['object_type']).'.jpg';
     			}
@@ -36,9 +36,8 @@ class Media extends AppModel {
     		}
     	}
     	return $results;
-    	
     }
-        
+	        
     /**
      * Removes actual media-files before delete a record
      *

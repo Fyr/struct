@@ -36,9 +36,9 @@
 <?
 	$user = $aUsers[Hash::get($task, 'Task.manager_id')];
 ?>
-                    <a class="clearfix" href="<?=$this->Html->url(array('controller' => 'Profile', 'action' => 'view', $user['User']['id']))?>">
+                    <a class="clearfix" href="<?=$this->Html->url(array('controller' => 'User', 'action' => 'view', $user['User']['id']))?>">
                         <div class="user-avatar">
-                            <span class="user-avatar rate-10"><img src="<?=$user['Media']['url_img']?>" alt="<?=$user['User']['full_name']?>"/></span>
+                            <span class="user-avatar rate-10"><img src="<?=$this->Media->imageUrl($user['UserMedia'], 'thumb100x100')?>" alt="<?=$user['User']['full_name']?>"/></span>
                         </div> <?=$user['User']['full_name']?>
                     </a>
                 </div>
@@ -49,9 +49,9 @@
 <?
 	$user = $aUsers[Hash::get($task, 'Task.user_id')];
 ?>
-                    <a class="clearfix" href="<?=$this->Html->url(array('controller' => 'Profile', 'action' => 'view', $user['User']['id']))?>">
+                    <a class="clearfix" href="<?=$this->Html->url(array('controller' => 'User', 'action' => 'view', $user['User']['id']))?>">
                         <div class="user-avatar">
-                            <span class="user-avatar rate-10"><img src="<?=$user['Media']['url_img']?>" alt="<?=$user['User']['full_name']?>"/></span>
+                            <span class="user-avatar rate-10"><img src="<?=$this->Media->imageUrl($user['UserMedia'], 'thumb100x100')?>" alt="<?=$user['User']['full_name']?>"/></span>
                         </div> <?=$user['User']['full_name']?>
                     </a>
                 </div>
@@ -61,7 +61,10 @@
     <div class="row new-descution col-md-12 col-sm-12 col-xs-12">
         <figure class="user-avatar-box col-md-2 col-sm-2 col-xs-2">
             <div class="user-avatar rate-10">
-                <img src="<?=$currUser['Media']['url_img']?>" alt="<?=$currUser['User']['full_name']?>"/>
+<?
+	$user = $aUsers[$currUserID];
+?>
+                <img src="<?=$this->Media->imageUrl($user['UserMedia'], 'thumb100x100')?>" alt="<?=$currUser['User']['full_name']?>"/>
             </div>
         </figure>
         <div class="user-new-descution-text col-md-10 col-sm-10 col-xs-10">
@@ -95,12 +98,12 @@
         <div class="descution-massages-list">
 <?
 	foreach($aEvents as $event) {
-		$user = $members[$event['ProjectEvent']['user_id']];
+		$user = $aUsers[$event['ProjectEvent']['user_id']];
 		if (in_array($event['ProjectEvent']['event_type'], array(ProjectEvent::TASK_CREATED, ProjectEvent::TASK_CLOSED, ProjectEvent::TASK_COMMENT, ProjectEvent::FILE_ATTACHED))) {
 ?>
             <div class="descution-massages-cell col-md-12 col-sm-12 col-xs-12">
                 <div class="user-avatar col-md-1 col-sm-1 col-xs-2">
-                    <a href="<?=$this->Html->url(array('controller' => 'Profile', 'action' => 'view', $user['User']['id']))?>" class="rate-0"><img src="<?=$user['Media']['url_img']?>" alt="<?=$user['User']['full_name']?>" /></a>
+                    <a href="<?=$this->Html->url(array('controller' => 'User', 'action' => 'view', $user['User']['id']))?>" class="rate-0"><img src="<?=$this->Media->imageUrl($user['UserMedia'], 'thumb100x100')?>" alt="<?=$user['User']['full_name']?>" /></a>
                 </div>
                 <div class="massages-cont col-md-11 col-sm-11 col-xs-10">
                     <div class="massages-cont-text col-md-9 col-sm-9 col-xs-12">

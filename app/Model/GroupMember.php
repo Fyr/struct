@@ -1,9 +1,11 @@
 <?
 App::uses('AppModel', 'Model');
 App::uses('Group', 'Model');
+App::uses('User', 'Model');
 class GroupMember extends AppModel {
 	
 	public $belongsTo = array('Group');
+	// public $hasOne = array('User');
 	
 	protected $User;
 	
@@ -25,43 +27,11 @@ class GroupMember extends AppModel {
 	}
 	
 	public function getList($group_id) {
-		$aMembers = $this->findAllByGroupIdAndApproved($group_id, 1);
-		$aMembers = Hash::combine($aMembers, '{n}.GroupMember.user_id', '{n}');
-		
-		if ($group_id == Configure::read('Konstructor.groupID')) {
-			unset($aMembers[183]);
-		}
-		$aID = array_keys($aMembers);
-		
-		// $group = $this->Group->findById($group_id);
-		// $aID = array_merge(array($group['Group']['owner_id']), $aID);
-		
-		$this->loadModel('User');
-		$aUsers = $this->User->getUsers($aID);
-		$members = array();
-		foreach($aUsers as $user) {
-			$user_id = $user['User']['id'];
-			$members[$user_id] = $user;
-			if (isset($aMembers[$user_id])) {
-				$members[$user_id] = array_merge($members[$user_id], $aMembers[$user_id]);
-			}
-		}
-		
-		if ($group_id == Configure::read('Konstructor.groupID') && !TEST_ENV) {
-			$members = array_merge(array(array_merge($this->User->getUser(183), $this->findByGroupIdAndUserId($group_id, 183))), $members);
-		}
-		$group = $this->Group->findById($group_id);
-		$members = array_merge(array($this->User->getUser($group['Group']['owner_id'])), $members);
-		/*
-		$aMembers = Hash::combine($this->User->getUsers($aID), '{n}.User.id', '{n}');
-		$aMembers = array_merge(
-			Hash::combine($this->User->getUsers($aID), '{n}.User.id', '{n}'),
-			Hash::combine($aMembers, '{n}.GroupMember.user_id', '{n}')
-		);
-		$aMembers = Hash::combine($aMembers, '{n}.User.id', '{n}');
+		$conditions = array('GroupMember.group_id' => $group_id, 'GroupMember.approved' => 1);
+		$order = array('GroupMember.sort_order', 'GroupMember.created');
+		$aMembers = $this->find('all', compact('conditions', 'order'));
+		// $aMembers = Hash::combine($aMembers, '{n}.GroupMember.user_id', '{n}');
 		return $aMembers;
-		*/
-		return $members;
 	}
 	
 	public function getUserGroups($user_id) {

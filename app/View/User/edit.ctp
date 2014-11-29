@@ -1,11 +1,11 @@
 <?
-	$id = $this->request->data('Profile.id');
+	$id = $this->request->data('User.id');
 ?>
-<?=$this->Form->create('Profile')?>
-<?=$this->Form->hidden('Profile.id')?>
+<?=$this->Form->create('User')?>
+<?=$this->Form->hidden('User.id')?>
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="page-title"><?=($id)? __('Profile settings') : __('Create your profile')?></div>
+        <div class="page-title"><?=__('User settings')?></div>
     </div>
 </div>
 <div class="row">
@@ -13,36 +13,17 @@
         <div class="col-md-3 col-sm-3 col-xs-12">
             <div class="col-md-12 col-sm-12 col-xs-3 n-padding">
                 <div class="settings-avatar">
-                    <!--a href="#"><img src="img/temp/bigavatar.jpg" alt="" /></a>
-                    <input type="file" class="filestyle"-->
-<?
-	if ($id) {
-		if ($this->request->data('Media.id')) {
-			$src = $this->Media->imageUrl($this->request->data, 'noresize');
-		} else {
-			$src = '/img/no-photo.jpg';
-		}
-?>
-                <img id="Profile<?=$id?>" src="<?=$src?>" alt="" data-resize="noresize" data-id="<?=$this->request->data('Media.id')?>" />
-<?
-	}
-?>
+                	<img id="User<?=$id?>" src="<?=$this->request->data('UserMedia.url_img')?>" alt="" data-resize="thumb200x200" data-id="<?=$this->request->data('UserMedia.id')?>" />
                 </div>
             </div>
-<?
-	if ($id) {
-?>
             <div class="settings-avatar-info fs13 text-grey mb60">
-                <input class="fileuploader filestyle" type="file" data-object_type="Profile" data-object_id="<?=$id?>" data-progress_id="progress-Profile<?=$id?>" />
-                <span id="progress-Profile<?=$id?>">
+                <input class="fileuploader filestyle" type="file" data-object_type="User" data-object_id="<?=$id?>" data-progress_id="progress-User<?=$id?>" />
+                <span id="progress-User<?=$id?>">
 	                <div id="progress-bar">
 		            	<div id="progress-stats"></div>
 		            </div>
 	            </span>
             </div>
-<?
-	}
-?>
             <div class="mb30">
                 <a href="/tickets/tickets" target="_blank"><?=__('Tech.support')?></a>
             </div>
@@ -59,7 +40,7 @@
 ?>
     	<div align="center">
     		<label>
-                <?=__('Profile has been successfully saved')?>
+                <?=__('User has been successfully saved')?>
             </label>
         </div>
 <?
@@ -70,7 +51,7 @@
 	                <?=__('Full name')?>
 	            </div>
 	            <div class="input-group settings-input col-md-12 col-sm-12">
-	                <?=$this->Form->input('Profile.full_name', array('label' => false, 'class' => 'form-control'))?>
+	                <?=$this->Form->input('User.full_name', array('label' => false, 'class' => 'form-control'))?>
 	            </div>
 	        </div>
             <div class="settings-input-row">
@@ -79,7 +60,7 @@
 	            </div>
 	            <div class="input-group settings-input col-md-12 col-sm-12">
 	                <span class="input-group-addon halflings facetime-video"></span>
-	                <?=$this->Form->input('Profile.video_url', array('label' => false, 'class' => 'form-control'))?>
+	                <?=$this->Form->input('User.video_url', array('label' => false, 'class' => 'form-control'))?>
 	            </div>
 	        </div>
 	        <div class="settings-input-row">
@@ -87,7 +68,7 @@
 	                <?=__('Phone')?>
 	            </div>
 	            <div class="input-group settings-input col-md-12 col-sm-12">
-	                <?=$this->Form->input('Profile.phone', array('label' => false, 'class' => 'form-control'))?>
+	                <?=$this->Form->input('User.phone', array('label' => false, 'class' => 'form-control'))?>
 	            </div>
 	        </div>
             <div class="settings-input-row">
@@ -95,7 +76,7 @@
 	                <?=__('Skills')?>
 	            </div>
 	            <div class="input-group settings-input col-md-12 col-sm-12">
-	            	<?=$this->Form->input('Profile.skills', array('type' => 'text', 'label' => false, 'class' => 'form-control col-md-12 col-sm-12', 'id' => 'tokenfield'))?>
+	            	<?=$this->Form->input('User.skills', array('type' => 'text', 'label' => false, 'class' => 'form-control col-md-12 col-sm-12', 'id' => 'tokenfield'))?>
 	            </div>
 	        </div>
             <div class="settings-input-row">
@@ -106,7 +87,7 @@
 	                <span class="input-group-addon">
 	                    <span class="glyphicons calendar"></span>
 	                </span>
-	                <?=$this->Form->input('Profile.birthday', array('type' => 'text', 'label' => false, 'id' => 'datetimepicker6', 'class' => 'form-control', 'data-date-format' => "YYYY-MM-DD"))?>
+	                <?=$this->Form->input('User.birthday', array('type' => 'text', 'label' => false, 'id' => 'datetimepicker6', 'class' => 'form-control', 'data-date-format' => "YYYY-MM-DD"))?>
 	            </div>
 	        </div>
             <!--div class="settings-input-row">
@@ -124,7 +105,7 @@
 	            </div>
 	            <div class="input-group settings-input col-md-12 col-sm-12">
 	                <span class="input-group-addon glyphicon-extended glyphicons direction"></span>
-	                <?=$this->Form->input('Profile.live_country', array('type' => 'text', 'label' => false))?>
+	                <?=$this->Form->input('User.live_country', array('type' => 'text', 'label' => false))?>
 	            </div>
 	        </div>
 	        <div class="settings-input-row">
@@ -133,43 +114,25 @@
 	            </div>
 	            <div class="input-group settings-input col-md-12 col-sm-12">
 	                <span class="input-group-addon glyphicon-extended glyphicons direction"></span>
-	                <?=$this->Form->input('Profile.live_place', array('type' => 'text', 'label' => false))?>
+	                <?=$this->Form->input('User.live_place', array('type' => 'text', 'label' => false))?>
 	            </div>
 	        </div>
-            <!--div class="settings-input-row">
-                <div class="comments-box-send-info">
-                    Университет
-                </div>
-                <div class="input-group settings-input col-md-12 col-sm-12">
-                    <span class="input-group-addon glyphicon-extended glyphicons book_open"></span>
-                    <input class="form-control" />
-                </div>
-            </div-->
             <div class="settings-input-row">
 	            <div class="comments-box-send-info">
 	                <?=__('University')?>
 	            </div>
 	            <div class="input-group settings-input col-md-12 col-sm-12">
-	            	<?=$this->Form->input('Profile.university', array('type' => 'text', 'label' => false, 'class' => 'form-control'))?>
+	            	<?=$this->Form->input('User.university', array('type' => 'text', 'label' => false, 'class' => 'form-control'))?>
 	            </div>
 	        </div>
-<?
-	if ($id) {
-?>            
             <div class="group-create-cell">
                 <fieldset class="gallery-block">
-                    <label>Фотографии</label>
+                    <label><?=__('University photo')?></label>
                     <div class="gallery-add page-menu clearfix">
                         <ul class="gallery-add-list clearfix">
                         	<li>
                         		<!--div class="remove-media"><span class="glyphicons circle_remove"></span></div-->
-<?
-	$src = $this->Media->imageUrl(array('Media' => $this->request->data('MediaUniversity')), 'thumb120x90');
-	if (!$src) {
-		$src = '/img/group-create-pl-image.jpg';
-	}
-?>
-                        		<img id="ProfileUniversity<?=$id?>" alt="" src="<?=$src?>" data-media_id="<?=$this->request->data('MediaUniversity.id')?>" data-resize="thumb120x90" style="width: 120px; height: 90px;">
+                        		<img id="UserUniversity<?=$id?>" alt="" src="<?=$this->Media->imageUrl($this->request->data('UniversityMedia'), 'thumb120x90')?>" data-media_id="<?=$this->request->data('UniversityMedia.id')?>" data-resize="thumb120x90" style="width: 120px; height: 90px;">
                         	</li>
                             <!--li>
                                 <div class="remove-media"><span class="glyphicons circle_remove"></span></div>
@@ -186,8 +149,8 @@
                                     </span>
                             </li-->
                         </ul>
-                        <input class="fileuploader filestyle" type="file" data-object_type="ProfileUniversity" data-object_id="<?=$id?>" data-progress_id="progress-ProfileUniversity<?=$id?>" />
-                        <span id="progress-ProfileUniversity<?=$id?>">
+                        <input class="fileuploader filestyle" type="file" data-object_type="UserUniversity" data-object_id="<?=$id?>" data-progress_id="progress-UserUniversity<?=$id?>" />
+                        <span id="progress-UserUniversity<?=$id?>">
 			                <div id="progress-bar">
 				            	<div id="progress-stats"></div>
 				            </div>
@@ -195,9 +158,7 @@
                     </div>
                 </fieldset>
             </div>
-<?
-	}
-?>            
+            
         </div>
     </div>
 </div>
@@ -214,7 +175,7 @@
                 </div>
                 <div class="group-create-right col-md-7 col-sm-7 col-xs-12">
 <?
-	$aAchiev = $this->request->data('ProfileAchievement');
+	$aAchiev = $this->request->data('UserAchievement');
 	if (!$aAchiev) {
 ?>
 					<div class="group-fieldset no-items">
@@ -228,18 +189,18 @@
 ?>
                 
 					<div class="group-fieldset">
-						<input type="hidden" name="data[ProfileAchievement][<?=$i?>][id]" value="<?=Hash::get($row, 'id')?>">
-						<input type="hidden" name="data[ProfileAchievement][<?=$i?>][profile_id]" value="<?=$id?>">
+						<input type="hidden" name="data[UserAchievement][<?=$i?>][id]" value="<?=Hash::get($row, 'id')?>">
+						<input type="hidden" name="data[UserAchievement][<?=$i?>][profile_id]" value="<?=$id?>">
                         <fieldset>
                             <label for="achiv-title<?=$i?>"><?=__('Achievement')?></label>
                             <div class="input-boxing clearfix">
-                                <textarea class="textarea-auto animated icon-left-width" id="achiv-title<?=$i?>" name="data[ProfileAchievement][<?=$i?>][title]" placeholder="<?=__('Achievement')?>..."><?=Hash::get($row, 'title')?></textarea>
+                                <textarea class="textarea-auto animated icon-left-width" id="achiv-title<?=$i?>" name="data[UserAchievement][<?=$i?>][title]" placeholder="<?=__('Achievement')?>..."><?=Hash::get($row, 'title')?></textarea>
                             </div>
                         </fieldset>
                         <fieldset>
                             <label for="achiv-url<?=$i?>"><?=__('Achievement approve URL')?></label>
                             <div class="input-boxing clearfix">
-                                <input id="achiv-url<?=$i?>" type="text" name="data[ProfileAchievement][<?=$i?>][url]" value="<?=Hash::get($row, 'url')?>" placeholder="http://yoursite.com..."/>
+                                <input id="achiv-url<?=$i?>" type="text" name="data[UserAchievement][<?=$i?>][url]" value="<?=Hash::get($row, 'url')?>" placeholder="http://yoursite.com..."/>
                             </div>
                         </fieldset>
                     </div>
@@ -269,7 +230,7 @@
 		'rus' => __('Russian')
 	);
 ?>
-                    <?=$this->Form->input('Profile.lang', array('label' => false, 'options' => $options, 'class' => 'formstyler', 'id' => 'settings-input-row-lang'))?>
+                    <?=$this->Form->input('User.lang', array('label' => false, 'options' => $options, 'class' => 'formstyler', 'id' => 'settings-input-row-lang'))?>
                 </div>
             </div>
             <div class="settings-input-row nbb clearfix mb100">
@@ -281,7 +242,7 @@
 	if ($id) {
 ?>
                 <div class="col-md-6 col-sm-6 col-xs-6  taright">
-                    <a class="my-page-view-user" href="<?=$this->Html->url(array('controller' => 'Profile', 'action' => 'view'))?>"><?=__('How other people see this page')?></a>
+                    <a class="my-page-view-user" href="<?=$this->Html->url(array('controller' => 'User', 'action' => 'view'))?>"><?=__('How other people see this page')?></a>
                 </div>
 <?
 	}
@@ -306,18 +267,18 @@ $(document).ready(function(){
 </script>
 <script type="text/x-tmpl" id="profile-achiev">
 <div class="group-fieldset default">
-	<input type="hidden" name="data[ProfileAchievement][{%=o.i%}][id]" value="">
-	<input type="hidden" name="data[ProfileAchievement][{%=o.i%}][profile_id]" value="<?=$id?>">
+	<input type="hidden" name="data[UserAchievement][{%=o.i%}][id]" value="">
+	<input type="hidden" name="data[UserAchievement][{%=o.i%}][profile_id]" value="<?=$id?>">
     <fieldset>
         <label for="achiv-title{%=o.i%}"><?=__('Achievement')?></label>
         <div class="input-boxing clearfix">
-            <textarea class="textarea-auto animated icon-left-width" id="achiv-title{%=o.i%}" name="data[ProfileAchievement][{%=o.i%}][title]" placeholder="<?=__('Achievement')?>..."></textarea>
+            <textarea class="textarea-auto animated icon-left-width" id="achiv-title{%=o.i%}" name="data[UserAchievement][{%=o.i%}][title]" placeholder="<?=__('Achievement')?>..."></textarea>
         </div>
     </fieldset>
     <fieldset>
         <label for="achiv-url{%=o.i%}"><?=__('Achievement approve URL')?></label>
         <div class="input-boxing clearfix">
-            <input id="achiv-url{%=o.i%}" type="text" name="data[ProfileAchievement][{%=o.i%}][url]" value="" placeholder="http://yoursite.com..."/>
+            <input id="achiv-url{%=o.i%}" type="text" name="data[UserAchievement][{%=o.i%}][url]" value="" placeholder="http://yoursite.com..."/>
         </div>
     </fieldset>
 </div>

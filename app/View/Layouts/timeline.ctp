@@ -69,7 +69,7 @@
 	
 	<script src="<?=$this->Html->url(array('controller' => 'ChatAjax', 'action' => 'jsSettings'))?>"></script>
 	<script src="<?=$this->Html->url(array('controller' => 'DeviceAjax', 'action' => 'jsSettings'))?>"></script>
-	<script src="<?=$this->Html->url(array('controller' => 'ProfileAjax', 'action' => 'jsSettings'))?>"></script>
+	<script src="<?=$this->Html->url(array('controller' => 'UserAjax', 'action' => 'jsSettings'))?>"></script>
 	<script src="<?=$this->Html->url(array('controller' => 'GroupAjax', 'action' => 'jsSettings'))?>"></script>
 <script>
 $(function() {

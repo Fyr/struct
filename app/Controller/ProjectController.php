@@ -43,7 +43,7 @@ class ProjectController extends SiteController {
 		}
 		
 		$this->Project->delete($id);
-		$this->redirect(array('controller' => 'Profile', 'action' => 'view'));
+		$this->redirect(array('controller' => 'User', 'action' => 'view'));
 	}
 	*/
 	public function view($id) {
@@ -52,10 +52,12 @@ class ProjectController extends SiteController {
 		$this->set('isProjectAdmin', Hash::get($project, 'Project.owner_id') == $this->currUserID);
 		
 		$members = $this->GroupMember->getList($project['Project']['group_id']);
-		if (!in_array($this->currUserID, Hash::extract($members, '{n}.User.id'))) {
+		$aID = Hash::extract($members, '{n}.GroupMember.user_id');
+		if (!in_array($this->currUserID, $aID)) {
 			return $this->redirect(array('controller' => 'Group', 'action' => 'view', $project['Project']['group_id']));
 		}
-		$this->set('aUsers', $members);
+		$aUsers = $this->User->getUsers($aID);
+		$this->set('aUsers', $aUsers);
 		
 		$subprojects = $this->Subproject->findAllByProjectId($id);
 		$subprojects = Hash::combine($subprojects, '{n}.Subproject.id', '{n}');
@@ -63,7 +65,7 @@ class ProjectController extends SiteController {
 		$aID = array_keys($subprojects);
 		$aTasks = $this->Task->findAllBySubprojectId($aID);
 
-		$this->set('aMemberOptions', Hash::combine($members, '{n}.User.id', '{n}.User.full_name'));
+		$this->set('aMemberOptions', Hash::combine($aUsers, '{n}.User.id', '{n}.User.full_name'));
 		
 		$conditions = array('ProjectEvent.project_id' => $id);
 		$order = 'ProjectEvent.created DESC';
@@ -87,9 +89,12 @@ class ProjectController extends SiteController {
 		$group = $this->Group->findById($project['Project']['group_id']);
 		
 		$members = $this->GroupMember->getList($project['Project']['group_id']);
-		if (!in_array($this->currUserID, array_keys($members))) {
+		$aID = Hash::extract($members, '{n}.GroupMember.user_id');
+		if (!in_array($this->currUserID, $aID)) {
 			return $this->redirect(array('controller' => 'Group', 'action' => 'view', $project['Project']['group_id']));
 		}
+		$aUsers = $this->User->getUsers($aID);
+		$this->set('aUsers', $aUsers);
 		
 		if ($this->request->is('put') || $this->request->is('post')) {
 			$this->ProjectEvent->addTaskComment(

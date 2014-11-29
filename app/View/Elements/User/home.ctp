@@ -13,7 +13,7 @@
 		    <div class="col-md-7 col-md-offset-1">
 		        <div class="input-box">
 		            <div class="form">
-		                <?=$this->element('FE/login_form')?>
+		                <?=$this->element('User/login_form')?>
 		            </div>
 		        </div>
 		    </div>
@@ -25,7 +25,7 @@
 		    <div class="col-md-7 col-md-offset-1">
 		        <div class="input-box">
 		            <div class="form">
-		            	<?=$this->element('FE/register_form')?>
+		            	<?=$this->element('User/register_form')?>
 		            </div>
 		        </div>
 		    </div>

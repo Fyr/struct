@@ -200,472 +200,455 @@ msgstr "Дек"
 
 
 msgid "Product already exists in the order"
-msgstr "Продукт уже присутствует в заказе"
+msgstr "rus:Product already exists in the order!"
 
 msgid "Product does not exist"
-msgstr "Продукт не существует"
+msgstr "rus:Product does not exist!"
 
 msgid "Incorrect request"
-msgstr "Неправильный запрос"
+msgstr "rus:Incorrect request!"
 
 msgid "Products"
-msgstr "Продукт"
+msgstr "rus:Products!"
 
 msgid "Product types"
-msgstr "Типы продуктов"
+msgstr "rus:Product types!"
 
 msgid "Contractors"
-msgstr "Контрагенты"
+msgstr "rus:Contractors!"
 
 msgid "Orders"
-msgstr "Заказы"
+msgstr "rus:Orders!"
 
 msgid "FAQ"
-msgstr "FAQ"
+msgstr "rus:FAQ!"
 
-msgid "New orders"
-msgstr "Новые заказы"
+msgid "New order"
+msgstr "rus:New order!"
 
 msgid "My orders"
-msgstr "Мои заказы"
+msgstr "rus:My orders!"
 
 msgid "Recharge balance"
-msgstr "Пополнить баланс"
-
-msgid "Profile settings"
-msgstr "Настройки профиля"
-
-msgid "Tech.params"
-msgstr "Тех. параметры"
-
-msgid "Edit contractor"
-msgstr "Редактировать контрагента"
-
-msgid "Create contractor"
-msgstr "Создать контрагента"
-
-msgid "Edit question"
-msgstr "Редактировать вопрос"
-
-msgid "Create question"
-msgstr "Создать вопрос"
-
-msgid "Edit order"
-msgstr "Редактировать заказ"
-
-msgid "Create order"
-msgstr "Создать заказ"
-
-msgid "Edit product"
-msgstr "Редактировать продукт"
-
-msgid "Create product"
-msgstr "Создать продукт"
-
-msgid "Edit product type"
-msgstr "Редактировать тип продукта"
-
-msgid "Create product type"
-msgstr "Создать тип продукта"
-
-msgid "You have received a file"
-msgstr "Вы получили файл"
-
-msgid "File has been uploaded"
-msgstr "Файл загружен"
-
-msgid "Min.qty"
-msgstr "Мин. кол-во"
-
-msgid "items"
-msgstr "предметы"
-
-msgid "Remove"
-msgstr "Удалить"
-
-msgid "Contact person"
-msgstr "Контактное лицо"
-
-msgid "Email"
-msgstr "Email"
-
-msgid "Contractor details"
-msgstr "Контактные данные контрагента"
-
-msgid "Contractor name"
-msgstr "Наименнование контрагента"
-
-msgid "Order ID"
-msgstr "ID заказа"
-
-msgid "Sum"
-msgstr "Сумма"
-
-msgid "Choose the suitable payment system to recharge your balance"
-msgstr "Выберите подходящую платёжную систему для пополнения вашего баланса"
-
-msgid "Recharge amount"
-msgstr "Пополнить сумму"
-
-msgid "Paid"
-msgstr "Платное"
-
-msgid "Shipped"
-msgstr "Куплено"
-
-msgid "- No products in this order -"
-msgstr "Нет продуктов в текущем заказе"
-
-msgid "month"
-msgstr "месяц"
-
-msgid "Requires a payment"
-msgstr "Требует оплату"
-
-msgid "Shipping"
-msgstr "Покупка"
-
-msgid "Ready"
-msgstr "Готово"
-
-msgid "Find user..."
-msgstr "Найти пользователя..."
-
-msgid "Order it"
-msgstr "Оформить заказ"
-
-msgid "years"
-msgstr "года"
-
-msgid "Send message"
-msgstr "Отправить сообщение"
-
-msgid "To send message press Enter"
-msgstr "Для отправки сообщения нажмите Enter"
-
-msgid "Processing file..."
-msgstr "Обработка файла"
-
-msgid "Balance"
-msgstr "Баланс"
-
-msgid "Tech.support"
-msgstr "Техническая поддержка"
-
-msgid "Change email"
-msgstr "Сменить email"
-
-msgid "Change password"
-msgstr "Сменить пароль"
-
-msgid "Profile has been successfully saved"
-msgstr "Профиль успешно сохранён"
-
-msgid "My video"
-msgstr "Моё видео"
-
-msgid "Skills"
-msgstr "Навыки"
-
-msgid "Birthday"
-msgstr "Дата рождения"
-
-msgid "I live"
-msgstr "Я живу"
-
-msgid "Interface language"
-msgstr "Язык интерфейса"
-
-msgid "No user found"
-msgstr "Не найден ни один пользователь"
-
-msgid "Achievement"
-msgstr "Достижение"
-
-msgid "Achievement approve URL"
-msgstr "Ссылка подтверждения достижения"
-
-msgid "Remove achievement"
-msgstr "Удалить достижение"
-
-msgid "Headquaters"
-msgstr "Штаб-квартира"
-
-msgid "Phone"
-msgstr "Телефон"
-
-msgid "Site URL and email"
-msgstr "Адрес сайта и email"
-
-msgid "Remove address"
-msgstr "Удалить адрес"
-
-msgid "Members"
-msgstr "Участники"
-
-msgid "Find group..."
-msgstr "Найти группу..."
-
-msgid "Find user or community..."
-msgstr "Найти пользователя или сообщество"
-
-msgid "No item found"
-msgstr "Ничего не найдено"
-
-msgid "Group settings"
-msgstr "Настройки группы"
-
-msgid "Create group"
-msgstr "Создать группу"
-
-msgid "Group has been successfully saved"
-msgstr "Группа успешно сохранена"
-
-msgid "Group video"
-msgstr "Видео группы"
-
-msgid "Group title"
-msgstr "Название группы"
-
-msgid "Description"
-msgstr "Описание"
-
-msgid "Photo or video gallery"
-msgstr "Фото-видео галерея"
-
-msgid "URL for video"
-msgstr "Ссылка для видео"
-
-msgid "Add another address"
-msgstr "Добавить другой адрес"
-
-msgid "Add another achievement"
-msgstr "Добавить другое достижение"
-
-msgid "If you are looking for a job, employer can find you in our database"
-msgstr "Если вы в поисках работы, работодатель сможет найти вас в нашей базе данных"
-
-msgid "Hide group"
-msgstr "Скрыть группу"
-
-msgid "All addresses"
-msgstr "Все адреса"
-
-msgid "Collapse"
-msgstr "Свернуть"
-
-msgid "Show more"
-msgstr "Показать ещё"
-
-msgid "Create your profile"
-msgstr "Создайте свой профиль"
-
-msgid "Full name"
-msgstr "Полное имя"
-
-msgid "I am looking for a job"
-msgstr "Я ищу  работу"
-
-msgid "How other people see this page"
-msgstr "Как другие люди видят эту страницу"
-
-msgid "You can easily remove your profile from the site, just click the button and all information will be deleted permanently."
-msgstr "Вы можете легко удалить ваш профиль с сайта, просто нажмите кнопку и вся информация будет сразу же удалена."
-
-msgid "Contractor phone"
-msgstr "Телефон контрагента"
-
-msgid "Youtube.com URL"
-msgstr "Ссылка на Youtube.com"
-
-msgid "Upload video"
-msgstr "Загрузить видео"
-
-msgid "Achievements"
-msgstr "Достижения"
-
-msgid "Upload image"
-msgstr "Загрузить изображение"
-
-msgid "English"
-msgstr "English"
-
-msgid "Russian"
-msgstr "Русский"
-
-msgid "University"
-msgstr "Университет"
-msgid "Incorrect event ID"
-msgstr "Неверное ID событие!"
+msgstr "rus:Recharge balance!"
 
 msgid "Administrator"
-msgstr "Администратор!"
+msgstr "rus:Administrator!"
+
+msgid "Incorrect event ID"
+msgstr "rus:Incorrect event ID!"
+
+msgid "Tech.params"
+msgstr "rus:Tech.params!"
+
+msgid "Edit contractor"
+msgstr "rus:Edit contractor!"
+
+msgid "Create contractor"
+msgstr "rus:Create contractor!"
+
+msgid "Edit question"
+msgstr "rus:Edit question!"
+
+msgid "Create question"
+msgstr "rus:Create question!"
+
+msgid "Edit order"
+msgstr "rus:Edit order!"
+
+msgid "Create order"
+msgstr "rus:Create order!"
+
+msgid "Edit product"
+msgstr "rus:Edit product!"
+
+msgid "Create product"
+msgstr "rus:Create product!"
+
+msgid "Edit product type"
+msgstr "rus:Edit product type!"
+
+msgid "Create product type"
+msgstr "rus:Create product type!"
+
+msgid "You have received a file"
+msgstr "rus:You have received a file!"
+
+msgid "File has been uploaded"
+msgstr "rus:File has been uploaded!"
+
+msgid "Min.qty"
+msgstr "rus:Min.qty!"
+
+msgid "items"
+msgstr "rus:items!"
+
+msgid "Remove"
+msgstr "rus:Remove!"
+
+msgid "Contact person"
+msgstr "rus:Contact person!"
+
+msgid "Email"
+msgstr "rus:Email!"
+
+msgid "Contractor phone"
+msgstr "rus:Contractor phone!"
+
+msgid "Contractor name"
+msgstr "rus:Contractor name!"
+
+msgid "Contractor details"
+msgstr "rus:Contractor details!"
+
+msgid "Order ID"
+msgstr "rus:Order ID!"
+
+msgid "Sum"
+msgstr "rus:Sum!"
+
+msgid "Choose the suitable payment system to recharge your balance"
+msgstr "rus:Choose the suitable payment system to recharge your balance!"
+
+msgid "Recharge amount"
+msgstr "rus:Recharge amount!"
+
+msgid "Paid"
+msgstr "rus:Paid!"
+
+msgid "Shipped"
+msgstr "rus:Shipped!"
+
+msgid "- No products in this order -"
+msgstr "rus:- No products in this order -!"
+
+msgid "month"
+msgstr "rus:month!"
+
+msgid "No user found"
+msgstr "rus:No user found!"
+
+msgid "Achievement"
+msgstr "rus:Achievement!"
+
+msgid "Achievement approve URL"
+msgstr "rus:Achievement approve URL!"
+
+msgid "Remove achievement"
+msgstr "rus:Remove achievement!"
+
+msgid "Headquaters"
+msgstr "rus:Headquaters!"
+
+msgid "Phone"
+msgstr "rus:Phone!"
+
+msgid "Site URL and email"
+msgstr "rus:Site URL and email!"
+
+msgid "Remove address"
+msgstr "rus:Remove address!"
+
+msgid "Members"
+msgstr "rus:Members!"
+
+msgid "Requires a payment"
+msgstr "rus:Requires a payment!"
+
+msgid "Shipping"
+msgstr "rus:Shipping!"
+
+msgid "Ready"
+msgstr "rus:Ready!"
+
+msgid "Find user..."
+msgstr "rus:Find user...!"
+
+msgid "Order it"
+msgstr "rus:Order it!"
+
+msgid "Find group..."
+msgstr "rus:Find group...!"
+
+msgid "Find user or community..."
+msgstr "rus:Find user or community...!"
+
+msgid "No item found"
+msgstr "rus:No item found!"
+
+msgid "years"
+msgstr "rus:years!"
+
+msgid "Send message"
+msgstr "rus:Send message!"
+
+msgid "To send message press Enter"
+msgstr "rus:To send message press Enter!"
+
+msgid "Processing file..."
+msgstr "rus:Processing file...!"
+
+msgid "Group settings"
+msgstr "rus:Group settings!"
+
+msgid "Create group"
+msgstr "rus:Create group!"
+
+msgid "Group has been successfully saved"
+msgstr "rus:Group has been successfully saved!"
+
+msgid "Group title"
+msgstr "rus:Group title!"
+
+msgid "Group video"
+msgstr "rus:Group video!"
+
+msgid "Description"
+msgstr "rus:Description!"
+
+msgid "Your role in group"
+msgstr "rus:Your role in group!"
+
+msgid "Photo or video gallery"
+msgstr "rus:Photo or video gallery!"
+
+msgid "Youtube.com URL"
+msgstr "rus:Youtube.com URL!"
+
+msgid "Upload video"
+msgstr "rus:Upload video!"
 
 msgid "Add group address"
-msgstr "Добавить адрес группы!"
+msgstr "rus:Add group address!"
 
 msgid "No addresses yet"
-msgstr "Адрес не задан!"
+msgstr "rus:No addresses yet!"
 
 msgid "Add group achievement"
-msgstr "Добавить достижение группы!"
+msgstr "rus:Add group achievement!"
 
 msgid "No achivements yet"
-msgstr "У вас пока нет никаких достижени!"
+msgstr "rus:No achivements yet!"
 
-msgid "Are you sure to delete this user?"
-msgstr "Вы точно хотите удалить этого пользователя?!"
+msgid "Are you sure to delete this user"
+msgstr "rus:Are you sure to delete this user!"
 
-msgid "Add user"
-msgstr "Добавить пользователя!"
+msgid "Add member"
+msgstr "rus:Add member!"
 
 msgid "Join this group"
-msgstr "Вступить в группу!"
+msgstr "rus:Join this group!"
 
 msgid "Your invitation has been sent to group administrator"
-msgstr "Ваше приглашение администратору группы отправлено!"
+msgstr "rus:Your invitation has been sent to group administrator!"
+
+msgid "All addresses"
+msgstr "rus:All addresses!"
+
+msgid "Collapse"
+msgstr "rus:Collapse!"
+
+msgid "Achievements"
+msgstr "rus:Achievements!"
+
+msgid "Show more"
+msgstr "rus:Show more!"
+
+msgid "Team"
+msgstr "rus:Team!"
 
 msgid "Projects"
-msgstr "Проекты!"
+msgstr "rus:Projects!"
 
 msgid "New project"
-msgstr "Новый проект!"
+msgstr "rus:New project!"
 
 msgid "No projects yet"
-msgstr "У вас пока нет проектов!"
+msgstr "rus:No projects yet!"
 
-msgid "Messanges"
-msgstr "Сообщения!"
+msgid "Messanger"
+msgstr "rus:Messanger!"
+
+msgid "Balance"
+msgstr "rus:Balance!"
 
 msgid "Main page"
-msgstr "Главная страница!"
+msgstr "rus:Main page!"
+
+msgid "Upload image"
+msgstr "rus:Upload image!"
 
 msgid "Timeline"
-msgstr "Временная лента!"
+msgstr "rus:Timeline!"
 
 msgid "Day"
-msgstr "День!"
+msgstr "rus:Day!"
 
 msgid "Week"
-msgstr "Неделя!"
-
-msgid "Country of residence"
-msgstr "Страна!"
-
-msgid "City of residence"
-msgstr "Город!"
-
-msgid "Add user achievement"
-msgstr "Добавить достижения пользователя!"
-
-msgid "Video with me"
-msgstr "Мое видео!"
-
-msgid "Groups"
-msgstr "Группы!"
+msgstr "rus:Week!"
 
 msgid "Project settings"
-msgstr "Настройки проекта!"
+msgstr "rus:Project settings!"
 
 msgid "Create project"
-msgstr "Создать проект!"
+msgstr "rus:Create project!"
 
 msgid "Project has been successfully saved"
-msgstr "Проект успешно сохранен!"
+msgstr "rus:Project has been successfully saved!"
 
 msgid "Project title"
-msgstr "Название проекта!"
+msgstr "rus:Project title!"
 
 msgid "Deadline"
-msgstr "Крайний срок!"
+msgstr "rus:Deadline!"
 
 msgid "Close"
-msgstr "Завершить!"
+msgstr "rus:Close!"
 
-msgid "Managing"
-msgstr "Управление!"
+msgid "Manager"
+msgstr "rus:Manager!"
 
 msgid "Assigned to"
-msgstr "Подписаться!"
+msgstr "rus:Assigned to!"
 
 msgid "Discussion"
-msgstr "Обсуждение!"
+msgstr "rus:Discussion!"
 
-msgid "Create task"
-msgstr "Создать задачу!"
+msgid "Task was created"
+msgstr "rus:Task was created!"
 
-msgid "Close task"
-msgstr "Завершить задачу!"
+msgid "Task was closed"
+msgstr "rus:Task was closed!"
 
 msgid "Go to Group"
 msgstr "rus:Go to Group!"
 
 msgid "Closed"
-msgstr "Завершено!"
+msgstr "rus:Closed!"
 
 msgid "Last updates"
-msgstr "Послдние обновления!"
+msgstr "rus:Last updates!"
 
-msgid "close this project"
-msgstr "Завершить задачу!"
+msgid "closed this project"
+msgstr "rus:closed this project!"
 
 msgid "No open tasks"
-msgstr "Нет текущих задач!"
+msgstr "rus:No open tasks!"
 
 msgid "New task"
-msgstr "Новые задачи!"
+msgstr "rus:New task!"
 
 msgid "Closed tasks"
-msgstr "Завершенные задачи!"
+msgstr "rus:Closed tasks!"
 
 msgid "Add subproject"
-msgstr "Добавить подпроект!"
+msgstr "rus:Add subproject!"
 
 msgid "Add task"
-msgstr "Добавить задачу!"
+msgstr "rus:Add task!"
 
 msgid "Sun"
-msgstr "Воскр!"
+msgstr "rus:Sun!"
 
 msgid "Mon"
-msgstr "Пн!"
+msgstr "rus:Mon!"
 
 msgid "Tue"
-msgstr "Вт!"
+msgstr "rus:Tue!"
 
 msgid "Wen"
-msgstr "Ср!"
+msgstr "rus:Wen!"
 
 msgid "Thu"
-msgstr "Чт!"
+msgstr "rus:Thu!"
 
 msgid "Fri"
-msgstr "Пт!"
+msgstr "rus:Fri!"
 
 msgid "Sat"
-msgstr "Сб"
+msgstr "rus:Sat!"
 
 msgid "Event title"
-msgstr "Название события!"
+msgstr "rus:Event title!"
 
 msgid "Event description"
-msgstr "Описание события!"
+msgstr "rus:Event description!"
 
 msgid "I registered on this site"
-msgstr "Я зарегистрировался на сайте!"
+msgstr "rus:I registered on this site!"
 
 msgid "Last created groups"
-msgstr "Последние созданные группы!"
+msgstr "rus:Last created groups!"
 
 msgid "You joined this group as "
-msgstr "Вы вступили в эту группу !"
+msgstr "rus:You joined this group as !"
 
 msgid "You received a request to join your group"
-msgstr  "Вы предложение присоединиться к своей группе !"
+msgstr "rus:You received a request to join your group!"
 
 msgid "Updated site began to work"
-msgstr "Сайт работает после обноления!"
+msgstr "rus:Updated site began to work!"
 
 msgid "Last registered users"
-msgstr "Последний зарегистрированный пользователь!"
+msgstr "rus:Last registered users!"
+
+msgid "User settings"
+msgstr "rus:User settings!"
+
+msgid "Tech.support"
+msgstr "rus:Tech.support!"
+
+msgid "Change email"
+msgstr "rus:Change email!"
+
+msgid "Change password"
+msgstr "rus:Change password!"
+
+msgid "User has been successfully saved"
+msgstr "rus:User has been successfully saved!"
+
+msgid "Full name"
+msgstr "rus:Full name!"
+
+msgid "My video"
+msgstr "rus:My video!"
+
+msgid "Skills"
+msgstr "rus:Skills!"
+
+msgid "Birthday"
+msgstr "rus:Birthday!"
+
+msgid "Country of residence"
+msgstr "rus:Country of residence!"
+
+msgid "City of residence"
+msgstr "rus:City of residence!"
+
+msgid "University"
+msgstr "rus:University!"
+
+msgid "University photo"
+msgstr "rus:University photo!"
+
+msgid "Add user achievement"
+msgstr "rus:Add user achievement!"
+
+msgid "Interface language"
+msgstr "rus:Interface language!"
+
+msgid "English"
+msgstr "rus:English!"
+
+msgid "Russian"
+msgstr "rus:Russian!"
+
+msgid "How other people see this page"
+msgstr "rus:How other people see this page!"
+
+msgid "Video with me"
+msgstr "rus:Video with me!"
+
+msgid "Groups"
+msgstr "rus:Groups!"
 
