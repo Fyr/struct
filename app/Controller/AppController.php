@@ -81,5 +81,9 @@ class AppController extends Controller {
 		$this->set('currUser', $this->currUser);
 		$this->set('currUserID', $this->currUserID);
 		$this->set('pageTitle', $this->pageTitle);
+		
+		$this->set('PU_', '$');
+		$this->set('PU_', '');
+		$this->set('balance', '0');
 	}
 }

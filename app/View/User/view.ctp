@@ -91,7 +91,10 @@
         <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="user-adress">
                 <div class="fs15"><?=Hash::get($user, 'User.live_place')?></div>
-                <div class="fs13 text-grey"><?=Hash::get($user, 'User.live_country')?></div>
+<?
+	$country = Hash::get($user, 'User.live_country');
+?>
+                <div class="fs13 text-grey"><?=(isset($aCountryOptions[$country])) ?$aCountryOptions[$country] : ''?></div>
                 <div class="fs15 mt10"><?=$this->LocalDate->date(Hash::get($user, 'User.birthday'))?></div>
             </div>
         </div>

@@ -108,9 +108,9 @@
 	            <div class="comments-box-send-info">
 	                <?=__('Country of residence')?>
 	            </div>
-	            <div class="input-group settings-input col-md-12 col-sm-12">
+	            <div class="input-group settings-input col-md-12 col-sm-12 timezone-select">
 	                <span class="input-group-addon glyphicon-extended glyphicons direction"></span>
-	                <?=$this->Form->input('User.live_country', array('type' => 'text', 'label' => false))?>
+	                <?=$this->Form->input('User.live_country', array('options' => $aCountryOptions, 'label' => false, 'class' => 'formstyler'))?>
 	            </div>
 	        </div>
 	        <div class="settings-input-row">
@@ -227,7 +227,7 @@
                 <div class="comments-box-send-info">
                     <?=__('Interface language')?>
                 </div>
-                <div class="box-select">
+                <div class="box-select lang-select">
                     <label for="settings-input-row-lang"></label>
 <?
 	$options = array(
@@ -236,6 +236,15 @@
 	);
 ?>
                     <?=$this->Form->input('User.lang', array('label' => false, 'options' => $options, 'class' => 'formstyler', 'id' => 'settings-input-row-lang'))?>
+                </div>
+            </div>
+            <div class="settings-input-row nbb">
+                <div class="comments-box-send-info">
+                    <?=__('Timezone')?>
+                </div>
+                <div class="box-select timezone-select">
+                    <label for="settings-input-row-lang"></label>
+                    <?=$this->Form->input('User.timezone', array('label' => false, 'options' => $aTimezoneOptions, 'class' => 'formstyler'))?>
                 </div>
             </div>
             <div class="settings-input-row nbb clearfix mb100">

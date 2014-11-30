@@ -3,6 +3,7 @@ App::uses('AppController', 'Controller');
 class UserController extends AppController {
 	public $name = 'User';
 	public $layout = 'profile';
+	public $uses = array('Timezone', 'Country');
 	
 	public function register() {
 		$this->layout = 'home';
@@ -25,11 +26,6 @@ class UserController extends AppController {
 		$this->layout = 'home';
 		if ($this->request->is('post')) {
 			if ($this->Auth->login()) {
-				if ( !(isset($_COOKIE['tzo']) && isset($_COOKIE['tzd'])) ) {
-					exit('Sorry, your browser must support Cookies and Javascript');
-				}
-				$timezone = timezone_name_from_abbr('', -$_COOKIE['tzo'] * 60, $_COOKIE['tzd']);
-				$this->User->save(array('id' => $this->Auth->user('id'), 'timezone' => $timezone));
 				return $this->redirect($this->Auth->redirect());
 			} else {
 				$this->Session->setFlash(AUTH_ERROR, null, null, 'auth');
@@ -60,6 +56,9 @@ class UserController extends AppController {
 		} else {
 			$this->request->data = $this->currUser;
 		}
+		
+		$this->set('aTimezoneOptions', $this->Timezone->options());
+		$this->set('aCountryOptions', $this->Country->options());
 	}
 
 	public function view($id = 0) {
@@ -69,5 +68,6 @@ class UserController extends AppController {
 		}
 		$this->set('user', $this->User->getUser($id));
 		$this->set('aGroups', $this->GroupMember->getUserGroups($id));
+		$this->set('aCountryOptions', $this->Country->options());
 	}
 }
