@@ -6,7 +6,8 @@
 	<![endif]-->
 	<?=$this->Html->charset(); ?>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name = "format-detection" content = "telephone=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="user-scalable=no" />
 	<title>Konstruktor: <?=__('Timeline')?></title>
 	
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>

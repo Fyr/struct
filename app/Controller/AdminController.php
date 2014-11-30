@@ -29,6 +29,7 @@ class AdminController extends AppController {
 		$this->set('currUser', $user);
 		if (!Hash::get($user, 'is_admin')) {
 			$this->redirect($this->Auth->loginAction);
+			return false;
 		}
 		return true;// Hash::get($user, 'is_admin');
 	}
@@ -52,7 +53,19 @@ class AdminController extends AppController {
 	}
 
 	public function index() {
-		// $this->redirect(array('controller' => 'AdminProducts'));
+		$this->loadModel('User');
+		$this->loadModel('Country');
+		
+		$fields = array('User.live_country', 'COUNT(*) AS count');
+		$order = array('User.live_country');
+		$group = array('User.live_country');
+		$aStats = $this->User->find('all', compact('fields', 'conditions', 'order', 'group'));
+		
+		$conditions = $this->User->dateTimeRange('User.created', date('Y-m-d H:i:s', time() - DAY), date('Y-m-d H:i:s'));
+		$aStatsToday = $this->User->find('all', compact('fields', 'conditions', 'order', 'group'));
+		
+		$aCountryOptions = $this->Country->options();
+		$this->set(compact('aStats', 'aStatsToday', 'aCountryOptions'));
 	}
 	
 	protected function _getCurrMenu() {

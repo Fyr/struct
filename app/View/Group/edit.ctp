@@ -144,6 +144,15 @@
 						    </div>
 						</fieldset>
 						<fieldset>
+						    <label for="group-create-5"><?=__('Fax')?></label>
+						    <div class="input-boxing clearfix">
+						        <span class="icon-input">
+						            <span class="glyphicons earphone"></span>
+						        </span>
+						        <input class="icon-left-width" id="group-create-5" type="text" name="data[GroupAddress][<?=$i?>][fax]" value="<?=Hash::get($groupAddress, 'fax')?>" placeholder="<?=__('Fax')?>..." />
+						    </div>
+						</fieldset>
+						<fieldset>
 						    <label for="group-create-7"><?=__('Site URL and email')?></label>
 						    <div class="input-boxing clearfix">
 						        <span class="icon-input">
@@ -275,6 +284,15 @@ $(document).ready(function(){
 	            <span class="glyphicons earphone"></span>
 	        </span>
 	        <input class="icon-left-width" id="group-create-5" type="text" name="data[GroupAddress][{%=o.i%}][phone]" value="" placeholder="<?=__('Phone')?>..." />
+	    </div>
+	</fieldset>
+	<fieldset>
+	    <label for="group-create-5"><?=__('Fax')?></label>
+	    <div class="input-boxing clearfix">
+	        <span class="icon-input">
+	            <span class="glyphicons earphone"></span>
+	        </span>
+	        <input class="icon-left-width" id="group-create-5" type="text" name="data[GroupAddress][{%=o.i%}][fax]" value="" placeholder="<?=__('Fax')?>..." />
 	    </div>
 	</fieldset>
 	<fieldset>

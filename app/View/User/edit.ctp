@@ -54,6 +54,14 @@
 	                <?=$this->Form->input('User.full_name', array('label' => false, 'class' => 'form-control'))?>
 	            </div>
 	        </div>
+	        <div class="settings-input-row">
+	            <div class="comments-box-send-info">
+	                <?=__('Skills')?>
+	            </div>
+	            <div class="input-group settings-input col-md-12 col-sm-12">
+	            	<?=$this->Form->input('User.skills', array('type' => 'text', 'label' => false, 'class' => 'form-control col-md-12 col-sm-12', 'id' => 'tokenfield'))?>
+	            </div>
+	        </div>
             <div class="settings-input-row">
 	            <div class="comments-box-send-info">
 	                <?=__('My video')?>
@@ -69,14 +77,6 @@
 	            </div>
 	            <div class="input-group settings-input col-md-12 col-sm-12">
 	                <?=$this->Form->input('User.phone', array('label' => false, 'class' => 'form-control'))?>
-	            </div>
-	        </div>
-            <div class="settings-input-row">
-	            <div class="comments-box-send-info">
-	                <?=__('Skills')?>
-	            </div>
-	            <div class="input-group settings-input col-md-12 col-sm-12">
-	            	<?=$this->Form->input('User.skills', array('type' => 'text', 'label' => false, 'class' => 'form-control col-md-12 col-sm-12', 'id' => 'tokenfield'))?>
 	            </div>
 	        </div>
             <div class="settings-input-row">
@@ -120,6 +120,14 @@
 	            <div class="input-group settings-input col-md-12 col-sm-12">
 	                <span class="input-group-addon glyphicon-extended glyphicons direction"></span>
 	                <?=$this->Form->input('User.live_place', array('type' => 'text', 'label' => false))?>
+	            </div>
+	        </div>
+	        <div class="settings-input-row">
+	            <div class="comments-box-send-info">
+	                <?=__('Speciality')?>
+	            </div>
+	            <div class="input-group settings-input col-md-12 col-sm-12">
+	            	<?=$this->Form->input('User.speciality', array('type' => 'text', 'label' => false, 'class' => 'form-control col-md-12 col-sm-12', 'id' => 'tokenfield'))?>
 	            </div>
 	        </div>
             <div class="settings-input-row">

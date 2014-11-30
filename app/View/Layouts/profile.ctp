@@ -5,6 +5,7 @@
 		<meta http-equiv="Refresh" content="0; URL=/html/include/ie.html" />
 	<![endif]-->
 	<?=$this->Html->charset(); ?>
+	<meta name="viewport" content="user-scalable=no" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<title>Konstruktor: <?=__('Main page')?></title>
 	

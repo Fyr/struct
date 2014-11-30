@@ -113,6 +113,7 @@
 			<div class="user-adress <?=$class?>" <?=$style?>>
                 <div class="fs13"><?=Hash::get($groupAddress, 'address')?></div>
                 <div class="fs13"><?=Hash::get($groupAddress, 'phone')?></div>
+                <div class="fs13"><?=Hash::get($groupAddress, 'fax')?></div>
                 <div class="fs13">
                     <a href="<?=$url?>" target="_blank"><?=$url?></a><br/>
                     <a href="mailto:<?=$email?>"><?=$email?></a>
