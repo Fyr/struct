@@ -99,7 +99,7 @@
 ?>
             <li>
 <?
-			if ($isGroupAdmin) {
+			if ($isGroupAdmin && $userID != Hash::get($group, 'Group.owner_id')) {
 ?>
             	<a href="<?=$urlRemove?>" onclick="return confirm('<?=__('Are you sure to delete this user')?>?');">
                 	<div class="remove-media"><span class="glyphicons circle_remove"></span></div>
