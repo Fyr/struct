@@ -241,17 +241,11 @@
             <div class="settings-input-row nbb clearfix mb100">
                 <div class="col-md-3 col-sm-3 col-xs-3 npl">
                     <!--a href="#" class="btn btn-default save-button">Сохранить</a-->
-                    <input type="submit" class="btn btn-default save-button" value="<?=__('Save')?>" />
+                    <input type="submit" class="btn btn-primary save-button" value="<?=__('Save')?>" />
                 </div>
-<?
-	if ($id) {
-?>
-                <div class="col-md-6 col-sm-6 col-xs-6  taright">
+                <div class="col-md-9 col-sm-9 col-xs-9 taright npr">
                     <a class="my-page-view-user" href="<?=$this->Html->url(array('controller' => 'User', 'action' => 'view'))?>"><?=__('How other people see this page')?></a>
                 </div>
-<?
-	}
-?>
                 <!--div class="col-md-3 col-sm-3 col-xs-3 taright">
                     <a href="#" class="btn btn-default"><?=__('Delete')?></a>
                 </div-->

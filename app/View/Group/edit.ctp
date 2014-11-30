@@ -218,7 +218,7 @@
             <div class="group-create-left col-md-3 col-sm-3 col-xs-12"></div>
             <div class="group-create-right col-md-9 col-sm-9 col-xs-12">
                 <div class="page-menu clearfix">
-                    <input type="submit" class="btn btn-default save-button" value="<?=__('Save')?>" />
+                    <input type="submit" class="btn btn-primary save-button" value="<?=__('Save')?>" />
 <?
 	if ($id) {
 ?>

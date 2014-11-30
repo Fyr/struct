@@ -51,7 +51,7 @@
 
         <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="page-menu clearfix">
-                    <input type="submit" class="btn btn-default save-button" value="<?=__('Save')?>" />
+                    <input type="submit" class="btn btn-primary save-button" value="<?=__('Save')?>" />
 <?
 	if ($id) {
 ?>

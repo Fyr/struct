@@ -25,7 +25,8 @@
 		'search-page',
 		'settings-page',
 		'group-page',
-		'project-page'
+		'project-page',
+		'konstruktor'
 	);
 	echo $this->Html->css($css);
 	
