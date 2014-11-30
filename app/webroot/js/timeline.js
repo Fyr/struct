@@ -50,17 +50,21 @@ var Timeline = {
 			Timeline.clockTimer = setInterval(function(){
 				var _now = new Date();
 				var time = Date.HoursMinutes(_now);
-				if ($('.curr-time-value').html().indexOf(':') > -1) {
-					time = time.replace(/\:/, ' ');
+				if ($('.curr-time-value').length) {
+					if ($('.curr-time-value').html().indexOf(':') > -1) {
+						time = time.replace(/\:/, ' ');
+					}
+					$('.curr-time-value').html(time);
 				}
-				$('.curr-time-value').html(time);
 			}, 500);
 		}
 	},
 	
 	scrollCurrentTime: function () {
-		$('.curr-time-cell').get(0).scrollIntoView();
-		window.scrollBy(0, -40);
+		if ($('.curr-time-cell').length) {
+			$('.curr-time-cell').get(0).scrollIntoView();
+			window.scrollBy(0, -40);
+		}
 	},
 	
 	renderEvents: function(data) {

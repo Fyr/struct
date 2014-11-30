@@ -1,42 +1,62 @@
-$(function() {
+var lChatOpened = null;
 
-    $('.logo-icon').css({backgroundSize: "cover"});
+$(function() {
+    var panel_list = $('.main-panel-dropdown .dropdown-panel'),
+        main_panel_li = $('.main-panel-list li');
+
+    function openMainPanel(open_this){
+		if ($(open_this).find('.chatPanel').length){
+			lChatOpened = true;
+			Chat.disableUpdate();
+		}
+        if($('.main-panel-list li.open').length > 0){
+            main_panel_li.removeClass('open');
+            open_this.parent().addClass('open');
+            panel_list.removeClass('dropdown-open');
+            setTimeout(function() {
+                var number_find = $('.main-panel-list li.open').index();
+                panel_list.eq(number_find).addClass('dropdown-open');
+            }, 650)
+        }else{
+            // closeMainPanel();
+            main_panel_li.removeClass('open');
+        	panel_list.removeClass('dropdown-open');
+        	
+            $(open_this).parent().addClass('open');
+            panel_list.eq($(open_this).parent().index()).addClass('dropdown-open');
+        }
+    }
+    
+    function closeMainPanel(){
+		if (lChatOpened) {
+			Chat.enableUpdate();
+		}
+        main_panel_li.removeClass('open');
+        panel_list.removeClass('dropdown-open');
+    }
+    
+    function closeMainPanelWrapp(){
+        closeMainPanel();
+        setTimeout(function() {
+            main_panel_li.removeClass('open');
+            panel_list.removeClass('dropdown-open');
+        }, 650);
+    }
 
     // click panel icon jobs
     $('.main-panel-list a').on('click', function(){
-        var panel_list = $('.main-panel-dropdown .dropdown-panel'),
-            main_panel_li = $('.main-panel-list li'),
-            number_click = $(this).parent().index();
         if($(this).parent().hasClass('open')){
-            main_panel_li.removeClass('open');
-            panel_list.removeClass('dropdown-open');
+            closeMainPanel();
         }else{
-            if($('.main-panel-list li.open').length > 0){
-                main_panel_li.removeClass('open');
-                $(this).parent().addClass('open');
-                panel_list.removeClass('dropdown-open');
-                setTimeout(function() {
-                    var number_find = $('.main-panel-list li.open').index();
-                    panel_list.eq(number_find).addClass('dropdown-open');
-                }, 650)
-            }else{
-                main_panel_li.removeClass('open');
-                $(this).parent().addClass('open');
-                panel_list.removeClass('dropdown-open');
-                panel_list.eq($(this).parent().index()).addClass('dropdown-open');
-            }
+            openMainPanel(this);
         }
         $(document).on('touchstart click', function(event){
             if ($(event.target).closest($('.main-panel')).length) return true;
-                main_panel_li.removeClass('open');
-                panel_list.removeClass('dropdown-open');
-                setTimeout(function() {
-                    main_panel_li.removeClass('open');
-                    panel_list.removeClass('dropdown-open');
-                }, 650);
+                closeMainPanelWrapp();
             event.stopPropagation();
         });
     });
+
 
     // event resize window service menu fixed
     var windows_height = $(window).height(),
@@ -62,9 +82,4 @@ $(function() {
 
 
     window.scrollBy(0, 1);
-
-//    hide menu list
-	$('.main-panel-list li:nth-child(4),.main-panel-list li:nth-child(5),' +
-    '.main-panel-list li:nth-child(6),.main-panel-list li:nth-child(7),' +
-    '.main-panel-list li:nth-child(8),.main-panel-list li:nth-child(10)').hide();
 });
