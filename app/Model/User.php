@@ -209,7 +209,7 @@ class User extends AppModel {
 			Hash::extract($data['last_groups'], '{n}.Group.id'),
 			Hash::extract($this->GroupMember->getUserGroups($currUserID), '{n}.GroupMember.group_id')
 		);
-		$data['groups'] = $this->Group->findAllById($aID);
+		$data['groups'] = Hash::combine($this->Group->findAllById($aID), '{n}.Group.id', '{n}');
 		$data['group_members'] = array();
 		foreach($data['groups'] as $group) {
 			$group_id = $group['Group']['id'];
