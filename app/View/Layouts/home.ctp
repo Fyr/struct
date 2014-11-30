@@ -84,6 +84,7 @@
                 <div class="footer-menu">
                     <ul>
                         <!--<li><a href="#">О проекте</a></li>-->
+                        <li><a href="/terms.pdf" target="_blank">Terms of Use</a></li>
                         <li><a href="/policy.pdf" target="_blank">Privacy Policy</a></li>
                         <!--<li><a href="#">Помощь</a></li>-->
                     </ul>
