@@ -77,8 +77,10 @@ class User extends AppModel {
 	public function afterFind($results, $primary = false) {
 		foreach($results as &$_row) {
     		$row = $_row[$this->alias];
-    		if (isset($row['username']) && isset($row['full_name']) && !trim($row['full_name'])) {
-    			$_row[$this->alias]['full_name'] = $row['username'];
+    		if (isset($row['username']) && isset($row['full_name'])) {
+    			if (empty($row['full_name'])) {
+    				$_row[$this->alias]['full_name'] = $row['username'];
+    			}
     		}
     	}
     	return $results;
@@ -146,7 +148,7 @@ class User extends AppModel {
 			)
 		);
 		$order = array('User.username');
-		$aUsers = $this->find('all', compact('fields', 'conditions', 'order', 'joins'));
+		$aUsers = $this->find('all', compact('fields', 'conditions', 'order'));
 		return $aUsers;
 	}
 	

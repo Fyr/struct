@@ -34,6 +34,7 @@ class UserController extends AppController {
 	}
 	
 	public function logout() {
+		$this->_initLang('eng');
 		$this->redirect($this->Auth->logout());
 	}
 

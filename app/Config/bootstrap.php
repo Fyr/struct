@@ -21,7 +21,7 @@ CakePlugin::loadAll();
 define('DOMAIN_NAME', 'struct.dev');
 define('DOMAIN_TITLE', 'Struct.DEV');
 
-define('AUTH_ERROR', __('Invalid username or password, try again'));
+define('AUTH_ERROR', 'Invalid username or password, try again');
 define('TEST_ENV', $_SERVER['SERVER_ADDR'] == '192.168.1.22');
 
 define('EMAIL_ADMIN', 'fyr.work@gmail.com');
