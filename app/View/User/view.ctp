@@ -4,7 +4,7 @@
 <div class="col-md-12 col-sm-12 col-xs-12 mutant-title">
     <div class="col-md-9 col-sm-9 col-xs-12">
         <div class="page-title"><?=Hash::get($user, 'User.full_name')?></div>
-        <div class="user-spec">
+        <div class="user-spec clearfix">
             <div class="spec"><?=Hash::get($user, 'User.skills')?></div>
 <?
 	if ($video = Hash::get($user, 'User.video_url')) {

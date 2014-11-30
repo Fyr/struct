@@ -3,7 +3,7 @@ App::uses('AppHelper', 'View/Helper');
 class LocalDateHelper extends AppHelper {
 
 	public function date($date) {
-		if (!$date || !strtotime($date)) {
+		if (!$date || !strtotime($date) || $date == '0000-00-00' || $date == '0000-00-00 00:00:00') {
 			return '';
 		}
 		if ($this->viewVar('currUser.User.lang') == 'rus') {
@@ -13,7 +13,7 @@ class LocalDateHelper extends AppHelper {
 	}
 	
 	public function dateTime($date) {
-		if (!$date || !strtotime($date)) {
+		if (!$date || !strtotime($date) || $date == '0000-00-00' || $date == '0000-00-00 00:00:00') {
 			return '';
 		}
 		if ($this->viewVar('currUser.User.lang') == 'rus') {
@@ -23,7 +23,7 @@ class LocalDateHelper extends AppHelper {
 	}
 	
 	public function time($date) {
-		if (!$date || !strtotime($date)) {
+		if (!$date || !strtotime($date) || $date == '0000-00-00' || $date == '0000-00-00 00:00:00') {
 			return '';
 		}
 		if ($this->viewVar('currUser.User.lang') == 'rus') {
