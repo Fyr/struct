@@ -12,7 +12,7 @@
         <div class="col-md-5 col-sm-12 col-xs-12">
             <div class="page-title">
                 <div class="page-title-group-image">
-                    <img alt="<?=$title?>" src="<?=$src?>" />
+                    <img alt="<?=$title?>" src="<?=$src?>" style="width: 50px;" />
                 </div> <?=$title?>
             </div>
         </div>

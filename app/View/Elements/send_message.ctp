@@ -1,5 +1,5 @@
 <div class="sendForm clearfix" style="display: none;">
-	<img class="ava" src="<?=$currUser['UserMedia']['url_img']?>" alt="" />
+	<img class="ava" src="<?=$this->Media->imageUrl($currUser['UserMedia'], 'thumb100x100')?>" alt="" />
 	<div class="text"><?=__('Send message')?></div>
 	<textarea></textarea>
 	<a href="javascript: void(0)" class="icon icon_enter"></a>

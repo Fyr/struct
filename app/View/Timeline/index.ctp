@@ -293,7 +293,7 @@ $(document).ready(function(){
 <?=__('Last created groups')?>
 {%
 	for(var i = 0; i < o.globalData.last_groups.length; i++) {
-		var group = o.globalData.last_groups[i].Group;
+		var group = o.globalData.last_groups[i];
 		var url = '<?=$this->Html->url(array('controller' =>'Group', 'action' => 'view', '~group_id'))?>';
 %}
 <div class="news-article group-type progect-type">
