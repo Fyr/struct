@@ -1,3 +1,6 @@
+<?
+	$user_id = Hash::get($user, 'User.id');
+?>
 <div class="col-md-12 col-sm-12 col-xs-12 mutant-title">
     <div class="col-md-9 col-sm-9 col-xs-12">
         <div class="page-title"><?=Hash::get($user, 'User.full_name')?></div>
@@ -13,8 +16,16 @@
 	}
 ?>
         </div>
-        <!--div class="user-menu page-menu">
-            <div class="btn-group add-to-favorites">
+        <div class="user-menu page-menu">
+<?
+	if ($currUserID != $user_id) {
+?>
+        	<a class="btn btn-default" href="<?=$this->Html->url(array('controller' => 'Chat', 'action' => 'index', $user_id))?>"><?=__('Send message')?></a>
+<?
+	}
+?>
+
+            <!--div class="btn-group add-to-favorites">
                 <div style="display: inline-block; position: relative; z-index:100" class="jq-selectbox jqselect formstyler"><select id="" name="" class="formstyler" style="margin: 0px; padding: 0px; position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; opacity: 0;">
                     <option value="0">В избранное</option>
                     <option value="1">Друзья</option>
@@ -65,8 +76,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div-->
+            </div-->
+        </div>
     </div>
     <div class="col-md-3 col-sm-3 col-xs-12">
         <div class="user-avatar taright">
@@ -90,6 +101,7 @@
 	$university = Hash::get($user, 'User.university');
 	$src = $this->Media->imageUrl(Hash::get($user, 'UniversityMedia'), 'thumb50x50');
 	if ($university) {
+		// echo $this->Html->image($src, array('alt' => $university, 'style' => 'width: 50px'));
 ?>
                 <img src="<?=$src?>" alt="<?=$university?>" style="width: 50px" />
 <?

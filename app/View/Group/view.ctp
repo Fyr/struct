@@ -73,10 +73,14 @@
                 <!--a class="btn btn-default" href="#">
                     <span class="glyphicons parents"></span>
                 </a-->
+<?
+	if ($isGroupMember) {
+?>
                 <a href="<?=$this->Html->url(array('controller' => 'Group', 'action' => 'members', $groupID))?>" class="btn btn-default">
                     <?=__('Members')?>
                 </a>
 <?
+	}
 	if ($isGroupAdmin) {
 ?>
                 <a class="btn btn-default" href="<?=$this->Html->url(array('controller' => 'Group', 'action' => 'edit', $groupID))?>">
@@ -243,7 +247,20 @@
     </div>
 </div>
 <?
-	// if (in_array($currUserID, array_keys($aMembers)) || $groupID == Configure::read('Konstructor.groupID')) {
+	$aContainer = array('', '', '');
+	$i = 0;
+	$isProjectsMember = 0;
+	foreach($aProjects as $j => $project) {
+		if (in_array($currUserID, $aProjectMembers[$project['Project']['id']])) {
+			$isProjectsMember++;
+			$aContainer[$i].= $this->element('group_projects', array('project' => $project, 'hide' => ($j >= 3)));
+			$i++;
+			if ($i >= 3) {
+				$i = 0;
+			}
+		}
+	}
+	if ($isProjectsMember || $isGroupAdmin) {
 ?>
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -263,18 +280,6 @@
         </div>
     </div>
 </div>
-
-<?
-		$aContainer = array('', '', '');
-		$i = 0;
-		foreach($aProjects as $j => $project) {
-			$aContainer[$i].= $this->element('group_projects', array('project' => $project, 'hide' => ($j >= 3)));
-			$i++;
-			if ($i >= 3) {
-				$i = 0;
-			}
-		}
-?>
 <div class="row group-projects">
     <div class="col-md-11 col-sm-10 col-xs-8">
 <?
@@ -316,7 +321,7 @@
 ?>
 </div>
 <?
-	// }
+	}
 ?>
 <script type="text/javascript">
 $(document).ready(function(){

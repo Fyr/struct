@@ -8,7 +8,7 @@ App::uses('SiteController', 'Controller');
 class GroupController extends SiteController {
 	public $name = 'Group';
 	public $layout = 'profile';
-	public $uses = array('Group', 'GroupMember');
+	public $uses = array('Group', 'GroupMember', 'ProjectMember');
 	public $helpers = array('Media');
 	
 	public function edit($id = 0) {
@@ -85,8 +85,17 @@ class GroupController extends SiteController {
 		$aID = Hash::extract($aMembers, '{n}.GroupMember.user_id');// array_keys($aMembers);
 		$aUsers = $this->User->getUsers($aID);
 		$this->set('aUsers', $aUsers);
+		$this->set('isGroupMember', in_array($this->currUserID, $aID));
 		
-		$this->set('aProjects', $this->Project->findAllByGroupIdAndClosed($id, 0));
+		$aProjects = $this->Project->findAllByGroupIdAndClosed($id, 0);
+		$this->set('aProjects', $aProjects);
+		
+		$aProjectMembers = array();
+		foreach($aProjects as $project) {
+			$project_id = $project['Project']['id'];
+			$aProjectMembers[$project_id] = Hash::extract($this->ProjectMember->getList($project_id), '{n}.ProjectMember.user_id');
+		}
+		$this->set('aProjectMembers', $aProjectMembers);
 	}
 	
 	public function members($id) {
