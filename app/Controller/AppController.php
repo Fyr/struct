@@ -11,7 +11,7 @@ class AppController extends Controller {
 		'Auth' => array(
 			'authorize'      => array('Controller'),
 			'loginAction'    => array('controller' => 'User', 'action' => 'login'),
-			'loginRedirect'  => array('controller' => 'User', 'action' => 'edit'),
+			'loginRedirect'  => array('controller' => 'User', 'action' => 'index'),
 			'logoutRedirect' => '/',
 			'authError'      => 'You must sign in to access that page'
 		),

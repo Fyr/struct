@@ -122,7 +122,7 @@ class User extends AppModel {
 	}
 	
 	public function search($currUserID, $q) {
-		$fields = 'User.id, User.username, UserMedia.*';
+		$fields = 'User.id, User.username, User.full_name, User.skills, UserMedia.*';
 		$conditions = array(
 			'User.id <> '.$currUserID,
 			'AND' => array(
