@@ -206,6 +206,11 @@ class User extends AppModel {
 		
 		// Get joined groups data
 		$data['groups'] = $this->GroupMember->getUserGroups($currUserID);
+		$data['group_members'] = array();
+		foreach($data['groups'] as $group) {
+			$group_id = $group['Group']['id'];
+			$data['group_members'][$group_id] = Hash::extract($this->GroupMember->getList($group_id), '{n}.GroupMember.user_id');
+		}
 		
 		// Sort all sortable events by time creation
 		$data['unread_msgs'] = Hash::combine($data['unread_msgs'], '{n}.ChatEvent.created', '{n}');

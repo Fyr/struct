@@ -81,8 +81,8 @@ class GroupController extends SiteController {
 		
 		$aMembers = $this->GroupMember->getList($id);
 		$this->set('aMembers', $aMembers);
-		
 		$aID = Hash::extract($aMembers, '{n}.GroupMember.user_id');// array_keys($aMembers);
+		
 		$aUsers = $this->User->getUsers($aID);
 		$this->set('aUsers', $aUsers);
 		$this->set('isGroupMember', in_array($this->currUserID, $aID));

@@ -305,22 +305,23 @@ $(document).ready(function(){
 	for(var i = 0; i < o.globalData.last_groups.length; i++) {
 		var group = o.globalData.last_groups[i];
 		var url = '<?=$this->Html->url(array('controller' =>'Group', 'action' => 'view', '~group_id'))?>';
+		var members = o.globalData.group_members[o.event.group_id];
 %}
 <div class="news-article group-type progect-type">
-    <a href="{%=url.replace(/~group_id/g, group.id)%}">
+    <a href="{%=url.replace(/~group_id/g, group.Group.id)%}">
         <div class="news-article-title"></div>
         <div class="news-article-title subtitle clearfix">
             <div class="subtitle-image">
-                <img alt="{%=group.title%}" src="{%=group.GroupMedia.url_img.replace(/noresize/, 'thumb50x50')%}" style="width: 50px;">
+                <img alt="{%=group.Group.title%}" src="{%=group.GroupMedia.url_img.replace(/noresize/, 'thumb50x50')%}" style="width: 50px;">
             </div>
             <div class="subtitle-body">
-                {%=group.title%}
+                {%=group.Group.title%}
                 <div class="subtitle-body-info">
-                    <!--11 участников -->
+                    {%=members.length%} <?=__('member(s)')?>
                 </div>
             </div>
         </div>
-        <div class="news-article-pubdate">{%=group.descr%}</div>
+        <div class="news-article-pubdate">{%=group.Group.descr%}</div>
     </a>
 </div>
 {%
@@ -332,19 +333,20 @@ $(document).ready(function(){
 {%
 	var group = o.globalData.groups[o.event.group_id];
 	var url = '<?=$this->Html->url(array('controller' =>'Group', 'action' => 'view', '~group_id'))?>';
+	var members = o.globalData.group_members[o.event.group_id];
 %}
 <?=__('You joined this group as ')?>{%=o.event.role%}
 <div class="news-article group-type progect-type">
-    <a href="{%=url.replace(/~group_id/g, group.id)%}">
+    <a href="{%=url.replace(/~group_id/g, group.Group.id)%}">
         <div class="news-article-title"></div>
         <div class="news-article-title subtitle clearfix">
             <div class="subtitle-image">
-                <img alt="{%=group.title%}" src="{%=group.GroupMedia.url_img.replace(/noresize/, 'thumb50x50')%}" style="width: 50px;">
+                <img alt="{%=group.Group.title%}" src="{%=group.GroupMedia.url_img.replace(/noresize/, 'thumb50x50')%}" style="width: 50px;">
             </div>
             <div class="subtitle-body">
                 {%=group.Group.title%}
                 <div class="subtitle-body-info">
-                    <!--11 участников -->
+                	{%=members.length%} <?=__('member(s)')?>
                 </div>
             </div>
         </div>
