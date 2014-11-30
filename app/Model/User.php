@@ -205,7 +205,11 @@ class User extends AppModel {
 		$data['files'] = Hash::combine($data['files'], '{n}.Media.id', '{n}.Media');
 		
 		// Get joined groups data
-		$data['groups'] = $this->GroupMember->getUserGroups($currUserID);
+		$aID = array_merge(
+			Hash::extract($data['last_groups'], '{n}.Group.id'),
+			Hash::extract($this->GroupMember->getUserGroups($currUserID), '{n}.GroupMember.group_id')
+		);
+		$data['groups'] = $this->Group->findAllById($aID);
 		$data['group_members'] = array();
 		foreach($data['groups'] as $group) {
 			$group_id = $group['Group']['id'];

@@ -305,7 +305,7 @@ $(document).ready(function(){
 	for(var i = 0; i < o.globalData.last_groups.length; i++) {
 		var group = o.globalData.last_groups[i];
 		var url = '<?=$this->Html->url(array('controller' =>'Group', 'action' => 'view', '~group_id'))?>';
-		var members = o.globalData.group_members[o.event.group_id];
+		var members = o.globalData.group_members[group.Group.id];
 %}
 <div class="news-article group-type progect-type">
     <a href="{%=url.replace(/~group_id/g, group.Group.id)%}">
