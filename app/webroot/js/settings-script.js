@@ -1,8 +1,5 @@
 $(function () {
     $('select.formstyler').styler();
-    $('.datetimepicker').datetimepicker({
-        pickTime: false
-    });
 
     //$('#tokenfield').tokenfield({
     //    autocomplete: {
@@ -26,7 +23,4 @@ $(function () {
         $(this).change();
     });
     $('.settings-input-row input[type="checkbox"]').change();
-
-
-
 });

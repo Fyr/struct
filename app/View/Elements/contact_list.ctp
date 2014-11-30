@@ -6,7 +6,7 @@
 			$message = Hash::get($user, 'ChatMessage.message');
 			$time = Hash::get($user, 'ChatEvent.created');
 			if ($time) {
-				$time = date('H:i', strtotime($time));
+				$time = $this->Localdate->time($time);
 			}
 			
 			$count = Hash::get($user, 'ChatEvent.count');

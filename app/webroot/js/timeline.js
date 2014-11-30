@@ -184,17 +184,21 @@ var Timeline = {
 		js_date.setHours(hours);
 		$('#UserEventTimeEvent').val(Date.HoursMinutes(js_date));
 		$('#UserEventDateEvent').val(sql_date);
+		$('#UserEventJsDateEvent').val(Date.fullDate(js_date, locale));
 		Timeline.showEventPopup(sql_date, hours, 0);
 	}, 
 	
 	editEventPopup: function(sql_date, time, event_id) {
 		var aHoursMinutes = time.split(':');
 		var hours = aHoursMinutes[0];
+		var js_date = Date.fromSqlDate(sql_date);
+		js_date.setHours(parseInt(hours));
 		var e = $('#user-event_' + event_id).get(0);
 		
 		$('#UserEventId').val(event_id);
-		$('#UserEventTimeEvent').val(time);
+		$('#UserEventTimeEvent').val(Date.HoursMinutes(js_date));
 		$('#UserEventDateEvent').val(sql_date);
+		$('#UserEventJsDateEvent').val(Date.fullDate(js_date, locale));
 		$('#UserEventTitle').val($('.user-event-title', e).html());
 		$('#UserEventDescr').val($('.user-event-descr', e).html());
 		Timeline.showEventPopup(sql_date, hours, event_id);
@@ -280,32 +284,3 @@ var Timeline = {
 	}
 }
 
-Date.timeDays = function(days) {
-	return 86400 * 1000 * days;
-}
-
-Date.fromSqlDate = function(mysql_string) { 
-	if(typeof mysql_string === 'string')    {
-		var t = mysql_string.split(/[- :]/);
-		return new Date(t[0], t[1] - 1, t[2], t[3] || 0, t[4] || 0, t[5] || 0);          
-	}
-	return null;   
-}
-Date.prototype.toSqlDate = function() { 
-	return this.getFullYear() + '-' + zeroFormat(this.getMonth() + 1) + '-' + zeroFormat(this.getDate());
-}
-Date.HoursMinutes = function(jsdate) {
-	var hours = jsdate.getHours();
-	return zeroFormat((hours > 12) ? hours - 12 : hours) + ':' + zeroFormat(jsdate.getMinutes()) + ((hours >= 12) ? 'pm' : 'am');
-}
-Date.fullDate = function(js_date) {
-	return zeroFormat(js_date.getDate()) + '.' + zeroFormat(js_date.getMonth()) + '.' + js_date.getFullYear();
-}
-Date.prototype.addDays = function(days) {
-	this.setTime(this.getTime() + Date.timeDays(days));
-	return this;
-}
-function zeroFormat(n) {
-	n = parseInt(n);
-	return (n >= 10) ? '' + n : '0' + n;
-}

@@ -49,7 +49,8 @@
 		'settings-script',
 		'group-script',
 		'group',
-		'project-page'
+		'project-page',
+		'xdate'
 	);
 	
 	// Files required for upload

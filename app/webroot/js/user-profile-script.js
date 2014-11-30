@@ -1,10 +1,5 @@
 $(function() {
 
-    $('.datetimepicker').datetimepicker({
-        pickTime: false
-    });
-
-
     $('.add-event-block .close-block').on('touchstart click', function(){
         $(this).parent().removeClass('open');
     });

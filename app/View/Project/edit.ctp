@@ -31,7 +31,12 @@
                 <fieldset>
                     <label for="group-create-3"><?=__('Deadline')?></label>
                     <div class="input-boxing clearfix">
-                    	<?=$this->Form->input('Project.deadline', array('type' => 'text', 'label' => false, 'class' => 'datetimepicker', 'data-date-format' => 'YYYY-MM-DD'))?>
+<?
+	$dateFormat = (Hash::get($currUser, 'User.lang') == 'rus') ? 'DD.MM.YYYY' : 'MM/DD/YYYY';
+	$dateValue = $this->LocalDate->date($this->request->data('Project.deadline'));
+?>
+                    	<?=$this->Form->input('Project.js_deadline', array('type' => 'text', 'label' => false, 'class' => 'datetimepicker', 'value' => $dateValue, 'data-date-format' => $dateFormat))?>
+                    	<?=$this->Form->hidden('Project.deadline')?>
                     </div>
                 </fieldset>
                 <fieldset>
@@ -59,6 +64,14 @@
 </div>
 <?=$this->Form->end()?>
 <script type="text/javascript">
-
+$(document).ready(function(){
+	$('.datetimepicker').datetimepicker({
+		pickTime: false
+	});
+	
+	$('#ProjectJsDeadline').change(function(){
+		$('#ProjectDeadline').val(Date.local2sql($(this).val()));
+	});
+});
 </script>
 

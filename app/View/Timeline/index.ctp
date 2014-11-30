@@ -8,9 +8,9 @@
 var aMonths = <?=json_encode(array(__('Jan'), __('Feb'), __('Mar'), __('Apr'), __('May'), __('Jul'), __('Jun'), __('Aug'), __('Sep'), __('Oct'), __('Nov'), __('Dec')))?>;
 var aDays = <?=json_encode(array(__('Sun'), __('Mon'), __('Tue'), __('Wen'), __('Thu'), __('Fri'), __('Sat')))?>;
 var todayDate, now;
-var startDay;
+var startDay, locale;
 $(document).ready(function(){
-	
+	locale = '<?=Hash::get($currUser, 'User.lang')?>';
 	todayDate = new Date;
 	todayDate = todayDate.toSqlDate(); // 
 	todayDate = '<?=date('Y-m-d')?>';
@@ -55,6 +55,14 @@ $(document).ready(function(){
 		$('#showWeek').removeClass('save-button');
 		Timeline.scrollCurrentTime();
 	});
+	
+	$('.datetimepicker').datetimepicker({
+		pickTime: false
+	});
+	
+	$('#UserEventJsDateEvent').change(function(){
+		$('#UserEventDateEvent').val(Date.local2sql($(this).val()));
+	});
 });
 </script>
 
@@ -79,7 +87,9 @@ $(document).ready(function(){
             <div class="input-date-block">
                 <span class="glyphicons calendar"></span>
 <?
-	echo $this->Form->input('date_event', array('label' => false, 'class' => 'select-data-for-event datetimepicker', 'data-date-format' => "YYYY-MM-DD")); // 
+	$dateFormat = (Hash::get($currUser, 'User.lang') == 'rus') ? 'DD.MM.YYYY' : 'MM/DD/YYYY';
+	echo $this->Form->input('js_date_event', array('label' => false, 'class' => 'select-data-for-event datetimepicker', 'data-date-format' => $dateFormat)); // 
+	echo $this->Form->hidden('date_event');
 ?>
             </div>
         </div>

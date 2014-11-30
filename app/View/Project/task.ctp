@@ -23,7 +23,10 @@
         <div class="col-md-12 col-sm-12 col-xs-12 deadline-date">
             <div class="date">
                 <span class="glyphicons anchor"></span>
-                <?=__('Deadline')?>: <?=(Hash::get($task, 'Task.deadline')) ? Hash::get($task, 'Task.deadline') : ' - '?> <?=($closed) ? __('(Сlosed)') : ''?>
+<?
+	$deadline = Hash::get($task, 'Task.deadline');
+?>
+                <?=__('Deadline')?>: <?=$this->LocalDate->date($deadline)?> <?=($closed) ? __('(Сlosed)') : ''?>
             </div>
            &nbsp;&nbsp; <?=__('Project')?>: <a href="<?=$this->Html->url(array('controller' => 'Project', 'action' => 'view', Hash::get($project, 'Project.id')))?>"><?=Hash::get($project, 'Project.title')?></a>
         </div>
@@ -142,7 +145,7 @@
                     </div>
                     <div class="massages-cont-files col-md-3 col-sm-3 col-xs-12"></div>
                     <div class="massage-date col-md-10 col-sm-10 col-xs-10">
-                        <div class="massage-date-cont"><?=$event['ProjectEvent']['created']?></div>
+                        <div class="massage-date-cont"><?=$this->LocalDate->dateTime($event['ProjectEvent']['created'])?></div>
                     </div>
                 </div>
             </div>

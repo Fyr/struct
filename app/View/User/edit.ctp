@@ -83,11 +83,16 @@
 	            <div class="comments-box-send-info">
 	                <?=__('Birthday')?>
 	            </div>
-	            <div id="datetimepicker1" class="input-group date settings-input col-md-12 col-sm-12">
+	            <div class="input-group date settings-input col-md-12 col-sm-12">
 	                <span class="input-group-addon">
 	                    <span class="glyphicons calendar"></span>
 	                </span>
-	                <?=$this->Form->input('User.birthday', array('type' => 'text', 'label' => false, 'id' => 'datetimepicker6', 'class' => 'form-control', 'data-date-format' => "YYYY-MM-DD"))?>
+<?
+	$dateFormat = (Hash::get($currUser, 'User.lang') == 'rus') ? 'DD.MM.YYYY' : 'MM/DD/YYYY';
+	$dateValue = $this->LocalDate->date($this->request->data('User.birthday'));
+?>
+	                <?=$this->Form->input('User.js_birthday', array('type' => 'text', 'label' => false, 'class' => 'form-control datetimepicker', 'value' => $dateValue, 'data-date-format' => $dateFormat))?>
+	                <?=$this->Form->hidden('User.birthday')?>
 	            </div>
 	        </div>
             <!--div class="settings-input-row">
@@ -257,6 +262,13 @@
 <?=$this->Form->end()?>
 <script type="text/javascript">
 $(document).ready(function(){
+	$('.datetimepicker').datetimepicker({
+		pickTime: false
+	});
+	$('#UserJsBirthday').change(function(){
+		$('#UserBirthday').val(Date.local2sql($(this).val()));
+	});
+            
 	$('.profile-achievements-block .add-new-info').click(function(){
 		$('.profile-achievements-block .no-items').remove();
 		$('.profile-achievements-block .group-create-right').prepend(

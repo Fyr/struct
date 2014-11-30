@@ -219,7 +219,11 @@
     	<?=$this->Form->hidden('creator_id', array('value' => $currUserID))?>
     	<?=$this->Form->hidden('subproject_id')?>
         <?=$this->Form->input('title')?>
-        <?=$this->Form->input('deadline', array('type' => 'text', 'class' => 'datetimepicker', 'data-date-format' => 'YYYY-MM-DD'))?>
+<?
+	$dateFormat = (Hash::get($currUser, 'User.lang') == 'rus') ? 'DD.MM.YYYY' : 'MM/DD/YYYY';
+?>
+        <?=$this->Form->input('js_deadline', array('type' => 'text', 'class' => 'datetimepicker', 'data-date-format' => $dateFormat, 'label' => array('text' => __('Deadline'))))?>
+        <?=$this->Form->hidden('deadline')?>
         <label><?=__('Manager')?></label>
         <?=$this->Form->input('manager_id', array('options' => $aMemberOptions, 'class' => 'formstyler', 'label' => false))?>
         <label><?=__('Assigned to')?></label>
@@ -246,6 +250,13 @@ $(document).ready(function(){
     $('.popup-block .close-block, .popup-block .close-block').on('click', function(){
         $('.popup-block').hide();
     });
+    $('.datetimepicker').datetimepicker({
+		pickTime: false
+	});
+	
+	$('#TaskJsDeadline').change(function(){
+		$('#TaskDeadline').val(Date.local2sql($(this).val()));
+	});
 });
 
 </script>

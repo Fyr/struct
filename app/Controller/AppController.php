@@ -59,7 +59,6 @@ class AppController extends Controller {
 	
 	protected function _initLang($lang) {
 		$lang = ($lang == 'rus') ? $lang : 'eng';
-		fdebug($lang);
 		Configure::write('Config.language', $lang);
 	}
 	

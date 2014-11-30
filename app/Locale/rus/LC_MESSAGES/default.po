@@ -509,7 +509,7 @@ msgid "Manager"
 msgstr "Менеджер"
 
 msgid "Assigned to"
-msgstr "Присвоен"
+msgstr "Назначен"
 
 msgid "Discussion"
 msgstr "Обсуждение"

@@ -81,7 +81,7 @@
             <div class="user-adress">
                 <div class="fs15"><?=Hash::get($user, 'User.live_place')?></div>
                 <div class="fs13 text-grey"><?=Hash::get($user, 'User.live_country')?></div>
-                <div class="fs15 mt10"><?=Hash::get($user, 'User.birthday')?></div>
+                <div class="fs15 mt10"><?=$this->LocalDate->date(Hash::get($user, 'User.birthday'))?></div>
             </div>
         </div>
         <div class="col-md-4 col-sm-6 col-xs-12 user-info-block">
@@ -89,8 +89,12 @@
 <?
 	$university = Hash::get($user, 'User.university');
 	$src = $this->Media->imageUrl(Hash::get($user, 'UniversityMedia'), 'thumb50x50');
+	if ($university) {
 ?>
                 <img src="<?=$src?>" alt="<?=$university?>" style="width: 50px" />
+<?
+	}
+?>
                 <div class="fs15"><?=$university?></div>
                 <div class="fs13"><?=Hash::get($user, 'User.speciality')?></div>
             </div>

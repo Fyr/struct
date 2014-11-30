@@ -48,6 +48,7 @@
 		'group',
 		'user-profile-script',
 		'timeline',
+		'xdate',
 		'/Table/js/format'
 	);
 	
