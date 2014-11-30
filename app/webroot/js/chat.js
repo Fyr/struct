@@ -11,7 +11,7 @@ var Chat = {
 	
 	getCurrTime: function () {
 		var date = new Date();
-		return date.getHours() + ':' + Chat.zformat(date.getMinutes());
+		return date.toSqlDateTime();// date.getHours() + ':' + Chat.zformat(date.getMinutes());
 	},
 	
 	fixPanelHeight: function () {

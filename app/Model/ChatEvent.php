@@ -102,11 +102,11 @@ class ChatEvent extends AppModel {
 		$conditions = array_merge(array('user_id' => $currUserID), $conditions);
 		$order = array('room_id', 'created');
 		$events = $this->find('all', compact('conditions', 'order'));
-		
+		/*
 		foreach($events as &$event) {
 			$event['ChatEvent']['created'] = date('H:i', strtotime($event['ChatEvent']['created']));
 		}
-		
+		*/
 		// Get info about sent messages
 		$aMsgID = Hash::extract($events, '{n}.ChatEvent.msg_id');
 		$messages = $this->ChatMessage->findAllById($aMsgID);

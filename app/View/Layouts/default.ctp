@@ -34,6 +34,7 @@
 		'vendor/tmpl.min',
 		'/core/js/json_handler',
 		'main-panel',
+		'xdate',
 		'chat',
 		'struct',
 		'search',

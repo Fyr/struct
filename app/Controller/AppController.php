@@ -5,7 +5,7 @@ class AppController extends Controller {
 	public $pageTitle = '';
 	
 	public $uses = array('User', 'Media.Media');
-	public $helpers = array('Html', 'Form', 'Core.PHTime', 'Media');
+	public $helpers = array('Html', 'Form', 'Core.PHTime', 'Media', 'LocalDate');
 	public $components = array(
 		'Session',
 		'Auth' => array(

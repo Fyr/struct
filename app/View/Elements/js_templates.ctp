@@ -12,11 +12,17 @@
 </script>
 
 <script type="text/x-tmpl" id="chat-msg">
+{%
+	// console.log(o.time);
+	var locale = '<?=Hash::get($currUser, 'User.lang')?>';
+	var js_date = Date.fromSqlDate(o.time);
+	var time = Date.fullDate(js_date, locale) + ' ' + Date.HoursMinutes(js_date, locale);
+%}
 <div class="{%=((o.user) ? 'leftMessage' : 'rightMessage')%} clearfix">
 {% if (o.user) { %}
 	<img class="ava" src="{%=o.user.UserMedia.url_img.replace(/noresize/, 'thumb100x100')%}" alt="{%=o.user.User.full_name%}" style="width: 50px" />
 {% } %}
-	<div class="time">{%=o.time%}</div>
+	<div class="time">{%=time%}</div>
 	<div class="text">{%=o.msg%}</div>
 </div>
 <div class="clearfix"></div>

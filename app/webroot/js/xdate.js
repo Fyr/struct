@@ -12,8 +12,15 @@ Date.fromSqlDate = function(mysql_string) {
 Date.prototype.toSqlDate = function() { 
 	return this.getFullYear() + '-' + zeroFormat(this.getMonth() + 1) + '-' + zeroFormat(this.getDate());
 }
-Date.HoursMinutes = function(jsdate) {
+Date.prototype.toSqlDateTime = function() { 
+	return this.getFullYear() + '-' + zeroFormat(this.getMonth() + 1) + '-' + zeroFormat(this.getDate()) + ' ' + 
+		this.getHours() + ':' + this.getMinutes() + ':' + this.getSeconds();
+}
+Date.HoursMinutes = function(jsdate, locale) {
 	var hours = jsdate.getHours();
+	if (locale && locale == 'rus') {
+		return zeroFormat(hours) + ':' + zeroFormat(jsdate.getMinutes());
+	}
 	return zeroFormat((hours > 12) ? hours - 12 : hours) + ':' + zeroFormat(jsdate.getMinutes()) + ((hours >= 12) ? 'pm' : 'am');
 }
 Date.fullDate = function(js_date, locale) {
