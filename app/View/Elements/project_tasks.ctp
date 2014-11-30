@@ -8,6 +8,6 @@
                 </div> <?=$user['User']['full_name']?>
             </a>
         </div>
-        <div class="col-md-3 col-sm-3 col-xs-3 deadline"><?=Hash::get($task, 'Task.deadline')?></div>
+        <div class="col-md-3 col-sm-3 col-xs-3 deadline"><?=$this->Localdate->date(Hash::get($task, 'Task.deadline'))?></div>
     </div>
 </li>

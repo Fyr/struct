@@ -146,8 +146,8 @@
 <?
 		}
 		foreach($aGroupGallery as $media) {
-			$src = $this->Media->imageUrl(array('Media' => $media), 'thumb200x113');
-			$orig = $this->Media->imageUrl(array('Media' => $media), 'noresize');
+			$src = $this->Media->imageUrl($media, 'thumb200x113');
+			$orig = $this->Media->imageUrl($media, 'noresize');
 ?>
     <div class="galery-box-item">
 		<a href="<?=$orig?>" class="fancybox" rel="photoalobum"><img src="<?=$src?>" alt="" /></a>

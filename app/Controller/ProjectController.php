@@ -9,7 +9,7 @@ class ProjectController extends SiteController {
 	public $name = 'Project';
 	public $layout = 'profile';
 	public $uses = array('Project', 'ProjectEvent', 'Subproject', 'Task', 'GroupMember', 'User', 'Group', 'Media.Media', 'ChatMessage');
-	public $helpers = array('Media');
+	public $helpers = array('Media', 'LocalDate');
 	
 	public function edit($id = 0) {
 		$Project = $this->Project->findById($id);

@@ -44,9 +44,13 @@
     </div>
     <div class="col-md-12 col-sm-12 col-xs-12 deadline-date">
         <div class="date">
-            <?=(Hash::get($project, 'Project.closed')) ? __('Closed') : ''?><br/>
+<?
+	$closed = Hash::get($project, 'Project.closed');
+	$deadline = Hash::get($project, 'Project.deadline');
+?>
+            <?=($closed) ? __('Closed') : ''?><br/>
             <span class="glyphicons anchor"></span>
-            <?=__('Deadline')?><?=(Hash::get($project, 'Project.deadline')) ? ': '.Hash::get($project, 'Project.deadline') : ': - '?>
+            <?=__('Deadline')?>: <?=$this->LocalDate->date($deadline)?>
         </div>
     </div>
 </div>
@@ -63,7 +67,7 @@
 		$userLink = $this->element('user_link', compact('user'));
 ?>
             <li class="clearfix">
-                <div class="time col-md-3 col-sm-3 col-xs-12"><?=$event['ProjectEvent']['created']?></div>
+                <div class="time col-md-3 col-sm-3 col-xs-12"><?=$this->LocalDate->dateTime($event['ProjectEvent']['created'])?></div>
                 <div class="timeline-text col-md-9 col-sm-9 col-xs-12">
 <?
 		switch ($event['ProjectEvent']['event_type']) {

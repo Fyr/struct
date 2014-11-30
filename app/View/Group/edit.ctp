@@ -322,7 +322,7 @@ $(document).ready(function(){
     <li>
         <div class="remove-media" onclick="Group.delGalleryImage({%=img.object_id%}, {%=img.id%})"><span class="glyphicons circle_remove"></span></div>
         <a href="javascript::void(0)">
-            <img src="{%=img.image.replace(/100x80/, 'thumb120x90')%}" alt="" />
+            <img src="{%=img.url_img.replace(/noresize/, 'thumb120x90')%}" alt="" />
         </a>
     </li>
 {%
