@@ -8,7 +8,7 @@ App::uses('SiteController', 'Controller');
 class ProjectController extends SiteController {
 	public $name = 'Project';
 	public $layout = 'profile';
-	public $uses = array('Project', 'ProjectEvent', 'Subproject', 'Task', 'GroupMember', 'User', 'Group', 'Media.Media', 'ChatMessage');
+	public $uses = array('Project', 'ProjectEvent', 'Subproject', 'Task', 'GroupMember', 'User', 'Group', 'Media.Media', 'ChatMessage', 'ProjectMember');
 	public $helpers = array('Media', 'LocalDate');
 	
 	public function edit($id = 0) {
@@ -26,6 +26,7 @@ class ProjectController extends SiteController {
 			
 			if (!$id) { 
 				$this->ProjectEvent->addEvent(ProjectEvent::PROJECT_CREATED, $this->Project->id, $this->currUserID);
+				$this->ProjectMember->save(array('project_id' => $this->Project->id, 'user_id' => $this->currUserID, 'sort_order' => '0'));
 			}
 			// return $this->redirect(array('controller' => $this->name, 'action' => 'edit', $this->Project->id, '?' => array('success' => '1')));
 			return $this->redirect(array('controller' => $this->name, 'action' => 'view', $this->Project->id));
@@ -51,13 +52,22 @@ class ProjectController extends SiteController {
 		$this->set('project', $project);
 		$this->set('isProjectAdmin', Hash::get($project, 'Project.owner_id') == $this->currUserID);
 		
-		$members = $this->GroupMember->getList($project['Project']['group_id']);
-		$aID = Hash::extract($members, '{n}.GroupMember.user_id');
+		$aMembers = $this->ProjectMember->getList($id);
+		$aID = Hash::extract($aMembers, '{n}.ProjectMember.user_id');
 		if (!in_array($this->currUserID, $aID)) {
 			return $this->redirect(array('controller' => 'Group', 'action' => 'view', $project['Project']['group_id']));
 		}
+		$this->set('aProjectMembers', $aMembers);
+		
+		$aMembers = $this->GroupMember->getList($project['Project']['group_id']);
+		$aMembers = Hash::combine($aMembers, '{n}.GroupMember.user_id', '{n}');
+		$this->set('aMembers', $aMembers);
+		
+		$aID = array_keys($aMembers);
 		$aUsers = $this->User->getUsers($aID);
 		$this->set('aUsers', $aUsers);
+		
+		$this->set('aMemberOptions', Hash::combine($aUsers, '{n}.User.id', '{n}.User.full_name'));
 		
 		$subprojects = $this->Subproject->findAllByProjectId($id);
 		$subprojects = Hash::combine($subprojects, '{n}.Subproject.id', '{n}');
@@ -65,8 +75,6 @@ class ProjectController extends SiteController {
 		$aID = array_keys($subprojects);
 		$aTasks = $this->Task->findAllBySubprojectId($aID);
 
-		$this->set('aMemberOptions', Hash::combine($aUsers, '{n}.User.id', '{n}.User.full_name'));
-		
 		$conditions = array('ProjectEvent.project_id' => $id);
 		$order = 'ProjectEvent.created DESC';
 		$limit = 10;
@@ -147,4 +155,9 @@ class ProjectController extends SiteController {
 		$this->redirect(array('controller' => 'Group', 'action' => 'view', $project['Project']['group_id']));
 	}
 	
+	public function addMember($project_id) {
+		$this->ProjectMember->save($this->request->data);
+		// $this->ProjectEvent->addEvent(ProjectEvent::TASK_CREATED, $project_id, $this->currUserID, $this->Task->id);
+		$this->redirect(array('action' => 'view', $project_id));
+	}
 }

@@ -100,10 +100,11 @@
             <li>
 <?
 			if ($isGroupAdmin && $userID != Hash::get($group, 'Group.owner_id')) {
+				// временно закомментил, т.к. может нарушиться целостость по членам группы\событиям\тайм-лайну
 ?>
-            	<a href="<?=$urlRemove?>" onclick="return confirm('<?=__('Are you sure to delete this user')?>?');">
+            	<!--a href="<?=$urlRemove?>" onclick="return confirm('<?=__('Are you sure to delete this user')?>?');">
                 	<div class="remove-media"><span class="glyphicons circle_remove"></span></div>
-                </a>
+                </--a>
 <?
 			}
 ?>

@@ -54,6 +54,57 @@
         </div>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-12">
+            <div class="subheading">
+                <?=__('Team')?>
+<?
+		if ($isProjectAdmin) {
+?>
+                <a class="btn btn-default" href="javascript:void(0)" onclick="addProjectMember(this)">
+                    <?=__('Add member')?>
+                </a>
+<?
+		}
+?>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mb40">
+    <div class="col-md-11 col-sm-10 col-xs-8">
+        <div class="col-md-12">
+            <div class="units-list clearfix">
+<?
+	foreach($aProjectMembers as $member) {
+		$user = $aUsers[$member['ProjectMember']['user_id']];
+		$_member = $aMembers[$member['ProjectMember']['user_id']];
+		$role = $_member['GroupMember']['role'];
+?>
+                <div class="units-list-item">
+                    <a href="<?=$this->html->url(array('controller' => 'User', 'action' => 'view', $user['User']['id']))?>">
+                        <div class="units-list-item-image bb-aqua">
+                            <img src="<?=$this->Media->imageUrl($user['UserMedia'], 'thumb100x100')?>" alt="<?=$user['User']['full_name']?>" style="width: 100px;" />
+                        </div>
+                        <div class="units-list-item-name">
+                            <?=$user['User']['full_name']?>
+                        </div>
+                        <div class="units-list-item-spec">
+                            <?=$role?>
+                        </div>
+                    </a>
+                </div>
+<?
+	}
+?>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div class="row project-timeline clearfix">
     <div class="col-md-12 col-sm-12 col-xs-12 project-timeline-list">
         <div class="title-list">
@@ -116,7 +167,7 @@
 	if ($isProjectAdmin) {
 ?>
     <div class="page-menu new-under-project">
-        <a href="javascript:void(0)" class="btn btn-default new-under-project-btn">Новый подпроект</a>
+        <a href="javascript:void(0)" class="btn btn-default new-under-project-btn"><?=__('New subproject')?></a>
     </div>
 <?
 	}
@@ -157,7 +208,7 @@
 		if ($isProjectAdmin) {
 ?>
         <div class="page-menu new-task">
-            <a href="#" class="add-new-task-project" onclick="addNewTask(<?=$subprojectID?>)">
+            <a href="javascript:void(0)" class="add-new-task-project" onclick="addNewTask(this, <?=$subprojectID?>)">
                 <button class="btn btn-default"><span class="glyphicons plus"></span></button>
                 <?=__('New task')?>
             </a>
@@ -235,17 +286,37 @@
     <?=$this->Form->end()?>
 </div>
 
+<div class="drop-add-project-member popup-block">
+    	<div class="close-block glyphicons circle_remove"></div>
+    	<?=$this->Form->create('ProjectMember', array('url' => array('controller' => 'Project', 'action' => 'addMember', $projectID)))?>
+    	<?=$this->Form->hidden('project_id', array('value' => $projectID))?>
+        <label><?=__('Add member')?></label>
+<?
+	unset($aMemberOptions[$currUserID]);
+?>
+        <?=$this->Form->input('user_id', array('options' => $aMemberOptions, 'class' => 'formstyler', 'label' => false))?>
+        <div class="page-menu clearfix">
+            <button type="submit" class="btn btn-default"><?=__('Add member')?></button>
+        </div>
+    	<?=$this->Form->end()?>
+</div>
+
 <script type="text/javascript">
-function addNewTask(subprojectID) {
+function addNewTask(e, subprojectID) {
 	$('.popup-block').hide();
-	$('.drop-add-sub-project-user').show();
+	$('.drop-add-sub-project-user').show().css({'top': $(e).offset().top});
 	$('#TaskSubprojectId').val(subprojectID);
+}
+
+function addProjectMember(e) {
+	$('.popup-block').hide();
+	$('.drop-add-project-member').show().css({'top': $(e).offset().top});
 }
 
 $(document).ready(function(){
     $('.new-under-project-btn').on('click', function(){
         $('.popup-block').hide();
-        $('.drop-add-sub-project').show();
+        $('.drop-add-sub-project').show().css({'top': $('.new-under-project-btn').offset().top});
     });
     $('.popup-block .close-block, .popup-block .close-block').on('click', function(){
         $('.popup-block').hide();
