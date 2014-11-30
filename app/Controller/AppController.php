@@ -59,6 +59,7 @@ class AppController extends Controller {
 	
 	protected function _initLang($lang) {
 		$lang = ($lang == 'rus') ? $lang : 'eng';
+		fdebug($lang);
 		Configure::write('Config.language', $lang);
 	}
 	
@@ -71,8 +72,8 @@ class AppController extends Controller {
 		if ($this->Auth->loggedIn()) {
 			$this->currUserID = $this->Auth->user('id');
 			$this->currUser = $this->User->findById($this->currUserID);
-			$this->_initTimezone($this->Auth->user('timezone'));
-			$this->_initLang($this->Auth->user('lang'));
+			$this->_initTimezone($this->currUser['User']['timezone']);
+			$this->_initLang($this->currUser['User']['lang']);
 			
 			if (TEST_ENV) {
 				fdebug($this->currUser, 'curr_user.log', false);
