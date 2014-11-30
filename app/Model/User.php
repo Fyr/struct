@@ -74,6 +74,16 @@ class User extends AppModel {
 		}
 	}
 */
+	public function afterFind($results, $primary = false) {
+		foreach($results as &$_row) {
+    		$row = $_row[$this->alias];
+    		if (isset($row['username']) && isset($row['full_name']) && !trim($row['full_name'])) {
+    			$_row[$this->alias]['full_name'] = $row['username'];
+    		}
+    	}
+    	return $results;
+	}
+	
 	public function beforeSave($options = array()) {
 		if (isset($this->data['User']['password'])) {
 			$this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);

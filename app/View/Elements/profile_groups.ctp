@@ -16,7 +16,7 @@
             <div class="subtitle-body">
                 <?=$title?>
                 <div class="subtitle-body-info ">
-                    1 <?=__('Members')?>
+                    <?=Hash::get($group, 'Group.members')?> <?=__('member(s)')?>
                 </div>
             </div>
         </div>

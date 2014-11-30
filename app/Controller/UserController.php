@@ -67,7 +67,13 @@ class UserController extends AppController {
 			$id = $this->currUserID;
 		}
 		$this->set('user', $this->User->getUser($id));
-		$this->set('aGroups', $this->GroupMember->getUserGroups($id));
+		$aGroups = $this->GroupMember->getUserGroups($id);
+		foreach($aGroups as &$group) {
+			$group_id = $group['Group']['id'];
+			// $aGroupMembers[$group_id] = Hash::extract($this->GroupMember->getList($group_id), '{n}.GroupMember.user_id');
+			$group['Group']['members'] = count(Hash::extract($this->GroupMember->getList($group_id), '{n}.GroupMember.user_id'));
+		}
+		$this->set('aGroups', $aGroups);
 		$this->set('aCountryOptions', $this->Country->options());
 	}
 }
