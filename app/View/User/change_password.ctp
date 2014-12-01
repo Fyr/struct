@@ -14,14 +14,13 @@
                 <div class="settings-input-row">
                     <div class="comments-box-send-info"><?=__('New password')?></div>
                     <div class="input-group settings-input col-md-12 col-sm-12">
-                        <span class="input-group-addon glyphicons message_full"></span>
-                        <?=$this->Form->input('password', array('class' => 'form-control', 'label' => false, 'value' => ''))?>
+                        <?=$this->Form->input('password', array('class' => 'form-control', 'label' => false, 'value' => '', 'autocomplete' => 'false'))?>
                     </div>
                 </div>
                 <div class="settings-input-row">
                     <div class="comments-box-send-info"><?=__('Confirm password')?></div>
                     <div class="input-group settings-input col-md-12 col-sm-12">
-                        <?=$this->Form->input('confirm_password', array('class' => 'form-control', 'label' => false, 'value' => ''))?>
+                        <?=$this->Form->input('confirm_password', array('type' => 'password', 'class' => 'form-control', 'label' => false, 'value' => '', 'autocomplete' => 'false'))?>
                     </div>
                 </div>
             </div>
@@ -30,7 +29,7 @@
             <div class="col-md-7 col-sm-7 col-xs-12">
                 <div class="settings-input-row nbb clearfix mb100">
                     <div class="col-md-3 col-sm-3 col-xs-3 npl">
-                        <button type="button" class="btn btn-primary save-button"><?=__('Save')?></button>
+                        <button type="submit" class="btn btn-primary save-button"><?=__('Save')?></button>
                     </div>
                 </div>
             </div>
