@@ -167,9 +167,12 @@
 	if ($aGroupAchievement && Hash::get($aGroupAchievement, '0.url')) {
 ?>
 <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12"><div class="subheading"><?=__('Achievements')?></div></div>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-12">
+            <div class="subheading"><?=__('Achievements')?></div>
+        </div>
+    </div>
 </div>
-
 <div class="row achieve-list">
 	<div class="col-md-12 col-sm-12 col-xs-12">
 <?
@@ -212,14 +215,14 @@
 	}
 ?>
 <div class="row">
-    <div class="col-md-11 col-sm-10 col-xs-8">
+    <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="col-md-12">
             <div class="subheading"><?=__('Team')?></div>
         </div>
     </div>
 </div>
 <div class="row mb40">
-    <div class="col-md-11 col-sm-10 col-xs-8">
+    <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="col-md-12">
             <div class="units-list clearfix">
 <?
