@@ -75,7 +75,7 @@
             <div class="col-md-8 col-sm-8 col-xs-8">
                 <div class="copyright-wrap">
                     <div class="copyright">
-                        © KONSRTRUKTOR US lab LLC
+                        © KONSTRUKTOR US lab LLC
                         <div class="copyright-year">2002-2014</div>
                     </div>
                 </div>

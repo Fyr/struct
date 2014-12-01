@@ -13,8 +13,25 @@
         </label>
         <a class="terms-link" href="http://54.68.18.45/terms.pdf" target="_blank">Terms of Use</a>
         <br>
-        <a class="enter-link" href="javascript:void(0);" onclick="if ($('label.terms-of-use').hasClass('checkedIn')) { $('#registerForm').submit(); }">
+        <button type="submit" class="enter-link save-button">
             <span class="halflings log_in"></span> Register
-        </a>
+        </button>
     </div>
 <?=$this->Form->end()?>
+<script type="text/javascript">
+function updateSubmit() {
+	var enabled = $('#UserUsername').val() && $('label.terms-of-use').hasClass('checkedIn');
+	$('.save-button').prop('disabled', !enabled);
+	$('.save-button').removeClass('disabled');
+	if (!enabled) {
+		$('.save-button').addClass('disabled');
+	}
+}
+
+$(document).ready(function(){
+	$('#registerForm .save-button').click(function(){
+		updateSubmit();
+		return !$('.save-button').prop('disabled');
+	});
+});
+</script>

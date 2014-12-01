@@ -77,4 +77,22 @@ class UserController extends AppController {
 		$this->set('aGroups', $aGroups);
 		$this->set('aCountryOptions', $this->Country->options());
 	}
+	
+	public function changeEmail() {
+		if ($this->request->is('post') || $this->request->is('put')) {
+			$this->User->saveAll($this->request->data);
+			return $this->redirect(array('controller' => $this->name, 'action' => 'edit', '?' => array('success' => '1')));
+		} else {
+			$this->request->data = $this->currUser;
+		}
+	}
+	
+	public function changePassword() {
+		if ($this->request->is('post') || $this->request->is('put')) {
+			$this->User->saveAll($this->request->data);
+			return $this->redirect(array('controller' => $this->name, 'action' => 'edit', '?' => array('success' => '1')));
+		} else {
+			$this->request->data = $this->currUser;
+		}
+	}
 }

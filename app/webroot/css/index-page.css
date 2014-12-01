@@ -81,11 +81,17 @@
   padding: 0 9px;
   line-height: 29px;
   border: 1px solid #cccccc;
-  -webkit-border-radius: 2px;
-  border-radius: 2px;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  background: none;
   font-size: 14px; }
+  .login-box .enter-link:hover {
+    text-decoration: underline; }
   .login-box .enter-link span {
     margin: 0 5px 0 0;
+    text-decoration: none;
     font-size: 14px; }
     .login-box .enter-link span:before {
       margin-top: -5px; }

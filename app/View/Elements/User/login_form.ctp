@@ -14,7 +14,7 @@
 ?>
     </div>
     <div class="login-box">
-        <a class="enter-link" href="javascript:void(0);" onclick="$('#loginForm').submit()"><span class="halflings log_in"></span>Log In</a>
+        <button type="submit" class="enter-link"><span class="halflings log_in"></span>Log In</button>
         <a class="func-link fright" href="#">Password Reminder</a>
     </div>
 <?=$this->Form->end()?>

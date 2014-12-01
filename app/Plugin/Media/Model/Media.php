@@ -24,7 +24,7 @@ class Media extends AppModel {
     		}
     		if ($row['id']) {
 	    		if ($row['media_type'] == 'image') {
-	            	$_row[$this->alias]['url_img'] = $this->PHMedia->getImageUrl($row['object_type'], $row['id'], 'noresize', $row['file'].$row['ext']);
+	            	$_row[$this->alias]['url_img'] = $this->PHMedia->getImageUrl($row['object_type'], $row['id'], 'noresize', $row['file'].$row['ext'].'.png');
 	    		}
 	    		$_row[$this->alias]['url_download'] = $this->PHMedia->getRawUrl($row['object_type'], $row['id'], $row['file'].$row['ext']);
     		} else  {

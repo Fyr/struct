@@ -28,10 +28,10 @@
                 <a href="/tickets/tickets" target="_blank"><?=__('Tech.support')?></a>
             </div>
             <div class="settings-link">
-                <a href="#"><span class="glyphicon-extended glyphicon-mailfull"></span> <?=__('Change email')?></a>
+                <a href="<?=$this->Html->url(array('controller' => 'User', 'action' => 'changeEmail'))?>"><span class="glyphicon-extended glyphicon-mailfull"></span> <?=__('Change email')?></a>
             </div>
             <div class="settings-link">
-                <a href="#"><span class="glyphicon-extended glyphicon-unlock"></span> <?=__('Change password')?></a>
+                <a href="<?=$this->Html->url(array('controller' => 'User', 'action' => 'changePassword'))?>"><span class="glyphicon-extended glyphicon-unlock"></span> <?=__('Change password')?></a>
             </div>
         </div>
         <div class="col-md-7 col-sm-7 col-xs-12">
