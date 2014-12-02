@@ -1,8 +1,7 @@
 .wrapper-container {
   padding: 0 0 0 90px;
   font-family: "Open Sans";
-  min-height: 100%;
-	z-index:500;  }
+  min-height: 100%;  }
 
 .jq-selectbox {
   vertical-align: middle;

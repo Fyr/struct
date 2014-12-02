@@ -306,8 +306,8 @@ border-radius: 20px;
 }
 .page-title-group-image img{
     display: block;
-    min-height: 80px;
-    min-width: 80px;
+    max-height: 80px;
+    max-width: 80px;
 }
 .page-menu .btn-default {
     vertical-align: top;margin: 0px 10px 5px 0; color: #616161;

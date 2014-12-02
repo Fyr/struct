@@ -3,6 +3,7 @@
   min-height: 100%;
   height: auto !important;
   background: url(../img/vidbg.jpg) no-repeat 50% 50%;
+  font-family: "Open Sans",sans-serif;
   background-size: cover;
   font-size: 15px;
   height: 100%; }
@@ -14,6 +15,8 @@
 .logo-company {
   display: inline-block;
   padding-bottom: 15px; }
+  .logo-company:focus {
+    outline: none; }
   .logo-company .logo-image {
     width: 220px; }
   .logo-company .logo-text {
@@ -27,6 +30,9 @@
   display: inline-block;
   border-bottom: 1px dotted #fff;
   margin-top: 10px; }
+  .func-link-box .func-link:hover {
+    outline: none;
+    border-bottom-color: transparent; }
 
 .input-box-item {
   color: #fff;
@@ -75,6 +81,10 @@
   display: inline-block;
   border-bottom: 1px dotted #fff;
   margin-top: 5px; }
+  .login-box .func-link:focus {
+    outline: none; }
+  .login-box .func-link:hover {
+    outline: none; }
 .login-box .enter-link {
   color: #fff;
   display: inline-block;
@@ -87,8 +97,10 @@
   border-bottom-right-radius: 2px;
   background: none;
   font-size: 14px; }
-  .login-box .enter-link:hover {
-    text-decoration: underline; }
+  .login-box .enter-link:focus {
+    outline: none; }
+  .login-box .enter-link:disabled {
+    opacity: 0.5; }
   .login-box .enter-link span {
     margin: 0 5px 0 0;
     text-decoration: none;

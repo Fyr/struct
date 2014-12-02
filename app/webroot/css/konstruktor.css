@@ -97,7 +97,7 @@ a:focus {
   background: #22b5ae;
   height: 24px;
   width: 25px;
-  padding: 2px 2px 4px 5px;
+  padding: 4px 2px 4px 5px;
   border-top-left-radius: 50%;
   border-top-right-radius: 50%;
   border-bottom-left-radius: 50%;
@@ -252,8 +252,9 @@ fieldset[disabled] .btn-primary:active,
 .btn-primary.disabled.active,
 .btn-primary[disabled].active,
 fieldset[disabled] .btn-primary.active {
-  background-color: #0fa29b;
-  border-color: #0fa29b; }
+  background: transparent;
+  border-color: #0fa29b;
+  opacity: 0.6; }
 
 .btn-primary .badge {
   color: #337ab7;
@@ -848,5 +849,23 @@ input[type="button"].btn-block {
   padding: 10px 0 0; }
   .dialog-style .select-block .jq-selectbox {
     width: 328px; }
+
+.error404 {
+  margin-left: -90px;
+  text-align: center; }
+  .error404 .error404-logo {
+    display: inline-block;
+    background: url(../img/slogo.png) no-repeat 0 0;
+    height: 170px;
+    width: 150px;
+    background-size: cover;
+    margin-top: 80px; }
+  .error404 .error404-text {
+    font-size: 40px;
+    margin-top: 20px;
+    text-transform: uppercase; }
+  .error404 .link404 {
+    color: #333;
+    font-size: 16px; }
 
 /*# sourceMappingURL=konstruktor.css.map */

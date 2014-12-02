@@ -291,6 +291,12 @@
   font-size: 15px;
   font-weight: 400; }
 
+.static-system-event .time-line-list {
+  height: 0; }
+.static-system-event .event-box {
+  position: relative;
+  top: -140px; }
+
 .time-line-list .time-line-cell .event-text .h2-title {
   color: #23B5AE !important;
   font-family: "Roboto";
