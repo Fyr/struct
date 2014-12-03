@@ -74,9 +74,10 @@ class User extends AppModel {
 		}
 	}
 */
+
 	public function afterFind($results, $primary = false) {
 		foreach($results as &$_row) {
-			if (isset($_row[$this->alias])) {
+			if (is_array($_row) && isset($_row[$this->alias])) { // почему то иногда создает массив данных без [User] :(
 	    		$row = $_row[$this->alias];
 	    		if (isset($row['username']) && isset($row['full_name'])) {
 	    			if (empty($row['full_name'])) {
@@ -103,7 +104,7 @@ class User extends AppModel {
 		$aUsers = $this->findAllById($aID);
 		return Hash::combine($aUsers, '{n}.User.id', '{n}');
 	}
-	
+/*	
 	public function getContactListUsers($currUserID) {
 		$this->loadModel(array('ChatEvent', 'ChatRoom'));
 		
@@ -134,7 +135,7 @@ class User extends AppModel {
 		
 		return array_merge($aActiveRooms, $this->getUsers($aID2));
 	}
-	
+	*/
 	public function search($currUserID, $q) {
 		$fields = 'User.id, User.username, User.full_name, User.skills, UserMedia.*';
 		$conditions = array(

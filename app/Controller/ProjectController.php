@@ -77,7 +77,7 @@ class ProjectController extends SiteController {
 
 		$conditions = array('ProjectEvent.project_id' => $id);
 		$order = 'ProjectEvent.created DESC';
-		$limit = 10;
+		$limit = 5;
 		$aEvents = $this->ProjectEvent->find('all', compact('conditions', 'order', 'limit'));
 		
 		$aID = Hash::extract($aEvents, '{n}.ProjectEvent.file_id');
@@ -96,8 +96,8 @@ class ProjectController extends SiteController {
 		$project = $this->Project->findById($project_id);
 		$group = $this->Group->findById($project['Project']['group_id']);
 		
-		$members = $this->ProjectMember->getList($project['Project']['group_id']);
-		$aID = Hash::extract($members, '{n}.GroupMember.user_id');
+		$members = $this->ProjectMember->getList($project_id);
+		$aID = Hash::extract($members, '{n}.ProjectMember.user_id');
 		if (!in_array($this->currUserID, $aID)) {
 			return $this->redirect(array('controller' => 'Group', 'action' => 'view', $project['Project']['group_id']));
 		}

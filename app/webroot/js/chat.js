@@ -27,7 +27,8 @@ var Chat = {
 		Chat.panel = container;
 		Chat.innerCall = userID && true;
 		// load panel anyway
-		$(Chat.panel).load(chatURL.panel, {data: {type: (Chat.innerCall) ? 'internal' : ''}}, function(){
+		$.post(chatURL.contactList, null, function(response){
+			Chat.renderPanel(response.data.aUsers);
 			Chat.fixPanelHeight();
 			if (chatUpdateTime) {
 				Chat.timer = setInterval(function(){
@@ -52,6 +53,10 @@ var Chat = {
 		$(".searchBlock .searchButton", Chat.panel).click(function(){
 			Chat.filterContactList($(".searchBlock .searchInput", Chat.panel).val());
 		});
+	},
+	
+	renderPanel: function (aUsers) {
+		return $(Chat.panel).html(tmpl('chat-panel', {innerCall: Chat.innerCall, q: $(".searchBlock .searchInput", Chat.panel).val(), aUsers: aUsers}));
 	},
 	/*
 	panelShow: function () {
@@ -136,6 +141,8 @@ var Chat = {
 		Chat.disableUpdate();
 		$.post(chatURL.openRoom, {data: {user_id: userID}}, function(response){
 			if (checkJson(response)) {
+				$(Chat.panel).html(response.data.panel);
+				Chat.initHandlers();
 				roomID = response.data.room.ChatRoom.id;
 				if (!$(".openChats #roomTab_" + roomID).length) { 
 					Chat.createRoomTab(response.data);
@@ -146,6 +153,7 @@ var Chat = {
 				Chat.dispatchEvents(response.data.events);
 				Chat.activateRoom(roomID);
 				Chat.scrollTop();
+				closeMainPanel();
 				Chat.enableUpdate();
 			}
 		}, 'json');
@@ -251,11 +259,11 @@ var Chat = {
 			var data = {data: {q: $(".searchBlock .searchInput", Chat.panel).val(), type: (Chat.innerCall) ? 'internal' : ''}};
 			$.post(chatURL.updateState, data, function(response){
 				if (checkJson(response)) {
+					Chat.renderPanel(response.data.aUsers);
 					Chat.dispatchEvents(response.data);
 					if (roomID = Chat.getActiveRoom()) {
 						Chat.activateRoom(roomID);
 					}
-					$(Chat.panel).html(response.panel);
 					Chat.initHandlers();
 					Chat.enableUpdate();
 				}
@@ -365,22 +373,25 @@ var Chat = {
 	},
 	
 	filterContactList: function (filter) {
-		$(Chat.panel).load(chatURL.panel, {data: {q: filter, type: (Chat.innerCall) ? 'internal' : ''}}, function(){
+		Chat.disableUpdate();
+		$.post(chatURL.contactList, {data: {q: filter}}, function(response){
+			Chat.renderPanel(response.data.aUsers);
 			Chat.initHandlers();
+			Chat.enableUpdate();
 		});
-		/*
-		$(".allMessages .messages-new", Chat.panel).each(function(){
-			if (filter) {
-				var name = $(".name", this).html();
-				if (name.substr(0, filter.length).toLowerCase() == filter.toLowerCase()) {
-					$(this).show();
-				} else {
-					$(this).hide();
-				}
-			} else {
-				$(this).show();
-			}
+	},
+	
+	delContact: function(contact_id, room_id) {
+		Chat.disableUpdate();
+		$.post(chatURL.delContact, {data: {contact_id: contact_id}}, function(response){
+			Chat.renderPanel(response.data.aUsers);
+			Chat.initHandlers();
+			Chat.enableUpdate();
 		});
-		*/
+		if ($('.openChats .item').length > 1) {
+			Chat.clearUnreadEvents(room_id);
+			Chat.showUnreadTotal(Chat.countUnreadTotal());
+			Chat.removeRoom(room_id);
+		}
 	}
 }

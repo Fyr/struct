@@ -12,7 +12,7 @@ class ChatEvent extends AppModel {
 	const ACTIVE = 1;
 	const INACTIVE = 0;
 	
-	protected $ChatMessage, $ChatRoom, $Media;
+	protected $ChatMessage, $ChatRoom, $Media, $ChatContact;
 	
 	protected function _addEvent($event_type, $user_id, $room_id, $obj_id, $initiator_id, $active = 1) {
 		$data = compact('event_type', 'user_id', 'room_id', 'initiator_id', 'active');
@@ -28,6 +28,7 @@ class ChatEvent extends AppModel {
 		if (!$this->save($data)) {
 			throw new Exception("Chat event cannot be saved\n".print_r($data, true));
 		}
+		return $this->id;
 	}
 	
 	/**
@@ -50,6 +51,7 @@ class ChatEvent extends AppModel {
 	
 	public function addMessage($currUserID, $roomID, $message) {
 		$this->loadModel('ChatMessage');
+		$this->loadModel('ChatContact');
 		
 		if (!$this->ChatMessage->save(compact('message'))) {
 			throw new Exception("Message cannot be saved\n".print_r($data, true));
@@ -59,39 +61,77 @@ class ChatEvent extends AppModel {
 		$aUsersID = $this->_getRoomUsersID($roomID);
 		foreach($aUsersID as $userID) {
 			if ($userID == $currUserID) {
-				$this->_addEvent(self::OUTCOMING_MSG, $currUserID, $roomID, $msgID, $currUserID, self::INACTIVE);
+				$eventID = $this->_addEvent(self::OUTCOMING_MSG, $currUserID, $roomID, $msgID, $currUserID, self::INACTIVE);
+				
+				// выбираем первого юзера в комнате, но не самого себя
+				foreach($aUsersID as $anotherUserID) {
+					if ($anotherUserID != $currUserID) {
+						break;
+					}
+				}
+				$this->ChatContact->updateList($currUserID, $roomID, $anotherUserID, $message, $eventID);
+				$this->ChatContact->setActiveCount($currUserID, $roomID, 0);
 			} else {
-				$this->_addEvent(self::INCOMING_MSG, $userID, $roomID, $msgID, $currUserID);
+				$eventID = $this->_addEvent(self::INCOMING_MSG, $userID, $roomID, $msgID, $currUserID);
+				// TODO: для КонтактЛиста - сохранять точное время из события
+				// т.к. время сохранения КонтактЛиста и ЧатСобытия может отличаться по минутам
+				// напр. ЧатСобытие записалось 03:59:59, а контактЛист - уже 04:00:00
+				$this->ChatContact->updateList($userID, $roomID, $currUserID, $message, $eventID);
 			}
 		}
 	}
 	
 	public function addFile($currUserID, $roomID, $mediaID) {
+		$this->loadModel('ChatContact');
+		
 		$aUsersID = $this->_getRoomUsersID($roomID);
 		foreach($aUsersID as $userID) {
 			if ($userID == $currUserID) {
 				$this->_addEvent(self::FILE_UPLOADED, $currUserID, $roomID, $mediaID, $currUserID, self::INACTIVE);
 			} else {
-				$this->_addEvent(self::FILE_DOWNLOAD_AVAIL, $userID, $roomID, $mediaID, $currUserID);
+				$eventID = $this->_addEvent(self::FILE_DOWNLOAD_AVAIL, $userID, $roomID, $mediaID, $currUserID);
+				$this->ChatContact->updateList($userID, $roomID, $currUserID, __('You have received a file'), $eventID);
 			}
 		}
 	}
 	
 	public function openRoom($currUserID, $userID) {
 		$this->loadModel('ChatRoom');
+		$this->loadModel('ChatContact');
 		
 		$room = $this->ChatRoom->getRoomWith2Users($currUserID, $userID);
 		if (!$room) {
+			// первичная инициализация комнаты чата
 			$this->ChatRoom->clear();
 			$data = array('initiator_id' => $currUserID, 'recipient_id' => $userID);
 			if (!$this->ChatRoom->save($data)) {
 				throw new Exception("Room cannot be opened\n".print_r($data));
 			}
 			$room = $this->ChatRoom->findById($this->ChatRoom->id);
-			$this->_addEvent(self::ROOM_OPENED, $currUserID, $room['ChatRoom']['id'], $userID, $currUserID, self::INACTIVE);
 			
-			// Room is auto-opened by JS Chat  - no need to have an active event
+			// Комнату для чата открывает сам юзер - нет смысла помечать это как прочитанное
+			$eventID = $this->_addEvent(self::ROOM_OPENED, $currUserID, $room['ChatRoom']['id'], $userID, $currUserID, self::INACTIVE);
+			
+			// Добавить контакт при открытии комнаты - мы ведь его по идее уже выбираем для общения
+			$msg = ''; // сообщение при открытии комнаты еще никакое не пришло. Можно выставлять skills, т.к. при поиске все равно они показываются
+			$this->ChatContact->updateList($currUserID, $room['ChatRoom']['id'], $userID, $msg, $eventID);
+			$this->ChatContact->setActiveCount($currUserID, $room['ChatRoom']['id'], 0);
+			
+			// Если реципиенту не написали - нет смысла показывать открытие комнаты как НЕпрочитанное
+			// Не смысла вносить этот контакт в список пока он ничего не написал
 			$this->_addEvent(self::ROOM_OPENED, $userID, $room['ChatRoom']['id'], $userID, $currUserID, self::INACTIVE);
+		} else {
+			// проверить есть ли такой контакт - возможно контакт был удален
+			if (!$this->ChatContact->findByUserIdAndRoomId($currUserID, $room['ChatRoom']['id'])) {
+				// найти событие, по которому комната была открыта
+				$conditions = array('user_id' => $currUserID, 'active' => 0, 'room_id' => $room['ChatRoom']['id'], 'event_type' => self::ROOM_OPENED);
+				$order = 'ChatEvent.created DESC';
+				$event = $this->find('first', compact('conditions', 'order'));
+				
+				$msg = ''; // сообщение при открытии комнаты еще никакое не пришло. Можно выставлять skills, т.к. при поиске все равно они показываются
+				$this->ChatContact->updateList($currUserID, $room['ChatRoom']['id'], $userID, $msg, $event['ChatEvent']['id']);
+				$this->ChatContact->setActiveCount($currUserID, $room['ChatRoom']['id'], 0);
+			}
 		}
 		return $room;
 	}
@@ -133,10 +173,21 @@ class ChatEvent extends AppModel {
 		return $this->_getEvents($currUserID, compact('room_id'));
 	}
 	
-	public function markInactive($ids) {
+	public function updateInactive($userID, $ids) {
 		$this->updateAll(array('active' => self::INACTIVE), array('id' => $ids));
+		
+		// update contact list
+		$this->loadModel('ChatContact');
+		$fields = array('user_id', 'room_id', 'SUM(active) as active_count');
+		$conditions = array('id' => $ids, 'user_id' => $userID);
+		$order = 'ChatEvent.created DESC';
+		$group = array('room_id');
+		$aEvents = $this->find('all', compact('fields', 'conditions', 'order', 'group'));
+		foreach($aEvents as $event) {
+			$this->ChatContact->setActiveCount($userID, $event['ChatEvent']['room_id'], $event[0]['active_count']);
+		}
 	}
-	
+	/*
 	public function getActiveRooms($userID) {
 		$this->loadModel('ChatMessage', 'Media.Media');
 		
@@ -149,7 +200,7 @@ class ChatEvent extends AppModel {
 		$group = array('ChatEvent.room_id');
 		return $this->find('all', compact('fields', 'conditions', 'joins', 'order', 'group'));
 	}
-	
+	*/
 	public function timelineEvents($currUserID, $date, $date2) {
 		$conditions = array_merge(
 			$this->dateRange('ChatEvent.created', $date, $date2),
@@ -162,5 +213,18 @@ class ChatEvent extends AppModel {
 		$order = 'ChatEvent.created DESC';
 		$limit = 5;
 		return $this->find('all', compact('conditions', 'order', 'limit'));
+	}
+	
+	public function removeContact($currUserID, $id) {
+		$this->loadModel('ChatContact');
+		$contact = $this->ChatContact->findById($id);
+		if ($contact) {
+			// помечаем все НЕпрочитанные сообщения как прочитанные, 
+			// иначе будет глюк с общей статистикой по событиям (вылазит общее кол-во на иконке чата)
+			$fields = array('active' => 0);
+			$conditions = array('user_id' => $currUserID, 'room_id' => $contact['ChatContact']['room_id']);
+			$this->updateAll($fields, $conditions);
+			$this->ChatContact->delete($id);
+		}
 	}
 }

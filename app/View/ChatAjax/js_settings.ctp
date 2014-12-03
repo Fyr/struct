@@ -2,13 +2,14 @@
 	App::uses('ChatEvent', 'Model');
 ?>
 var chatURL = {
-	panel: '<?=$this->Html->url(array('controller' => 'ChatAjax', 'action' => 'panel'), true)?>',
-	contactList: '<?=$this->Html->url(array('controller' => 'ChatAjax', 'action' => 'contactList'), true)?>',
-	sendMsg: '<?=$this->Html->url(array('controller' => 'ChatAjax', 'action' => 'sendMsg'), true)?>.json',
-	sendFile: '<?=$this->Html->url(array('controller' => 'ChatAjax', 'action' => 'sendFile'), true)?>.json',
-	updateState: '<?=$this->Html->url(array('controller' => 'ChatAjax', 'action' => 'updateState'), true)?>.json',
-	openRoom: '<?=$this->Html->url(array('controller' => 'ChatAjax', 'action' => 'openRoom'), true)?>.json',
-	markRead: '<?=$this->Html->url(array('controller' => 'ChatAjax', 'action' => 'markRead'), true)?>.json',
+	// panel: '<?=$this->Html->url(array('controller' => 'ChatAjax', 'action' => 'panel'))?>.json',
+	contactList: '<?=$this->Html->url(array('controller' => 'ChatAjax', 'action' => 'contactList'))?>.json',
+	sendMsg: '<?=$this->Html->url(array('controller' => 'ChatAjax', 'action' => 'sendMsg'))?>.json',
+	sendFile: '<?=$this->Html->url(array('controller' => 'ChatAjax', 'action' => 'sendFile'))?>.json',
+	updateState: '<?=$this->Html->url(array('controller' => 'ChatAjax', 'action' => 'updateState'))?>.json',
+	openRoom: '<?=$this->Html->url(array('controller' => 'ChatAjax', 'action' => 'openRoom'))?>.json',
+	markRead: '<?=$this->Html->url(array('controller' => 'ChatAjax', 'action' => 'markRead'))?>.json',
+	delContact: '<?=$this->Html->url(array('controller' => 'ChatAjax', 'action' => 'delContact'))?>.json',
 }
 chatUpdateTime = <?=Configure::read('chatUpdateTime')?>;
 chatDef = {

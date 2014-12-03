@@ -37,6 +37,7 @@ class Media extends AppModel {
     	}
     	return $results;
     }
+    
 	        
     /**
      * Removes actual media-files before delete a record

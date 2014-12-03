@@ -3,7 +3,7 @@ App::uses('AppController', 'Controller');
 App::uses('PAjaxController', 'Core.Controller');
 class ChatAjaxController extends PAjaxController {
 	public $name = 'ChatAjax';
-	public $uses = array('User', 'ChatMessage', 'ChatEvent');
+	public $uses = array('User', 'ChatMessage', 'ChatEvent', 'ChatContact');
 
 	public function beforeFilter() {
 		parent::beforeFilter();
@@ -14,31 +14,15 @@ class ChatAjaxController extends PAjaxController {
 		$this->loadModel('ChatRoom');
 	}
 	
-	public function panel() {
-		/*
-		$aUsers = $this->User->getContactListUsers($this->currUserID);
-		$this->set('aUsers', $aUsers);
-		*/
-		$this->contactList();
-	}
-	
 	public function contactList() {
-		/*
 		try {
-			$aUsers = $this->User->getContactListUsers($this->currUserID);
-			$this->setResponse($aUsers);
+			$aUsers = array();
+			$q = $this->request->data('q');
+			$aUsers = $this->ChatContact->getList($this->currUserID, $q);
+			$this->setResponse(compact('aUsers'));
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
 		}
-		*/
-		$aUsers = array();
-		$q = $this->request->data('q');
-		if ($q) {
-			$aUsers = $this->User->search($this->currUserID, $q);
-		} else {
-			$aUsers = $this->User->getContactListUsers($this->currUserID);
-		}
-		$this->set('aUsers', $aUsers);
 	}
 	
 	public function openRoom() {
@@ -91,13 +75,9 @@ class ChatAjaxController extends PAjaxController {
 	
 	public function updateState() {
 		try {
-			// fdebug($data, 'update_chat.log', false);
-			// $this->setResponse($data);
 			$data = $this->ChatEvent->getActiveEvents($this->currUserID);
-			$this->set('status', self::STATUS_OK);
-			$this->set('data', $data);
-			
-			$this->contactList();
+			$data['aUsers'] = $this->ChatContact->getList($this->currUserID);
+			$this->setResponse($data);
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
 		}
@@ -110,8 +90,19 @@ class ChatAjaxController extends PAjaxController {
 			if (!$ids || !is_array($ids)) {
 				throw new Exception('Incorrect request');
 			}
-			$this->ChatEvent->markInactive($ids);
+			$this->ChatEvent->updateInactive($this->currUserID, $ids);
 			$this->setResponse(true);
+		} catch (Exception $e) {
+			$this->setError($e->getMessage());
+		}
+	}
+	
+	public function delContact() {
+		try {
+			$id = $this->request->data('contact_id');
+			$this->ChatEvent->removeContact($this->currUserID, $id);
+			$data['aUsers'] = $this->ChatContact->getList($this->currUserID);
+			$this->setResponse($data);
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
 		}

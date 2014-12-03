@@ -367,3 +367,7 @@
     font-size: 17px; }
 
 /*# sourceMappingURL=settings-page.css.map */
+
+.gallery-add .jq-file{
+	max-width: 140px;
+}

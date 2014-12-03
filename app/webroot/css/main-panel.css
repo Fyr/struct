@@ -730,16 +730,17 @@
     display: none; }
 
 .aside-block .close-block {
-    color: #C5C5C5;
-    position: absolute;
-    right: -10px;
-    text-align: center;
-    top: -10px;
-}
-.aside-block .close-block:hover { color: #22B5AE;}
+  color: #C5C5C5;
+  position: absolute;
+  right: -10px;
+  text-align: center;
+  top: -10px; }
+  .aside-block .close-block:hover {
+    color: #22B5AE; }
+
 .main-panel .dropdown-chatPanel .messages-list li .aside-block {
-    float: right;
-    position: relative;
-    width: 35px;
-}
+  float: right;
+  position: relative;
+  width: 35px; }
+
 /*# sourceMappingURL=main-panel.css.map */
