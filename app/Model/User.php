@@ -78,16 +78,17 @@ class User extends AppModel {
 	public function afterFind($results, $primary = false) {
 		foreach($results as &$_row) {
 			if (is_array($_row) && isset($_row[$this->alias])) { // почему то иногда создает массив данных без [User] :(
-	    		$row = $_row[$this->alias];
-	    		if (isset($row['username']) && isset($row['full_name'])) {
-	    			if (empty($row['full_name'])) {
-	    				$_row[$this->alias]['full_name'] = $row['username'];
-	    			}
-	    		}
+				$row = $_row[$this->alias];
+				if (isset($row['username']) && isset($row['full_name'])) {
+					if (empty($row['full_name'])) {
+						$_row[$this->alias]['full_name'] = $row['username'];
+					}
+				}
 			}
-    	}
-    	return $results;
+		}
+		return $results;
 	}
+
 	
 	public function beforeSave($options = array()) {
 		if (isset($this->data['User']['password'])) {

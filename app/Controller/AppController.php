@@ -83,7 +83,7 @@ class AppController extends Controller {
 		$this->set('pageTitle', $this->pageTitle);
 		
 		$this->set('PU_', '$');
-		$this->set('PU_', '');
+		$this->set('_PU', '');
 		$this->set('balance', '0');
 	}
 }
