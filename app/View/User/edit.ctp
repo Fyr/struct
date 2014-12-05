@@ -122,20 +122,20 @@
 	                <?=$this->Form->input('User.live_place', array('type' => 'text', 'label' => false))?>
 	            </div>
 	        </div>
-	        <div class="settings-input-row">
-	            <div class="comments-box-send-info">
-	                <?=__('Speciality')?>
-	            </div>
-	            <div class="input-group settings-input col-md-12 col-sm-12">
-	            	<?=$this->Form->input('User.speciality', array('type' => 'text', 'label' => false, 'class' => 'form-control col-md-12 col-sm-12', 'id' => 'tokenfield'))?>
-	            </div>
-	        </div>
             <div class="settings-input-row">
 	            <div class="comments-box-send-info">
 	                <?=__('University')?>
 	            </div>
 	            <div class="input-group settings-input col-md-12 col-sm-12">
 	            	<?=$this->Form->input('User.university', array('type' => 'text', 'label' => false, 'class' => 'form-control'))?>
+	            </div>
+	        </div>
+	        <div class="settings-input-row">
+	            <div class="comments-box-send-info">
+	                <?=__('Speciality')?>
+	            </div>
+	            <div class="input-group settings-input col-md-12 col-sm-12">
+	            	<?=$this->Form->input('User.speciality', array('type' => 'text', 'label' => false, 'class' => 'form-control col-md-12 col-sm-12', 'id' => 'tokenfield'))?>
 	            </div>
 	        </div>
             <div class="group-create-cell">
