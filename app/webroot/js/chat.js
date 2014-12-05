@@ -19,8 +19,10 @@ var Chat = {
 		$(".dialog").height(dialogHeight);
 	},
 	
-	scrollTop: function () {
-		$(".dialog").scrollTop($(".innerDialog").height() - $(".dialog").height() + 97);
+	scrollTop: function (roomID) {
+		// $(".dialog").scrollTop($(".innerDialog").height() - $(".dialog").height() + 97);
+		console.log($('#roomChat_' + roomID + ' .clearfix:last').get(0));
+		$('#roomChat_' + roomID + ' .clearfix:last').get(0).scrollIntoView(false);
 	},
 	
 	initPanel: function (container, userID) {
@@ -43,6 +45,7 @@ var Chat = {
 	},
 	
 	initHandlers: function() {
+		/*
 		$(".searchBlock .searchInput", Chat.panel).focus(function(){
 			this.select();
 			Chat.disableUpdate();
@@ -52,6 +55,19 @@ var Chat = {
 		});
 		$(".searchBlock .searchButton", Chat.panel).click(function(){
 			Chat.filterContactList($(".searchBlock .searchInput", Chat.panel).val());
+		});
+		*/
+		$('#searchChatForm').ajaxForm({
+			url: chatURL.contactList,
+			dataType: 'json',
+			beforeSubmit: function(){
+				Chat.disableUpdate();
+			},
+			success: function(response) { 
+				Chat.renderPanel(response.data.aUsers);
+				Chat.initHandlers();
+				Chat.enableUpdate();
+			}
 		});
 	},
 	
@@ -113,7 +129,7 @@ var Chat = {
 			roomID = Chat.getActiveRoom();
 		}
 		$(".dialog .innerDialog #roomChat_" + roomID).append(Chat.renderMsg(msg, user, time));
-		Chat.scrollTop();
+		Chat.scrollTop(roomID);
 	},
 	
 	renderAddFile: function (msg, url, file_name) {
@@ -125,7 +141,7 @@ var Chat = {
 			roomID = Chat.getActiveRoom();
 		}
 		$(".dialog .innerDialog #roomChat_" + roomID).append(Chat.renderAddFile(msg, url, file_name));
-		Chat.scrollTop();
+		Chat.scrollTop(roomID);
 	},
 	
 	sendFile: function (fileData) {
@@ -152,7 +168,7 @@ var Chat = {
 				}
 				Chat.dispatchEvents(response.data.events);
 				Chat.activateRoom(roomID);
-				Chat.scrollTop();
+				Chat.scrollTop(roomID);
 				closeMainPanel();
 				Chat.enableUpdate();
 			}
@@ -213,7 +229,7 @@ var Chat = {
 			Chat.showUnreadTab(roomID);
 			Chat.showUnreadTotal(Chat.countUnreadTotal());
 			var readIds = Chat.renderEvents(roomID, aUnreadEvents);
-			Chat.scrollTop();
+			Chat.scrollTop(roomID);
 			Chat.disableUpdate();
 			$.post(chatURL.markRead, {data: {ids: readIds}}, function(response){
 				if (checkJson(response)) {
@@ -371,7 +387,7 @@ var Chat = {
 	isUpdateEnabled: function () {
 		return Chat.enableLevel == 0;
 	},
-	
+	/*
 	filterContactList: function (filter) {
 		Chat.disableUpdate();
 		$.post(chatURL.contactList, {data: {q: filter}}, function(response){
@@ -380,6 +396,7 @@ var Chat = {
 			Chat.enableUpdate();
 		});
 	},
+	*/
 	
 	delContact: function(contact_id, room_id) {
 		Chat.disableUpdate();

@@ -24,16 +24,16 @@ class GroupController extends SiteController {
 			$this->request->data('Group.hidden', $this->request->data('Group.hidden') && true);
 			if ($this->request->data('GroupAchievement')) {
 				foreach($this->request->data('GroupAchievement') as $i => $data) {
-					$this->request->data('GroupAchievement.'.$i.'.url', 
-						(strpos($data['url'], 'http://') === false) ? 'http://'.$data['url'] : $data['url']
-					);
+					$url = $this->request->data('GroupAchievement.'.$i.'.url');
+					$url = (strpos($url, 'http://') === false) ? 'http://'.$url : $url;
+					$this->request->data('GroupAchievement.'.$i.'.url', $url);
 				}
 			}
 			if ($this->request->data('GroupAddress')) {
 				foreach($this->request->data('GroupAddress') as $i => $data) {
-					$this->request->data('GroupAddress.'.$i.'.url', 
-						(strpos($data['url'], 'http://') === false) ? 'http://'.$data['url'] : $data['url']
-					);
+					$url = $this->request->data('GroupAddress.'.$i.'.url');
+					$url = (strpos($url, 'http://') === false) ? 'http://'.$url : $url;
+					$this->request->data('GroupAddress.'.$i.'.url', $url);
 				}
 			}
 			$this->Group->saveAll($this->request->data);

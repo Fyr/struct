@@ -9,31 +9,10 @@ var Search = {
 	},
 	
 	initHandlers: function() {
-		$(".searchBlock .searchInput", Search.panel).click(function(){
-			this.select();
+		$('#searchUserForm').ajaxForm({
+			url: profileURL.panel,
+			target: Search.panel,
+			success: function() { Search.initHandlers(); }
 		});
-		$(".searchBlock .searchButton", Search.panel).click(function(){
-			Search.filterContactList($(".searchBlock .searchInput", Search.panel).val());
-		});
-	},
-	
-	filterContactList: function (filter) {
-		$(Search.panel).load(profileURL.panel, {data: {q: filter}}, function(){
-			Search.initHandlers();
-		});
-		/*
-		$(".simple-list-item", Search.panel).each(function(){
-			if (filter) {
-				var name = $(".user-list-item-name", this).html();
-				if (name.substr(0, filter.length).toLowerCase() == filter.toLowerCase()) {
-					$(this).show();
-				} else {
-					$(this).hide();
-				}
-			} else {
-				$(this).hide();
-			}
-		});
-		*/
 	}
 }

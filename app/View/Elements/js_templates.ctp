@@ -34,8 +34,10 @@
 
 <script type="text/x-tmpl" id="chat-panel">
 <div class="searchBlock clearfix">
-        <input class="searchInput" type="text" value="{%=o.q%}" placeholder="<?=__('Find user...')?>">
-        <button type="button" class="searchButton"><span class="glyphicons search"></span></button>
+	<form id="searchChatForm" action="" method="post">
+        <input class="searchInput" type="text" name="data[q]" value="{%=o.q%}" placeholder="<?=__('Find user...')?>">
+        <button type="submit" class="searchButton"><span class="glyphicons search"></span></button>
+    </form>
 </div>
 <div class="dropdown-panel-scroll">
     <div class="messages-list allMessages">

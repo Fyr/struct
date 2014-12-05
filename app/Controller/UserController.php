@@ -53,9 +53,9 @@ class UserController extends AppController {
 			$this->request->data('User.user_id', $this->currUserID);
 			if ($this->request->data('UserAchievement')) {
 				foreach($this->request->data('UserAchievement') as $i => $data) {
-					$this->request->data('UserAchievement.'.$i.'.url', 
-						(strpos($data['url'], 'http://') !== false) ? 'http://'.$data['url'] : $data['url']
-					);
+					$url = $this->request->data('UserAchievement.'.$i.'.url');
+					$url = (strpos($url, 'http://') === false) ? 'http://'.$url : $url;
+					$this->request->data('UserAchievement.'.$i.'.url', $url);
 				}
 			}
 			$this->User->saveAll($this->request->data);

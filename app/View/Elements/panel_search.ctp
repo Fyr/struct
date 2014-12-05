@@ -1,6 +1,8 @@
 <div class="searchBlock clearfix">
-        <input class="searchInput" type="text" value="<?=$this->request->data('q')?>" placeholder="<?=__('Find user or community...')?>">
-        <button type="button" class="searchButton"><span class="glyphicons search"></span></button>
+	<form id="searchUserForm" action="" method="post">
+        <input class="searchInput" type="text" name="data[q]" value="<?=$this->request->data('q')?>" placeholder="<?=__('Find user or community...')?>">
+        <button type="submit" class="searchButton"><span class="glyphicons search"></span></button>
+    </form>
 </div>
 <div class="dropdown-panel-scroll">
 <?
