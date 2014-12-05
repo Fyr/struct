@@ -106,7 +106,7 @@
 	if ($university) {
 		// echo $this->Html->image($src, array('alt' => $university, 'style' => 'width: 50px'));
 ?>
-                <img src="<?=$src?>" alt="<?=$university?>" style="width: 50px" />
+                <img src="<?=$src?>" alt="" style="width: 50px" />
 <?
 	}
 ?>
