@@ -14,7 +14,7 @@ class UserController extends AppController {
 			}
 			$timezone = timezone_name_from_abbr('', -$_COOKIE['tzo'] * 60, $_COOKIE['tzd']);
 			$this->request->data('User.timezone', $timezone);
-			// $this->request->data('User.full_name', $this->request->data('User.username'));
+			$this->request->data('User.full_name', '');
 			if ($this->User->save($this->request->data('User'))) {
 				$this->Auth->login();
 				return $this->redirect($this->Auth->redirect());

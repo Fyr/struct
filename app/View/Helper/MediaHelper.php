@@ -23,7 +23,7 @@ class MediaHelper extends AppHelper {
 		$media = $mediaRow['Media'];
 		return $this->MediaPath->getImageUrl($media['object_type'], $media['id'], $size, $media['file'].$media['ext']);
 		*/
-		if (!(isset($media['id']) && $media['id']) || !isset($media['url_img'])) {
+		if (!isset($media['url_img']) && $media['url_img']) {
 			return '';
 		}
 		return str_replace('noresize', $size, $media['url_img']);
