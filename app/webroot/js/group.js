@@ -9,32 +9,11 @@ var Group = {
 	},
 	
 	initHandlers: function() {
-		$(".searchBlock .searchInput", Group.panel).click(function(){
-			this.select();
+		$('#searchGroupForm').ajaxForm({
+			url: groupURL.panel,
+			target: Group.panel,
+			success: function() { Group.initHandlers(); }
 		});
-		$(".searchBlock .searchButton", Group.panel).click(function(){
-			Group.filterContactList($(".searchBlock .searchInput", Group.panel).val());
-		});
-	},
-	
-	filterContactList: function (filter) {
-		$(Group.panel).load(groupURL.panel, {data: {q: filter}}, function(){
-			Group.initHandlers();
-		});
-		/*
-		$(".simple-list-item", Group.panel).each(function(){
-			if (filter) {
-				var name = $(".user-list-item-name", this).html();
-				if (name.substr(0, filter.length).toLowerCase() == filter.toLowerCase()) {
-					$(this).show();
-				} else {
-					$(this).hide();
-				}
-			} else {
-				$(this).show();
-			}
-		});
-		*/
 	},
 	
 	renderGalleryVideoAdmin: function(data) {
