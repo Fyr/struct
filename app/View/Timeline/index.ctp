@@ -8,7 +8,7 @@
 var aMonths = <?=json_encode(array(__('Jan'), __('Feb'), __('Mar'), __('Apr'), __('May'), __('Jul'), __('Jun'), __('Aug'), __('Sep'), __('Oct'), __('Nov'), __('Dec')))?>;
 var aDays = <?=json_encode(array(__('Sun'), __('Mon'), __('Tue'), __('Wen'), __('Thu'), __('Fri'), __('Sat')))?>;
 var todayDate, now;
-var startDay, locale;
+var startDay, startDate, locale;
 $(document).ready(function(){
 	locale = '<?=Hash::get($currUser, 'User.lang')?>';
 	todayDate = new Date;
@@ -17,7 +17,8 @@ $(document).ready(function(){
 	now = new Date(); // 
 	now = now.toSqlDate();
 	now = Date.fromSqlDate('<?=date('Y-m-d H:i:s')?>');
-	startDay = <?=-floor((time() - strtotime(Configure::read('Konstructor.created'))) / DAY)?>;
+	startDay = <?=-floor((time() - strtotime(Hash::get($currUser, 'User.created'))) / DAY)?>;
+	startDate = '<?=date('Y-m-d', strtotime(Hash::get($currUser, 'User.created')))?>';
 	
 	var timelineData = <?=json_encode($aTimeline)?>;
 	Timeline.init({
@@ -117,8 +118,8 @@ $(document).ready(function(){
 {%
 	var js_date = Date.fromSqlDate(o.sql_date);
 %}
-<div id="row-day_{%=o.sql_date%}" class="row-day-events">
-    <div id="time-list{%=o.sql_date%}" class="col-md-12 col-sm-12 col-xs-12 time-line-list events-expanded">
+<div id="row-day_{%=o.sql_date%}" class="row-day-events events-collapsible">
+    <div id="time-list{%=o.sql_date%}" class="col-md-12 col-sm-12 col-xs-12 time-line-list">
 {% 
 	for(hour = 23; hour >= 0; hour--) {
 		include('time-line-cell', {
@@ -189,6 +190,17 @@ $(document).ready(function(){
 	}
 %}
 <div id="{%=id%}" class="time-line-cell clearfix">
+{%
+	if (event && event.SelfRegistration) {
+%}
+    <div class="col-md-12 col-sm-12 col-xs-12 t-a-center time-get-start">
+		<span class="title-registration"> {%=Date.HoursMinutes(Date.fromSqlDate(event.SelfRegistration.created))%}
+			<div class="title-time"><?=__('I registered on this site')?></div>
+		</span>
+    </div>
+{%
+	}
+%}
     <div class="col-md-5 col-sm-5 col-xs-12 t-a-right event-box">
 {%
 	for(var i = 0; i < o.data.length; i++) {
@@ -219,25 +231,17 @@ $(document).ready(function(){
 	}
 %}
     </div>
-    <div class="col-md-12 col-sm-12 col-xs-12 t-a-center {%=(event && event.SelfRegistration) ? 'time-get-start' : 'time'%}">
 {%
-	
-	if (event && event.SelfRegistration) {
+	if (js_date.getHours() > 0) {
 %}
-		<span class="title-registration"> {%=Date.HoursMinutes(Date.fromSqlDate(event.SelfRegistration.created))%}
-			<div class="title-time"><?=__('I registered on this site')?></div>
-		</span>
-{%
-	} else if (js_date.getHours() > 0) {
-%}
+	<div class="col-md-12 col-sm-12 col-xs-12 t-a-center time">
         <span onclick="Timeline.addEventPopup('{%=o.sql_date%}', '{%=zeroFormat(js_date.getHours())%}')">{%=Date.HoursMinutes(js_date)%}
             <span class="add-event-time"><i class="glyphicon glyphicons circle_plus"></i></span>
         </span>
-
+	</div>
 {%
 	}
 %}
-    </div>
 </div>
 </script>
 
@@ -421,4 +425,84 @@ $(document).ready(function(){
         </ul>
     </div>
 </div>
+</script>
+
+<script type="text/x-tmpl" id="timeline-bottom">
+    <div class="row-day-events static-system-event">
+        <div class="col-md-12 col-sm-12 col-xs-12 day-data t-a-center">
+            <div class="day-calendar">
+                <div class="data">2</div>
+                <div class="day">Tue</div>
+                <div class="month">Dec</div>
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12 time-line-list">
+            <div class="time-line-cell clearfix">
+                <div class="col-md-5 col-sm-5 col-xs-12 t-a-right event-box">
+                    <div class="event-box-cell clearfix">
+                        <div class="event-text">
+                            <div class="h2-title">200.000</div>                                          
+                            <p><?=__('messages were written')?></p>                                       
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-12 t-a-right">&nbsp;</div>
+                <div class="col-md-5 col-sm-5 col-xs-12 t-a-left event-box">
+                    <div class="event-box-cell clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-day-events static-system-event">
+        <div class="col-md-12 col-sm-12 col-xs-12 day-data t-a-center">
+            <div class="day-calendar">
+                <div class="data">24</div>
+                <div class="day">Mon</div>
+                <div class="month">Nov</div>
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12 time-line-list" style="display: block;">
+            <div class="time-line-cell clearfix">
+                <div class="col-md-5 col-sm-5 col-xs-12 t-a-right event-box">
+                    <div class="event-box-cell clearfix"></div>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-12 t-a-right"></div>
+                <div class="col-md-5 col-sm-5 col-xs-12 t-a-left event-box">
+                    <div class="event-text system-event">
+                        <div class="h2-title">300</div>
+                        <p><?=__('projects were created based on groups')?></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-day-events static-system-event">
+        <div class="col-md-12 col-sm-12 col-xs-12 day-data t-a-center">
+            <div class="day-calendar">
+                <div class="data">19</div>
+                <div class="day">Wen</div>
+                <div class="month">Nov</div>
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12 time-line-list" style="display: block;">
+            <div class="time-line-cell clearfix">
+                <div class="col-md-5 col-sm-5 col-xs-12 t-a-right event-box">
+                    <div class="event-text system-event">
+                        <div class="h2-title">1000</div>
+                        <p><?=__('users were registered on website')?></p>                                    
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-12 t-a-right"></div>
+                <div class="col-md-5 col-sm-5 col-xs-12 t-a-left event-box"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12 day-data t-a-center">
+        <div class="day-calendar konstructor">
+            <div class="data">12</div>
+            <div class="day">Wen</div>
+            <div class="month">Nov 2014</div>
+            <div class="start-project"><img alt="" src="img/user-profile/t_logo2.png"><?=__('Updated site began to work')?></div>
+        </div>
+    </div>
 </script>

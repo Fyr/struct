@@ -25,7 +25,7 @@ var Timeline = {
 		
 		if (Timeline.updateTime) {
 			Timeline.updateTimer = setInterval(function(){
-				Timeline.updateState();
+				// Timeline.updateState();
 				//clearInterval(Timeline.updateTimer);
 			}, Timeline.updateTime);
 		}
@@ -77,6 +77,10 @@ var Timeline = {
 				data: (data.days && data.days[jsDate.toSqlDate()]) ? data.days[jsDate.toSqlDate()] : {}
 			});
 		}
+		console.log([jsDate.toSqlDate(), startDate]);
+		if (jsDate.toSqlDate() == startDate) {
+			html+= tmpl('timeline-bottom', {});
+		}
 		return html;
 	},
 	
@@ -95,13 +99,13 @@ var Timeline = {
 	
 	collapseEmptyCells: function() {
 		var lGroup = false, groupID = 0, html = '';
-		$('.row-day-events .time-line-list').each(function(){
+		$('.row-day-events.events-collapsible .time-line-list').each(function(){
 			lGroup = false;
 			var id = $(this).prop('id');
 			$('#' + id + ' > .time-line-cell').each(function(){
 				var leftBox = $('.t-a-right.event-box', this).length && $('.t-a-right.event-box', this).html().replace(/\s*/, '');
 				var rightBox = $('.t-a-left.event-box', this).length && $('.t-a-left.event-box', this).html().replace(/\s*/, '');
-				var centerBox = $('.t-a-left.event-box', this).length && $('.t-a-center', this).html().replace(/\s*/, '');
+				// var centerBox = $('.t-a-center.time', this).length && $('.t-a-center.time', this).html().replace(/\s*/, '');
 				var html = '';
 				if (!leftBox && !rightBox) {
 					$(this).addClass('empty-cell');
@@ -131,7 +135,7 @@ var Timeline = {
 	},
 	
 	initHandlers: function() {
-		$('.toggle-dotted-btn').click(function(){
+		$('.events-collapsible .toggle-dotted-btn').click(function(){
 			$(this).fadeOut('fast');
 			// $(this).parent().find('.toggle-dotted-cells').stop(true, false).slideDown();
 			$(this).parent().find('.toggle-dotted-cells').show();
@@ -144,7 +148,7 @@ var Timeline = {
 			}
 		});
 		
-		$('.day-calendar').click(function(){
+		$('.events-collapsible .day-calendar').click(function(){
 			// $(this).parent().parent().find('.time-line-list').stop(true,false).slideToggle('slow');
 			$(this).parent().parent().find('.time-line-list').toggle();
 		});
