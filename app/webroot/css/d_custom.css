@@ -297,18 +297,21 @@ border-radius: 20px;
     color: #313131;
     font-family: 'Roboto', sans-serif;
     padding: 20px 0;
+	border-collapse: separate;
+    display: table;
 }
-.page-title-group-image{
-    display: inline-block;
-    width: 80px;height: 80px;
-    margin-bottom: -29px;
-    overflow: hidden;
-}
+
+
+.page-title-group-image{ display: table-cell; vertical-align: middle; padding-right: 15px;}
 .page-title-group-image img{
     display: block;
     max-height: 80px;
     max-width: 80px;
 }
+
+.page-title-group-description { display: table-cell; vertical-align: middle; line-height: 38px;}
+@media (max-width: 500px) { .page-title {display: block} .page-title-group-description { display: block}}
+
 .page-menu .btn-default {
     vertical-align: top;margin: 0px 10px 5px 0; color: #616161;
 }

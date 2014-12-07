@@ -97,7 +97,7 @@ a:focus {
   background: #22b5ae;
   height: 24px;
   width: 25px;
-  padding: 4px 2px 4px 5px;
+  padding: 1px 0 0 6px;
   border-top-left-radius: 50%;
   border-top-right-radius: 50%;
   border-bottom-left-radius: 50%;

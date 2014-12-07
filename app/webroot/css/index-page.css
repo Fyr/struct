@@ -1,24 +1,41 @@
+html { min-height: 100%; position: relative; }
+body { 
+	background: url(../img/vidbg.jpg) no-repeat 50% 50%;
+	background-size: cover;
+	margin-bottom: 50px;
+	min-height: 0;
+	position: static;
+	height: auto;
+}
+
 .index-wrapper {
-  width: 100%;
-  min-height: 100%;
-  height: auto !important;
-  background: url(../img/vidbg.jpg) no-repeat 50% 50%;
-  font-family: "Open Sans",sans-serif;
-  background-size: cover;
-  font-size: 15px;
-  height: 100%; }
+	/*
+		width: 100%;
+		min-height: 100%;
+		height: auto !important;
+		height: 100%; 
+	*/
+	
+	font-family: "Open Sans",sans-serif;	
+	font-size: 15px;
+	
+}
+
   .index-wrapper .iw-content {
     padding-bottom: 100px; }
-  .index-wrapper .container {
-    padding-top: 20px; }
+
+.index-wrapper .container { padding-top: 20px; }
+@media (max-width: 767px) { .index-wrapper .container {padding-top: 5px;}}
 
 .logo-company {
   display: inline-block;
   padding-bottom: 15px; }
   .logo-company:focus {
     outline: none; }
-  .logo-company .logo-image {
-    width: 220px; }
+
+  .logo-company .logo-image { width: 220px; }
+@media (max-width: 767px) { .logo-company .logo-image {width: 180px}}
+
   .logo-company .logo-text {
     color: #fff;
     display: inline-block;
@@ -35,10 +52,13 @@
     border-bottom-color: transparent; }
 
 .input-box-item {
-  color: #fff;
-  font-size: 15px;
-  position: relative;
-  margin: 0 0 25px 0; }
+	color: #fff;
+	font-size: 15px;
+	position: relative;
+	margin: 0 0 25px 0;
+}
+@media (max-width: 767px) { .input-box-item { margin-bottom: 10px;}}
+
   .input-box-item input {
     background: none;
     border: 0;
@@ -111,11 +131,16 @@
   float: right; }
 
 .footer {
-  position: relative;
-  margin: -100px auto 0;
-  padding-top: 50px;
-  height: 100px;
-  cursor: default; }
+	position: absolute;
+    width: 100%;
+	bottom: 0;
+	/*
+	margin: -100px auto 0;
+	padding-top: 50px;
+	*/
+	height: 50px;
+	cursor: default;
+}
   .footer .copyright-wrap {
     position: relative; }
     .footer .copyright-wrap .copyright {
