@@ -231,7 +231,7 @@
 <?
 	if ($id) {
 ?>
-                    <a href="<?=$this->Html->url(array('controller' => 'Group', 'action' => 'delete', $id))?>" class="btn btn-default delete-group"><?=__('Delete')?></a>
+                    <!--a href="<?=$this->Html->url(array('controller' => 'Group', 'action' => 'delete', $id))?>" class="btn btn-default delete-group"><?=__('Delete')?></a-->
 <?
 	}
 ?>
