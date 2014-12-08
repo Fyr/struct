@@ -442,7 +442,7 @@ $(document).ready(function(){
                     <div class="event-box-cell clearfix">
                         <div class="event-text">
                             <div class="h2-title">200.000</div>                                          
-                            <p><?=__('messages were written')?></p>                                       
+                            <p><?=__('messages were written.')?></p>                                       
                         </div>
                     </div>
                 </div>
@@ -470,7 +470,7 @@ $(document).ready(function(){
                 <div class="col-md-5 col-sm-5 col-xs-12 t-a-left event-box">
                     <div class="event-text system-event">
                         <div class="h2-title">300</div>
-                        <p><?=__('projects were created based on groups')?></p>
+                        <p><?=__('projects were created based on groups.')?></p>
                     </div>
                 </div>
             </div>
@@ -489,7 +489,7 @@ $(document).ready(function(){
                 <div class="col-md-5 col-sm-5 col-xs-12 t-a-right event-box">
                     <div class="event-text system-event">
                         <div class="h2-title">1000</div>
-                        <p><?=__('users were registered on website')?></p>                                    
+                        <p><?=__('users were registered on website.')?></p>                                    
                     </div>
                 </div>
                 <div class="col-md-2 col-sm-2 col-xs-12 t-a-right"></div>
