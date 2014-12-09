@@ -43,16 +43,6 @@
 	echo $this->fetch('script');
 ?>
 
-	<!--[if lt IE 9]>
-<?=$this->Html->script('vendor/html5shiv.min')?>
-<?=$this->Html->script('vendor/respond.min')?>
-	<script>
-		document.createElement('video');
-	</script>
-
-<?//$this->Html->css('ie8-index')?>
-	<![endif]-->
-	
 </head>
 <body>
 <script type="text/javascript">

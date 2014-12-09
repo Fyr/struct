@@ -20,7 +20,7 @@
 		'bootstrap/bootstrap', 
 		'main-panel',
 		'content',
-		'chat-page',
+		// 'chat-page',
 		'chat-old',
 		'device-page',
 		'progress-bar'
@@ -37,7 +37,7 @@
 		'/core/js/json_handler',
 		'main-panel',
 		'xdate',
-		'chat',
+		'chat', 'chat_panel', 'chat_room',
 		'struct',
 		'search',
 		'group'
@@ -85,13 +85,13 @@ $(document).ready(function () {
 	Group.initPanel($('.dropdown-groupPanel .dropdown-panel-wrapper').get(0));
 	
 	$(".sendForm .icon_enter").bind('click', function() {
-		Chat.sendMsg();
+		Chat.Panel.rooms[Chat.Panel.activeRoom].sendMsg();
 	});
 	
 	$(".sendForm textarea").bind('keypress', function(event) {
 		if ( event.which == 13 ) {
 			event.preventDefault();
-			Chat.sendMsg();
+			Chat.Panel.rooms[Chat.Panel.activeRoom].sendMsg();
 		}
 	});
 });	
@@ -104,24 +104,20 @@ $(document).ready(function () {
 	if ($this->request->controller == 'Chat') {
 ?>
 <div class="wrapper-container chat-page">
-    <div class="usersInChat">
-    	<!--
-        <a href="javascript: void(0)" class="icon icon_add"></a>
-        <a href="javascript: void(0)"><img src="/img/temp/2.jpg" alt="" /></a>
-        <a href="javascript: void(0)"><img src="/img/temp/3.jpg" class="active" alt="" /></a>
-        <a href="javascript: void(0)"><img src="/img/temp/1.jpg" alt="" /></a>
-        -->
-    </div>
+    <div class="usersInChat chat-members">
+		<!--a href="javascript: void(0)" class="addUser glyphicons plus text-center"></a-->
+	</div>
     <div class="bottom">
-        <div class="openChats clearfix">
-            <?=$this->element('chat_rooms')?>
-        </div>
-        <?=$this->element('send_message')?>
+        <div class="openChats chat-tabs clearfix"></div>
+        <?=$this->element('/Chat/send_message')?>
     </div>
-    <div class="dialog clearfix">
-        <div class="innerDialog">
-            <?=$this->fetch('content')?>
-        </div>
+    <div class="chat-dialogs">
+    	<?=$this->fetch('content')?>
+	    <!--div class="dialog clearfix">
+	        <div class="innerDialog">
+	            
+	        </div>
+	    </div-->
     </div>
 </div>
 <?

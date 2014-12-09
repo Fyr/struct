@@ -69,25 +69,12 @@
 	echo $this->fetch('script');
 ?>
 
-	<!--[if lt IE 9]>
-<?=$this->Html->css('ie8')?>
-<?=$this->Html->script('vendor/html5shiv.min')?>
-<?=$this->Html->script('vendor/respond.min')?>
-	<script>
-		document.createElement('video');
-	</script>
-	<![endif]-->
-
 	<script src="<?=$this->Html->url(array('controller' => 'ChatAjax', 'action' => 'jsSettings'))?>"></script>
 	<script src="<?=$this->Html->url(array('controller' => 'DeviceAjax', 'action' => 'jsSettings'))?>"></script>
 	<script src="<?=$this->Html->url(array('controller' => 'UserAjax', 'action' => 'jsSettings'))?>"></script>
 	<script src="<?=$this->Html->url(array('controller' => 'GroupAjax', 'action' => 'jsSettings'))?>"></script>
 <script>
 $(function() {
-	$(window).resize(function() {
-		Chat.fixPanelHeight();
-	});
-	
 	$('select.formstyler, input.filestyle').styler({
 		fileBrowse: '<?=__('Upload image')?>'
 	});
