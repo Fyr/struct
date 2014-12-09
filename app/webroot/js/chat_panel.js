@@ -209,4 +209,12 @@ var ChatPanel = function(container, userID){ // static object
 		closeMainPanel();
 		self.rooms[self.activeRoom].addMember(userID);
 	}
+	
+	this.onScrollTop = function() {
+		// self.rooms[self.activeRoom].loadMoreEvents();
+	}
+	
+	this.onScrollBottom = function() {
+		
+	}
 }

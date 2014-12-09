@@ -45,7 +45,7 @@ class ChatAjaxController extends PAjaxController {
 			$aID = $this->ChatMember->getRoomMembers($room['ChatRoom']['id'], $this->currUserID);
 			$members = $this->User->getUsers($aID);
 			unset($members[$this->currUserID]);
-			$events = $this->ChatEvent->getAllRoomEvents($this->currUserID, $room['ChatRoom']['id']);
+			$events = $this->ChatEvent->getActiveEvents($this->currUserID, $room['ChatRoom']['id']);
 			return $this->setResponse(compact('room', 'members', 'events'));
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
@@ -123,6 +123,17 @@ class ChatAjaxController extends PAjaxController {
 		try {
 			$userID = $this->request->data('user_id');
 			$roomID = $this->request->data('room_id');
+			$members = $this->ChatMember->getRoomMembers($roomID);
+			if (count($members) == 2) {
+				// create a new room for a group chat
+				$newRoom = $this->ChatEvent->createRoom($members[0], $members[1]);
+				if ($userID != $members[0] && $userID !== $members[1]) {
+					// $this->ChatMember->save(array('room_id' => $newRoom['ChatRoom']['id'], 'user_id' => $userID));
+					$this->ChatEvent->addMember($this->currUserID, $newRoom['ChatRoom']['id'], $userID);
+				}
+				$this->setResponse(compact('newRoom'));
+				return;
+			}
 			if ($roomID && $userID) {
 				$this->ChatEvent->addMember($this->currUserID, $roomID, $userID);
 			} else {

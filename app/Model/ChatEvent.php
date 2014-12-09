@@ -91,6 +91,40 @@ class ChatEvent extends AppModel {
 		}
 	}
 	
+	public function createRoom($currUserID, $userID) {
+		$this->loadModel('ChatRoom');
+		$this->loadModel('ChatMember');
+		$this->loadModel('ChatContact');
+		
+		$this->ChatRoom->clear();
+		$data = array('initiator_id' => $currUserID, 'recipient_id' => $userID);
+		if (!$this->ChatRoom->save($data)) {
+			throw new Exception("Room cannot be opened\n".print_r($data));
+		}
+		$room = $this->ChatRoom->findById($this->ChatRoom->id);
+		
+		// добавляем в нее обоих юзеров
+		$this->ChatMember->clear();
+		$this->ChatMember->save(array('room_id' => $this->ChatRoom->id, 'user_id' => $currUserID));
+		$this->ChatMember->clear();
+		$this->ChatMember->save(array('room_id' => $this->ChatRoom->id, 'user_id' => $userID));
+		
+		// Комнату для чата открывает сам юзер - помечаем это событие как прочитанное
+		$eventID = $this->_addEvent(self::ROOM_OPENED, $currUserID, $room['ChatRoom']['id'], $userID, $currUserID, self::INACTIVE);
+		
+		// Создать чат-контакт при открытии комнаты - мы ведь его по идее уже выбираем для общения
+		$msg = ''; // сообщение при открытии комнаты еще никакое не пришло. Можно выставлять skills, т.к. при поиске все равно они показываются
+		$this->ChatContact->updateList($currUserID, $room['ChatRoom']['id'], $userID, $msg, $eventID);
+		
+		// раз он сам открывает комнату - по ней не должно быть входящих
+		$this->ChatContact->setActiveCount($currUserID, $room['ChatRoom']['id'], 0); 
+		
+		// Если реципиенту не написали - нет смысла показывать открытие комнаты как НЕпрочитанное
+		// Нет смысла вносить этот контакт в список пока он ничего не написал
+		$this->_addEvent(self::ROOM_OPENED, $userID, $room['ChatRoom']['id'], $userID, $currUserID, self::INACTIVE);
+		return $room;
+	}
+	
 	/**
 	 * Открывает или создает комнату для 2х юзеров, а также чат-контакт для текущего
 	 *
@@ -111,32 +145,7 @@ class ChatEvent extends AppModel {
 		$room = $this->ChatRoom->getRoomWith2Users($currUserID, $userID);
 		if (!$room) {
 			// первичная инициализация комнаты чата
-			$this->ChatRoom->clear();
-			$data = array('initiator_id' => $currUserID, 'recipient_id' => $userID);
-			if (!$this->ChatRoom->save($data)) {
-				throw new Exception("Room cannot be opened\n".print_r($data));
-			}
-			$room = $this->ChatRoom->findById($this->ChatRoom->id);
-			
-			// добавляем в нее обоих юзеров
-			$this->ChatMember->clear();
-			$this->ChatMember->save(array('room_id' => $this->ChatRoom->id, 'user_id' => $currUserID));
-			$this->ChatMember->clear();
-			$this->ChatMember->save(array('room_id' => $this->ChatRoom->id, 'user_id' => $userID));
-			
-			// Комнату для чата открывает сам юзер - помечаем это событие как прочитанное
-			$eventID = $this->_addEvent(self::ROOM_OPENED, $currUserID, $room['ChatRoom']['id'], $userID, $currUserID, self::INACTIVE);
-			
-			// Создать чат-контакт при открытии комнаты - мы ведь его по идее уже выбираем для общения
-			$msg = ''; // сообщение при открытии комнаты еще никакое не пришло. Можно выставлять skills, т.к. при поиске все равно они показываются
-			$this->ChatContact->updateList($currUserID, $room['ChatRoom']['id'], $userID, $msg, $eventID);
-			
-			// раз он сам открывает комнату - по ней не должно быть входящих
-			$this->ChatContact->setActiveCount($currUserID, $room['ChatRoom']['id'], 0); 
-			
-			// Если реципиенту не написали - нет смысла показывать открытие комнаты как НЕпрочитанное
-			// Нет смысла вносить этот контакт в список пока он ничего не написал
-			$this->_addEvent(self::ROOM_OPENED, $userID, $room['ChatRoom']['id'], $userID, $currUserID, self::INACTIVE);
+			$room = $this->createRoom($currUserID, $userID);
 		} else {
 			// проверить есть ли такой контакт - возможно контакт был удален
 			if (!$this->ChatContact->findByUserIdAndRoomId($currUserID, $room['ChatRoom']['id'])) {
@@ -197,6 +206,25 @@ class ChatEvent extends AppModel {
 	
 	public function getAllRoomEvents($currUserID, $room_id) {
 		return $this->_getEvents($currUserID, compact('room_id'));
+	}
+	
+	/*
+	public function getLatestEvents($currUserID, $room_id) {
+		$events = $this->_getEvents($currUserID, array('active' => 1, 'room_id' => $room_id));
+		if (!$events || count($events) < Configure::read('chat.loadMore')) {
+			if ($events) {
+				$firstEvent = strtotime($events['events'][0]['ChatEvent']['created']);
+				$events = $this->getEvents($currUserID, array('ChatEvent.created > ' => date('Y-m-d H:i:s', $firstEvent - DAY)));
+			}
+		}
+		return $events;
+	}
+	*/
+	
+	public function loadMoreEvents($currUserID, $room_id, $firstEventID) {
+		$firstEvent = $this->findById($firstEventID);
+		$date = strtotime($firstEvent['ChatEvent']['created']) - DAY * Configure::read('chat.loadMore');
+		return $this->getEvents($currUserID, array('ChatEvent.created > ' => date('Y-m-d H:i:s', $date)));
 	}
 	
 	public function updateInactive($userID, $ids) {

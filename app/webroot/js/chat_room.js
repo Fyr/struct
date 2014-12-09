@@ -7,6 +7,7 @@ var ChatRoom = function() {
 	self.dialog = null;
 	self.unread = [];
 	self.lFirstRun = true;
+	// self.firstEvent = 0;
 	
 	this.init = function(room, members) {
 		self.ChatRoom = room.ChatRoom;
@@ -44,6 +45,7 @@ var ChatRoom = function() {
 	
 	this.renderEvents = function(aEvents) {
 		var html = '', event;
+		// self.firstEvent = (aEvents[0]) ? aEvents[0].id : 0;
 		for(var i = 0; i < aEvents.length; i++) {
 			var event = aEvents[i];
 			if (event.active) {
@@ -132,6 +134,12 @@ var ChatRoom = function() {
 		$('#processRequest').show();
 		$.post(chatURL.addMember, {data: {room_id: self.roomID, user_id: userID}}, function(response){
 			if (checkJson(response)) {
+				if (response.data.newRoom) {
+					Chat.enableUpdate();
+					$('#processRequest').hide();
+					Chat.Panel.openRoom(response.data.newRoom.ChatRoom.id);
+					return;
+				}
 				self.updateMembers(response.data.members);
 				
 				// update dialog
@@ -141,9 +149,23 @@ var ChatRoom = function() {
 				};
 				$(self.dialog).append(tmpl('extra-msg', {event: event, members: self.members}));
 				$('#processRequest').hide();
-				
 				self.scrollBottom();
-				Chat.enableUpdate();
+				
+			}
+		}, 'json');
+	}
+	
+	this.loadMoreEvents = function() {
+		console.log('loadMoreEvents');
+		Chat.disableUpdate();
+		$('#processRequest').show();
+		$.post(chatURL.loadMoreEvents, {data: {room_id: self.roomID, event_id: self.firstEvent}}, function(response){
+			if (checkJson(response)) {
+				if (response.data.events) {
+					Chat.Panel.dispatchEvents(response.data);
+				}
+				$('#processRequest').hide();
+				Chat.Panel.activateTab();
 			}
 		}, 'json');
 	}
