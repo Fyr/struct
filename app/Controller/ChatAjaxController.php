@@ -3,7 +3,7 @@ App::uses('AppController', 'Controller');
 App::uses('PAjaxController', 'Core.Controller');
 class ChatAjaxController extends PAjaxController {
 	public $name = 'ChatAjax';
-	public $uses = array('User', 'ChatMessage', 'ChatEvent', 'ChatContact');
+	public $uses = array('User', 'ChatMessage', 'ChatEvent', 'ChatContact', 'ChatRoom', 'ChatMember');
 
 	public function beforeFilter() {
 		parent::beforeFilter();
@@ -11,7 +11,7 @@ class ChatAjaxController extends PAjaxController {
 	}
 	
 	public function jsSettings() {
-		$this->loadModel('ChatRoom');
+		$this->response->type(array('type' => 'text/javascript'));
 	}
 	
 	public function contactList() {
@@ -27,15 +27,20 @@ class ChatAjaxController extends PAjaxController {
 	
 	public function openRoom() {
 		$userID = $this->request->data('user_id');
+		$roomID = $this->request->data('room_id');
 		try {
-			if (!$userID) {
+			if ($roomID) {
+				$room = $this->ChatRoom->findById($roomID);
+			} elseif ($userID) {
+				$room = $this->ChatEvent->openRoom($this->currUserID, $userID);
+			} else {
 				throw new Exception('Incorrect request');
 			}
-			
-			$room = $this->ChatEvent->openRoom($this->currUserID, $userID);
-			$user = $this->User->getUser($userID);
+			$aID = $this->ChatMember->getRoomMembers($room['ChatRoom']['id'], $this->currUserID);
+			$members = $this->User->getUsers($aID);
+			unset($members[$this->currUserID]);
 			$events = $this->ChatEvent->getAllRoomEvents($this->currUserID, $room['ChatRoom']['id']);
-			return $this->setResponse(compact('room', 'user', 'events'));
+			return $this->setResponse(compact('room', 'members', 'events'));
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
 		}

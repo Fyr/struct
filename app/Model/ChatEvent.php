@@ -38,15 +38,9 @@ class ChatEvent extends AppModel {
 	 * @return array
 	 */
 	protected function _getRoomUsersID($roomID) {
-		$this->loadModel('ChatRoom');
-		$room = $this->ChatRoom->findById($roomID);
-		if (!$room) {
-			throw new Exception('Incorrect room ID');
-		}
-		return array_merge(
-			array($room['ChatRoom']['initiator_id'], $room['ChatRoom']['recipient_id']), 
-			$this->ChatRoom->getUsersID($roomID)
-		);
+		$this->loadModel('ChatMember');
+		$aID = $this->ChatMember->getRoomMembers($roomID);
+		return $aID;
 	}
 	
 	public function addMessage($currUserID, $roomID, $message) {
@@ -64,6 +58,7 @@ class ChatEvent extends AppModel {
 				$eventID = $this->_addEvent(self::OUTCOMING_MSG, $currUserID, $roomID, $msgID, $currUserID, self::INACTIVE);
 				
 				// выбираем первого юзера в комнате, но не самого себя
+				// нужно выбрать того, кому адресовано сообщение
 				foreach($aUsersID as $anotherUserID) {
 					if ($anotherUserID != $currUserID) {
 						break;
@@ -95,10 +90,22 @@ class ChatEvent extends AppModel {
 		}
 	}
 	
+	/**
+	 * Открывает или создает комнату для 2х юзеров, а также чат-контакт для текущего
+	 *
+	 * @param int $currUserID
+	 * @param int $userID
+	 * @return array - данные о комнате
+	 */
 	public function openRoom($currUserID, $userID) {
 		$this->loadModel('ChatRoom');
 		$this->loadModel('ChatContact');
 		
+		/**
+		 * Нужно проверять - открыта ли комната уже. 
+		 * Может быть ситуация, когда один юзер открывает комнату с другим, а тот уже ее открыл
+		 * Тогда они будут писать друг другу в разные комнаты, что недопустимо
+		 */
 		$room = $this->ChatRoom->getRoomWith2Users($currUserID, $userID);
 		if (!$room) {
 			// первичная инициализация комнаты чата
@@ -109,13 +116,15 @@ class ChatEvent extends AppModel {
 			}
 			$room = $this->ChatRoom->findById($this->ChatRoom->id);
 			
-			// Комнату для чата открывает сам юзер - нет смысла помечать это как прочитанное
+			// Комнату для чата открывает сам юзер - нет смысла помечать это как НЕ-прочитанное
 			$eventID = $this->_addEvent(self::ROOM_OPENED, $currUserID, $room['ChatRoom']['id'], $userID, $currUserID, self::INACTIVE);
 			
-			// Добавить контакт при открытии комнаты - мы ведь его по идее уже выбираем для общения
+			// Создать чат-контакт при открытии комнаты - мы ведь его по идее уже выбираем для общения
 			$msg = ''; // сообщение при открытии комнаты еще никакое не пришло. Можно выставлять skills, т.к. при поиске все равно они показываются
 			$this->ChatContact->updateList($currUserID, $room['ChatRoom']['id'], $userID, $msg, $eventID);
-			$this->ChatContact->setActiveCount($currUserID, $room['ChatRoom']['id'], 0);
+			
+			// раз он сам открывает комнату - по ней не должно быть входящих
+			$this->ChatContact->setActiveCount($currUserID, $room['ChatRoom']['id'], 0); 
 			
 			// Если реципиенту не написали - нет смысла показывать открытие комнаты как НЕпрочитанное
 			// Не смысла вносить этот контакт в список пока он ничего не написал
@@ -123,7 +132,7 @@ class ChatEvent extends AppModel {
 		} else {
 			// проверить есть ли такой контакт - возможно контакт был удален
 			if (!$this->ChatContact->findByUserIdAndRoomId($currUserID, $room['ChatRoom']['id'])) {
-				// найти событие, по которому комната была открыта
+				// найти событие, по которому комната была открыта для логирования
 				$conditions = array('user_id' => $currUserID, 'active' => 0, 'room_id' => $room['ChatRoom']['id'], 'event_type' => self::ROOM_OPENED);
 				$order = 'ChatEvent.created DESC';
 				$event = $this->find('first', compact('conditions', 'order'));
@@ -137,30 +146,22 @@ class ChatEvent extends AppModel {
 	}
 	
 	protected function _getEvents($currUserID, $conditions) {
-		$this->loadModel(array('ChatMessage', 'User', 'Media.Media'));
+		$this->loadModel('ChatMessage');
+		$this->loadModel('User');
+		$this->loadModel('Media.Media');
 		
 		$conditions = array_merge(array('user_id' => $currUserID), $conditions);
 		$order = array('room_id', 'created');
 		$events = $this->find('all', compact('conditions', 'order'));
-		/*
-		foreach($events as &$event) {
-			$event['ChatEvent']['created'] = date('H:i', strtotime($event['ChatEvent']['created']));
-		}
-		*/
+		
 		// Get info about sent messages
-		$aMsgID = Hash::extract($events, '{n}.ChatEvent.msg_id');
-		$messages = $this->ChatMessage->findAllById($aMsgID);
-		$aAuthorsID = Hash::extract($events, '{n}.ChatEvent.initiator_id');
-		$authors = $this->User->getUsers($aAuthorsID);
+		$aID = Hash::extract($events, '{n}.ChatEvent.msg_id');
+		$messages = $this->ChatMessage->findAllById($aID);
+		$messages = Hash::combine($messages, '{n}.ChatMessage.id', '{n}.ChatMessage');
 		
 		// Get info about sent files
-		$aFilesID = Hash::extract($events, '{n}.ChatEvent.file_id');
-		$files = $this->Media->getList(array('id' => $aFilesID), 'Media.id');
-		
-		// rebuild data to have IDs as keys 
-		// $events = Hash::combine($events, '{n}.ChatEvent.id', '{n}.ChatEvent');
-		$messages = Hash::combine($messages, '{n}.ChatMessage.id', '{n}.ChatMessage');
-		$authors = Hash::combine($authors, '{n}.User.id', '{n}');
+		$aID = Hash::extract($events, '{n}.ChatEvent.file_id');
+		$files = $this->Media->getList(array('id' => $aID), 'Media.id');
 		$files = Hash::combine($files, '{n}.Media.id', '{n}.Media');
 		return compact('events', 'messages', 'authors', 'files');
 	}

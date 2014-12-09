@@ -15,7 +15,7 @@
   height: 100%;
   width: 90px;
   font-family: "Open Sans";
-  z-index: 200000;
+  z-index: 1000;
   left: 0;
   top: 0;
   /*  DropDown Panel Style  */ }
@@ -76,8 +76,7 @@
           display: none; }
         .main-panel .main-panel-list ul li:nth-child(7) {
           display: none; }
-        .main-panel .main-panel-list ul li:nth-child(8) {
-          display: none; }
+       
         .main-panel .main-panel-list ul li:nth-child(10) {
           display: none; }
         .main-panel .main-panel-list ul li.active a {
@@ -277,14 +276,17 @@
       font-size: 20px;
       border: none;
       padding: 0; }
+
   .main-panel .main-panel-dropdown .group-enter-btn {
     padding: 0 25px;
     height: 50px; }
+
+
     .main-panel .main-panel-dropdown .group-enter-btn .btn-default {
       vertical-align: top;
       margin-right: 10px; }
   .main-panel .main-panel-dropdown .btn-default {
-    background: #F4F4F4;
+   
     margin-right: 10px; }
   .main-panel .dropdown-searchPanel .search-list-user {
     width: 270px;
@@ -444,7 +446,7 @@
             font-size: 10px;
             padding: 2px 0;
             color: #fff; }
-  .main-panel .dropdown-groupPanel .create-group {
+  .main-panel  .create-group {
     position: absolute;
     height: 69px;
     width: 270px;
@@ -454,14 +456,17 @@
     top: 81px;
     left: 0;
     z-index: 100; }
-    .main-panel .dropdown-groupPanel .create-group .btn-default {
+/*
+    .main-panel  .create-group .btn-default {
       background-color: transparent; }
+
       .main-panel .dropdown-groupPanel .create-group .btn-default:hover {
         background: #22B5AE; }
-  .main-panel .dropdown-groupPanel .group-list {
+*/
+  .main-panel  .group-list {
     width: 270px;
     padding: 150px 0 0 0; }
-    .main-panel .dropdown-groupPanel .group-list .simple-list-item {
+    .main-panel  .group-list .simple-list-item {
       display: block;
       text-decoration: none;
       border-bottom: 1px solid #eaeaea;
@@ -469,35 +474,44 @@
       color: #616161;
       font-weight: 600;
       line-height: 60px; }
-      .main-panel .dropdown-groupPanel .group-list .simple-list-item.active, .main-panel .dropdown-groupPanel .group-list .simple-list-item:hover {
+      .main-panel  .group-list .simple-list-item.active, .main-panel .group-list .simple-list-item:hover {
         background: #e7f1f1; }
-    .main-panel .dropdown-groupPanel .group-list a {
+
+.main-panel  .group-list .simple-list-item .buttonsBottom { padding: 0 25px 22px 25px;}
+	.main-panel  .group-list .simple-list-item .buttonsBottom .btn-default { margin-right: 0;}
+	.main-panel  .group-list .simple-list-item .buttonsBottom .smallBtn { margin-left: 10px;}
+/*
+    .main-panel  .group-list a {
       display: block;
       height: 100%;
       width: 100%; }
-      .main-panel .dropdown-groupPanel .group-list a .user-list-item {
+*/
+      .main-panel  .group-list a .user-list-item {
         padding: 10px 15px 10px 25px; }
-        .main-panel .dropdown-groupPanel .group-list a .user-list-item .user-list-item-avatar {
+        .main-panel .group-list a .user-list-item .user-list-item-avatar {
           height: 52px;
           width: 50px;
           border-bottom: 2px solid transparent;
           margin: 7px 15px 0 0;
           overflow: hidden;
           float: left; }
-          .main-panel .dropdown-groupPanel .group-list a .user-list-item .user-list-item-avatar.rate-10 {
+          .main-panel .group-list a .user-list-item .user-list-item-avatar.rate-10 {
             border-color: #23b5ae; }
-          .main-panel .dropdown-groupPanel .group-list a .user-list-item .user-list-item-avatar.rate-0 {
+          .main-panel .group-list a .user-list-item .user-list-item-avatar.rate-0 {
             border-color: #ff6363; }
-          .main-panel .dropdown-groupPanel .group-list a .user-list-item .user-list-item-avatar img {
+          .main-panel .group-list a .user-list-item .user-list-item-avatar img {
             display: block;
             min-width: 50px;
             min-height: 50px; }
-        .main-panel .dropdown-groupPanel .group-list a .user-list-item .user-list-item-body {
+        .main-panel  .group-list a .user-list-item .user-list-item-body {
           float: left;
           width: 164px;
           line-height: 26px; }
-          .main-panel .dropdown-groupPanel .group-list a .user-list-item .user-list-item-body .user-list-item-name {
-            width: 164px;
+
+.main-panel  .group-list a .user-list-item .user-list-item-body.noImage { width: 100%;}
+.main-panel  .group-list a .user-list-item .user-list-item-body.noImage .user-list-item-spec { color: #818181; font-weight: 400; }
+
+          .main-panel  .group-list a .user-list-item .user-list-item-body .user-list-item-name {
             color: #313131;
             font-size: 15px;
             font-weight: 600;
@@ -506,8 +520,10 @@
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            padding: 5px 0 0 0; }
-          .main-panel .dropdown-groupPanel .group-list a .user-list-item .user-list-item-body .user-list-item-spec {
+            padding: 5px 0 0 0;
+		  }
+			
+          .main-panel  .group-list a .user-list-item .user-list-item-body .user-list-item-spec {
             display: inline-block;
             max-width: 100%;
             overflow: hidden;
@@ -523,8 +539,6 @@
   .main-panel .dropdown-credit_cardPanel {
     display: none; }
   .main-panel .dropdown-cloudPanel {
-    display: none; }
-  .main-panel .dropdown-filePanel {
     display: none; }
   .main-panel .dropdown-ipadPanel .drop-device-list {
     width: 270px;
@@ -729,14 +743,17 @@
   .main-panel .dropdown-calendarPanel {
     display: none; }
 
-.aside-block .close-block {
+.aside-block .close-block, .aside-block .add-plus {
   color: #C5C5C5;
   position: absolute;
   right: -10px;
   text-align: center;
   top: -10px; }
-  .aside-block .close-block:hover {
+  .aside-block .close-block:hover, .aside-block .add-plus:hover {
     color: #22B5AE; }
+
+.aside-block .add-plus { right: 9px !important; }
+
 
 .main-panel .dropdown-chatPanel .messages-list li .aside-block {
   float: right;

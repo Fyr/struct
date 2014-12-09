@@ -11,6 +11,15 @@ class ChatContact extends AppModel {
 */
 	protected $User;
 	
+	/**
+	 * Добавить к счетчику входящих по юзеру и комнате. Создает или обновляет чат-контакт
+	 *
+	 * @param int $user_id
+	 * @param int $room_id
+	 * @param int $initiator_id - инициатор события
+	 * @param str $msg
+	 * @param int $chat_event_id - ID события для логирования
+	 */
 	public function updateList($user_id, $room_id, $initiator_id, $msg, $chat_event_id) {
 		$conditions = compact('user_id', 'room_id');
 		$row = $this->find('first', compact('conditions'));
@@ -27,12 +36,26 @@ class ChatContact extends AppModel {
 		$this->save(compact('id', 'user_id', 'room_id', 'initiator_id', 'msg', 'active_count', 'chat_event_id'));
 	}
 	
+	/**
+	 * Установить значение счетчика входящих
+	 *
+	 * @param int $user_id
+	 * @param int $room_id
+	 * @param int $active_count
+	 */
 	public function setActiveCount($user_id, $room_id, $active_count) {
 		$row = $this->findByUserIdAndRoomId($user_id, $room_id);
 		$id = Hash::get($row, 'ChatContact.id');
 		$this->save(compact('id', 'user_id', 'room_id', 'active_count'));
 	}
 	
+	/**
+	 * Получить список контактов юзера или поиск по контактам и юзерам
+	 *
+	 * @param int $user_id
+	 * @param str $q
+	 * @return array
+	 */
 	public function getList($user_id, $q = '') {
 		$this->loadModel('User');
 		$conditions = array('ChatContact.user_id' => $user_id);
@@ -44,6 +67,7 @@ class ChatContact extends AppModel {
 			$aContacts = Hash::combine($aContacts, '{n}.ChatContact.initiator_id', '{n}');
 			$aResult = array();
 			// показываем чат-контакты только тех юзеров, кот. есть в списке найденных
+			// в порядке очередности поиска
 			foreach($aUsers as $row) {
 				$user_id = $row['User']['id'];
 				if (isset($aContacts[$user_id])) {
@@ -52,7 +76,7 @@ class ChatContact extends AppModel {
 				$aResult[] = $row;
 			}
 		} else {
-			// Просто показываем весь контакт лист в привязке к юзерам
+			// Просто показываем весь контакт лист в привязке к оппоненту, который писал в комнату
 			$aUsers = $this->User->getUsers($aID);
 			$aResult = array();
 			foreach($aContacts as $row) {

@@ -1,10 +1,28 @@
-
+.wrapper-container.chat-page { padding-left: 90px}
 
 .usersInChat { position: fixed; right: 0; top: 0; z-index: 100; margin-left: 90px;}
-	.usersInChat img { margin: 0; display: block; float: right; border-bottom: 2px solid #23b5ae;}
-	.usersInChat a:hover img { opacity: 0.6}
+	.usersInChat img { margin: 0; display: block;  border-bottom: 2px solid #23b5ae;}
 	.usersInChat img.active { border-bottom-color: #ff7b84;}
-	.usersInChat .icon_add { float: right;}
+	.usersInChat .addUser { width: 52px; height: 52px; background: #e6e6e6; color: #23b5ab; font-size: 24px; display: inline-block; }
+	.usersInChat a { display: block; float: right; position: relative;}
+	.usersInChat .shadow.circle_remove:before { position: absolute; color: #fff; display: inline-block;  top: 18px; left: 20px;}
+	.usersInChat .shadow { position: absolute; background: rgba(167,169,170,0.7); width: 100%; height: 100%; top: 0; left: 0; display: none; }
+	.usersInChat a:hover .shadow { display: block;}
+	
+	
+	.usersInChat .addUser:hover { color: #1d9991;}
+	.usersInChat .addUser.glyphicons:before { margin: 0; position: relative; top: 5px;}
+
+.chatFindUser { margin-bottom: 20px;}
+	.chatFindUser .item {padding: 9px 26px 13px 26px; margin: 2px -26px 0 -26px; cursor: pointer;}
+	.chatFindUser .item:hover { background: #f5f6f8;}
+	.chatFindUser .item.active { background: #25B5BE}
+	.chatFindUser .item.active .info .name, .chatFindUser .item.active .info .position { color: #fff;}
+	.chatFindUser .item.active .ava { border-bottom-color: #FF7B84;}
+	.chatFindUser .ava { border-bottom: 2px solid #23B5AE; display: block; float: left; height: 50px; width: 50px;}
+	.chatFindUser .info { margin-left: 66px;}
+		.chatFindUser .info .name {  display: inline-block; font-size: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; font-weight: 600; color: #313131;  }
+		.chatFindUser .info .position {  display: inline-block; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; color: #616161; font-weight: 400;}
 	
 .dialog {
     overflow: auto;
@@ -37,15 +55,14 @@
 	.dialog .text.anotherText { margin-top: 8px;}
 	.dialog .text.anotherText:before { border: none;}
 
-.bottom { position: fixed; left: 90px; bottom: 0; width: 100%; z-index: 100; background: #fff;}
 	
 .openChats { padding: 0; }
-	.openChats .item { border: 1px solid #eee; border-left: none; position: relative; float: left; }
+	.openChats .item { border: 1px solid #eee; border-left: none; position: relative; float: left; font-size: 0; }
 		.openChats .item .ava { border-bottom: 2px solid #23b5ae; display: inline-block; width: 50px; height: 50px; cursor: pointer; vertical-align: middle;}
 		.openChats .item .badge.badge-important { position: absolute; bottom: -8px; left: 17px; z-index: 3;border-radius: 50%;color:#fff;}
 		.openChats .item .remove { border-left: 1px solid #eee; height:50px; padding: 13px 12px 0 12px; float: right; width: 41px;}
 		.openChats .item .name { font-size: 15px;  border-left: none; margin: 0; padding: 0 19px 0 19px; cursor: pointer; max-width: 238px; display: inline-block; vertical-align: middle;}
-		.openChats .item .circle_remove { color: #c1c1c1; margin-top: -3px;}
+		.openChats .item .circle_remove { color: #c1c1c1; font-size: 13px;}
 		.openChats .item .circle_remove:before { font-size: 16px;}
 		
 		.openChats .item.disable-remove .circle_remove { display: none;}
@@ -58,6 +75,8 @@
 		
 		.openChats .item:hover .ava { opacity: 0.7; filter: alpha(opacity=70);}
 		.openChats .item .circle_remove:hover { color: #dfdfdf;}
+		
+	.openChats .badge-important { background-color: #ff6363; text-align: center; font-size: 10px; padding: 0; font-weight: normal; text-shadow: none; line-height: 17px; height: 18px; width: 18px; }
 	
 	
 .sendForm  { margin: 20px auto 20px auto; width: 59.7%; max-width: 544px; position: relative;}
@@ -139,3 +158,14 @@
 	.pageOrder { margin-left: 100px; padding-right: 10px;}
 	.pageOrder .rightButton { float: none; margin-top: 5px;}
 }
+
+
+.chat-page .bottom {  width: 100%; position: fixed; left: 90px; bottom: 0; background: #fff; z-index: 100; }
+
+.chat-page .icon_enter { background: url("../img/sprite.png") no-repeat 0 -55px; width: 29px; height: 29px; }
+.chat-page .icon_enter:hover { background-position: 0 -211px; }
+
+.chat-page .icon_attach { background: url("../img/sprite.png") no-repeat 0 -89px; width: 31px; height: 31px; }
+.chat-page .icon_attach:hover { background-position: 0 -244px; }
+
+

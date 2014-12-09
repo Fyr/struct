@@ -2,13 +2,13 @@
 App::uses('AppModel', 'Model');
 class ChatRoom extends AppModel {
 
-	protected $ChatRoomUser;
+	protected $ChatMember;
 	
 	public function getUsersID($roomID) {
-		$this->loadModel('ChatRoomUser');
+		$this->loadModel('ChatMember');
 
-		$aRows = $this->ChatRoomUser->findAllByRoomId($roomID);
-		return Hash::extract($aRows, '{n}.ChatRoomUser.user_id');
+		$aRows = $this->ChatMember->findAllByRoomId($roomID);
+		return Hash::extract($aRows, '{n}.ChatMember.user_id');
 	}
 	
 	public function getRoomWith2Users($user_id, $user2_id) {

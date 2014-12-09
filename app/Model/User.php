@@ -151,7 +151,7 @@ class User extends AppModel {
 				)
 			)
 		);
-		$order = array('User.username');
+		$order = array('User.full_name', 'User.skills', 'User.username');
 		$aUsers = $this->find('all', compact('fields', 'conditions', 'order'));
 		return $aUsers;
 	}

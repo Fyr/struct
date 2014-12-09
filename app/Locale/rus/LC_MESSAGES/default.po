@@ -272,7 +272,7 @@ msgid "Create product type"
 msgstr "Создать новый продукт"
 
 msgid "You have received a file"
-msgstr "Вам пришло сообщение"
+msgstr "Вы получили файл"
 
 msgid "File has been uploaded"
 msgstr "Файл загружен"

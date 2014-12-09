@@ -29,10 +29,10 @@ define('EMAIL_ADMIN_CC', 'fyr.work@gmail.com');
 
 define('PATH_FILES_UPLOAD', $_SERVER['DOCUMENT_ROOT'].'/files/');
 
-Configure::write('chatUpdateTime', 3000); // in msec, 0 - do not update
+Configure::write('chatUpdateTime', 5000); // in msec, 0 - do not update
 Configure::write('groupMaxImages', 4);
 Configure::write('Konstructor', array(
-	'created' => '2014-11-01 00:00:00',
+	'created' => '2014-11-12 00:00:00',
 	'groupID' => 7
 ));
 
@@ -41,7 +41,7 @@ Configure::write('baseURL', array(
 ));
 
 Configure::write('timeline', array(
-	'initialPeriod' => array(-1, 0),
+	'initialPeriod' => array(0, 3),
 	'loadPeriod' => 3,
 	'updateTime' => 10000
 ));
