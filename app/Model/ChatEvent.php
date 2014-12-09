@@ -4,21 +4,22 @@ class ChatEvent extends AppModel {
 	const OUTCOMING_MSG = 1;
 	const INCOMING_MSG = 2;
 	const ROOM_OPENED = 3;
-	const USER_INCLUDED = 4;
-	const USER_EXCLUDED = 5; // not used yet
 	const FILE_UPLOADED = 6;
 	const FILE_DOWNLOAD_AVAIL = 7;
+	const INVITED_USER = 8;
+	const WAS_INVITED = 9;
+	const JOINED_ROOM = 10;
 	
 	const ACTIVE = 1;
 	const INACTIVE = 0;
 	
-	protected $ChatMessage, $ChatRoom, $Media, $ChatContact;
+	protected $ChatMessage, $ChatRoom, $Media, $ChatContact, $ChatMember;
 	
 	protected function _addEvent($event_type, $user_id, $room_id, $obj_id, $initiator_id, $active = 1) {
 		$data = compact('event_type', 'user_id', 'room_id', 'initiator_id', 'active');
 		if (in_array($event_type, array(self::OUTCOMING_MSG, self::INCOMING_MSG))) {
 			$data['msg_id'] = $obj_id;
-		} elseif (in_array($event_type, array(self::ROOM_OPENED, self::USER_INCLUDED, self::USER_EXCLUDED))) {
+		} elseif (in_array($event_type, array(self::INVITED_USER, self::WAS_INVITED, self::JOINED_ROOM))) {
 			$data['recipient_id'] = $obj_id;
 		} elseif (in_array($event_type, array(self::FILE_UPLOADED, self::FILE_DOWNLOAD_AVAIL))) {
 			$data['file_id'] = $obj_id;
@@ -226,6 +227,33 @@ class ChatEvent extends AppModel {
 			$conditions = array('user_id' => $currUserID, 'room_id' => $contact['ChatContact']['room_id']);
 			$this->updateAll($fields, $conditions);
 			$this->ChatContact->delete($id);
+		}
+	}
+	
+	public function addMember($currUserID, $room_id, $user_id) {
+		$this->loadModel('ChatMember');
+		$this->loadModel('ChatContact');
+		$this->loadModel('User');
+		
+		$alreadyMember = $this->ChatMember->findByRoomIdAndUserId($room_id, $user_id);
+		if (!$alreadyMember) {
+			$this->ChatMember->save(compact('room_id', 'user_id'));
+		}
+		
+		$user = $this->User->getUser($user_id);
+		$aUsersID = $this->_getRoomUsersID($room_id);
+		foreach($aUsersID as $userID) {
+			if ($currUserID == $userID) {
+				$eventID = $this->_addEvent(self::INVITED_USER, $currUserID, $room_id, $user_id, $currUserID, self::INACTIVE);
+				$this->ChatContact->updateList($currUserID, $room_id, $user_id, __('You invited user "%s" in this room', $user['User']['full_name']), $eventID);
+				$this->ChatContact->setActiveCount($currUserID, $room_id, 0);
+			} elseif ($userID == $user_id) {
+				$eventID = $this->_addEvent(self::WAS_INVITED, $user_id, $room_id, $user_id, $currUserID, self::ACTIVE);
+				$this->ChatContact->updateList($userID, $room_id, $currUserID, __('You was invited into this room', $user['User']['full_name']), $eventID);
+			} else {
+				$eventID = $this->_addEvent(self::JOINED_ROOM, $user_id, $room_id, $user_id, $currUserID, self::ACTIVE);
+				$this->ChatContact->updateList($userID, $room_id, $currUserID, __('User "%s" joined this room', $user['User']['full_name']), $eventID);
+			}
 		}
 	}
 }

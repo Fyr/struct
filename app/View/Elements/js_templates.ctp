@@ -138,7 +138,7 @@
 				if (activeRoom.ChatRoom.canAddMember && !activeRoom.members[user_id]) {
 				*/
 %}
-					<div id="addMember_{%=room_id%}" class="add-plus glyphicons circle_plus add-member" data-members="{%=members%}" onclick="var e = arguments[0] || window.event; if ($(e.target).hasClass('circle_plus')) { e.stopPropagation(); Chat.Panel.addMember({%=user_id%}) }" style="display: none;"></div>
+					<div class="add-plus glyphicons circle_plus add-member" data-members="{%=members%}" onclick="var e = arguments[0] || window.event; if ($(e.target).hasClass('circle_plus')) { e.stopPropagation(); Chat.Panel.addMember({%=user_id%}) }" style="display: none;"></div>
 {%
 /*
 				}

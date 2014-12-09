@@ -873,17 +873,6 @@ input[type="button"].btn-block {
 
 
 
-.smallBtn { padding-left: 8px; padding-right: 2px; padding-top:3px; color: #616161}
-
-
-    .main-panel  .create-group .btn-default {
-      background-color: transparent; }
-
-      .main-panel .dropdown-groupPanel .create-group .btn-default:hover {
-        background: #22B5AE; }
-
-	.main-panel  .group-list .simple-list-item .buttonsBottom .btn-default { background: transparent; color: #616161}
-
 
 .editArticle { padding: 34px 0 0 0;}
 .articleTitleBox { margin: -12px 130px 0 0; }

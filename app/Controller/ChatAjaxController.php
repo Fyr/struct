@@ -119,4 +119,19 @@ class ChatAjaxController extends PAjaxController {
 		}
 	}
 	
+	public function addMember() {
+		try {
+			$userID = $this->request->data('user_id');
+			$roomID = $this->request->data('room_id');
+			if ($roomID && $userID) {
+				$this->ChatEvent->addMember($this->currUserID, $roomID, $userID);
+			} else {
+				throw new Exception('Incorrect request');
+			}
+			$this->setResponse(true);
+		} catch (Exception $e) {
+			$this->setError($e->getMessage());
+		}
+	}
+	
 }

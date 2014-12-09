@@ -10,13 +10,17 @@ var chatURL = {
 	openRoom: '<?=$this->Html->url(array('controller' => 'ChatAjax', 'action' => 'openRoom'))?>.json',
 	markRead: '<?=$this->Html->url(array('controller' => 'ChatAjax', 'action' => 'markRead'))?>.json',
 	delContact: '<?=$this->Html->url(array('controller' => 'ChatAjax', 'action' => 'delContact'))?>.json',
+	addMember: '<?=$this->Html->url(array('controller' => 'ChatAjax', 'action' => 'addMember'))?>.json',
 }
 chatUpdateTime = <?=Configure::read('chatUpdateTime')?>;
 chatDef = {
 	outcomingMsg: <?=ChatEvent::OUTCOMING_MSG?>,
 	incomingMsg: <?=ChatEvent::INCOMING_MSG?>,
 	fileUploaded: <?=ChatEvent::FILE_UPLOADED?>,
-	fileDownloadAvail: <?=ChatEvent::FILE_DOWNLOAD_AVAIL?>
+	fileDownloadAvail: <?=ChatEvent::FILE_DOWNLOAD_AVAIL?>,
+	invitedUser: <?=ChatEvent::INVITED_USER?>,
+	wasInvited: <?=ChatEvent::WAS_INVITED?>,
+	joinedRoom: <?=ChatEvent::JOINED_ROOM?>
 }
 chatLocale = {
 	Loading: '<?=__('Loading...')?>',

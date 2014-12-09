@@ -196,6 +196,14 @@ var ChatPanel = function(container, userID){ // static object
 						url: file.url_download,
 						file_name: file.orig_fname
 					});
+				} else if (event.event_type == chatDef.invitedUser || event.event_type == chatDef.wasInvited || event.event_type == chatDef.joinedRoom) {
+					self.rooms[event.room_id].events.push({
+						id: event.id,
+						event_type: event.event_type,
+						active: event.active,
+						time: Date.fromSqlDate(event.created),
+						user: event.recipient_id
+					});
 				}
 			}
 		}
@@ -206,5 +214,19 @@ var ChatPanel = function(container, userID){ // static object
 		
 		self.dispatchEvents(data);
 		self.activateTab();
+	}
+	
+	this.addMember = function(userID) {
+		Chat.disableUpdate();
+		console.log(chatURL.addMember);
+		$.post(chatURL.addMember, {data: {room_id: self.activeRoom, user_id: userID}}, function(response){
+			if (checkJson(response)) {
+				self.rooms[self.activeRoom].close();
+				delete self.rooms[self.activeRoom];
+				self.openRoom(self.activeRoom);
+				Chat.enableUpdate();
+			}
+		}, 'json');
+		
 	}
 }

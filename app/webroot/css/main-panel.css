@@ -15,7 +15,7 @@
   height: 100%;
   width: 90px;
   font-family: "Open Sans";
-  z-index: 1000;
+  z-index: 200000;
   left: 0;
   top: 0;
   /*  DropDown Panel Style  */ }
@@ -456,13 +456,13 @@
     top: 81px;
     left: 0;
     z-index: 100; }
-/*
-    .main-panel  .create-group .btn-default {
+
+    .main-panel  .btn-default {
       background-color: transparent; }
 
-      .main-panel .dropdown-groupPanel .create-group .btn-default:hover {
+      .main-panel .dropdown-groupPanel  .btn-default:hover {
         background: #22B5AE; }
-*/
+
   .main-panel  .group-list {
     width: 270px;
     padding: 150px 0 0 0; }
@@ -761,3 +761,6 @@
   width: 35px; }
 
 /*# sourceMappingURL=main-panel.css.map */
+
+
+.smallBtn { padding-left: 8px; padding-right: 2px; padding-top:3px; color: #616161}
