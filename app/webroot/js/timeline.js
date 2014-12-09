@@ -25,7 +25,7 @@ var Timeline = {
 		
 		if (Timeline.updateTime) {
 			Timeline.updateTimer = setInterval(function(){
-				// Timeline.updateState();
+				Timeline.updateState();
 				//clearInterval(Timeline.updateTimer);
 			}, Timeline.updateTime);
 		}
