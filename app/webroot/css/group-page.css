@@ -188,8 +188,8 @@
                 .group-page .group-create .group-create-cell fieldset .gallery-add .gallery-add-list li .remove-media .glyphicons {
                   margin-top: -1px; }
                 .group-page .group-create .group-create-cell fieldset .gallery-add .gallery-add-list li .remove-media:hover {
-                  background: #23b5ae;
-                  color: #fff; }
+                  background: #fff;
+                  color: #23b5ae; }
               .group-page .group-create .group-create-cell fieldset .gallery-add .gallery-add-list li .gallery-video {
                 position: relative; }
                 .group-page .group-create .group-create-cell fieldset .gallery-add .gallery-add-list li .gallery-video:hover:before {

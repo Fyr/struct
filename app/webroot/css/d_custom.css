@@ -818,6 +818,9 @@ a.autor-link img{
     padding: 10px 0 10px 20px;
     background:url('../img/temp/adress.png') no-repeat left 15px;
 }
+
+.user-adress .phone_alt, .user-adress .fax { color: #616161; vertical-align: top}
+
 .fs15{
     font-size: 15px;
 }

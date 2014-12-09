@@ -13,7 +13,8 @@
             <div class="page-title">
                 <div class="page-title-group-image">
                     <img alt="<?=$title?>" src="<?=$src?>" />
-                </div> <?=$title?>
+                </div>
+                <div class="page-title-group-description"><?=$title?></div>
             </div>
         </div>
         <div class="col-md-5 col-sm-12 col-xs-12">
@@ -112,8 +113,8 @@
 ?>
 			<div class="user-adress <?=$class?>" <?=$style?>>
                 <div class="fs13"><?=Hash::get($groupAddress, 'address')?></div>
-                <div class="fs13"><?=Hash::get($groupAddress, 'phone')?></div>
-                <div class="fs13"><?=Hash::get($groupAddress, 'fax')?></div>
+                <div class="fs13"><span class="glyphicons phone_alt"></span><?=Hash::get($groupAddress, 'phone')?></div>
+                <div class="fs13"><span class="glyphicons fax"></span><?=Hash::get($groupAddress, 'fax')?></div>
                 <div class="fs13">
                     <a href="<?=$url?>" target="_blank"><?=$url?></a><br/>
                     <a href="mailto:<?=$email?>"><?=$email?></a>
