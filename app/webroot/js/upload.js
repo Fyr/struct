@@ -15,15 +15,15 @@ $(function () {
 			file.object_id = $(data.fileInput).data('object_id');
 			
 			$('.inputFile').hide();
+			$('#processFile', getProgressContext(data)).show();
 			$.post(mediaURL.move, file, function(response){
                 $('#processFile', getProgressContext(data)).hide();
                 $('.inputFile').show();
                 $('#progress-bar', getProgressContext(data)).hide();
-				$('#processFile', getProgressContext(data)).show();
                 if (checkJson(response)) {
                 	if (file.object_type == 'Chat') {
 	                	var fileData = response.data[0].Media;
-	                	Chat.sendFile(fileData);
+	                	Chat.Panel.rooms[Chat.Panel.activeRoom].sendFile(fileData);
                 	} else if (file.object_type == 'GroupGallery') {
                 		Group.updateGalleryAdmin($(data.fileInput).data('object_id'));
                 	} else if (file.object_type == 'ProjectEvent') {
