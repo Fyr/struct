@@ -45,7 +45,7 @@ class ChatAjaxController extends PAjaxController {
 			$aID = $this->ChatMember->getRoomMembers($room['ChatRoom']['id'], $this->currUserID);
 			$members = $this->User->getUsers($aID);
 			unset($members[$this->currUserID]);
-			$events = $this->ChatEvent->getActiveEvents($this->currUserID, $room['ChatRoom']['id']);
+			$events = $this->ChatEvent->getAllRoomEvents($this->currUserID, $room['ChatRoom']['id']);
 			return $this->setResponse(compact('room', 'members', 'events'));
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
