@@ -9,8 +9,7 @@ var ChatPanel = function(container, userID){ // static object
 		$.post(chatURL.contactList, null, function(response){
 			self.render(response.data.aUsers);
 			if (userID) {
-				// Chat.openRoom(userID);
-				
+				self.openRoom(null, userID);
 			}
 		});
 	}
@@ -59,59 +58,23 @@ var ChatPanel = function(container, userID){ // static object
 		self.initHandlers();
 	}
 	
-	this.removeRoom = function(contact_id, room_id) {
-		// Chat.disableUpdate();
+	this.removeContact = function(contact_id, roomID) {
+		Chat.disableUpdate();
+		self.closeTab(roomID);
 		$.post(chatURL.delContact, {data: {contact_id: contact_id}}, function(response){
 			self.render(response.data.aUsers);
 			self.initHandlers();
-			// Chat.enableUpdate();
+			Chat.enableUpdate();
 		});
-		/*
-		if ($('.openChats .item').length > 1) {
-			Chat.clearUnreadEvents(room_id);
-			Chat.showUnreadTotal(Chat.countUnreadTotal());
-			Chat.removeRoom(room_id);
-		}
-		*/
 	}
-	
-	this.createRoom = function (userID) {
-		// Chat.panelHide();
-		// Chat.disableUpdate();
-		/*
-		$.post(chatURL.openRoom, {data: {user_id: userID}}, function(response){
-			if (checkJson(response)) {
-				$(Chat.panel).html(response.data.panel);
-				Chat.initHandlers();
-				roomID = response.data.room.ChatRoom.id;
-				if (!$(".openChats #roomTab_" + roomID).length) { 
-					Chat.createRoomTab(response.data);
-				}
-				if (!$(".dialog .innerDialog #roomChat_" + roomID).length) { 
-					$(".dialog .innerDialog").append(Chat.renderRoomChat(roomID));
-				}
-				Chat.dispatchEvents(response.data.events);
-				Chat.activateRoom(roomID);
-				Chat.scrollTop(roomID);
-				
-				// Chat.enableUpdate();
-			}
-		}, 'json');
-		*/
-		console.log('ChatPanel - openRoom');
-		closeMainPanel();
-		var room = new ChatRoom(roomID);
-		room.init();
-		self.rooms[roomID] = room;
-	}
-	
-	this.openRoom = function(roomID) {
+
+	this.openRoom = function(roomID, userID) {
 		closeMainPanel();
 		if (self.rooms[roomID]) {
 			self.activateTab(roomID);
 		} else {
 			Chat.disableUpdate();
-			$.post(chatURL.openRoom, {data: {room_id: roomID}}, function(response){
+			$.post(chatURL.openRoom, {data: {room_id: roomID, user_id: userID}}, function(response){
 				if (checkJson(response)) {
 					var roomID = response.data.room.ChatRoom.id;
 					var room = new ChatRoom();

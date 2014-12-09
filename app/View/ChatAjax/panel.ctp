@@ -1,1 +1,0 @@
-<?=$this->element('panel_chat')?>

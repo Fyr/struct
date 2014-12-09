@@ -42,7 +42,7 @@
 		'vendor/tmpl.min',
 		'/core/js/json_handler',
 		'main-panel',
-		'chat',
+		'chat', 'chat_panel', 'chat_room',
 		'struct',
 		'search',
 		'settings-script',

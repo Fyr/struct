@@ -129,9 +129,12 @@
 	
                 	<div class="close-block glyphicons circle_remove" onclick="var e = arguments[0] || window.event; if ($(e.target).hasClass('circle_remove')) { e.stopPropagation(); Chat.Panel.removeContact({%=user.ChatContact.id%}, {%=user.ChatContact.room_id%}) }"></div>
 {%
+			} else {
+%}
+					<div class="add-plus glyphicons circle_plus" onclick="var e = arguments[0] || window.event; if ($(e.target).hasClass('circle_plus')) { e.stopPropagation(); Chat.Panel.addMember({%=user_id%}) }"></div>
+{%
 			}
 %}
-					<div class="add-plus glyphicons circle_plus" onclick="var e = arguments[0] || window.event; if ($(e.target).hasClass('circle_plus')) { e.stopPropagation(); Chat.Panel.addMember({%=user.ChatContact.id%}, {%=user.ChatContact.room_id%}) }"></div>
                     <div class="time">{%=(time) ? Date.HoursMinutes(Date.fromSqlDate(time)) : ''%}</div>
                     <div class="count-b">
 {%

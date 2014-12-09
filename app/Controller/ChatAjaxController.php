@@ -36,6 +36,11 @@ class ChatAjaxController extends PAjaxController {
 			} else {
 				throw new Exception('Incorrect request');
 			}
+			
+			if (!$room) {
+				throw new Exception('Room does not exists');
+			}
+			
 			$aID = $this->ChatMember->getRoomMembers($room['ChatRoom']['id'], $this->currUserID);
 			$members = $this->User->getUsers($aID);
 			unset($members[$this->currUserID]);
