@@ -128,7 +128,12 @@ class ChatAjaxController extends PAjaxController {
 			} else {
 				throw new Exception('Incorrect request');
 			}
-			$this->setResponse(true);
+			
+			$aID = $this->ChatMember->getRoomMembers($roomID, $this->currUserID);
+			$members = $this->User->getUsers($aID);
+			unset($members[$this->currUserID]);
+			
+			$this->setResponse(compact('members'));
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
 		}

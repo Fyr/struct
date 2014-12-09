@@ -1,13 +1,14 @@
 <?
 	$groupID = Hash::get($group, 'Group.id');
 	$title = Hash::get($group, 'Group.title');
-	$src = $this->Media->imageUrl(Hash::get($group, 'GroupMedia'), 'thumb50x50');
+	$src = $this->Media->imageUrl(Hash::get($group, 'GroupMedia'), '200x');
 ?>
 <div class="row header-group-create clearfix">
     <div class="group-page-title col-md-6 col-sm-6 col-xs-12">
         <div class="page-title-group-image">
-            <img alt="<?=$title?>" src="<?=$src?>" style="width: 50px">
-        </div> <?=$title?>
+            <img alt="<?=$title?>" src="<?=$src?>">
+        </div>
+		<div class="page-title-group-description"><?=$title?></div>
     </div>
     <div class="title-button page-menu col-md-6 col-sm-6 col-xs-12">
         <a href="<?=$this->Html->url(array('controller' => 'Group', 'action' => 'view', $groupID))?>" class="btn btn-default"><span class="glyphicons parents"></span></a>

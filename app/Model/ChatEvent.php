@@ -100,6 +100,7 @@ class ChatEvent extends AppModel {
 	 */
 	public function openRoom($currUserID, $userID) {
 		$this->loadModel('ChatRoom');
+		$this->loadModel('ChatMember');
 		$this->loadModel('ChatContact');
 		
 		/**
@@ -116,6 +117,12 @@ class ChatEvent extends AppModel {
 				throw new Exception("Room cannot be opened\n".print_r($data));
 			}
 			$room = $this->ChatRoom->findById($this->ChatRoom->id);
+			
+			// добавляем в нее обоих юзеров
+			$this->ChatMember->clear();
+			$this->ChatMember->save(array('room_id' => $this->ChatRoom->id, 'user_id' => $currUserID));
+			$this->ChatMember->clear();
+			$this->ChatMember->save(array('room_id' => $this->ChatRoom->id, 'user_id' => $userID));
 			
 			// Комнату для чата открывает сам юзер - помечаем это событие как прочитанное
 			$eventID = $this->_addEvent(self::ROOM_OPENED, $currUserID, $room['ChatRoom']['id'], $userID, $currUserID, self::INACTIVE);
@@ -150,6 +157,7 @@ class ChatEvent extends AppModel {
 		$this->loadModel('ChatMessage');
 		$this->loadModel('User');
 		$this->loadModel('Media.Media');
+		$this->loadModel('ChatMember');
 		
 		$conditions = array_merge(array('user_id' => $currUserID), $conditions);
 		$order = array('room_id', 'created');
@@ -164,7 +172,23 @@ class ChatEvent extends AppModel {
 		$aID = Hash::extract($events, '{n}.ChatEvent.file_id');
 		$files = $this->Media->getList(array('id' => $aID), 'Media.id');
 		$files = Hash::combine($files, '{n}.Media.id', '{n}.Media');
-		return compact('events', 'messages', 'authors', 'files');
+		
+		// Get info about updated rooms (members joined)
+		// $aRooms = Hash::combine($events, '{n}.ChatEvent.room_id')
+		$rooms = array();
+		foreach($events as $event) {
+			if ($event['ChatEvent']['active'] && in_array($event['ChatEvent']['event_type'], array(self::INVITED_USER, self::WAS_INVITED, self::JOINED_ROOM))) {
+				$rooms[] = $event['ChatEvent']['room_id'];
+			}
+		}
+		$updateRooms = array();
+		foreach($rooms as $roomID) {
+			$members = $this->ChatMember->getRoomMembers($roomID);
+			$members = array_combine($members, $members);
+			unset($members[$currUserID]);
+			$updateRooms[$roomID] = $this->User->getUsers($members);
+		}
+		return compact('events', 'messages', 'authors', 'files', 'updateRooms');
 	}
 	
 	public function getActiveEvents($currUserID) {
@@ -244,14 +268,14 @@ class ChatEvent extends AppModel {
 		$aUsersID = $this->_getRoomUsersID($room_id);
 		foreach($aUsersID as $userID) {
 			if ($currUserID == $userID) {
-				$eventID = $this->_addEvent(self::INVITED_USER, $currUserID, $room_id, $user_id, $currUserID, self::INACTIVE);
+				$eventID = $this->_addEvent(self::INVITED_USER, $userID, $room_id, $user_id, $currUserID, self::INACTIVE);
 				$this->ChatContact->updateList($currUserID, $room_id, $user_id, __('You invited user "%s" in this room', $user['User']['full_name']), $eventID);
 				$this->ChatContact->setActiveCount($currUserID, $room_id, 0);
 			} elseif ($userID == $user_id) {
-				$eventID = $this->_addEvent(self::WAS_INVITED, $user_id, $room_id, $user_id, $currUserID, self::ACTIVE);
+				$eventID = $this->_addEvent(self::WAS_INVITED, $userID, $room_id, $user_id, $currUserID, self::ACTIVE);
 				$this->ChatContact->updateList($userID, $room_id, $currUserID, __('You was invited into this room', $user['User']['full_name']), $eventID);
 			} else {
-				$eventID = $this->_addEvent(self::JOINED_ROOM, $user_id, $room_id, $user_id, $currUserID, self::ACTIVE);
+				$eventID = $this->_addEvent(self::JOINED_ROOM, $userID, $room_id, $user_id, $currUserID, self::ACTIVE);
 				$this->ChatContact->updateList($userID, $room_id, $currUserID, __('User "%s" joined this room', $user['User']['full_name']), $eventID);
 			}
 		}

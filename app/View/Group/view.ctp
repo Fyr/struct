@@ -112,6 +112,7 @@
 		$email = Hash::get($groupAddress, 'email');
 ?>
 			<div class="user-adress <?=$class?>" <?=$style?>>
+				<span class="glyphicons pin"></span>
                 <div class="fs13"><?=Hash::get($groupAddress, 'address')?></div>
                 <div class="fs13"><span class="glyphicons phone_alt"></span><?=Hash::get($groupAddress, 'phone')?></div>
                 <div class="fs13"><span class="glyphicons fax"></span><?=Hash::get($groupAddress, 'fax')?></div>

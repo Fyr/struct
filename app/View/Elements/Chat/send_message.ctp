@@ -9,7 +9,7 @@
 			<input type="file" class="fileuploader" data-object_type="Chat" />
 		</div>
 		<span><?=__('To send message press Enter')?></span>
-		<div id="processMsg" style="padding-top: 4px; padding-left: 40px; display: none;"><img src="/img/ajax_loader.gif" alt="" /> <span style="float: none;"><?=__('Sending message...')?></span></div>
+		<div id="processRequest" style="padding-top: 4px; padding-left: 40px; display: none;"><img src="/img/ajax_loader.gif" alt="" /> <span style="float: none;"><?=__('Processing request...')?></span></div>
 		<div id="processFile" style="padding-top: 4px; padding-left: 40px; display: none;"><img src="/img/ajax_loader.gif" alt="" /> <span style="float: none;"><?=__('Processing file...')?></span></div>
 		<div id="progress-bar" style="display: none; position: absolute; width: 545px; padding-top: 12px;">
 			<div id="progress-stats" style="font-size: 10px; text-align: center;">&nbsp;</div>

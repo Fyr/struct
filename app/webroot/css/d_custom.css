@@ -813,11 +813,14 @@ a.autor-link img{
     right: 0;
     bottom: 30%;
 }
+
 .user-adress{
     color: #212121;
     padding: 10px 0 10px 20px;
-    background:url('../img/temp/adress.png') no-repeat left 15px;
+    /*background:url('../img/temp/adress.png') no-repeat left 15px;*/
 }
+
+.user-adress .pin { position: absolute; left: 10px; top: 10px; color: #616161;}
 
 .user-adress .phone_alt, .user-adress .fax { color: #616161; vertical-align: top}
 

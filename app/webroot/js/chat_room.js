@@ -37,37 +37,21 @@ var ChatRoom = function() {
 		self.dialog = $('.chat-dialogs #roomChat_' + self.roomID + ' .innerDialog').get(0);
 		
 		// render room tab
-		$('.chat-tabs').append(tmpl('room-tab', {roomID: self.roomID, members: self.members, msg_count: 0, removable: false}));
+		$('.chat-tabs').append(tmpl('room-tab', {roomID: self.roomID, members: self.members, msg_count: 0}));
 		
 		$('.chat-members').append(tmpl('chat-members', {roomID: self.roomID, members: self.members}));
 	}
 	
-	this.renderTab = function(roomID, members, msg_count, removable) {
-		return tmpl('room-tab', {roomID: roomID, members: members, msg_count: msg_count, removable: removable});
-	}
-	
 	this.renderEvents = function(aEvents) {
-		var html = '';
+		var html = '', event;
 		for(var i = 0; i < aEvents.length; i++) {
 			var event = aEvents[i];
 			if (event.active) {
 				self.unread.push(event.id);
 			}
-			if (event.event_type == chatDef.incomingMsg || event.event_type == chatDef.outcomingMsg) {
-				html+= self.renderMsg(event.msg, (event.user) ? self.members[event.user] : null, event.time);
-			} else if (event.event_type == chatDef.fileDownloadAvail || event.event_type == chatDef.fileUploaded) {
-				html+= self.renderFile(event.msg, event.url, event.file_name);
-			}
+			html+= tmpl('chat-event', {event: event, members: self.members});
 		}
 		return html;
-	},
-	
-	this.renderMsg = function (msg, user, js_datetime) {
-		return tmpl('chat-msg', {msg: msg, user: user, time: js_datetime});
-	},
-	
-	this.renderFile = function (msg, url, file_name) {
-		return tmpl('extra-msg', {msg: msg, url: url, file_name: file_name});
 	},
 	
 	this.activate = function() {
@@ -107,12 +91,12 @@ var ChatRoom = function() {
 		var msg = $('.sendForm textarea').val();
 		if (msg) {
 			$('.sendForm textarea').val('');
-			$('#processMsg').show();
+			$('#processRequest').show();
 			$.post(chatURL.sendMsg, {data: {msg: msg, roomID: self.roomID}}, function(response){
 				if (checkJson(response)) {
-					$(self.dialog).append(self.renderMsg(msg));
+					$(self.dialog).append(tmpl('chat-msg', {msg: msg}));
 					self.scrollBottom();
-					$('#processMsg').hide();
+					$('#processRequest').hide();
 				}
 			}, 'json');
 		}
@@ -122,7 +106,12 @@ var ChatRoom = function() {
 	this.sendFile = function (fileData) {
 		$.post(chatURL.sendFile, {data: {id: fileData.id, roomID: self.roomID}}, function(response){
 			if (checkJson(response)) {
-				$(self.dialog).append(self.renderFile(chatLocale.fileUploaded, fileData.url_download, fileData.orig_fname));
+				var event = {
+					event_type: chatDef.fileUploaded,
+					url: fileData.url_download,
+					file_name: fileData.orig_fname
+				};
+				$(self.dialog).append(tmpl('extra-msg', {event: event}));
 				self.scrollBottom();
 			}
 		}, 'json');
@@ -130,5 +119,32 @@ var ChatRoom = function() {
 	
 	this.setUnread = function(count) {
 		$('#roomTab_' + self.roomID + ' span.badge').html(count);
+	}
+	
+	this.updateMembers = function(members) {
+		self.members = members;
+		$('#roomTab_' + self.roomID).replaceWith(tmpl('room-tab', {roomID: self.roomID, members: self.members, msg_count: 0}));
+		Chat.Panel.updateTabs();
+	}
+	
+	this.addMember = function(userID) {
+		Chat.disableUpdate();
+		$('#processRequest').show();
+		$.post(chatURL.addMember, {data: {room_id: self.roomID, user_id: userID}}, function(response){
+			if (checkJson(response)) {
+				self.updateMembers(response.data.members);
+				
+				// update dialog
+				var event = {
+					event_type: chatDef.invitedUser,
+					recipient_id: userID
+				};
+				$(self.dialog).append(tmpl('extra-msg', {event: event, members: self.members}));
+				$('#processRequest').hide();
+				
+				self.scrollBottom();
+				Chat.enableUpdate();
+			}
+		}, 'json');
 	}
 }

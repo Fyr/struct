@@ -53,16 +53,19 @@
       font-family: "Roboto";
       font-size: 36px;
       font-weight: 900; }
+/*
     .group-page .header-group-create .page-title-group-image {
       height: 50px;
       width: 50px;
       margin-right: 20px;
       overflow: hidden;
       float: left; }
+
       .group-page .header-group-create .page-title-group-image img {
         display: block;
         min-width: 50px;
         min-height: 50px; }
+*/
     .group-page .header-group-create .title-button {
       text-align: right;
       font-size: 14px;

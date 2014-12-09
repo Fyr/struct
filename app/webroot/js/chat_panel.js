@@ -81,16 +81,12 @@ var ChatPanel = function(container, userID){ // static object
 				if (checkJson(response)) {
 					var roomID = response.data.room.ChatRoom.id;
 					var room = new ChatRoom();
+					
 					room.init(response.data.room, response.data.members);
 					self.rooms[roomID] = room; // add room into tabs stack
 					
 					self.dispatchEvents(response.data.events);
 					
-					if ($(".openChats .room-tab").length > 1) { // single tab must be not closed
-						self.enableCloseTabs();
-					} else {
-						self.disableCloseTabs();
-					}
 					self.activateTab(roomID);
 					Chat.enableUpdate();
 				}
@@ -135,7 +131,16 @@ var ChatPanel = function(container, userID){ // static object
 		}
 	}
 	
+	this.updateTabs = function() {
+		if ($(".openChats .room-tab").length > 1) { // single tab must be not closed
+			self.enableCloseTabs();
+		} else {
+			self.disableCloseTabs();
+		}
+	}
+	
 	this.activateTab = function(roomID) {
+		self.updateTabs();
 		if (roomID) {
 			self.activeRoom = roomID;
 		}
@@ -172,61 +177,36 @@ var ChatPanel = function(container, userID){ // static object
 	}
 	
 	this.dispatchEvents = function (data) {
+		var msg, user, file;
+		for(var roomID in data.updateRooms) {
+			if (self.rooms[roomID]) {
+				self.rooms[roomID].updateMembers(data.updateRooms[roomID]);
+			}
+		}
 		for(var i = 0; i < data.events.length; i++) {
 			var event = data.events[i].ChatEvent;
 			if (self.rooms[event.room_id]) { // tab could be async-ly closed 
 				if (event.event_type == chatDef.incomingMsg || event.event_type == chatDef.outcomingMsg) {
-					var msg = data.messages[event.msg_id];
-					self.rooms[event.room_id].events.push({
-						id: event.id,
-						event_type: event.event_type,
-						active: event.active,
-						time: Date.fromSqlDate(event.created),
-						msg: msg.message,
-						user: (event.event_type == chatDef.incomingMsg) ? event.initiator_id : null
-					});
+					msg = data.messages[event.msg_id];
+					event.msg = msg.message;
 				} else if (event.event_type == chatDef.fileDownloadAvail || event.event_type == chatDef.fileUploaded) {
-					var file = data.files[event.file_id];
-					self.rooms[event.room_id].events.push({
-						id: event.id,
-						event_type: event.event_type,
-						active: event.active,
-						time: Date.fromSqlDate(event.created),
-						msg: (event.event_type == chatDef.fileDownloadAvail) ? chatLocale.fileReceived : chatLocale.fileUploaded,
-						url: file.url_download,
-						file_name: file.orig_fname
-					});
-				} else if (event.event_type == chatDef.invitedUser || event.event_type == chatDef.wasInvited || event.event_type == chatDef.joinedRoom) {
-					self.rooms[event.room_id].events.push({
-						id: event.id,
-						event_type: event.event_type,
-						active: event.active,
-						time: Date.fromSqlDate(event.created),
-						user: event.recipient_id
-					});
+					file = data.files[event.file_id];
+					event.url = file.url_download;
+					event.file_name = file.orig_fname;
 				}
+				self.rooms[event.room_id].events.push(event);
 			}
 		}
 	}
 	
 	this.update = function(data) {
 		self.render(data.aUsers);
-		
 		self.dispatchEvents(data);
 		self.activateTab();
 	}
 	
 	this.addMember = function(userID) {
-		Chat.disableUpdate();
-		console.log(chatURL.addMember);
-		$.post(chatURL.addMember, {data: {room_id: self.activeRoom, user_id: userID}}, function(response){
-			if (checkJson(response)) {
-				self.rooms[self.activeRoom].close();
-				delete self.rooms[self.activeRoom];
-				self.openRoom(self.activeRoom);
-				Chat.enableUpdate();
-			}
-		}, 'json');
-		
+		closeMainPanel();
+		self.rooms[self.activeRoom].addMember(userID);
 	}
 }

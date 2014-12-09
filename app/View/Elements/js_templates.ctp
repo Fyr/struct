@@ -52,6 +52,19 @@
 </span>
 </script>
 
+<script type="text/x-tmpl" id="chat-event">
+{%
+	var time = Date.fromSqlDate(o.event.created);
+	var user;
+	if (o.event.event_type == chatDef.incomingMsg || o.event.event_type == chatDef.outcomingMsg) {
+		user = (o.event.event_type == chatDef.incomingMsg) ? o.members[o.event.initiator_id] : null;
+		include('chat-msg', {time: time, user: user, msg: o.event.msg});
+	} else {
+		include('extra-msg', {event: o.event, members: o.members});
+	}
+%}
+</script>
+
 <script type="text/x-tmpl" id="chat-msg">
 {%
 	var locale = '<?=Hash::get($currUser, 'User.lang')?>';
@@ -59,9 +72,13 @@
 	var time = Date.fullDate(js_date, locale) + ' ' + Date.HoursMinutes(js_date, locale);
 %}
 <div class="{%=((o.user) ? 'leftMessage' : 'rightMessage')%} clearfix">
-{% if (o.user) { %}
+{% 
+	if (o.user) { 
+%}
 	<img class="ava" src="{%=o.user.UserMedia.url_img.replace(/noresize/, 'thumb100x100')%}" alt="{%=o.user.User.full_name%}" style="width: 50px" />
-{% } %}
+{% 
+	}
+%}
 	<div class="time">{%=time%}</div>
 	<div class="text">{%=o.msg%}</div>
 </div>
@@ -69,7 +86,35 @@
 </script>
 
 <script type="text/x-tmpl" id="extra-msg">
-<div class="date">{%=o.msg%}: <a href="{%=o.url%}" target="_blank">{%=o.file_name%}</a></div>
+{%
+	if (o.event.event_type == chatDef.fileDownloadAvail) {
+%}
+	<div class="date"><?=__('File has been uploaded')?>: <a href="{%=o.event.url%}" target="_blank">{%=o.event.file_name%}</a></div>
+{%		
+	} else if (o.event.event_type == chatDef.fileUploaded) {
+%}
+	<div class="date"><?=__('You received a file')?>: <a href="{%=o.event.url%}" target="_blank">{%=o.event.file_name%}</a></div>
+{%
+	} else if (o.event.event_type == chatDef.invitedUser) {
+		var msg = '<?=__('You invited user "%s" in this room', '~user_name')?>';
+		msg = msg.replace(/~user_name/, o.members[o.event.recipient_id].User.full_name);
+%}
+	<div class="date">{%=msg%}</div>
+{%
+	} else if (o.event.event_type == chatDef.wasInvited) {
+		var msg = '<?=__('You was invited into this room')?>';
+%}
+	<div class="date">{%=msg%}</div>
+{%
+	} else if (o.event.event_type == chatDef.joinedRoom) {
+		var msg = '<?=__('User "%s" joined this room', '~user_name')?>';
+		msg = msg.replace(/~user_name/, o.members[o.event.recipient_id].User.full_name);
+%}
+	<div class="date">{%=msg%}</div>
+{%
+	}
+%}
+
 <div class="clearfix"></div>
 </script>
 
