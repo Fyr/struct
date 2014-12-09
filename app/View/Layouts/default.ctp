@@ -7,7 +7,7 @@
 	<?=$this->Html->charset(); ?>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="user-scalable=no" />
-	<title>Konstruktor: <?=__('Messanger')?></title>
+	<title>Konstruktor.com - <?=__('Messenger')?></title>
 	
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 

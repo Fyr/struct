@@ -37,6 +37,7 @@ var Chat = {
 	updateState: function () {
 		if (Chat.isUpdateEnabled()) {
 			Chat.disableUpdate();
+			// TODO: update only opened rooms
 			$.post(chatURL.updateState, null, function(response){
 				if (checkJson(response)) {
 					Chat.Panel.update(response.data);

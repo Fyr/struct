@@ -43,7 +43,7 @@ Configure::write('baseURL', array(
 Configure::write('timeline', array(
 	'initialPeriod' => array(0, 3),
 	'loadPeriod' => 3,
-	'updateTime' => 10000
+	'updateTime' => 5000
 ));
 
 function fdebug($data, $logFile = 'tmp.log', $lAppend = true) {

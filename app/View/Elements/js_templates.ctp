@@ -101,7 +101,7 @@
 				message = user.User.skills; <?// потому что поиск идет еще и по скилам?>
 			}
 			if (o.innerCall) {
-				var onclick = (room_id) ? 'Chat.Panel.openRoom(' + room_id + ')' : 'Chat.Panel.createRoom(' + user_id + ')';
+				var onclick = (room_id) ? 'Chat.Panel.openRoom(' + room_id + ')' : 'Chat.Panel.openRoom(null, ' + user_id + ')';
 %}
             <li class="messages-new clearfix" onclick="{%=onclick%}">
 {%
@@ -124,16 +124,26 @@
                 </div>
                 <div class="aside-block">
 {%
+			var members = '';
 			if (user.ChatContact) {
+				members = user.ChatContact.members.join(',');
 %}
 	
                 	<div class="close-block glyphicons circle_remove" onclick="var e = arguments[0] || window.event; if ($(e.target).hasClass('circle_remove')) { e.stopPropagation(); Chat.Panel.removeContact({%=user.ChatContact.id%}, {%=user.ChatContact.room_id%}) }"></div>
 {%
-			} else {
-%}
-					<div class="add-plus glyphicons circle_plus" onclick="var e = arguments[0] || window.event; if ($(e.target).hasClass('circle_plus')) { e.stopPropagation(); Chat.Panel.addMember({%=user_id%}) }"></div>
-{%
 			}
+			/*
+			if (Chat.Panel.activeRoom) {
+				var activeRoom = Chat.Panel.rooms[Chat.Panel.activeRoom];
+				if (activeRoom.ChatRoom.canAddMember && !activeRoom.members[user_id]) {
+				*/
+%}
+					<div id="addMember_{%=room_id%}" class="add-plus glyphicons circle_plus add-member" data-members="{%=members%}" onclick="var e = arguments[0] || window.event; if ($(e.target).hasClass('circle_plus')) { e.stopPropagation(); Chat.Panel.addMember({%=user_id%}) }" style="display: none;"></div>
+{%
+/*
+				}
+			}
+			*/
 %}
                     <div class="time">{%=(time) ? Date.HoursMinutes(Date.fromSqlDate(time)) : ''%}</div>
                     <div class="count-b">

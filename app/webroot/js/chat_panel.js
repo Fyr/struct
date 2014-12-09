@@ -54,7 +54,10 @@ var ChatPanel = function(container, userID){ // static object
 			}
 		}
 		$('#chatTotalUnread').html(self.formatUnread(totalCount));
+		
+		//var canAddMember = (self.activeRoom && self.rooms[self.activeRoom].ChatRoom.initiator_id);
 		$(self.panel).html(tmpl('chat-panel', {innerCall: self.userID && true, q: $(".searchBlock .searchInput", self.panel).val(), aUsers: aUsers}));
+		self.updateAddMembers();
 		self.initHandlers();
 	}
 	
@@ -78,12 +81,12 @@ var ChatPanel = function(container, userID){ // static object
 				if (checkJson(response)) {
 					var roomID = response.data.room.ChatRoom.id;
 					var room = new ChatRoom();
-					room.init(roomID, response.data.members);
+					room.init(response.data.room, response.data.members);
 					self.rooms[roomID] = room; // add room into tabs stack
 					
 					self.dispatchEvents(response.data.events);
 					
-					if ($(".openChats .room-tab").length > 1) { // one tab
+					if ($(".openChats .room-tab").length > 1) { // single tab must be not closed
 						self.enableCloseTabs();
 					} else {
 						self.disableCloseTabs();
@@ -103,11 +106,42 @@ var ChatPanel = function(container, userID){ // static object
 		$(".room-tab").removeClass('disable-remove');
 	}
 	
+	this.checkMember = function(members) {
+		if (members && members.split(',').length) {
+			members = members.split(',');
+			if (members.length > 1) {
+				return false;
+			}
+			var memberID = members[0];
+			var activeRoom = Chat.Panel.rooms[Chat.Panel.activeRoom];
+			for(var id in activeRoom.members) {
+				if (id == memberID) { // already in this room
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	this.updateAddMembers = function() {
+		if (self.activeRoom) {
+			if (Chat.Panel.rooms[Chat.Panel.activeRoom].ChatRoom.canAddMember) {
+				$('.add-member').each(function(){
+					if (self.checkMember($(this).data('members').toString())) {
+						$(this).show();
+					}
+				});
+			}
+		}
+	}
+	
 	this.activateTab = function(roomID) {
 		if (roomID) {
 			self.activeRoom = roomID;
 		}
+		$('.add-member').hide();
 		if (self.activeRoom) {
+			self.updateAddMembers();
 			self.rooms[self.activeRoom].activate();
 		}
 	}

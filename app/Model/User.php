@@ -105,38 +105,7 @@ class User extends AppModel {
 		$aUsers = $this->findAllById($aID);
 		return Hash::combine($aUsers, '{n}.User.id', '{n}');
 	}
-/*	
-	public function getContactListUsers($currUserID) {
-		$this->loadModel(array('ChatEvent', 'ChatRoom'));
-		
-		$aActiveRooms = $this->ChatEvent->getActiveRooms($currUserID);
-		$aID = Hash::extract($aActiveRooms, '{n}.ChatEvent.initiator_id');
-		$aUsers = $this->getUsers($aID);
-		$aUsers = Hash::combine($aUsers, '{n}.User.id', '{n}');
-		foreach($aActiveRooms as &$user) {
-			$user_id = Hash::get($user, 'ChatEvent.initiator_id');
-			$user = array_merge($user, $aUsers[$user_id]);
-			$user['ChatEvent']['count'] = $user[0]['count'];
-			unset($user[0]);
-		}
-		
-		// get also inactive rooms for panel
-		$rooms = $this->ChatRoom->getRoomsWithUser($currUserID);
-		$aID2 = array();
-		foreach($rooms as $room) {
-			$user_id = $room['ChatRoom']['initiator_id'];
-			if ($user_id != $currUserID && !in_array($user_id, $aID)) {
-				$aID2[] = $user_id;
-			}
-			$user_id = $room['ChatRoom']['recipient_id'];
-			if ($user_id != $currUserID && !in_array($user_id, $aID)) {
-				$aID2[] = $user_id;
-			}
-		}
-		
-		return array_merge($aActiveRooms, $this->getUsers($aID2));
-	}
-	*/
+	
 	public function search($currUserID, $q) {
 		$fields = 'User.id, User.username, User.full_name, User.skills, UserMedia.*';
 		$conditions = array(

@@ -116,7 +116,7 @@ class ChatEvent extends AppModel {
 			}
 			$room = $this->ChatRoom->findById($this->ChatRoom->id);
 			
-			// Комнату для чата открывает сам юзер - нет смысла помечать это как НЕ-прочитанное
+			// Комнату для чата открывает сам юзер - помечаем это событие как прочитанное
 			$eventID = $this->_addEvent(self::ROOM_OPENED, $currUserID, $room['ChatRoom']['id'], $userID, $currUserID, self::INACTIVE);
 			
 			// Создать чат-контакт при открытии комнаты - мы ведь его по идее уже выбираем для общения
@@ -127,7 +127,7 @@ class ChatEvent extends AppModel {
 			$this->ChatContact->setActiveCount($currUserID, $room['ChatRoom']['id'], 0); 
 			
 			// Если реципиенту не написали - нет смысла показывать открытие комнаты как НЕпрочитанное
-			// Не смысла вносить этот контакт в список пока он ничего не написал
+			// Нет смысла вносить этот контакт в список пока он ничего не написал
 			$this->_addEvent(self::ROOM_OPENED, $userID, $room['ChatRoom']['id'], $userID, $currUserID, self::INACTIVE);
 		} else {
 			// проверить есть ли такой контакт - возможно контакт был удален

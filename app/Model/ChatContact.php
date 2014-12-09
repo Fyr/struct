@@ -9,7 +9,7 @@ class ChatContact extends AppModel {
 	);
 	при recursive=1 не выдает UserMedia, а при 2 пихает его как элемент на уровень ниже в [User] :(
 */
-	protected $User;
+	protected $User, $ChatRoom;
 	
 	/**
 	 * Добавить к счетчику входящих по юзеру и комнате. Создает или обновляет чат-контакт
@@ -61,11 +61,28 @@ class ChatContact extends AppModel {
 		$conditions = array('ChatContact.user_id' => $user_id);
 		$order = array('ChatContact.modified DESC');
 		$aContacts = $this->find('all', compact('conditions', 'order', 'recursive'));
+		
+		// добавлять в комнату других юзеров  может только иницитор открытия комнаты
+		$aID = Hash::extract($aContacts, '{n}.ChatContact.room_id');
+		$this->loadModel('ChatMember');
+		
+		// $rooms = $this->ChatMember->findAllById($aID);
+		
+		// $rooms = Hash::combine($rooms, '{n}.ChatRoom.id', '{n}');
+		foreach($aContacts as &$_row) {
+			$roomID = $_row['ChatContact']['room_id'];
+			$members = $this->ChatMember->getRoomMembers($roomID); // ($user_id == $rooms[$roomID]['ChatRoom']['initiator_id']);
+			$members = array_combine($members, $members);
+			unset($members[$user_id]);
+			$_row['ChatContact']['members'] = array_values($members);
+		}
+		
 		$aID = Hash::extract($aContacts, '{n}.ChatContact.initiator_id');
+		$aResult = array();
 		if ($q) {
 			$aUsers = $this->User->search($user_id, $q);
 			$aContacts = Hash::combine($aContacts, '{n}.ChatContact.initiator_id', '{n}');
-			$aResult = array();
+			
 			// показываем чат-контакты только тех юзеров, кот. есть в списке найденных
 			// в порядке очередности поиска
 			foreach($aUsers as $row) {
@@ -78,7 +95,6 @@ class ChatContact extends AppModel {
 		} else {
 			// Просто показываем весь контакт лист в привязке к оппоненту, который писал в комнату
 			$aUsers = $this->User->getUsers($aID);
-			$aResult = array();
 			foreach($aContacts as $row) {
 				$aResult[] = array_merge($row, $aUsers[$row['ChatContact']['initiator_id']]);
 			}

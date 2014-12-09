@@ -1,5 +1,6 @@
 var ChatRoom = function() {
 	var self = this;
+	self.ChatRoom = null;
 	self.roomID = null;
 	self.members = {};
 	self.events = [];
@@ -7,8 +8,9 @@ var ChatRoom = function() {
 	self.unread = [];
 	self.lFirstRun = true;
 	
-	this.init = function(roomID, members) {
-		self.roomID = roomID;
+	this.init = function(room, members) {
+		self.ChatRoom = room.ChatRoom;
+		self.roomID = room.ChatRoom.id;
 		self.members = members;
 		self.render();
 		
