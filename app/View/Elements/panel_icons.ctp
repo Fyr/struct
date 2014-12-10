@@ -5,7 +5,7 @@
 	$isGroupActive = ($this->request->controller == 'Group' && !$isKonstructorActive) ? ' class="active"' : '';
 	$isDeviceActive = ($this->request->controller == 'Device') ? ' class="active"' : '';
 	$isUserActive = ($this->request->controller == 'User' && $this->request->action == 'edit') ? ' class="active"' : '';
-	
+	$isArticleActive = ($this->request->controller == 'Article') ? ' class="active"' : '';
 ?>
 <div class="main-panel-list">
     <ul>
@@ -16,7 +16,7 @@
         <li><a href="javascript:void(0)"><span class="glyphicons briefcase briefcasePanel"></span></a></li>
         <li><a href="javascript:void(0)"><span class="glyphicons credit_card credit_cardPanel"></span><div class="count"></div></a></li>
         <li><a href="javascript:void(0)"><span class="glyphicons cloud cloudPanel"></span></a></li>
-        <li><a href="javascript:void(0)"><span class="glyphicons file filePanel"></span></a></li>
+        <li<?=$isArticleActive?>><a href="javascript:void(0)"><span class="glyphicons file filePanel"></span></a></li>
         <li<?=$isDeviceActive?>><a href="javascript:void(0)"><span class="glyphicons ipad ipadPanel"></span></a></li>
         <li><a href="javascript:void(0)"><span class="glyphicons calendar calendarPanel"></span></a></li>
     </ul>

@@ -40,6 +40,7 @@
 		'chat', 'chat_panel', 'chat_room',
 		'struct',
 		'search',
+		'article',
 		'group'
 	);
 	
@@ -70,6 +71,7 @@
 	<script type="text/javascript" src="<?=$this->Html->url(array('controller' => 'DeviceAjax', 'action' => 'jsSettings'))?>"></script>
 	<script type="text/javascript" src="<?=$this->Html->url(array('controller' => 'UserAjax', 'action' => 'jsSettings'))?>"></script>
 	<script type="text/javascript" src="<?=$this->Html->url(array('controller' => 'GroupAjax', 'action' => 'jsSettings'))?>"></script>
+	<script type="text/javascript" src="<?=$this->Html->url(array('controller' => 'ArticleAjax', 'action' => 'jsSettings'))?>"></script>
 <script type="text/javascript">
 var objectType = 'Chat', objectID = null;
 $(document).ready(function () {
@@ -83,6 +85,7 @@ $(document).ready(function () {
 	Chat.initPanel($(".dropdown-chatPanel .dropdown-panel-wrapper").get(0), <?=(isset($chatUserID)) ? $chatUserID : 'false'?>);
 	Struct.initPanel($('.dropdown-ipadPanel .dropdown-panel-wrapper').get(0));
 	Group.initPanel($('.dropdown-groupPanel .dropdown-panel-wrapper').get(0));
+	Article.initPanel($('.dropdown-filePanel .dropdown-panel-wrapper').get(0));
 	
 	$(".sendForm .icon_enter").bind('click', function() {
 		Chat.Panel.rooms[Chat.Panel.activeRoom].sendMsg();

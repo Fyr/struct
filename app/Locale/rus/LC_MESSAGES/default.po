@@ -436,6 +436,9 @@ msgstr "Вы уверены, что хотите удалить пользова
 msgid "Add member"
 msgstr "Добавить пользователя"
 
+msgid "Are you sure to delete this record?"
+msgstr "Вы уверены, что хотите удалить эту запись?"
+
 msgid "Join this group"
 msgstr "Вступить в группу"
 
@@ -446,7 +449,7 @@ msgid "All addresses"
 msgstr "Все адреса"
 
 msgid "Collapse"
-msgstr "Ошибка"
+msgstr "Свернуть"
 
 msgid "Achievements"
 msgstr "Достижения"
@@ -479,7 +482,7 @@ msgid "Upload image"
 msgstr "Загрузить изображение"
 
 msgid "Timeline"
-msgstr "График"
+msgstr "Временная шкала"
 
 msgid "Day"
 msgstr "День"
@@ -515,10 +518,10 @@ msgid "Discussion"
 msgstr "Обсуждение"
 
 msgid "Task was created"
-msgstr "Задание создано"
+msgstr "Задача создана"
 
 msgid "Task was closed"
-msgstr "Задание выполнено"
+msgstr "Задача закрыта"
 
 msgid "Go to Group"
 msgstr "Перейти в группу"
@@ -533,19 +536,19 @@ msgid "closed this project"
 msgstr "Данный проект закрыт"
 
 msgid "No open tasks"
-msgstr "Нет доступных заданий"
+msgstr "Нет открытых задач"
 
 msgid "New task"
-msgstr "Новое задание"
+msgstr "Новая задача"
 
 msgid "Closed tasks"
-msgstr "Выполненные задания"
+msgstr "Закрытые задачи"
 
 msgid "Add subproject"
-msgstr "Добавить субпроект"
+msgstr "Добавить подпроект"
 
 msgid "Add task"
-msgstr "Добавить задание"
+msgstr "Добавить задачу"
 
 msgid "Sun"
 msgstr "Вос"
@@ -652,3 +655,68 @@ msgstr "Видео со мной"
 msgid "Groups"
 msgstr "Группы"
 
+msgid "Registered today"
+msgstr "Зарегистрированы сегодня"
+
+msgid "Qty"
+msgstr "Кол-во"
+
+msgid "No registered users yet"
+msgstr "Нет зарегистрированных пользователей"
+
+msgid "Total"
+msgstr "Всего"
+
+msgid "Registered total"
+msgstr "Всего зарегистрировано"
+
+msgid "You received a file"
+msgstr "Вы получили файл"
+
+msgid "You was invited into this room"
+msgstr "Вас пригласили в эту комнату"
+
+msgid "Processing request..."
+msgstr "Обработка запроса...!"
+
+msgid "Fax"
+msgstr "Фаск"
+
+msgid "Messenger"
+msgstr "Чат"
+
+msgid "New subproject"
+msgstr "Новый подпроект"
+
+msgid "messages were written."
+msgstr "сообщений написано"
+
+msgid "projects were created based on groups."
+msgstr "проектов создано на основе сообществ"
+
+msgid "users were registered on website."
+msgstr "пользователей зарегистрировано на сайте"
+
+msgid "New email"
+msgstr "Новый email"
+
+msgid "Confirm email"
+msgstr "Подтвердить email"
+
+msgid "New password"
+msgstr "Новый пароль"
+
+msgid "Confirm password"
+msgstr "Подтвердить пароль"
+
+msgid "Speciality"
+msgstr "СПециальность"
+
+msgid "Timezone"
+msgstr "Часовой пояс"
+
+msgid "Articles"
+msgstr "Статьи"
+
+msgid "Find article..."
+msgstr "Найти статью..."

@@ -45,6 +45,7 @@
 		'chat', 'chat_panel', 'chat_room',
 		'struct',
 		'search',
+		'article',
 		'settings-script',
 		'group-script',
 		'group',
@@ -65,6 +66,7 @@
 	<script src="<?=$this->Html->url(array('controller' => 'DeviceAjax', 'action' => 'jsSettings'))?>"></script>
 	<script src="<?=$this->Html->url(array('controller' => 'UserAjax', 'action' => 'jsSettings'))?>"></script>
 	<script src="<?=$this->Html->url(array('controller' => 'GroupAjax', 'action' => 'jsSettings'))?>"></script>
+	<script src="<?=$this->Html->url(array('controller' => 'ArticleAjax', 'action' => 'jsSettings'))?>"></script>
 <script>
 $(function() {
 	$('select.formstyler, input.filestyle').styler({
@@ -76,6 +78,7 @@ $(function() {
 	Chat.initPanel($('.dropdown-chatPanel .dropdown-panel-wrapper').get(0));
 	Struct.initPanel($('.dropdown-ipadPanel .dropdown-panel-wrapper').get(0));
 	Group.initPanel($('.dropdown-groupPanel .dropdown-panel-wrapper').get(0));
+	Article.initPanel($('.dropdown-filePanel .dropdown-panel-wrapper').get(0));
 });
 </script>
 </head>

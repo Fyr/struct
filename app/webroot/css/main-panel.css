@@ -460,7 +460,7 @@
     .main-panel  .btn-default {
       background-color: transparent; }
 
-      .main-panel .dropdown-groupPanel  .btn-default:hover {
+      .main-panel  .btn-default:hover {
         background: #22B5AE; }
 
   .main-panel  .group-list {
@@ -763,4 +763,4 @@
 /*# sourceMappingURL=main-panel.css.map */
 
 
-.smallBtn { padding-left: 8px; padding-right: 2px; padding-top:3px; color: #616161}
+.smallBtn { padding-left: 8px !important; padding-right: 2px !important; padding-top:3px !important; color: #616161 !important}

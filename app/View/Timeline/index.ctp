@@ -298,7 +298,7 @@ $(document).ready(function(){
                 <span class="icon filetype {%=file.ext.replace(/\./, '')%}"></span> {%=file.orig_fname%}
             </a>
         </div>
-        <div class="sub-text">{%=chatLocale.fileReceived%}</div>
+        <div class="sub-text"><?=__('You have received a file')?></div>
     </div>
 </div>
 </script>

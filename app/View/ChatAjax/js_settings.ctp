@@ -23,9 +23,7 @@ chatDef = {
 	joinedRoom: <?=ChatEvent::JOINED_ROOM?>
 }
 chatLocale = {
-	Loading: '<?=__('Loading...')?>',
-	fileReceived: '<?=__('You have received a file')?>',
-	fileUploaded: '<?=__('File has been uploaded')?>'
+	Loading: '<?=__('Loading...')?>'
 }
 var mediaURL = {
 	upload: '<?=$this->Html->url(array('plugin' => 'media', 'controller' => 'ajax', 'action' => 'upload'))?>',

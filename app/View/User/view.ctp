@@ -235,138 +235,65 @@
 </div>
 <?
 	}
-?>
 
-<!--div class="row">
+	if ($aArticles) {
+		$aContainer = array('', '', '');
+		$i = 0;
+		foreach($aArticles as $j => $article) {
+			$aContainer[$i].= $this->element('profile_articles', array('article' => $article, 'hide' => ($j >= 3)));
+			$i++;
+			if ($i >= 3) {
+				$i = 0;
+			}
+		}
+		
+?>
+<div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="col-md-12">
             <div class="subheading page-menu">
-                Статьи
-                <a href="#" class="btn btn-default edit-button">
+                <?=__('Articles')?>
+                <!--a href="#" class="btn btn-default edit-button">
                     Подписаться
-                </a>
+                </a-->
             </div>
         </div>
     </div>
 </div>
-<div class="row">
+<div class="row profile-articles">
     <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="col-md-4">
-            <div class="news-article">
-                <div class="dimention-link">
-                    <a href="#">
-                        Политика
-                    </a>
-                </div>
-                <a href="#">
-                    <div class="news-article-title">
-                        Почему мировые лидеры хотят отказаться от борьбы с наркотиками
-                    </div>
-                </a>
-                <div class="news-article-pubdate">
-                    Сегодня, 21:15
-                </div>
-            </div>
-            <div class="news-article bb-aqua">
-                <div class="dimention-link">
-                    <a href="#">
-                        Политика
-                    </a>
-                </div>
-                <a href="#">
-                    <div class="news-article-title">
-                        Шпионские игры: 8 главных экранизаций романов Джонна Ле Карре
-                    </div>
-                </a>
-                <div class="news-article-pubdate">
-                    Сегодня, 21:15
-                    <div class="comments-num">
-                        <span class="glyphicons comments"></span> 8
-                    </div>
-                </div>
-            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+<?
+		foreach($aContainer as $container) {
+?>
+        <div class="col-md-4 col-sm-6 col-xs-12 mb10">
+        	<?=$container?>
         </div>
-        <div class="col-md-4">
-            <div class="news-article">
-                <div class="dimention-link">
-                    <a href="#">
-                        Политика
-                    </a>
-                </div>
-                <a href="#">
-                    <div class="news-article-title">
-                        Новый iPhone 6 и часы Watch
-                    </div>
-                </a>
-                <div class="news-article-pubdate">
-                    Сегодня, 21:15
-                </div>
-            </div>
-            <div class="news-article bb-green">
-                <div class="dimention-link">
-                    <a href="#">
-                        Политика
-                    </a>
-                </div>
-                <a href="#">
-                    <div class="news-article-title">
-                        Как подростков ЮАР обучают межрасовой войне в националистических лагерях
-                    </div>
-                </a>
-                <div class="news-article-pubdate">
-                    Сегодня, 21:15
-                    <div class="comments-num">
-                        <span class="glyphicons comments"></span> 8
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="news-article">
-                <div class="dimention-link">
-                    <a href="#">
-                        Политика
-                    </a>
-                </div>
-                <a href="#">
-                    <div class="news-article-img">
-                        <img src="/img/temp/t_img.jpg" alt="" />
-                    </div>
-                    <div class="news-article-title">
-                        Почему мировые лидеры хотят отказаться от борьбы с наркотиками
-                    </div>
-                </a>
-                <div class="news-article-pubdate">
-                    Сегодня, 21:15
-                </div>
-            </div>
-            <div class="news-article bb-pink">
-                <div class="dimention-link">
-                    <a href="#">
-                        Политика
-                    </a>
-                </div>
-                <a href="#">
-                    <div class="news-article-title">
-                        Стивен Хокинг заявил, что опыты с бозоном Хиггса уничтожат Вселенную
-                    </div>
-                </a>
-                <div class="news-article-pubdate">
-                    Сегодня, 21:15
-                </div>
-            </div>
-        </div>
+<?
+		}
+?>
+    </div>
     </div>
 </div>
-<div class="row mb40">
+<div class="row mb40 profile-articles">
+<?
+		if (count($aArticles) > 3) {
+?>
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="col-md-12">
             <div class="morelink">
-                <a href="#">
-                    <span class="morelink-text">Показать ещё</span>
+                <a href="javascript:void(0)" onclick="$('.profile-articles .can-hide').toggle(); return false;">
+                    <span class="morelink-text can-hide"><?=__('Show more')?></span>
+                    <span class="morelink-text can-hide" style="display: none;"><?=__('Collapse')?></span>
                     <span class="glyphicon glyphicons repeat"></span>
                 </a>
             </div>
         </div>
     </div>
-</div-->
+<?
+		}
+?>
+</div>
+<?
+	}
+?>

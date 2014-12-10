@@ -3,7 +3,7 @@ App::uses('AppController', 'Controller');
 class UserController extends AppController {
 	public $name = 'User';
 	public $layout = 'profile';
-	public $uses = array('Timezone', 'Country');
+	public $uses = array('Timezone', 'Country', 'Article');
 	
 	public function register() {
 		$this->layout = 'home';
@@ -70,6 +70,7 @@ class UserController extends AppController {
 
 	public function view($id = 0) {
 		$this->loadModel('GroupMember');
+		// $this->loadModel('Article');
 		if (!$id) {
 			$id = $this->currUserID;
 		}
@@ -82,6 +83,8 @@ class UserController extends AppController {
 		}
 		$this->set('aGroups', $aGroups);
 		$this->set('aCountryOptions', $this->Country->options());
+		
+		$this->set('aArticles', $this->Article->findAllByOwnerIdAndPublished($id, 1));
 	}
 	
 	public function changeEmail() {
