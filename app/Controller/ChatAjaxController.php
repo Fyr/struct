@@ -40,7 +40,7 @@ class ChatAjaxController extends PAjaxController {
 			if (!$room) {
 				throw new Exception('Room does not exists');
 			}
-			$room['ChatRoom']['canAddMember'] = ($room['ChatRoom']['initiator_id'] == $this->currUserID);
+			$room['ChatRoom']['canAddMember'] = in_array($this->currUserID, array($room['ChatRoom']['initiator_id'], $room['ChatRoom']['recipient_id']));
 			
 			$aID = $this->ChatMember->getRoomMembers($room['ChatRoom']['id'], $this->currUserID);
 			$members = $this->User->getUsers($aID);

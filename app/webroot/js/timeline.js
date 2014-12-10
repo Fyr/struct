@@ -77,7 +77,7 @@ var Timeline = {
 				data: (data.days && data.days[jsDate.toSqlDate()]) ? data.days[jsDate.toSqlDate()] : {}
 			});
 		}
-		if (jsDate.toSqlDate() == startDate) {
+		if (jsDate.toSqlDate() == startDate && !$('.static-system-event').length) {
 			html+= tmpl('timeline-bottom', {});
 		}
 		return html;

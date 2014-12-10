@@ -103,13 +103,15 @@ var ChatPanel = function(container, userID){ // static object
 	}
 	
 	this.checkMember = function(members) {
+		var activeRoom = self.rooms[Chat.Panel.activeRoom];
+		console.log([members, activeRoom.members]);
 		if (members && members.split(',').length) {
 			members = members.split(',');
 			if (members.length > 1) {
 				return false;
 			}
 			var memberID = members[0];
-			var activeRoom = Chat.Panel.rooms[Chat.Panel.activeRoom];
+			var activeRoom = self.rooms[Chat.Panel.activeRoom];
 			for(var id in activeRoom.members) {
 				if (id == memberID) { // already in this room
 					return false;

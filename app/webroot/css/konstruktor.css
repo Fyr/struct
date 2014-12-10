@@ -872,14 +872,16 @@ input[type="button"].btn-block {
 
 
 
-
+.oneFormBlock { max-width: 545px;}
 
 .editArticle { padding: 34px 0 0 0;}
-.articleTitleBox { margin: -12px 130px 0 0; }
+.articleTitleBox { margin: -12px 130px 0 0; font-size: 36px; font-family: 'Roboto'; font-weight: 900;  line-height: 48px; }
 	.articleTitleBox textarea { border: none; width: 100%; color: #313131; font-size: 36px; font-family: 'Roboto'; font-weight: 900;  resize: none; height: 100px; line-height: 48px; outline: none; }
 
 .articleControls { float: right; text-align: right; }
 	.articleControls .btn { margin-left: 7px;}
+
+.articleText { padding-top: 50px}
 
 @media (max-width: 767px) { .articleTitleBox { margin: 5px 0 0 0} .articleControls { float: none} .editArticle { padding-top: 10px;} }
 

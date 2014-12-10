@@ -131,7 +131,7 @@
 <ul>
 {%
 	if (o.aUsers && o.aUsers.length) {
-		var user, user_id, name, message, time, count, media;
+		var user, user_id, name, message, time, count, media, members;
 		for(var i = 0; i < o.aUsers.length; i++) {
 			user = o.aUsers[i];
 			user_id = user.User.id;
@@ -158,18 +158,19 @@
 {%
 			}
 			src = user.UserMedia.url_img.replace(/noresize/, 'thumb100x100');
+			members = (user.ChatContact && user.ChatContact.members.length > 2) ? ' (+' + (user.ChatContact.members.length - 2) + ')' : '';
 %}
 
                 <figure class="messages-user rate-10"><img class="ava" src="{%=src%}" alt="{%=name%}" style="width: 50px; height: auto;"/></figure>
                 <div class="text">
-                    <div class="name">{%=name%}</div>
+                    <div class="name">{%=name%}{%=members%}</div>
                     <div class="message clearfix">
                         <p>{%=message%}</p>
                     </div>
                 </div>
                 <div class="aside-block">
 {%
-			var members = '';
+			members = '';
 			if (user.ChatContact) {
 				members = user.ChatContact.members.join(',');
 %}

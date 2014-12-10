@@ -7,7 +7,7 @@
 
 <div class="create-group">
 	<div class="page-menu">
-		<?=$this->Html->link(__('Create'), array('controller' => 'Article', 'action' => 'add'), array('class' => 'btn btn-default pull-left'))?>
+		<?=$this->Html->link(__('Create'), array('controller' => 'Article', 'action' => 'edit'), array('class' => 'btn btn-default pull-left'))?>
 	</div>
 </div>
 

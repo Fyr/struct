@@ -49,11 +49,11 @@ class ArticleController extends AppController {
 	public function changePublish($id) {
 		$this->autoRender = false;
 		
-		if ($id && Hash::get($group, 'Article.owner_id') != $this->currUserID) {
+		$article = $this->Article->findById($id);
+		if ($id && Hash::get($article, 'Article.owner_id') != $this->currUserID) {
 			return $this->redirect(array('controller' => 'Article', 'action' => 'view', $id));
 		}
 		
-		$article = $this->Article->findById($id);
 		$this->request->data('Article.id', $id);
 		$this->request->data('Article.published', !$article['Article']['published']);
 		if ($this->Article->save($this->request->data)){

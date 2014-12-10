@@ -1275,3 +1275,9 @@ a.autor-link img{
     display: inline-block;
     margin-top: 6px;
 }
+
+
+.editUserLink { margin-bottom: 14px; border-collapse: separate; display: table; position: relative;}
+	.editUserLink a { font-size: 15px; border-bottom: 1px solid #CAE2F0; text-decoration: none; }
+	.editUserLink a:hover { border-bottom: none;}
+	.editUserLink .glyphicons { color: #1580be; font-size: 12px; display: table-cell; vertical-align: top; white-space: nowrap; padding: 1px 4px 0 0;}

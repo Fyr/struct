@@ -24,14 +24,16 @@
 		            </div>
 	            </span>
             </div>
-            <div class="mb30">
+            <div class="editUserLink">
                 <a href="/tickets/tickets" target="_blank"><?=__('Tech.support')?></a>
+            </div><br />
+            <div class="editUserLink">
+				<span class="glyphicons message_full"></span>
+                <a href="<?=$this->Html->url(array('controller' => 'User', 'action' => 'changeEmail'))?>"><?=__('Change email')?></a>
             </div>
-            <div class="settings-link">
-                <a href="<?=$this->Html->url(array('controller' => 'User', 'action' => 'changeEmail'))?>"><span class="glyphicon-extended glyphicon-mailfull"></span> <?=__('Change email')?></a>
-            </div>
-            <div class="settings-link">
-                <a href="<?=$this->Html->url(array('controller' => 'User', 'action' => 'changePassword'))?>"><span class="glyphicon-extended glyphicon-unlock"></span> <?=__('Change password')?></a>
+            <div class="editUserLink">
+				<span class="glyphicons unlock"></span>
+                <a href="<?=$this->Html->url(array('controller' => 'User', 'action' => 'changePassword'))?>"><?=__('Change password')?></a>
             </div>
         </div>
         <div class="col-md-7 col-sm-7 col-xs-12">

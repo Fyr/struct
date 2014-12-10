@@ -62,13 +62,10 @@ class ChatContact extends AppModel {
 		$order = array('ChatContact.modified DESC');
 		$aContacts = $this->find('all', compact('conditions', 'order', 'recursive'));
 		
-		// добавлять в комнату других юзеров  может только иницитор открытия комнаты
+		// добавлять в комнату других юзеров  может только иницитор открытия комнаты или его изначальный оппонент
 		$aID = Hash::extract($aContacts, '{n}.ChatContact.room_id');
 		$this->loadModel('ChatMember');
 		
-		// $rooms = $this->ChatMember->findAllById($aID);
-		
-		// $rooms = Hash::combine($rooms, '{n}.ChatRoom.id', '{n}');
 		foreach($aContacts as &$_row) {
 			$roomID = $_row['ChatContact']['room_id'];
 			$members = $this->ChatMember->getRoomMembers($roomID); // ($user_id == $rooms[$roomID]['ChatRoom']['initiator_id']);

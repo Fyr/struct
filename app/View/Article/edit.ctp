@@ -2,11 +2,18 @@
 	$id = $this->request->data('Article.id');
 	$published = $this->request->data('Article.published');
 ?>
-<?=$this->Form->create('Article')?>
-<a class="btn btn-default smallBtn" href="javascript:void(0)"><span class="glyphicons parents"></span></a>
+<?=$this->Form->create('Article', array('class' => 'editArticle'))?>
 <div class="articleControls">
+	<a class="btn btn-default" href="<?=$this->Html->url(array('controller' => 'User', 'action' => 'view'))?>">
+		<?=__('Back to profile')?>
+	</a>
 <?
 	if ($id) {
+?>
+	<a class="btn btn-default" href="<?=$this->Html->url(array('controller' => 'Article', 'action' => 'view', $id))?>">
+		<?=__('View article')?>
+	</a>
+<?
 		echo $this->Html->link(
 			'<span class="glyphicons '.(($published) ? 'eye_open' : 'eye_close').'"></span>',
 			array('controller' => 'Article', 'action' => 'changePublish', $id),
@@ -22,11 +29,19 @@
 ?>
 </div>
 <div class="articleTitleBox">
-	<?=$this->Form->input('title', array('type' => 'textarea', 'required' => 'required', 'placeholder' => __('Article title'), 'label' => false))?>
+	<?=($id) ? __('Edit article') : __('Create article')?>
 </div>
-<div class="articleTitleBox">
-	<?=$this->Form->input('section', array('type' => 'textarea', 'required' => 'required', 'placeholder' => __('Article section'), 'label' => false))?>
+<br /><br /><br />
+
+<div class="oneFormBlock">
+	<div class="form-group">
+	<?=$this->Form->input('title', array('required' => 'required', 'placeholder' => __('Article title').'...', 'label' => __('Article title'), 'class' => 'form-control'))?>
+	</div>
+	<div class="form-group">
+	<?=$this->Form->input('section', array('required' => 'required', 'placeholder' => __('Article section').'...', 'label' => __('Article section'), 'class' => 'form-control'))?>
+	</div>
 </div>
+	
 <div class="wordProcessor">
 	<?=$this->Redactor->redactor('body', array('style' => 'width: 100%'))?>
 </div>

@@ -7,27 +7,20 @@
 			<div class="user-list-item clearfix">
 				<div class="user-list-item-body noImage">
 					<div class="user-list-item-name"><?=$article['Article']['title']?></div>
-					<!--div class="user-list-item-spec">/?php echo $article['Article']['abody']?/</div-->
 				</div>
 			</div>
 		</a>
 		<div class="buttonsBottom clearfix">
 			<?=$this->Html->link(__('Edit'), array('controller' => 'Article', 'action' => 'edit', $article['Article']['id']), array( 'class' => 'btn btn-default pull-left'))?>
 <?
-		if ($article['Article']['published']) {
-			echo $this->Html->link('<span class="glyphicons eye_close"></span>',
+		echo $this->Html->link('<span class="glyphicons '.($article['Article']['published'] ? 'eye_open' : 'eye_open').'"></span>',
 				array('controller' => 'Article', 'action' => 'changePublish', $article['Article']['id']), 
 				array('class' => 'btn btn-default smallBtn pull-left', 'escape' => false)
 			);
-		} else {
-			echo $this->Html->link('<span class="glyphicons eye_open"></span>',
-				array('controller' => 'Article', 'action' => 'changePublish', $article['Article']['id']), 
-				array('class' => 'btn btn-default smallBtn pull-left', 'escape' => false)
-			);
-		};
 		echo $this->Html->link('<span class="glyphicons bin"></span>', 
 			array('controller' => 'Article', 'action' => 'delete', $article['Article']['id']), 
-			array('confirm' => 'Are you sure you want delete this article?', 'class' => 'btn btn-default smallBtn pull-right', 'escape' => false)
+			array('class' => 'btn btn-default smallBtn pull-right', 'escape' => false),
+			__('Are you sure you want delete this record?')
 		);
 ?>
 		</div>
