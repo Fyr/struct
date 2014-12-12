@@ -76,6 +76,7 @@ class Media extends AppModel {
      *
      * @param array $data - array. Must contain elements: 'media_type', 'object_type', 'object_id', 'tmp_name', 'file', 'ext'
      *                      tmp_name - temp file to rename to media folders
+     *                      real_name - if image is relocated or copied
      *                      file.ext - final name of file
      */
     public function uploadMedia($data) {
@@ -99,10 +100,10 @@ class Media extends AppModel {
 			mkdir($path, self::MKDIR_MODE);
 		}
 		
-		if (isset($real_name)) {
+		if (isset($real_name)) { // if image is simply relocated
 			copy($real_name, $path.$file.$ext);
 			$res = false;
-		} else {
+		} else { // image was uploaded
 			// TODO: handle rename error
 			$res = rename($tmp_name, $path.$file.$ext);
 		}
@@ -120,6 +121,12 @@ class Media extends AppModel {
 			$image = new Image();
 			$image->load($file);
 			$this->save(array('id' => $id, 'orig_w' => $image->getSizeX(), 'orig_h' => $image->getSizeY(), 'orig_fsize' => filesize($file)));
+			if ($crop) {
+				//prepare thumb for future operations
+				list($x, $y, $sizeX, $sizeY) = explode(',', $crop);
+				$image->crop($x, $y, $sizeX, $sizeY);
+				$image->outputPng($this->PHMedia->getFileName($object_type, $id, null, 'thumb.png'));
+			}
 			
 			// Set main image if it was first image
 			$this->initMain($object_type, $object_id);

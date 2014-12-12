@@ -32,6 +32,10 @@ class AjaxController extends PAjaxController {
 		$file = $media_type; // $path['filename'];
 		$ext = '.'.$path['extension'];
 		
+		if ($crop = $this->request->data('crop')) {
+			$crop = (is_array($crop)) ? implode(',', $crop): $crop;
+		}
+		
 		if (in_array($object_type, array('User', 'Group', 'UserUniversity'))) {
 			$aMedia = $this->Media->getObjectList($object_type, $object_id);
 			foreach($aMedia as $media) {
@@ -39,7 +43,7 @@ class AjaxController extends PAjaxController {
 			}
 		}
 		
-		$data = compact('media_type', 'object_type', 'object_id', 'tmp_name', 'file', 'ext', 'orig_fname');
+		$data = compact('media_type', 'object_type', 'object_id', 'tmp_name', 'file', 'ext', 'orig_fname', 'crop');
 		$media_id = $this->Media->uploadMedia($data);
 		
 		if ($object_type == 'ProjectEvent') {

@@ -1,4 +1,7 @@
 <?
+	$this->Html->css('jquery.Jcrop.min', null, array('inline' => false));
+	$this->Html->script('vendor/jquery/jquery.Jcrop.min', array('inline' => false));
+	
 	$id = $this->request->data('User.id');
 ?>
 <?=$this->Form->create('User')?>
@@ -12,12 +15,18 @@
     <div class="col-md-12 col-sm-12 col-xs-12 n-padding">
         <div class="col-md-3 col-sm-3 col-xs-12">
             <div class="col-md-12 col-sm-12 col-xs-3 n-padding">
-                <div class="settings-avatar">
+                <!--div class="settings-avatar">
                 	<img id="User<?=$id?>" src="<?=$this->request->data('UserMedia.url_img')?>" alt="" data-resize="thumb200x200" data-id="<?=$this->request->data('UserMedia.id')?>" />
+                </div-->
+                <div class="avatar-img mb30">
+                	<img id="User<?=$id?>" src="<?=$this->Media->imageUrl($this->request->data('UserMedia'), 'thumb200x200')?>" alt="" data-resize="thumb200x200" data-id="<?=$this->request->data('UserMedia.id')?>" />
                 </div>
             </div>
             <div class="settings-avatar-info fs13 text-grey mb60">
-                <input class="fileuploader filestyle" type="file" data-object_type="User" data-object_id="<?=$id?>" data-progress_id="progress-User<?=$id?>" />
+            	<span class="inputFile">
+	                <input id="userAvatarChoose" class="fileuploader" type="file" data-object_type="User" data-object_id="<?=$id?>" data-progress_id="progress-User<?=$id?>" />
+	                <input id="userAvatarUpload" type="button" class="btn btn-primary save-button" value="<?=__('Save')?>" style="display: none;" />
+                </span>
                 <span id="progress-User<?=$id?>">
 	                <div id="progress-bar">
 		            	<div id="progress-stats"></div>
@@ -287,6 +296,14 @@ $(document).ready(function(){
 		$('.profile-achievements-block .group-create-right').prepend(
 			tmpl('profile-achiev', {i: $('.profile-achievements-block .group-create-right .group-fieldset').length})
 		);
+	});
+	
+	$('#userAvatarChoose').styler({
+		fileBrowse: '<?=__('Choose image')?>'
+	});
+	
+	$('#userAvatarUpload').click(function(){
+		$(this).data().submit();
 	});
 });
 </script>

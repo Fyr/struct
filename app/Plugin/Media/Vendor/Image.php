@@ -127,6 +127,7 @@ class Image
 	/**
 		Performs an image resizing constrain proportions. If new sizes do not correspond to image actial sizes, 
 		image is filled with given background color. 
+		Result image can be smaller then specified area according to proportions.
 		@param (int) $iNewSizeX - new size X
 		@param (int) $iNewSizeY - new size Y
 		@param (string) $sHexBkgColor - hexadecimal string of RGB-color representation for background color
@@ -140,7 +141,6 @@ class Image
 		$iW = $iNewSizeX;
 		$iH = $iNewSizeY;
         
-		
 		//$iNewSizeX = min($iNewSizeX, $iSourceX); - reduce only
 		//$iNewSizeY = min($iNewSizeY, $iSourceY);
         
@@ -168,6 +168,12 @@ class Image
 		$this->setImage($rImage);
 	}
 	
+	/**
+	 * Resize image as a thumb (result image fills whole given area)
+	 *
+	 * @param int $iNewSizeX
+	 * @param int $iNewSizeY
+	 */
 	public function thumb($iNewSizeX, $iNewSizeY) 
 	{
 		$iSourceX = $this->getSizeX();
@@ -183,6 +189,12 @@ class Image
 		
 		$rImage = imagecreatetruecolor($iNewSizeX, $iNewSizeY);
 		imagecopyresampled($rImage, $this->getImage(), ($iNewSizeX - $iDestX) / 2, ($iNewSizeY - $iDestY) / 2, 0, 0, $iDestX, $iDestY, $iSourceX, $iSourceY);
+		$this->setImage($rImage);
+	}
+	
+	public function crop($x, $y, $sizeX, $sizeY) {
+		$rImage = imagecreatetruecolor($sizeX, $sizeY);
+		imagecopy($rImage, $this->getImage(), 0, 0, $x, $y, $sizeX, $sizeY);
 		$this->setImage($rImage);
 	}
 	
