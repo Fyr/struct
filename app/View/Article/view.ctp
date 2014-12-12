@@ -8,7 +8,7 @@
 	if ($isArticleAdmin) {
 		$id = Hash::get($article, 'Article.id');
 ?>
-		<a class="btn btn-default" href="<?=$this->Html->url(array('controller' => 'Article', 'action' => 'edit', $id))?>">
+		<a class="btn btn-default smallBtn" href="<?=$this->Html->url(array('controller' => 'Article', 'action' => 'edit', $id))?>">
 			<span class="glyphicon glyphicon-wrench glyphicons wrench"></span>
 		</a>
 <?

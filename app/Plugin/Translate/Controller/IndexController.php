@@ -5,7 +5,7 @@ class IndexController extends AdminController {
 	public $name = 'Index';
 	public $uses = array();
 	
-	private $msgFile = '', $count = 0;
+	public $msgFile = '', $count = 0;
 	
 	public function _process($fname, $path, $aParams = array()) {
 		$file = file_get_contents($path.$fname);
@@ -28,6 +28,8 @@ class IndexController extends AdminController {
 	}
 	
 	public function generate() {
+		set_time_limit(600);
+
 		$this->autoRender = false;
 		App::uses('Path', 'Core.Vendor');
 		

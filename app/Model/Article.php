@@ -12,12 +12,15 @@ class Article extends AppModel {
 		)
 	);
 	
-	public function search($currUserID, $q) {
+	public function search($q, $currUserID = false) {
 		$conditions = array('Article.title LIKE ?' => '%'.$q.'%');
+		if ($currUserID) {
+			$conditions['owner_id'] = $currUserID;
+		} else {
+			$conditions['published'] = 1;
+		}
 		$order = array('Article.title');
 		return $this->find('all', compact('conditions', 'order'));
 	}
-	
-	
 	
 }

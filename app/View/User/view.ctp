@@ -1,6 +1,7 @@
 <?
 	$user_id = Hash::get($user, 'User.id');
 ?>
+<div class="row">
 <div class="col-md-12 col-sm-12 col-xs-12 mutant-title">
     <div class="col-md-9 col-sm-9 col-xs-12">
         <div class="page-title"><?=Hash::get($user, 'User.full_name')?></div>
@@ -85,6 +86,7 @@
 
         </div>
     </div>
+</div>
 </div>
 <div class="row user-info">
     <div class="col-md-12 col-sm-12 col-xs-12 user-info-block">
@@ -213,7 +215,7 @@
 ?>
         </div>
     </div>
-</div>
+
 <div class="row mb40 profile-groups">
 <?
 		if (count($aGroups) > 3) {
@@ -262,7 +264,7 @@
 </div>
 <div class="row profile-articles">
     <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="col-md-12 col-sm-12 col-xs-12">
+            
 <?
 		foreach($aContainer as $container) {
 ?>
@@ -272,7 +274,7 @@
 <?
 		}
 ?>
-    </div>
+    
     </div>
 </div>
 <div class="row mb40 profile-articles">

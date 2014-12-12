@@ -12,19 +12,19 @@
     </div>
 </div>
 <div class="dropdown-panel dropdown-notesPanel">
-    <div class="dropdown-panel-wrapper">dropdown-notesPanel</div>
+    <div class="dropdown-panel-wrapper"></div>
 </div>
 <div class="dropdown-panel dropdown-briefcasePanel">
-    <div class="dropdown-panel-wrapper">dropdown-briefcasePanel</div>
+    <div class="dropdown-panel-wrapper"></div>
 </div>
 <div class="dropdown-panel dropdown-credit_cardPanel">
-    <div class="dropdown-panel-wrapper">dropdown-credit_cardPanel</div>
+    <div class="dropdown-panel-wrapper"></div>
 </div>
 <div class="dropdown-panel dropdown-cloudPanel">
-    <div class="dropdown-panel-wrapper">dropdown-cloudPanel</div>
+    <div class="dropdown-panel-wrapper"></div>
 </div>
 <div class="dropdown-panel dropdown-filePanel">
-    <div class="dropdown-panel-wrapper">dropdown-filePanel</div>
+    <div class="dropdown-panel-wrapper"></div>
 </div>
 <div class="dropdown-panel dropdown-ipadPanel">
     <div class="dropdown-panel-wrapper">
@@ -32,5 +32,5 @@
     </div>
 </div>
 <div class="dropdown-panel dropdown-calendarPanel">
-    <div class="dropdown-panel-wrapper">dropdown-calendarPanel</div>
+    <div class="dropdown-panel-wrapper"></div>
 </div>

@@ -374,7 +374,7 @@ msgid "Find user or community..."
 msgstr "Найти пользователя или сообщество..."
 
 msgid "No item found"
-msgstr "Продукт не найден"
+msgstr "Нет записей"
 
 msgid "years"
 msgstr "Год"
@@ -710,7 +710,7 @@ msgid "Confirm password"
 msgstr "Подтвердить пароль"
 
 msgid "Speciality"
-msgstr "СПециальность"
+msgstr "Специальность"
 
 msgid "Timezone"
 msgstr "Часовой пояс"
@@ -720,3 +720,58 @@ msgstr "Статьи"
 
 msgid "Find article..."
 msgstr "Найти статью..."
+
+msgid "Politics" 
+msgstr "Политика"
+
+msgid "Economics"
+msgstr "Экономика"
+
+msgid "Community"
+msgstr "Сообщество"
+
+msgid "Culture"
+msgstr "Культура"
+
+msgid "Sports"
+msgstr "Спорт"
+
+msgid "Hi-tech"
+msgstr "Хай-тек"
+
+msgid "Cars"
+msgstr "Авто"
+
+msgid "Fashion"
+msgstr "Мода"
+
+msgid "Games"
+msgstr "Игры"
+
+msgid "Other"
+msgstr "Другое"
+
+msgid "Invalid mediafile"
+msgstr "некорректный медиа-файл"
+
+msgid "No articles int this category yet"
+msgstr "В этой категории пока нет статей"
+
+msgid "Back to profile"
+msgstr "Венуться к профилю"
+
+msgid "View article"
+msgstr "Просмотр статьи"
+
+msgid "Edit article"
+msgstr "Изменить статью"
+
+msgid "Create article"
+msgstr "Создать статью"
+
+msgid "Article title"
+msgstr "Заголовок статьи"
+
+msgid "Article section"
+msgstr "Категория статьи"
+

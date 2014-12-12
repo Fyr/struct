@@ -29,10 +29,7 @@ class CheckdbController extends AdminController {
 		$ret = ' ';
 		
 		$aUsers = $this->User->find('all'); //�������� ������
-		fdebug($aUsers);
-		fdebug(Hash::extract($aUsers, '{n}.User.id'), 'tmp2.log');
 		$aUsers = Hash::combine($aUsers, '{n}.User.id', '{n}.User'); //������� ���������� �������� � �������� ��������
-		fdebug($aUsers, 'tmp1.log');
 		
 		$aMedia = $this->Media->find('all'); //�������� ������
 		$aMedia = Hash::combine($aMedia, '{n}.Media.id', '{n}'); //������� ���������� �������� � �������� ��������

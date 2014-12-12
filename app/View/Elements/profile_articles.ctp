@@ -6,7 +6,7 @@
 			<div class="news-article <?=$class?>" <?=$style?>>
                 <div class="dimention-link">
                     <a href="javascript:void(0)">
-                        <?=Hash::get($article, 'Article.section')?>
+                        <?=$aCategoryOptions[Hash::get($article, 'Article.cat_id')]?>
                     </a>
                 </div>
                 <a href="<?=$this->Html->url(array('controller' => 'Article', 'action' => 'view', Hash::get($article, 'Article.id')))?>">

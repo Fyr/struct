@@ -3,7 +3,7 @@ App::uses('AppController', 'Controller');
 class UserController extends AppController {
 	public $name = 'User';
 	public $layout = 'profile';
-	public $uses = array('Timezone', 'Country', 'Article');
+	public $uses = array('Timezone', 'Country', 'Article', 'ArticleCategory');
 	
 	public function register() {
 		$this->layout = 'home';
@@ -85,6 +85,7 @@ class UserController extends AppController {
 		$this->set('aCountryOptions', $this->Country->options());
 		
 		$this->set('aArticles', $this->Article->findAllByOwnerIdAndPublished($id, 1));
+		$this->set('aCategoryOptions', $this->ArticleCategory->options());
 	}
 	
 	public function changeEmail() {

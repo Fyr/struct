@@ -1,1 +1,3 @@
-<?=$this->element('panel_articles')?>
+<?
+	echo $this->element('panel_articles');
+?>

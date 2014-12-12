@@ -49,7 +49,7 @@
 		'chat', 'chat_panel', 'chat_room',
 		'struct',
 		'search',
-		'article',
+		'article', 'article_category',
 		'settings-script',
 		'group-script',
 		'group',
@@ -87,6 +87,7 @@ $(function() {
 	Struct.initPanel($('.dropdown-ipadPanel .dropdown-panel-wrapper').get(0));
 	Group.initPanel($('.dropdown-groupPanel .dropdown-panel-wrapper').get(0));
 	Article.initPanel($('.dropdown-filePanel .dropdown-panel-wrapper').get(0));
+	ArticleCategory.initPanel($('.dropdown-notesPanel .dropdown-panel-wrapper').get(0));
 });
 </script>
 </head>

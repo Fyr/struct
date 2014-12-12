@@ -68,8 +68,7 @@
       padding: 0; }
       .main-panel .main-panel-list ul li {
         position: relative; }
-        .main-panel .main-panel-list ul li:nth-child(4) {
-          display: none; }
+        
         .main-panel .main-panel-list ul li:nth-child(5) {
           display: none; }
         .main-panel .main-panel-list ul li:nth-child(6) {
@@ -143,7 +142,7 @@
         .main-panel .main-panel-list ul .glyphicons.groupPanel:before {
           margin: -15px 0 0; }
         .main-panel .main-panel-list ul .glyphicons.ipadPanel:before {
-          margin: -7px 0 0; }
+          margin: 3px 0 0; }
   .main-panel .main-panel-dropdown {
     position: absolute;
     top: 0;
@@ -532,8 +531,7 @@
             margin-top: -7px;
             font-size: 13px;
             color: #616161; }
-  .main-panel .dropdown-notesPanel {
-    display: none; }
+  .main-panel .dropdown-notesPanel {}
   .main-panel .dropdown-briefcasePanel {
     display: none; }
   .main-panel .dropdown-credit_cardPanel {
@@ -763,4 +761,4 @@
 /*# sourceMappingURL=main-panel.css.map */
 
 
-.smallBtn { padding-left: 8px !important; padding-right: 2px !important; padding-top:3px !important; color: #616161 !important}
+.smallBtn { padding: 3px 2px 0 8px !important; color: #616161 !important; height: 34px;}

@@ -9,7 +9,7 @@ $(function() {
 		minHeight: 200,
 		buttons: ['html', '|', 'formatting', '|', 'bold', 'italic', 'deleted', '|', 
                 'unorderedlist', 'orderedlist', 'outdent', 'indent', '|',
-                'table', 'video', 'link', '|',
+                'link', '|',
                 'fontcolor', 'backcolor', '|', 'alignment', '|', 'horizontalrule']
 	});
 });

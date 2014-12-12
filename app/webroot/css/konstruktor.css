@@ -97,7 +97,7 @@ a:focus {
   background: #22b5ae;
   height: 24px;
   width: 25px;
-  padding: 1px 0 0 6px;
+  padding: 1px 0 0 5px;
   border-top-left-radius: 50%;
   border-top-right-radius: 50%;
   border-bottom-left-radius: 50%;
@@ -875,7 +875,7 @@ input[type="button"].btn-block {
 .oneFormBlock { max-width: 545px;}
 
 .editArticle { padding: 34px 0 0 0;}
-.articleTitleBox { margin: -12px 130px 0 0; font-size: 36px; font-family: 'Roboto'; font-weight: 900;  line-height: 48px; }
+.articleTitleBox { margin: -8px 0 0 0; font-size: 36px; font-family: 'Roboto'; font-weight: 900;  line-height: 48px; }
 	.articleTitleBox textarea { border: none; width: 100%; color: #313131; font-size: 36px; font-family: 'Roboto'; font-weight: 900;  resize: none; height: 100px; line-height: 48px; outline: none; }
 
 .articleControls { float: right; text-align: right; }

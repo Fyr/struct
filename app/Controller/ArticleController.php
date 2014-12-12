@@ -2,7 +2,7 @@
 App::uses('AppController', 'Controller');
 class ArticleController extends AppController {
 	public $name = 'Article';
-	public $uses = array('Article');
+	public $uses = array('Article', 'ArticleCategory');
 	public $helpers = array('Redactor.Redactor', 'Form', 'Html');
 	public $layout = 'profile';
 		
@@ -26,19 +26,27 @@ class ArticleController extends AppController {
 		} else {
 			$this->request->data = $article;
 		}
+		$aCategoryOptions = $this->ArticleCategory->options();
+		unset($aCategoryOptions[0]);
+		$this->set('aCategoryOptions', $aCategoryOptions);
 	}
 	
 	public function view($id) {
 		$article = $this->Article->findById($id);
 		$this->set('article', $article);
-		$this->set('isArticleAdmin', $article['Article']['owner_id'] == $this->currUserID);
+		$isArticleAdmin = $article['Article']['owner_id'] == $this->currUserID;
+		if (!Hash::get($article, 'Article.published') && !$isArticleAdmin) {
+			return $this->redirect(array('controller' => 'User', 'action' => 'view'));
+		}
+		$this->set('isArticleAdmin', $isArticleAdmin);
+		$this->set('aCategoryOptions', $this->ArticleCategory->options());
 	}
 	
 	public function delete($id) {
 		$this->autoRender = false;
 		
 		$article = $this->Article->findById($id);
-		if ($id && Hash::get($group, 'Article.owner_id') != $this->currUserID) {
+		if ($id && Hash::get($article, 'Article.owner_id') != $this->currUserID) {
 			return $this->redirect(array('controller' => 'Article', 'action' => 'view', $id));
 		}
 		
@@ -59,5 +67,10 @@ class ArticleController extends AppController {
 		if ($this->Article->save($this->request->data)){
 			return $this->redirect(array('action' => 'view', $id));
 		}
+	}
+	
+	public function category($id) {
+		$this->set('aArticles', $this->Article->findAllByCatIdAndPublished($id, 1));
+		$this->set('aCategoryOptions', $this->ArticleCategory->options());
 	}
 }

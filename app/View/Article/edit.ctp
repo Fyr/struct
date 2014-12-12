@@ -35,11 +35,16 @@
 
 <div class="oneFormBlock">
 	<div class="form-group">
-	<?=$this->Form->input('title', array('required' => 'required', 'placeholder' => __('Article title').'...', 'label' => __('Article title'), 'class' => 'form-control'))?>
+	<?=$this->Form->input('title', array('placeholder' => __('Article title').'...', 'label' => __('Article title'), 'class' => 'form-control'))?>
 	</div>
-	<div class="form-group">
-	<?=$this->Form->input('section', array('required' => 'required', 'placeholder' => __('Article section').'...', 'label' => __('Article section'), 'class' => 'form-control'))?>
-	</div>
+	<div class="settings-input-row" style="border-bottom: none;">
+        <div class="comments-box-send-info">
+            <?=__('Article section')?>
+        </div>
+        <div class="input-group settings-input col-md-12 col-sm-12 timezone-select">
+            <?=$this->Form->input('cat_id', array('options' => $aCategoryOptions, 'placeholder' => __('Article section').'...', 'label' => false, 'class' => 'formstyler'))?>
+        </div>
+    </div>
 </div>
 	
 <div class="wordProcessor">

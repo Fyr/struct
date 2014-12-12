@@ -5,14 +5,15 @@
 	$isGroupActive = ($this->request->controller == 'Group' && !$isKonstructorActive) ? ' class="active"' : '';
 	$isDeviceActive = ($this->request->controller == 'Device') ? ' class="active"' : '';
 	$isUserActive = ($this->request->controller == 'User' && $this->request->action == 'edit') ? ' class="active"' : '';
-	$isArticleActive = ($this->request->controller == 'Article') ? ' class="active"' : '';
+	$isArticleActive = ($this->request->controller == 'Article' && $this->request->action == 'edit') ? ' class="active"' : '';
+	$isNotesActive = ($this->request->controller == 'Article' && !$isArticleActive) ? ' class="active"' : '';
 ?>
 <div class="main-panel-list">
     <ul>
         <li><a href="javascript:void(0)"><span class="glyphicons search searchPanel"></span></a></li>
         <li<?=$isChatActive?>><a href="javascript:void(0)"><span class="glyphicons chat chatPanel"></span><div id="chatTotalUnread" class="count"></div></a></li>
         <li<?=$isGroupActive?>><a href="javascript:void(0)"><span class="glyphicons group groupPanel"></span></a></li>
-        <li><a href="javascript:void(0)"><span class="glyphicons notes notesPanel"></span></a></li>
+        <li<?=$isNotesActive?>><a href="javascript:void(0)"><span class="glyphicons notes notesPanel"></span></a></li>
         <li><a href="javascript:void(0)"><span class="glyphicons briefcase briefcasePanel"></span></a></li>
         <li><a href="javascript:void(0)"><span class="glyphicons credit_card credit_cardPanel"></span><div class="count"></div></a></li>
         <li><a href="javascript:void(0)"><span class="glyphicons cloud cloudPanel"></span></a></li>
