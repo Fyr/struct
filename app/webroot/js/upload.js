@@ -29,6 +29,7 @@ function jcropInit(data) {
    			var iW = img.width, iH = img.height;
    		
 	   		resizeAspect = 200 / iW;
+	   		$(img).prop('width', 200);
 	   		$(img).prop('height', iH * resizeAspect);
 	   		
 	   		var min = Math.min(iW, iH);

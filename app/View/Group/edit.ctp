@@ -1,5 +1,8 @@
 <?
+	$this->Html->css('jquery.Jcrop.min', null, array('inline' => false));
+	$this->Html->script('vendor/jquery/jquery.Jcrop.min', array('inline' => false));
 	$this->Html->script('group-script', array('inline' => false));
+	
 	$id = $this->request->data('Group.id');
 	$pageTitle = ($id) ? __('Group settings') : __('Create group');
 ?>
@@ -15,10 +18,13 @@
 <?
 	if ($id) {
 ?>
-				<figure class="col-md-12 col-sm-12 col-xs-5">
-                    <img id="Group<?=$id?>" src="<?=$this->Media->imageUrl($this->request->data('GroupMedia'), '200x')?>" alt="" data-resize="200x" data-id="<?=$this->request->data('Media.id')?>" />
-                </figure>
-                <input class="fileuploader filestyle" type="file" data-object_type="Group" data-object_id="<?=$id?>" data-progress_id="progress-Group<?=$id?>" />
+				<div class="avatar-img mb30">
+                	<img id="Group<?=$id?>" src="<?=$this->Media->imageUrl($this->request->data('GroupMedia'), 'thumb200x200')?>" alt="" data-resize="thumb200x200" data-id="<?=$this->request->data('Media.id')?>" />
+                </div>
+                <span class="inputFile">
+	                <input id="userAvatarChoose" class="fileuploader" type="file" data-object_type="Group" data-object_id="<?=$id?>" data-progress_id="progress-Group<?=$id?>" />
+	                <input id="userAvatarUpload" type="button" class="btn btn-primary save-button" value="<?=__('Save and upload')?>" style="display: none;" />
+                </span>
                 <span id="progress-Group<?=$id?>">
 	                <div id="progress-bar">
 		            	<div id="progress-stats"></div>
@@ -260,6 +266,14 @@ $(document).ready(function(){
 		$('.group-achievements-block .group-create-right').prepend(
 			tmpl('group-achiev', {i: $('.group-achievements-block .group-create-right .group-fieldset').length})
 		);
+	});
+	
+	$('#userAvatarChoose').styler({
+		fileBrowse: '<?=__('Choose image')?>'
+	});
+	
+	$('#userAvatarUpload').click(function(){
+		$(this).data().submit();
 	});
 });
 </script>

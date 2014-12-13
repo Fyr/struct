@@ -25,7 +25,7 @@
             <div class="settings-avatar-info fs13 text-grey mb60">
             	<span class="inputFile">
 	                <input id="userAvatarChoose" class="fileuploader" type="file" data-object_type="User" data-object_id="<?=$id?>" data-progress_id="progress-User<?=$id?>" />
-	                <input id="userAvatarUpload" type="button" class="btn btn-primary save-button" value="<?=__('Save')?>" style="display: none;" />
+	                <input id="userAvatarUpload" type="button" class="btn btn-primary save-button" value="<?=__('Save and upload')?>" style="display: none;" />
                 </span>
                 <span id="progress-User<?=$id?>">
 	                <div id="progress-bar">

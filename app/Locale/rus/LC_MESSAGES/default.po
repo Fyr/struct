@@ -775,3 +775,8 @@ msgstr "Заголовок статьи"
 msgid "Article section"
 msgstr "Категория статьи"
 
+msgid "Choose image"
+msgstr "Выбрать фото"
+
+msgid "Save and upload"
+msgstr "Сохранить фото"

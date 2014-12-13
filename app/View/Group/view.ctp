@@ -4,7 +4,7 @@
 	
 	$groupID = Hash::get($group, 'Group.id');
 	$title = Hash::get($group, 'Group.title');
-	$src = $this->Media->imageUrl(Hash::get($group, 'GroupMedia'), '200x');
+	$src = $this->Media->imageUrl(Hash::get($group, 'GroupMedia'), 'thumb200x200');
 ?>
 
 <div class="row">
