@@ -479,7 +479,7 @@ msgid "Main page"
 msgstr "Главная страница"
 
 msgid "Upload image"
-msgstr "Загрузить изображение"
+msgstr "Загрузить фото"
 
 msgid "Timeline"
 msgstr "Временная шкала"
@@ -677,7 +677,7 @@ msgid "You was invited into this room"
 msgstr "Вас пригласили в эту комнату"
 
 msgid "Processing request..."
-msgstr "Обработка запроса...!"
+msgstr "Обработка запроса..."
 
 msgid "Fax"
 msgstr "Фаск"

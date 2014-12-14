@@ -371,3 +371,7 @@
 .gallery-add .jq-file{
 	max-width: 140px;
 }
+
+.avatar-img img {
+	padding-right: 15px;
+}

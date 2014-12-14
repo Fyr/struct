@@ -30,9 +30,13 @@ class RouterController extends AppController {
 		
 		$aSize = $this->PHMedia->getSizeInfo($size);
 		$method = $this->PHMedia->getResizeMethod($size);
-		$origImg = $this->PHMedia->getFileName($type, $id, null, 
-			($method == 'thumb') ? 'thumb.png' : $aFName['fname'].'.'.$aFName['orig_ext']
-		);
+		$origImg = $this->PHMedia->getFileName($type, $id, null, $aFName['fname'].'.'.$aFName['orig_ext']);
+		if ($method == 'thumb') {
+			$thumb = $this->PHMedia->getFileName($type, $id, null, 'thumb.png');
+			if (file_exists($thumb)) {
+				$origImg = $thumb;
+			}
+		}
 		
 		$image->load($origImg);
 		if ($aSize) {

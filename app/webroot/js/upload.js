@@ -23,10 +23,21 @@ function jcropInit(data) {
 		var img = $('img#tempAvatar').get(0);
    		$(img).hide().prop('src', oFREvent.target.result);
    		
-   		setTimeout(function(){
+   		var count = 0;
+   		var timer = setInterval(function(){
+   			var iW = img.width, iH = img.height;
+   			console.log(count);
+   			if (count > 50) {
+   				alert('Your photo is too large. Please upload another one');
+   			}
+   			if (iW < 5) {
+   				count++;
+   				return;
+   			}
+   			clearInterval(timer);
+   			
    			$('#userAvatarUpload').show();
    			$(img).show();
-   			var iW = img.width, iH = img.height;
    		
 	   		resizeAspect = 200 / iW;
 	   		$(img).prop('width', 200);
@@ -34,6 +45,7 @@ function jcropInit(data) {
 	   		
 	   		var min = Math.min(iW, iH);
 	   		// console.log(['Orig size', iW, iH, 'Current', img.width, img.height, 'Select', min]);
+	   		// alert(['Orig size', iW, iH, 'Current', img.width, img.height, 'Select', min].join());
 			$('#tempAvatar').Jcrop({
 				aspectRatio: 1 / 1,
 				bgOpacity: 0.5,

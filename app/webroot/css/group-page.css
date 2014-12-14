@@ -536,3 +536,7 @@
       cursor: default; }
 
 /*# sourceMappingURL=group-page.css.map */
+
+.avatar-img img {
+	padding-right: 15px;
+}
