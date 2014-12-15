@@ -32,7 +32,7 @@
 	}
 	echo $this->Html->css(array_merge($vendorCss, $css));
 	
-	$scripts = array(
+	$vendorScripts = array(
 		'vendor/jquery/jquery-1.10.2.min',
 		'vendor/jquery/jquery.easing.1.3',
 		'vendor/jquery/jquery.backgroundSize',
@@ -41,7 +41,10 @@
 		'vendor/jquery/jquery.iframe-transport',
 		'vendor/jquery/jquery.fileupload',
 		'vendor/formstyler',
-		'vendor/tmpl.min',
+		'vendor/tmpl.min'
+	);
+	
+	$scripts = array(
 		'/core/js/json_handler',
 		'/table/js/format',
 		'main-panel',
