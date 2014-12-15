@@ -15,19 +15,25 @@
 <?php
 	echo $this->Html->meta('icon');
 	
-	$css = array(
+	$vendorCss = array(
 		'reset', 
 		'fonts', 
 		'bootstrap/bootstrap', 
 		'bootstrap/bootstrap-datepicker',
-		'bootstrap/bootstrap-tokenfield',
+		'bootstrap/bootstrap-tokenfield'
+	);
+	
+	$css = array(
 		'main-panel',
 		'content',
 		'user-profile'
 	);
-	echo $this->Html->css($css);
+	foreach($css as &$_css) {
+		$_css.= '.css?v='.Configure::read('version');
+	}
+	echo $this->Html->css(array_merge($vendorCss, $css));
 	
-	$aScripts = array(
+	$vendorScripts = array(
 		'vendor/jquery/jquery-1.10.2.min',
 		'vendor/jquery/jquery.backgroundSize',
 		'vendor/jquery/jquery-ui.min',
@@ -40,7 +46,11 @@
 		'vendor/bootstrap-tokenfield',
 		'vendor/meiomask',
 		'vendor/tmpl.min',
+	);
+	
+	$scripts = array(
 		'/core/js/json_handler',
+		'/table/js/format',
 		'main-panel',
 		'chat', 'chat_panel', 'chat_room',
 		'struct',
@@ -51,22 +61,25 @@
 		'group',
 		'user-profile-script',
 		'timeline',
-		'xdate',
-		'/Table/js/format'
+		'xdate'
 	);
 	
-	echo $this->Html->script($aScripts);
+	foreach($scripts as &$_js) {
+		$_js.= '.js?v='.Configure::read('version');
+	}
+	echo $this->Html->script(array_merge($vendorScripts, $scripts));
 
 	echo $this->fetch('meta');
 	echo $this->fetch('css');
 	echo $this->fetch('script');
+	
+	$aControllers = array('ChatAjax', 'DeviceAjax', 'UserAjax', 'GroupAjax', 'ArticleAjax');
+	foreach($aControllers as $_controller) {
 ?>
-
-	<script src="<?=$this->Html->url(array('controller' => 'ChatAjax', 'action' => 'jsSettings'))?>"></script>
-	<script src="<?=$this->Html->url(array('controller' => 'DeviceAjax', 'action' => 'jsSettings'))?>"></script>
-	<script src="<?=$this->Html->url(array('controller' => 'UserAjax', 'action' => 'jsSettings'))?>"></script>
-	<script src="<?=$this->Html->url(array('controller' => 'GroupAjax', 'action' => 'jsSettings'))?>"></script>
-	<script src="<?=$this->Html->url(array('controller' => 'ArticleAjax', 'action' => 'jsSettings'))?>"></script>
+	<script src="<?=$this->Html->url(array('controller' => $_controller, 'action' => 'jsSettings'))?>?v=<?=Configure::read('version')?>"></script>
+<?
+	}
+?>	
 <script>
 $(function() {
 	$('select.formstyler, input.filestyle').styler({

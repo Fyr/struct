@@ -14,10 +14,12 @@
 <?php
 	echo $this->Html->meta('icon');
 	
-	$css = array(
+	$vendorCss = array(
 		'reset', 
 		'fonts', 
-		'bootstrap/bootstrap', 
+		'bootstrap/bootstrap'
+	);
+	$css = array(
 		'main-panel',
 		'content',
 		// 'chat-page',
@@ -25,53 +27,49 @@
 		'device-page',
 		'progress-bar'
 	);
-	echo $this->Html->css($css);
+	foreach($css as &$_css) {
+		$_css.= '.css?v='.Configure::read('version');
+	}
+	echo $this->Html->css(array_merge($vendorCss, $css));
 	
-	$aScripts = array(
+	$scripts = array(
 		'vendor/jquery/jquery-1.10.2.min',
 		'vendor/jquery/jquery.easing.1.3',
 		'vendor/jquery/jquery.backgroundSize',
 		'vendor/jquery/jquery.form.min',
+		'vendor/jquery/jquery.ui.widget',
+		'vendor/jquery/jquery.iframe-transport',
+		'vendor/jquery/jquery.fileupload',
 		'vendor/formstyler',
 		'vendor/tmpl.min',
 		'/core/js/json_handler',
+		'/table/js/format',
 		'main-panel',
 		'xdate',
 		'chat', 'chat_panel', 'chat_room',
 		'struct',
 		'search',
 		'article', 'article_category',
-		'group'
+		'group',
+		'upload'
 	);
 	
-	// Files required for upload
-	$aScripts[] = 'vendor/jquery/jquery.ui.widget';
-	$aScripts[] = 'vendor/jquery/jquery.iframe-transport';
-	$aScripts[] = 'vendor/jquery/jquery.fileupload';
-	$aScripts[] = '/Table/js/format';
-	$aScripts[] = 'upload';
-	
-	echo $this->Html->script($aScripts);
+	foreach($scripts as &$_js) {
+		$_js.= '.js?v='.Configure::read('version');
+	}
+	echo $this->Html->script(array_merge($vendorScripts, $scripts));
 
 	echo $this->fetch('meta');
 	echo $this->fetch('css');
 	echo $this->fetch('script');
-?>
-
-	<!--[if lt IE 9]>
-<?=$this->Html->css('ie8')?>
-<?=$this->Html->script('vendor/html5shiv.min')?>
-<?=$this->Html->script('vendor/respond.min')?>
-	<script>
-		document.createElement('video');
-	</script>
-	<![endif]-->
 	
-	<script type="text/javascript" src="<?=$this->Html->url(array('controller' => 'ChatAjax', 'action' => 'jsSettings'))?>"></script>
-	<script type="text/javascript" src="<?=$this->Html->url(array('controller' => 'DeviceAjax', 'action' => 'jsSettings'))?>"></script>
-	<script type="text/javascript" src="<?=$this->Html->url(array('controller' => 'UserAjax', 'action' => 'jsSettings'))?>"></script>
-	<script type="text/javascript" src="<?=$this->Html->url(array('controller' => 'GroupAjax', 'action' => 'jsSettings'))?>"></script>
-	<script type="text/javascript" src="<?=$this->Html->url(array('controller' => 'ArticleAjax', 'action' => 'jsSettings'))?>"></script>
+	$aControllers = array('ChatAjax', 'DeviceAjax', 'UserAjax', 'GroupAjax', 'ArticleAjax');
+	foreach($aControllers as $_controller) {
+?>
+	<script src="<?=$this->Html->url(array('controller' => $_controller, 'action' => 'jsSettings'))?>?v=<?=Configure::read('version')?>"></script>
+<?
+	}
+?>	
 <script type="text/javascript">
 var objectType = 'Chat', objectID = null;
 $(document).ready(function () {

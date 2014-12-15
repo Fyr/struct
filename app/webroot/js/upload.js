@@ -26,7 +26,6 @@ function jcropInit(data) {
    		var count = 0;
    		var timer = setInterval(function(){
    			var iW = img.width, iH = img.height;
-   			console.log(count);
    			if (count > 50) {
    				alert('Your photo is too large. Please upload another one');
    			}

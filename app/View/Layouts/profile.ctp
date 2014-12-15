@@ -14,12 +14,15 @@
 <?php
 	echo $this->Html->meta('icon');
 	
-	$css = array(
+	$vendorCss = array(
 		'reset', 
 		'fonts', 
 		'bootstrap/bootstrap', 
 		'bootstrap/bootstrap-datepicker',
 		'bootstrap/bootstrap-tokenfield',
+	);
+	
+	$css = array(
 		'main-panel',
 		'content',
 		'd_custom',
@@ -29,13 +32,20 @@
 		'project-page',
 		'konstruktor'
 	);
-	echo $this->Html->css($css);
 	
-	$aScripts = array(
+	foreach($css as &$_css) {
+		$_css.= '.css?v='.Configure::read('version');
+	}
+	echo $this->Html->css(array_merge($vendorCss, $css));
+	
+	$vendorScripts = array(
 		'vendor/jquery/jquery-1.10.2.min',
 		'vendor/jquery/jquery.backgroundSize',
 		'vendor/jquery/jquery-ui.min',
 		'vendor/jquery/jquery.form.min',
+		'vendor/jquery/jquery.ui.widget',
+		'vendor/jquery/jquery.iframe-transport',
+		'vendor/jquery/jquery.fileupload',
 		'vendor/easing.1.3',
 		'vendor/formstyler',
 		'vendor/bootstrap.min',
@@ -44,7 +54,11 @@
 		'vendor/bootstrap-tokenfield',
 		'vendor/autosize.min',
 		'vendor/tmpl.min',
+	);
+	
+	$scripts = array(
 		'/core/js/json_handler',
+		'/table/js/format',
 		'main-panel',
 		'chat', 'chat_panel', 'chat_room',
 		'struct',
@@ -54,27 +68,26 @@
 		'group-script',
 		'group',
 		'project-page',
-		'xdate'
+		'upload',
+		'xdate',
 	);
+	foreach($scripts as &$_js) {
+		$_js.= '.js?v='.Configure::read('version');
+	}
 	
-	// Files required for upload
-	$aScripts[] = 'vendor/jquery/jquery.ui.widget';
-	$aScripts[] = 'vendor/jquery/jquery.iframe-transport';
-	$aScripts[] = 'vendor/jquery/jquery.fileupload';
-	$aScripts[] = '/Table/js/format';
-	$aScripts[] = 'upload';
-	echo $this->Html->script($aScripts);
+	echo $this->Html->script(array_merge($vendorScripts, $scripts));
 
 	echo $this->fetch('meta');
 	echo $this->fetch('css');
 	echo $this->fetch('script');
+	
+	$aControllers = array('ChatAjax', 'DeviceAjax', 'UserAjax', 'GroupAjax', 'ArticleAjax');
+	foreach($aControllers as $_controller) {
 ?>
-
-	<script src="<?=$this->Html->url(array('controller' => 'ChatAjax', 'action' => 'jsSettings'))?>"></script>
-	<script src="<?=$this->Html->url(array('controller' => 'DeviceAjax', 'action' => 'jsSettings'))?>"></script>
-	<script src="<?=$this->Html->url(array('controller' => 'UserAjax', 'action' => 'jsSettings'))?>"></script>
-	<script src="<?=$this->Html->url(array('controller' => 'GroupAjax', 'action' => 'jsSettings'))?>"></script>
-	<script src="<?=$this->Html->url(array('controller' => 'ArticleAjax', 'action' => 'jsSettings'))?>"></script>
+	<script src="<?=$this->Html->url(array('controller' => $_controller, 'action' => 'jsSettings'))?>?v=<?=Configure::read('version')?>"></script>
+<?
+	}
+?>	
 <script>
 $(function() {
 	$('select.formstyler, input.filestyle').styler({
