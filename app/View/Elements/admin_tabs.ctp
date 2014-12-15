@@ -1,5 +1,5 @@
 <?
-    $this->Html->script('admin_tabs', array('inline' => false));
+    $this->Html->script('admin_tabs.js?v='.Configure::read('version'), array('inline' => false));
 ?>
 <ul class="nav nav-tabs">
 <?

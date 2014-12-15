@@ -1,5 +1,4 @@
 <?
-	$this->Html->script('group-script', array('inline' => false));
 	$id = $this->request->data('Project.id');
 	$pageTitle = ($id) ? __('Project settings') : __('Create project');
 ?>

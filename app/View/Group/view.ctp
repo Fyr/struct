@@ -1,5 +1,5 @@
 <?
-	$this->Html->css(array('jquery.fancybox', 'fancy-fix'), array('inline' => false));
+	$this->Html->css(array('jquery.fancybox', 'fancy-fix.css?v='.Configure::read('version')), array('inline' => false));
 	$this->Html->script(array('vendor/jquery/jquery-ui-1.10.3.custom.min', 'vendor/jquery/jquery.fancybox.pack'), array('inline' => false));
 	
 	$groupID = Hash::get($group, 'Group.id');

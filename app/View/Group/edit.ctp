@@ -1,7 +1,6 @@
 <?
 	$this->Html->css('jquery.Jcrop.min', null, array('inline' => false));
 	$this->Html->script('vendor/jquery/jquery.Jcrop.min', array('inline' => false));
-	$this->Html->script('group-script', array('inline' => false));
 	
 	$id = $this->request->data('Group.id');
 	$pageTitle = ($id) ? __('Group settings') : __('Create group');
