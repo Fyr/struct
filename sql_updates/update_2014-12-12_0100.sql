@@ -1,0 +1,1 @@
+ALTER TABLE media ADD `crop` varchar(1023) DEFAULT NULL;
