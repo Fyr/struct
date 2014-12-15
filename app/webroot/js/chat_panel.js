@@ -104,7 +104,6 @@ var ChatPanel = function(container, userID){ // static object
 	
 	this.checkMember = function(members) {
 		var activeRoom = self.rooms[Chat.Panel.activeRoom];
-		console.log([members, activeRoom.members]);
 		if (members && members.split(',').length) {
 			members = members.split(',');
 			if (members.length > 1) {
@@ -212,11 +211,4 @@ var ChatPanel = function(container, userID){ // static object
 		self.rooms[self.activeRoom].addMember(userID);
 	}
 	
-	this.onScrollTop = function() {
-		// self.rooms[self.activeRoom].loadMoreEvents();
-	}
-	
-	this.onScrollBottom = function() {
-		
-	}
 }

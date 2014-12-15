@@ -20,21 +20,6 @@ var Chat = {
 		Chat.initHandlers();
 	},
 	
-	initHandlers: function() {
-		$(window).off('scroll');
-		$(window).scroll(function(event){
-			event.stopPropagation();
-			if (Chat.isUpdateEnabled()) {
-				var scrolled = window.pageYOffset || document.documentElement.scrollTop;
-				if (!scrolled) {
-					Chat.Panel.onScrollTop();
-				} else if (scrolled >= ($(document).height() - $(window).height())) {
-					Chat.Panel.onScrollBottom();
-				}
-			}
-		});
-	},
-	
 	enableUpdate: function () {
 		Chat.enableLevel--;
 		if (Chat.enableLevel < 0) {

@@ -45,7 +45,7 @@ class ChatAjaxController extends PAjaxController {
 			$aID = $this->ChatMember->getRoomMembers($room['ChatRoom']['id'], $this->currUserID);
 			$members = $this->User->getUsers($aID);
 			unset($members[$this->currUserID]);
-			$events = $this->ChatEvent->getAllRoomEvents($this->currUserID, $room['ChatRoom']['id']);
+			$events = $this->ChatEvent->getInitialEvents($this->currUserID, $room['ChatRoom']['id']);
 			return $this->setResponse(compact('room', 'members', 'events'));
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
@@ -150,4 +150,19 @@ class ChatAjaxController extends PAjaxController {
 		}
 	}
 	
+	public function loadMore() {
+		try {
+			$id = $this->request->data('id');
+			$room_id = $this->request->data('room_id');
+			
+			if (!$id || !$room_id) {
+				throw new Exception('Incorrect request');
+			}
+			
+			$data = $this->ChatEvent->loadEvents($this->currUserID, $room_id, $id);
+			$this->setResponse($data);
+		} catch (Exception $e) {
+			$this->setError($e->getMessage());
+		}
+	}
 }

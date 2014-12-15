@@ -162,7 +162,7 @@ class ChatEvent extends AppModel {
 		return $room;
 	}
 	
-	protected function _getEvents($currUserID, $conditions) {
+	protected function _getEvents($currUserID, $conditions, $limit = null) {
 		$this->loadModel('ChatMessage');
 		$this->loadModel('User');
 		$this->loadModel('Media.Media');
@@ -170,7 +170,7 @@ class ChatEvent extends AppModel {
 		
 		$conditions = array_merge(array('user_id' => $currUserID), $conditions);
 		$order = array('room_id', 'created');
-		$events = $this->find('all', compact('conditions', 'order'));
+		$events = $this->find('all', compact('conditions', 'order', 'limit'));
 		
 		// Get info about sent messages
 		$aID = Hash::extract($events, '{n}.ChatEvent.msg_id');
@@ -208,23 +208,44 @@ class ChatEvent extends AppModel {
 		return $this->_getEvents($currUserID, compact('room_id'));
 	}
 	
-	/*
-	public function getLatestEvents($currUserID, $room_id) {
-		$events = $this->_getEvents($currUserID, array('active' => 1, 'room_id' => $room_id));
-		if (!$events || count($events) < Configure::read('chat.loadMore')) {
+	public function getInitialEvents($currUserID, $room_id) {
+		$fields = array('COUNT(*) as count');
+		$conditions = array('user_id' => $currUserID, 'room_id' => $room_id, 'active' => self::ACTIVE);
+		$order = array('room_id', 'created');
+		$events = $this->find('all', compact('conditions', 'order'));
+		$count = Hash::get($events, '0.count');
+		if ($count >= Configure::read('chat.initialEvents')) { // активных событий больше чем лимит
+			// изначально вычитываем ВСЕ активные события
+			$conditions = array('ChatEvent.room_id' => $room_id, 'ChatEvent.active' => self::ACTIVE);
+			$limit = null;
+		} else {
+			// задаем такие условия, чтобы вычитать лимит последних событий
+			$fields = array('ChatEvent.id', 'ChatEvent.created');
+			$conditions = array('ChatEvent.user_id' => $currUserID, 'ChatEvent.room_id' => $room_id);
+			$order = 'ChatEvent.id DESC';
+			$limit = Configure::read('chat.initialEvents');
+			$events = $this->find('all', compact('fields', 'conditions', 'order', 'limit'));
+			$conditions = array('ChatEvent.room_id' => $room_id);
 			if ($events) {
-				$firstEvent = strtotime($events['events'][0]['ChatEvent']['created']);
-				$events = $this->getEvents($currUserID, array('ChatEvent.created > ' => date('Y-m-d H:i:s', $firstEvent - DAY)));
+				$lastEvent = array_pop($events);
+				$conditions['ChatEvent.id >= '] = $lastEvent['ChatEvent']['id'];
 			}
 		}
-		return $events;
+		
+		return $this->_getEvents($currUserID, $conditions, $limit);
 	}
-	*/
 	
-	public function loadMoreEvents($currUserID, $room_id, $firstEventID) {
-		$firstEvent = $this->findById($firstEventID);
-		$date = strtotime($firstEvent['ChatEvent']['created']) - DAY * Configure::read('chat.loadMore');
-		return $this->getEvents($currUserID, array('ChatEvent.created > ' => date('Y-m-d H:i:s', $date)));
+	public function loadEvents($currUserID, $room_id, $firstEventID = 0) {
+		$fields = array('ChatEvent.id', 'ChatEvent.created');
+		$conditions = array('ChatEvent.user_id' => $currUserID, 'ChatEvent.room_id' => $room_id, 'ChatEvent.id < ' => $firstEventID);
+		$order = 'ChatEvent.id DESC';
+		$limit = Configure::read('chat.loadMore');
+		$events = $this->find('all', compact('fields', 'conditions', 'order', 'limit'));
+		if ($events) {
+			$lastEvent = array_pop($events);
+			$conditions['ChatEvent.id >= '] = $lastEvent['ChatEvent']['id'];
+		}
+		return $this->_getEvents($currUserID, $conditions, $limit);
 	}
 	
 	public function updateInactive($userID, $ids) {

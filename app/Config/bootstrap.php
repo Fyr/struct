@@ -31,8 +31,11 @@ define('PATH_FILES_UPLOAD', $_SERVER['DOCUMENT_ROOT'].'/files/');
 
 Configure::write('version', '1.2');
 
-Configure::write('chatUpdateTime', 000); // in msec, 0 - do not update
-Configure::write('chat', array('loadMore' => 1)); // days
+Configure::write('chat', array(
+	'updateTime' => 0, // in msec, 0 - do not update
+	'initialEvents' => 3,
+	'loadMore' => 2
+));
 Configure::write('groupMaxImages', 4);
 Configure::write('Konstructor', array(
 	'created' => '2014-11-12 00:00:00',

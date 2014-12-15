@@ -65,6 +65,16 @@
 %}
 </script>
 
+<script type="text/x-tmpl" id="chat-event-first">
+{%
+	if (o.event.event_type != chatDef.roomOpened) {
+%}
+<div id="firstEvent_{%=o.event.room_id%}" class="date" style="margin-top: 10px;"><a href="javascript:void(0)" onclick="Chat.Panel.rooms[{%=o.event.room_id%}].loadMore({%=o.event.id%})"><?=__('Load more...')?></a></div>
+{%
+	}
+%}
+</script>
+
 <script type="text/x-tmpl" id="chat-msg">
 {%
 	var locale = '<?=Hash::get($currUser, 'User.lang')?>';
