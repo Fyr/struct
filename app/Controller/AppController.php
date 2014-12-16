@@ -10,8 +10,8 @@ class AppController extends Controller {
 		'Session',
 		'Auth' => array(
 			'authorize'      => array('Controller'),
-			'loginAction'    => array('controller' => 'User', 'action' => 'login'),
-			'loginRedirect'  => array('controller' => 'User', 'action' => 'index'),
+			'loginAction'    => array('plugin' => '', 'controller' => 'User', 'action' => 'login'),
+			'loginRedirect'  => array('plugin' => '', 'controller' => 'User', 'action' => 'index'),
 			'logoutRedirect' => '/',
 			'authError'      => 'You must sign in to access that page'
 		),
