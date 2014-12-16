@@ -37,6 +37,9 @@ class UserController extends AppController {
 				$this->Session->setFlash(AUTH_ERROR, null, null, 'auth');
 			}
 		}
+		if ($this->Auth->loggedIn()) {
+			$this->redirect($this->Auth->redirect());
+		}
 	}
 	
 	public function logout() {
