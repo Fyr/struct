@@ -17,7 +17,6 @@ var Chat = {
 				Chat.updateState();
 			}, chatUpdateTime);
 		}
-		Chat.initHandlers();
 	},
 	
 	enableUpdate: function () {

@@ -886,3 +886,5 @@ input[type="button"].btn-block {
 @media (max-width: 767px) { .articleTitleBox { margin: 5px 0 0 0} .articleControls { float: none} .editArticle { padding-top: 10px;} }
 
 .wordProcessor { padding: 10px 0 30px 0;}
+
+#userAvatarUpload { max-width: 185px; width: 100%;}

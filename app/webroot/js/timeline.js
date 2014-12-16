@@ -45,11 +45,11 @@ var Timeline = {
 		if (!$('.curr-time-cell').length) {
 			var _now = new Date();
 			var id = 'timeline' + _now.toSqlDate() + '_' + zeroFormat(_now.getHours()) + '00';
-			$('#' + id).before(tmpl('curr-time', {time: Date.HoursMinutes(_now)}));
+			$('#' + id).before(tmpl('curr-time', {time: Date.HoursMinutes(_now, locale)}));
 			clearInterval(Timeline.clockTimer);
 			Timeline.clockTimer = setInterval(function(){
 				var _now = new Date();
-				var time = Date.HoursMinutes(_now);
+				var time = Date.HoursMinutes(_now, locale);
 				if ($('.curr-time-value').length) {
 					if ($('.curr-time-value').html().indexOf(':') > -1) {
 						time = time.replace(/\:/, ' ');
@@ -189,7 +189,7 @@ var Timeline = {
 		$('.add-event-block input').val('');
 		var js_date = Date.fromSqlDate(sql_date);
 		js_date.setHours(hours);
-		$('#UserEventTimeEvent').val(Date.HoursMinutes(js_date));
+		$('#UserEventTimeEvent').val(Date.HoursMinutes(js_date, locale));
 		$('#UserEventDateEvent').val(sql_date);
 		$('#UserEventJsDateEvent').val(Date.fullDate(js_date, locale));
 		Timeline.showEventPopup(sql_date, hours, 0);
@@ -203,7 +203,7 @@ var Timeline = {
 		var e = $('#user-event_' + event_id).get(0);
 		
 		$('#UserEventId').val(event_id);
-		$('#UserEventTimeEvent').val(Date.HoursMinutes(js_date));
+		$('#UserEventTimeEvent').val(Date.HoursMinutes(js_date, locale));
 		$('#UserEventDateEvent').val(sql_date);
 		$('#UserEventJsDateEvent').val(Date.fullDate(js_date, locale));
 		$('#UserEventTitle').val($('.user-event-title', e).html());
