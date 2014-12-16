@@ -34,7 +34,7 @@
 	            </span>
             </div>
             <div class="editUserLink">
-                <a href="/tickets/tickets" target="_blank"><?=__('Tech.support')?></a>
+                <a href="mailto:support@konstruktor.com" target="_blank"><?=__('Tech.support')?></a>
             </div><br />
             <div class="editUserLink">
 				<span class="glyphicons message_full"></span>
