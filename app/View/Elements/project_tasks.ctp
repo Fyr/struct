@@ -4,7 +4,7 @@
         <div class="col-md-9 col-sm-9 col-xs-9 name-user">
             <a href="<?=$this->Html->url(array('controller' => 'User', 'action' => 'view', $user['User']['id']))?>">
                 <div class="user-avatar">
-                    <span class="user-avatar rate-10"><img src="<?=$user['UserMedia']['url_img']?>" alt="<?=$user['User']['full_name']?>"/></span>
+                    <span class="user-avatar rate-10"><img src="<?=$this->Media->imageUrl($user['UserMedia'], 'thumb25x25')?>" alt="<?=$user['User']['full_name']?>"/></span>
                 </div> <?=$user['User']['full_name']?>
             </a>
         </div>
