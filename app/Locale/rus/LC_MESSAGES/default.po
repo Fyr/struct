@@ -780,3 +780,12 @@ msgstr "Выбрать фото"
 
 msgid "Save and upload"
 msgstr "Сохранить фото"
+
+msgid "Load more..."
+msgstr "Загрузить еще..."
+
+msgid "Create"
+msgstr "Создать"
+
+msgid "Project"
+msgstr "Проект"
